@@ -9,6 +9,6 @@ class WaitingRoomsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const BodyWaitingRooms();
+    return const Scaffold(body: BodyWaitingRooms());
   }
 }

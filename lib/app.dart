@@ -1,3 +1,4 @@
+import 'package:dice_and_die_flutter/presentation/core/theme/theme_config.dart';
 import 'package:flutter/material.dart';
 
 import 'injectables.dart';
@@ -15,9 +16,11 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appRouter = getIt<AppRouter>();
+    final themeConfig = getIt<ThemeConfig>();
     return MaterialAppRouterDelegate.router(
       'Dice and Die',
       appRouter: appRouter,
+      themeConfig: themeConfig,
       messengerKey: messengerKey,
       context: context,
     );

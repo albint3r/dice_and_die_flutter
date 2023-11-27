@@ -1,10 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-abstract class MaterialAppRouterDelegate {
+import '../theme/theme_config.dart';
+
+
+class MaterialAppRouterDelegate {
   static MaterialApp router(
     String title, {
     required RootStackRouter appRouter,
+    required ThemeConfig themeConfig,
     required GlobalKey<ScaffoldMessengerState> messengerKey,
     required BuildContext context,
   }) {
@@ -13,6 +17,10 @@ abstract class MaterialAppRouterDelegate {
       debugShowCheckedModeBanner: false,
       // Sets the scaffoldMessengerKey to the provided GlobalKey.
       scaffoldMessengerKey: messengerKey,
+      // Sets the light theme for the app using themeConfigStyle.light.
+      theme: themeConfig.light,
+      // Sets the dark theme for the app using themeConfigStyle.dark.
+      darkTheme: themeConfig.dark,
       // Sets the default theme mode to dark.
       themeMode: ThemeMode.dark,
       // Sets the title of the app.
