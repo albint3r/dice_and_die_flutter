@@ -1,29 +1,53 @@
-# This file configures the analyzer, which statically analyzes Dart code to
-# check for errors, warnings, and lints.
-#
-# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
-# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
-# invoked from the command line by running `flutter analyze`.
-
-# The following line activates a set of recommended lints for Flutter apps,
-# packages, and plugins designed to encourage good coding practices.
-include: package:flutter_lints/flutter.yaml
+include: package:lint/analysis_options.yaml
+analyzer:
+  enable-experiment:
+    - records
+  plugins:
+    - dart_code_metrics
+  strong-mode:
+  errors:
+    avoid_web_libraries_in_flutter: error
+    invalid_annotation_target: ignore
+  exclude:
+    - "lib/**.freezed.dart"
+    - "lib/**.g.dart"
+    - "test/**.mocks.dart"
+    - "lib/gen/**"
+    - "lib/injection.config.dart"
 
 linter:
-  # The lint rules applied to this project can be customized in the
-  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
-  # included above or to enable additional rules. A list of all available lints
-  # and their documentation is published at
-  # https://dart-lang.github.io/linter/lints/index.html.
-  #
-  # Instead of disabling a lint rule for the entire project in the
-  # section below, it can also be suppressed for a single line of code
-  # or a specific dart file by using the `// ignore: name_of_lint` and
-  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
-  # producing the lint.
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+    close_sinks: false
+    file_names: false
+    prefer_relative_imports: true
+    always_use_package_imports: false
+    avoid_classes_with_only_static_members: false
+    avoid_unused_constructor_parameters: false
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+dart_code_metrics:
+  rules:
+    - prefer-single-widget-per-file:
+        ignore-private-widgets: true
+    - member-ordering:
+        order:
+          - constructors
+          - public-fields
+          - private-fields
+          - public-getters
+          - private-getters
+          - public-setters
+          - private-setters
+          - public-methods
+          - private-methods
+    - prefer-moving-to-variable:
+        allowed-duplicated-chains: 3
+    # - prefer-extracting-callbacks:
+    #     allowed-line-count: 3
+    - prefer-match-file-name
+    - prefer-immediate-return
+    - prefer-correct-edge-insets-constructor
+    - prefer-const-border-radius
+    - always-remove-listener
+    - avoid-shrink-wrap-in-lists
+    - prefer-commenting-analyzer-ignores
+    - list-all-equatable-fields
