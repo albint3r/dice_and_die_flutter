@@ -15,13 +15,49 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    GameRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<GameRouteArgs>(orElse: () => const GameRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: GamePage(game: args.game),
+      );
+    },
     WaitingRoomsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const WaitingRoomsPage(),
       );
-    }
+    },
   };
+}
+
+/// generated route for
+/// [GamePage]
+class GameRoute extends PageRouteInfo<GameRouteArgs> {
+  GameRoute({
+    Game? game,
+    List<PageRouteInfo>? children,
+  }) : super(
+          GameRoute.name,
+          args: GameRouteArgs(game: game),
+          initialChildren: children,
+        );
+
+  static const String name = 'GameRoute';
+
+  static const PageInfo<GameRouteArgs> page = PageInfo<GameRouteArgs>(name);
+}
+
+class GameRouteArgs {
+  const GameRouteArgs({this.game});
+
+  final Game? game;
+
+  @override
+  String toString() {
+    return 'GameRouteArgs{game: $game}';
+  }
 }
 
 /// generated route for

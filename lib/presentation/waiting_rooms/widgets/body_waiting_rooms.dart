@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/waiting_room/waiting_room_bloc.dart';
+import '../../core/router/app_router.dart';
 
 class BodyWaitingRooms extends StatelessWidget {
   const BodyWaitingRooms({super.key});
@@ -14,7 +16,7 @@ class BodyWaitingRooms extends StatelessWidget {
     return Column(
       children: [
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () => context.router.replace(GameRoute()),
           child: const Text('Create Game'),
         ),
         Expanded(
