@@ -3,7 +3,9 @@ import 'package:injectable/injectable.dart';
 import 'package:l/l.dart';
 
 import '../../domain/core/types.dart';
+import '../../domain/waiting_room/game.dart';
 import '../../domain/waiting_room/i_waiting_room_data_source.dart';
+import '../../domain/waiting_room/responses.dart';
 
 @Injectable(as: IWaitingRoomDataSource)
 class WaitingRoomDataSourceImpl implements IWaitingRoomDataSource {
@@ -12,17 +14,18 @@ class WaitingRoomDataSourceImpl implements IWaitingRoomDataSource {
   final Dio _dio;
 
   @override
-  Future<void> getWaitingRooms() async {
-    print('*-' * 100);
-    try {
-      final response = await _dio.get('/v1/waiting_rooms');
-
-      print('*-' * 100);
-      print(response);
-      print('*-' * 100);
-      final data = response.data as Json;
-    } catch (e) {
-      print("Error---> $e");
+  Future<List<Game>> getWaitingRooms() async {
+    final response = await _dio.get('/v1/waiting_rooms');
+    final data = response.data as Json;
+    final activeGamesResponses = ActiveGamesResponses.fromJson(data);
+    final List<Game> result = [];
+    for (final e in activeGamesResponses.response.entries) {
+      l.d(e);
+      final gameResponse = e.value;
+      if (gameResponse is Json) {
+        result.add(Game.fromJson(gameResponse));
+      }
     }
+    return result;
   }
 }

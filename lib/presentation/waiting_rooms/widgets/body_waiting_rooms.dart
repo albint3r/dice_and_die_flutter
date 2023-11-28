@@ -9,20 +9,28 @@ class BodyWaitingRooms extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<WaitingRoomBloc>().state;
-    if (state.isLoading) return Center(child: CircularProgressIndicator());
+    final games = state.games;
+    if (state.isLoading) return const Center(child: CircularProgressIndicator());
     return Column(
       children: [
         ElevatedButton(
           onPressed: () {},
-          child: Text('Create Game'),
+          child: const Text('Create Game'),
         ),
         Expanded(
           child: ListView.builder(
-            itemCount: 10,
+            itemCount: games.length,
             itemBuilder: (context, index) {
+              final game = games[index];
               return Card(
                 child: ListTile(
-                  title: Text('Item $index'),
+                  title: Text('Game id: ${game.id}'),
+                 leading: Column(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                   children: [
+                     Text(game.isFull ? 'Is Full' : 'Not Full')
+                   ],
+                 ),
                 ),
               );
             },

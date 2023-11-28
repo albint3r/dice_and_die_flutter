@@ -1,3 +1,5 @@
+import 'game.dart';
+
 abstract interface class IWaitingRoomDataSource {
-  Future<void> getWaitingRooms();
+  Future<List<Game>> getWaitingRooms();
 }

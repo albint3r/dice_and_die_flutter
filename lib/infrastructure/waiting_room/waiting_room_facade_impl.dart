@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 
+import '../../domain/waiting_room/game.dart';
 import '../../domain/waiting_room/i_waiting_room_data_source.dart';
 import '../../domain/waiting_room/i_waiting_room_facade.dart';
 
@@ -10,7 +11,6 @@ class WaitingRoomFacadeImpl implements IWaitingRoomDFacade {
   final IWaitingRoomDataSource _dataSource;
 
   @override
-  Future<void> getWaitingRooms() async {
-    await _dataSource.getWaitingRooms();
-  }
+  Future<List<Game>> getWaitingRooms() =>
+      _dataSource.getWaitingRooms();
 }
