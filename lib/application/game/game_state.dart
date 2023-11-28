@@ -5,6 +5,7 @@ class GameState with _$GameState {
   const factory GameState({
     required bool isLoading,
     Game? game,
+    Player? player,
   }) = _GameState;
 
   const GameState._();
