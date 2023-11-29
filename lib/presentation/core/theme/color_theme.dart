@@ -43,7 +43,7 @@ class ColorTheme {
         onSecondary: Color(0xff000000),
         error: Color(0xffb00020),
         onError: Color(0xffffffff),
-        background: Color(0xff0e1221),
+        background: Color(0xff2d335d),
         onBackground: Color(0xffffffff),
         surface: Color(0xffffffff),
         onSurface: Color(0xffff21f4),
