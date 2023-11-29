@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../application/game/game_bloc.dart';
-import '../../domain/waiting_room/player.dart';
 
 class BoardColumn extends StatelessWidget {
   const BoardColumn({
@@ -43,16 +39,19 @@ class BoardColumn extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onLongPress: onLongPress,
-      child: Card(
-        color: Colors.green,
-        child: SizedBox(
-          height: 300,
-          width: 100,
-          child: Column(
-            mainAxisAlignment: isFirstPerson
-                ? MainAxisAlignment.start
-                : MainAxisAlignment.end,
-            children: _getColumnsPoints(column),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
+          color: Colors.green,
+          child: SizedBox(
+            height: 300,
+            width: 100,
+            child: Column(
+              mainAxisAlignment: isFirstPerson
+                  ? MainAxisAlignment.start
+                  : MainAxisAlignment.end,
+              children: _getColumnsPoints(column),
+            ),
           ),
         ),
       ),

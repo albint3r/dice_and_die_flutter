@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../domain/waiting_room/die.dart';
 
-const size = 100.0;
+const size = 80.0;
 
 class PlayerBoardDie extends StatelessWidget {
   const PlayerBoardDie({

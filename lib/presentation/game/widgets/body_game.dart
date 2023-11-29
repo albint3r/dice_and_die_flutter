@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../application/game/game_bloc.dart';
 import '../../../domain/waiting_room/game.dart';
 import '../../../domain/waiting_room/player.dart';
-import '../../../infrastructure/game/board.dart';
+import 'board.dart';
 import 'player_board.dart';
 import 'player_board_die.dart';
 

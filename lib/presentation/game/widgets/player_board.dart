@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/game/game_bloc.dart';
 import '../../../domain/waiting_room/player.dart';
-import '../../../infrastructure/game/board.dart';
+import 'board.dart';
 
 class PlayerBoard extends StatelessWidget {
   const PlayerBoard({this.player, this.isFirstPerson = false, super.key});

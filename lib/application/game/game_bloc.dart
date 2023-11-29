@@ -27,18 +27,12 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           // Because game exist you use the game Id to join the party
           facade.getGameEvents(game.id),
           onData: (dataText) {
-            print('-2' * 100);
-            print('Player 2 loop');
-
             // Convert Data in Json
             final Json data = jsonDecode(dataText as String) as Json;
-            print('data-> $data');
             // Get Game Update
             Game? game;
             final Json match = jsonDecode(data['match'] as String) as Json;
             game = Game.fromJson(match);
-            print('game->$game');
-            print('-2' * 100);
             return state.copyWith(
               isLoading: false,
               game: game,
@@ -52,12 +46,8 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       // Because this is a new game We create a new id.
       final randomGameId = facade.generateRandomId();
       await emit.forEach(
-        // todo: replace 007 by the randomGameId
-        facade.getGameEvents('007'),
+        facade.getGameEvents(randomGameId),
         onData: (dataText) {
-          print('-1' * 100);
-          print('Player 1 loop');
-          print('-1' * 100);
           // Convert Data in Json
           final Json data = jsonDecode(dataText as String) as Json;
           // Get Game Update
@@ -75,26 +65,16 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       return;
     });
     on<_RollDice>((event, emit) async {
-      print('*-' * 100);
-      print('_RollDice');
       final channel = state.channel;
-      print('chanel-> $channel');
       if (channel != null) {
         channel.sink.add('{"message": "ok"}');
-        print('8->' * 100);
       }
-      print('*-' * 100);
     });
     on<_SelectColumn>((event, emit) async {
-      print('*-' * 100);
-      print('_SelectColumn');
       final channel = state.channel;
-      print('chanel-> $channel');
       if (channel != null) {
         channel.sink.add('{"message": "${event.columnIndex}"}');
-        print('8->' * 100);
       }
-      print('*-' * 100);
     });
   }
 }
