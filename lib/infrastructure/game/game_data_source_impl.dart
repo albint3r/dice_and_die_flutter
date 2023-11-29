@@ -13,9 +13,8 @@ class GameDataSourceImpl implements IGameDataSource {
   }
 
   @override
-  Stream<dynamic> getGameEvents(String gameId) {
+  WebSocketChannel getGameChannel(String gameId) {
     final uri = Uri.parse('ws://192.168.1.71:8000/ws/v1/game/$gameId');
-    final WebSocketChannel channel = WebSocketChannel.connect(uri);
-    return channel.stream;
+    return WebSocketChannel.connect(uri);
   }
 }

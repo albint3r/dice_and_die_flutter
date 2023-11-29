@@ -12,7 +12,9 @@ class BodyWaitingRooms extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = context.watch<WaitingRoomBloc>().state;
     final games = state.games;
-    if (state.isLoading) return const Center(child: CircularProgressIndicator());
+    if (state.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
     return Column(
       children: [
         ElevatedButton(
@@ -26,13 +28,16 @@ class BodyWaitingRooms extends StatelessWidget {
               final game = games[index];
               return Card(
                 child: ListTile(
+                  onTap: () => context.router.replace(
+                    GameRoute(
+                      game: game,
+                    ),
+                  ),
                   title: Text('Game id: ${game.id}'),
-                 leading: Column(
-                   mainAxisAlignment: MainAxisAlignment.center,
-                   children: [
-                     Text(game.isFull ? 'Is Full' : 'Not Full')
-                   ],
-                 ),
+                  leading: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [Text(game.isFull ? 'Is Full' : 'Not Full')],
+                  ),
                 ),
               );
             },

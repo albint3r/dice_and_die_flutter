@@ -1,7 +1,7 @@
-import '../waiting_room/game.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 abstract interface class IGameDataSource {
-  Stream<dynamic> getGameEvents(String gameId);
+  WebSocketChannel getGameChannel(String gameId);
 
   Future<void> disconnect(String gameId);
 }

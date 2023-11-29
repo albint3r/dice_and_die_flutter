@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../../domain/core/types.dart';
 import '../../domain/game/i_game_facade.dart';
@@ -23,6 +24,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       final game = event.game;
       if (game is Game) {
         await emit.forEach(
+          // Because game exist you use the game Id to join the party
           facade.getGameEvents(game.id),
           onData: (dataText) {
             // Convert Data in Json
@@ -35,6 +37,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
               isLoading: false,
               game: game,
               player: game.p2,
+              channel: facade.channel,
             );
           },
         );
@@ -55,10 +58,22 @@ class GameBloc extends Bloc<GameEvent, GameState> {
             isLoading: false,
             game: game,
             player: game.p1,
+            channel: facade.channel,
           );
         },
       );
       return;
+    });
+    on<_RollDice>((event, emit) async {
+      print('*-' * 100);
+      print('_RollDice');
+      final channel = state.channel;
+      print('chanel-> $channel');
+      if (channel != null) {
+        channel.sink.add({'message':'${event.columnIndex}'}.toString());
+        print('8->' * 100);
+      }
+      print('*-' * 100);
     });
   }
 }

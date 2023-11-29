@@ -6,6 +6,7 @@ class GameState with _$GameState {
     required bool isLoading,
     Game? game,
     Player? player,
+    WebSocketChannel? channel,
   }) = _GameState;
 
   const GameState._();
