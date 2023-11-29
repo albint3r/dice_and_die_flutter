@@ -5,6 +5,8 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 import '../../domain/core/types.dart';
 import '../../domain/game/i_game_data_source.dart';
 import '../../domain/game/i_game_facade.dart';
+import '../../domain/waiting_room/game.dart';
+import '../../domain/waiting_room/player.dart';
 
 @Injectable(as: IGameFacade)
 class GameFacadeImpl implements IGameFacade {
@@ -31,5 +33,13 @@ class GameFacadeImpl implements IGameFacade {
   @override
   void addGameEvent(Json playerInput) {
     // TODO: implement addGameEvent
+  }
+
+  @override
+  Player? getOpponentPlayer(Player? player, Game? game) {
+    if (player is Player && game is Game) {
+      return player.id == game.p1.id ? game.p2 : game.p1;
+    }
+    return null;
   }
 }

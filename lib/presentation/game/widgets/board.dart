@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/game/game_bloc.dart';
 import '../../../domain/waiting_room/player.dart';
-import 'BoardColumn.dart';
+import 'board_column.dart';
 
 class Board extends StatelessWidget {
   const Board({

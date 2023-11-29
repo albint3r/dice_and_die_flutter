@@ -4,8 +4,8 @@ import '../../../domain/waiting_room/die.dart';
 
 const size = 80.0;
 
-class PlayerBoardDie extends StatelessWidget {
-  const PlayerBoardDie({
+class BoardDie extends StatelessWidget {
+  const BoardDie({
     this.die,
     this.onTap,
     super.key,

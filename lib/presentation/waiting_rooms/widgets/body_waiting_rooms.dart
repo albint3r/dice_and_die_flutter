@@ -18,7 +18,7 @@ class BodyWaitingRooms extends StatelessWidget {
     return Column(
       children: [
         ElevatedButton(
-          onPressed: () => context.router.replace(GameRoute()),
+          onPressed: () => context.router.push(GameRoute()),
           child: const Text('Create Game'),
         ),
         Expanded(
@@ -28,7 +28,7 @@ class BodyWaitingRooms extends StatelessWidget {
               final game = games[index];
               return Card(
                 child: ListTile(
-                  onTap: () => context.router.replace(
+                  onTap: () => context.router.push(
                     GameRoute(
                       game: game,
                     ),

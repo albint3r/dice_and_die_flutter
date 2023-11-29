@@ -4,9 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../application/game/game_bloc.dart';
 import '../../../domain/waiting_room/game.dart';
 import '../../../domain/waiting_room/player.dart';
-import 'board.dart';
-import 'player_board.dart';
-import 'player_board_die.dart';
+import 'player_game_area.dart';
 
 class BodyGame extends StatelessWidget {
   const BodyGame({super.key});
@@ -16,28 +14,22 @@ class BodyGame extends StatelessWidget {
     final state = context.watch<GameBloc>().state;
     final game = state.game;
     final player = state.player;
-    print('*-' * 100);
-    print(game);
-    print(state.player?.id);
-    print('*-' * 100);
+    final opponentPlayer = state.opponentPlayer;
+
     if (state.isLoading && game == null) {
       const Center(
         child: CircularProgressIndicator(),
       );
     }
-    Player? opponentPlayer;
-    if (player is Player && game is Game) {
-      opponentPlayer = player.id == game.p1.id ? game.p2 : game.p1;
-    }
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        PlayerBoard(
+        PlayerGameArea(
           player: opponentPlayer,
         ),
-        PlayerBoard(
-          player: state.player,
+        PlayerGameArea(
+          player: player,
           isFirstPerson: true,
         )
       ],

@@ -17,7 +17,7 @@ migrate_working_dir/
 *.ipr
 *.iws
 .idea/
-.fvm
+.fvm/
 injectables.config.dart
 
 # The .vscode folder contains launch configuration and tasks you configure in

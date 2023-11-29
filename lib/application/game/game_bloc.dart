@@ -33,10 +33,12 @@ class GameBloc extends Bloc<GameEvent, GameState> {
             Game? game;
             final Json match = jsonDecode(data['match'] as String) as Json;
             game = Game.fromJson(match);
+            final player = game.p2;
             return state.copyWith(
               isLoading: false,
               game: game,
-              player: game.p2,
+              player: player,
+              opponentPlayer: facade.getOpponentPlayer(player, game),
               channel: facade.channel,
             );
           },
@@ -54,10 +56,12 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           Game? game;
           final Json match = jsonDecode(data['match'] as String) as Json;
           game = Game.fromJson(match);
+          final player = game.p1;
           return state.copyWith(
             isLoading: false,
             game: game,
-            player: game.p1,
+            player: player,
+            opponentPlayer: facade.getOpponentPlayer(player, game),
             channel: facade.channel,
           );
         },
