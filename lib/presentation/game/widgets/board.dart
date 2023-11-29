@@ -1,3 +1,4 @@
+import 'package:dice_and_die_flutter/presentation/game/widgets/points_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,40 +26,49 @@ class Board extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
-        color: Colors.brown,
-        child: SizedBox(
-          width: size.width,
-          height: 200,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              BoardColumn(
-                column: getColumnNumberViewOrder(player!.board.col1),
-                isFirstPerson: isFirstPerson,
-                onLongPress: () => context.read<GameBloc>().add(
-                      const GameEvent.selectColumn(1),
+    return SizedBox(
+      child: Column(
+        children: [
+          // THIS SHOW THE POINTS ROW ABOVE.
+          if (isFirstPerson) PointsRow(player: player),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              color: Colors.brown,
+              child: SizedBox(
+                width: size.width,
+                height: 200,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    BoardColumn(
+                      column: getColumnNumberViewOrder(player!.board.col1),
+                      isFirstPerson: isFirstPerson,
+                      onLongPress: () => context.read<GameBloc>().add(
+                            const GameEvent.selectColumn(1),
+                          ),
                     ),
-              ),
-              BoardColumn(
-                column: getColumnNumberViewOrder(player!.board.col2),
-                isFirstPerson: isFirstPerson,
-                onLongPress: () => context.read<GameBloc>().add(
-                      const GameEvent.selectColumn(2),
+                    BoardColumn(
+                      column: getColumnNumberViewOrder(player!.board.col2),
+                      isFirstPerson: isFirstPerson,
+                      onLongPress: () => context.read<GameBloc>().add(
+                            const GameEvent.selectColumn(2),
+                          ),
                     ),
-              ),
-              BoardColumn(
-                column: getColumnNumberViewOrder(player!.board.col3),
-                isFirstPerson: isFirstPerson,
-                onLongPress: () => context.read<GameBloc>().add(
-                      const GameEvent.selectColumn(3),
+                    BoardColumn(
+                      column: getColumnNumberViewOrder(player!.board.col3),
+                      isFirstPerson: isFirstPerson,
+                      onLongPress: () => context.read<GameBloc>().add(
+                            const GameEvent.selectColumn(3),
+                          ),
                     ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
+            ),
+          ),// THIS SHOW THE POINTS ROW BELOW.
+          if (!isFirstPerson) PointsRow(player: player),
+        ],
       ),
     );
   }
