@@ -15,16 +15,29 @@ class PlayerGameArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<GameBloc>().state;
+
     return Column(
       children: player is Player
           ? [
               // This show the dice above the board only for opponents
               if (!isFirstPerson)
-                BoardDie(
-                  die: player?.die,
-                  onTap: () => context.read<GameBloc>().add(
-                        const GameEvent.rollDice(),
-                      ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    if (state.game!.currentPlayer!.id != state.player!.id)
+                      Text('Opponnet Turn ---------->'),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('Score: ${state.opponentPlayer?.board.totalScore}'),
+                    ),
+                    BoardDie(
+                      die: player?.die,
+                      onTap: () => context.read<GameBloc>().add(
+                            const GameEvent.rollDice(),
+                          ),
+                    ),
+                  ],
                 ),
               SizedBox(
                 child: Column(
@@ -37,11 +50,21 @@ class PlayerGameArea extends StatelessWidget {
               ),
               // This show de dice below the the boar for the player 1
               if (isFirstPerson)
-                BoardDie(
-                  die: player?.die,
-                  onTap: () => context.read<GameBloc>().add(
-                        const GameEvent.rollDice(),
-                      ),
+                Row(
+                  children: [
+                    BoardDie(
+                      die: player?.die,
+                      onTap: () => context.read<GameBloc>().add(
+                            const GameEvent.rollDice(),
+                          ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('Score: ${player?.board.totalScore}'),
+                    ),
+                    if (state.game!.currentPlayer!.id == state.player!.id)
+                      Text('<----------- Your turn'),
+                  ],
                 ),
             ]
           : [],
