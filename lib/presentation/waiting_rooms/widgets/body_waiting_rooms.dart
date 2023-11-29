@@ -28,7 +28,7 @@ class BodyWaitingRooms extends StatelessWidget {
               final game = games[index];
               return Card(
                 child: ListTile(
-                  onTap: () => context.router.push(
+                  onTap: () => context.router.replace(
                     GameRoute(
                       game: game,
                     ),

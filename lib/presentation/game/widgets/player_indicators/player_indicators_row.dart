@@ -32,32 +32,35 @@ class PlayerIndicatorsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment:
-          isFirstPerson ? MainAxisAlignment.start : MainAxisAlignment.end,
-      children: isFirstPerson
-          // This is the order of the element ofr the player 2
-          ? [
-              BoardDie(
-                die: player?.die,
-                onTap: () => context.read<GameBloc>().add(
-                      const GameEvent.rollDice(),
-                    ),
-              ),
-              TurnIndicator.player(),
-              ScoreIndicator.player(),
-            ]
-          // This is the order of the element ofr the player 1
-          : [
-              TurnIndicator.opponentPlayer(),
-              ScoreIndicator.opponentPlayer(),
-              BoardDie(
-                die: player?.die,
-                onTap: () => context.read<GameBloc>().add(
-                      const GameEvent.rollDice(),
-                    ),
-              ),
-            ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment:
+            isFirstPerson ? MainAxisAlignment.start : MainAxisAlignment.end,
+        children: isFirstPerson
+            // This is the order of the element ofr the player 2
+            ? [
+                BoardDie(
+                  die: player?.die,
+                  onTap: () => context.read<GameBloc>().add(
+                        const GameEvent.rollDice(),
+                      ),
+                ),
+                TurnIndicator.player(),
+                ScoreIndicator.player(),
+              ]
+            // This is the order of the element ofr the player 1
+            : [
+                TurnIndicator.opponentPlayer(),
+                ScoreIndicator.opponentPlayer(),
+                BoardDie(
+                  die: player?.die,
+                  onTap: () => context.read<GameBloc>().add(
+                        const GameEvent.rollDice(),
+                      ),
+                ),
+              ],
+      ),
     );
   }
 }

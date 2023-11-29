@@ -1,10 +1,10 @@
-import 'package:dice_and_die_flutter/presentation/game/widgets/points_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/game/game_bloc.dart';
 import '../../../domain/waiting_room/player.dart';
 import 'board_column.dart';
+import 'points_row.dart';
 
 class Board extends StatelessWidget {
   const Board({

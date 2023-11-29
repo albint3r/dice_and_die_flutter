@@ -4,6 +4,7 @@ import '../core/types.dart';
 import 'player.dart';
 
 part 'game.freezed.dart';
+
 part 'game.g.dart';
 
 @freezed
@@ -13,6 +14,7 @@ class Game with _$Game {
     required Player p1,
     required Player? p2,
     @JsonKey(name: 'current_player') Player? currentPlayer,
+    @JsonKey(name: 'winner_player') required Player? winnerPlayer,
     required int turn,
   }) = _Game;
 
