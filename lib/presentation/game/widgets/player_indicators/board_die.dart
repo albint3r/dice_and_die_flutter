@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../domain/waiting_room/die.dart';
+import '../../../../domain/waiting_room/die.dart';
 
 const size = 80.0;
 

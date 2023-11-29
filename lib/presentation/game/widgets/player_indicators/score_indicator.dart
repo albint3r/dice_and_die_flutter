@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../application/game/game_bloc.dart';
+import '../../../../application/game/game_bloc.dart';
 
 class ScoreIndicator extends StatelessWidget {
   const ScoreIndicator({
