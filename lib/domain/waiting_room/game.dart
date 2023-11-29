@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../core/types.dart';
+import 'game_state.dart';
 import 'player.dart';
 
 part 'game.freezed.dart';
@@ -16,6 +17,7 @@ class Game with _$Game {
     @JsonKey(name: 'current_player') Player? currentPlayer,
     @JsonKey(name: 'winner_player') required Player? winnerPlayer,
     required int turn,
+    GameAppState? state,
   }) = _Game;
 
   const Game._();

@@ -39,7 +39,9 @@ class BodyGame extends StatelessWidget {
               Text('Your score: ${player.board.totalScore}'),
               Text('Opponent score: ${opponentPlayer?.board.totalScore}'),
               ElevatedButton(
-                  onPressed: ()=> context.router.replace(const WaitingRoomsRoute()), child: const Text('Go Back Waiting Room'))
+                  onPressed: () =>
+                      context.router.replace(const WaitingRoomsRoute()),
+                  child: const Text('Go Back Waiting Room'))
             ],
           ),
         ),
