@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/game/game_bloc.dart';
-import '../../../domain/waiting_room/game.dart';
 import '../../../domain/waiting_room/player.dart';
 import '../../core/router/app_router.dart';
 import 'player_game_area.dart';
@@ -39,9 +38,10 @@ class BodyGame extends StatelessWidget {
               Text('Your score: ${player.board.totalScore}'),
               Text('Opponent score: ${opponentPlayer?.board.totalScore}'),
               ElevatedButton(
-                  onPressed: () =>
-                      context.router.replace(const WaitingRoomsRoute()),
-                  child: const Text('Go Back Waiting Room'))
+                onPressed: () =>
+                    context.router.replace(const WaitingRoomsRoute()),
+                child: const Text('Go Back Waiting Room'),
+              )
             ],
           ),
         ),
