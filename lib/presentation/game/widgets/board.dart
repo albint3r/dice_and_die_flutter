@@ -37,7 +37,7 @@ class Board extends StatelessWidget {
               color: Colors.brown,
               child: SizedBox(
                 width: size.width,
-                height: 200,
+                height: size.height * .22,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

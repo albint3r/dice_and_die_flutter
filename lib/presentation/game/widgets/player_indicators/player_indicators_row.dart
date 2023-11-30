@@ -1,15 +1,18 @@
-import 'package:dice_and_die_flutter/presentation/game/widgets/player_indicators/score_indicator.dart';
-import 'package:dice_and_die_flutter/presentation/game/widgets/player_indicators/turn_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/game/game_bloc.dart';
 import '../../../../domain/waiting_room/player.dart';
 import 'board_die.dart';
+import 'score_indicator.dart';
+import 'turn_indicator.dart';
 
 class PlayerIndicatorsRow extends StatelessWidget {
-  const PlayerIndicatorsRow(
-      {this.player, required this.isFirstPerson, super.key});
+  const PlayerIndicatorsRow({
+    this.player,
+    required this.isFirstPerson,
+    super.key,
+  });
 
   final Player? player;
 
@@ -41,7 +44,7 @@ class PlayerIndicatorsRow extends StatelessWidget {
             // This is the order of the element ofr the player 2
             ? [
                 BoardDie(
-                  die: player?.die,
+                  player: player,
                   onTap: () => context.read<GameBloc>().add(
                         const GameEvent.rollDice(),
                       ),
@@ -54,7 +57,7 @@ class PlayerIndicatorsRow extends StatelessWidget {
                 TurnIndicator.opponentPlayer(),
                 ScoreIndicator.opponentPlayer(),
                 BoardDie(
-                  die: player?.die,
+                  player: player,
                   onTap: () => context.read<GameBloc>().add(
                         const GameEvent.rollDice(),
                       ),
