@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:l/l.dart';
+import 'package:web_socket_channel/src/channel.dart';
 
 import '../../domain/core/types.dart';
 import '../../domain/waiting_room/game.dart';
@@ -27,5 +28,13 @@ class WaitingRoomDataSourceImpl implements IWaitingRoomDataSource {
       }
     }
     return result;
+  }
+
+
+
+  @override
+  WebSocketChannel getWebsocketWaitingRooms() {
+    final uri = Uri.parse('ws://192.168.1.71:8000/ws/v1/waiting_rooms');
+    return WebSocketChannel.connect(uri);
   }
 }
