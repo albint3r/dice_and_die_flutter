@@ -17,6 +17,8 @@ class PlayerGameArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<GameBloc>().state;
+    final currentPlayer = state.game?.currentPlayer;
     return Column(
       children: player is Player
           ? [
@@ -24,7 +26,7 @@ class PlayerGameArea extends StatelessWidget {
               if (!isFirstPerson) PlayerIndicatorsRow.opponentPlayer(player),
               Board(player: player, isFirstPerson: isFirstPerson),
               // This show de dice below the the boar for the player 1
-              if (isFirstPerson) PlayerIndicatorsRow.player(player!),
+              if (isFirstPerson && currentPlayer is Player) PlayerIndicatorsRow.player(player!),
             ]
           : [],
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const dieSize = 35.0;
+
 class BoardColumn extends StatelessWidget {
   const BoardColumn({
     this.column = const [],
@@ -19,8 +21,8 @@ class BoardColumn extends StatelessWidget {
           elevation: 15,
           color: Colors.white,
           child: SizedBox(
-            height: 50,
-            width: 50,
+            height: dieSize,
+            width: dieSize,
             child: Center(
               child: Text(
                 points > 0 ? "$points" : "0",

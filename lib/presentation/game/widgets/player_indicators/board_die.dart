@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/game/game_bloc.dart';
-import '../../../../domain/waiting_room/die.dart';
 import '../../../../domain/waiting_room/game_state.dart';
 import '../../../../domain/waiting_room/player.dart';
 
-const size = 80.0;
+const size = 60.0;
 
 class BoardDie extends StatelessWidget {
   const BoardDie({
