@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../application/waiting_room/waiting_room_bloc.dart';
 import '../../../domain/waiting_room/game.dart';
 import '../../core/router/app_router.dart';
 
@@ -19,11 +21,16 @@ class GameTile extends StatelessWidget {
         child: ListTile(
           onTap: game.isFull
               ? null
-              : () => context.router.replace(
+              : () {
+                  context.router.replace(
                     GameRoute(
                       game: game,
                     ),
-                  ),
+                  );
+                  context.read<WaitingRoomBloc>().add(
+                        const WaitingRoomEvent.goGame(),
+                      );
+                },
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -43,5 +43,11 @@ class WaitingRoomBloc extends Bloc<WaitingRoomEvent, WaitingRoomState> {
         channel.sink.add('{"message": "reload_event"}');
       }
     });
+    on<_GoGame>((event, emit) async {
+      final channel = state.channel;
+      if (channel != null) {
+        channel.sink.add('{"message": "go_game"}');
+      }
+    });
   }
 }

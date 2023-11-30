@@ -4,4 +4,5 @@ part of 'waiting_room_bloc.dart';
 class WaitingRoomEvent with _$WaitingRoomEvent {
   const factory WaitingRoomEvent.started() = _Started;
   const factory WaitingRoomEvent.reloadEvents() = _ReloadEvents;
+  const factory WaitingRoomEvent.goGame() = _GoGame;
 }
