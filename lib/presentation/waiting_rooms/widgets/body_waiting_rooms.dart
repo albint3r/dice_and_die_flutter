@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/waiting_room/waiting_room_bloc.dart';
 import '../../core/router/app_router.dart';
+import 'game_tile.dart';
 
 class BodyWaitingRooms extends StatelessWidget {
   const BodyWaitingRooms({super.key});
@@ -18,28 +19,28 @@ class BodyWaitingRooms extends StatelessWidget {
     return Column(
       children: [
         ElevatedButton(
-          onPressed: () => context.router.push(GameRoute()),
+          onPressed: () {
+            context.router.push(GameRoute());
+            context.read<WaitingRoomBloc>().add(
+                  const WaitingRoomEvent.reloadEvents(),
+                );
+          },
           child: const Text('Create Game'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            context.read<WaitingRoomBloc>().add(
+                  const WaitingRoomEvent.reloadEvents(),
+                );
+          },
+          child: const Text('Reload Events'),
         ),
         Expanded(
           child: ListView.builder(
             itemCount: games.length,
             itemBuilder: (context, index) {
               final game = games[index];
-              return Card(
-                child: ListTile(
-                  onTap: () => context.router.replace(
-                    GameRoute(
-                      game: game,
-                    ),
-                  ),
-                  title: Text('Game id: ${game.id}'),
-                  leading: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Text(game.isFull ? 'Is Full' : 'Not Full')],
-                  ),
-                ),
-              );
+              return GameTile(game: game);
             },
           ),
         )
