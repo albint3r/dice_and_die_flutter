@@ -9,7 +9,7 @@ part 'responses.g.dart';
 @freezed
 class ActiveGamesResponses with _$ActiveGamesResponses {
   const factory ActiveGamesResponses({
-    @JsonKey(name: 'status_code') required int statusCode,
+    @JsonKey(name: 'status_code') int? statusCode,
     required Map<String, dynamic> response,
   }) = _ActiveGamesResponses;
 

@@ -1,11 +1,12 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/game/game_bloc.dart';
+import '../../../domain/waiting_room/game_state.dart';
 import '../../../domain/waiting_room/player.dart';
-import '../../core/router/app_router.dart';
 import 'player_game_area.dart';
+import 'podium_area/podium_area.dart';
+import 'waiting_game_room.dart';
 
 class BodyGame extends StatelessWidget {
   const BodyGame({super.key});
@@ -18,34 +19,18 @@ class BodyGame extends StatelessWidget {
     final opponentPlayer = state.opponentPlayer;
 
     if (state.isLoading && game == null) {
-      const Center(
+      return const Center(
         child: CircularProgressIndicator(),
       );
     }
+    // This is the waiting area until a player join to the game
+    if (state.game?.state == GameAppState.waitingPlayers) {
+      return const WaitingGameRoom();
+    }
     final winnerPlayer = state.game?.winnerPlayer;
+    // If exist a winner show the Podium Area
     if (winnerPlayer is Player) {
-      return Center(
-        child: SizedBox(
-          width: 400,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('Game is Finished!'),
-              if (winnerPlayer.id == player!.id)
-                const Text('You Win')
-              else
-                const Text('You Lose'),
-              Text('Your score: ${player.board.totalScore}'),
-              Text('Opponent score: ${opponentPlayer?.board.totalScore}'),
-              ElevatedButton(
-                onPressed: () =>
-                    context.router.replace(const WaitingRoomsRoute()),
-                child: const Text('Go Back Waiting Room'),
-              )
-            ],
-          ),
-        ),
-      );
+      return PodiumArea(winnerPlayer: winnerPlayer);
     }
 
     return Column(
