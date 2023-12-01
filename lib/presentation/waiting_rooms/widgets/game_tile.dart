@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../application/waiting_room/waiting_room_bloc.dart';
 import '../../../domain/waiting_room/game.dart';
 import '../../core/router/app_router.dart';
 
@@ -29,10 +27,19 @@ class GameTile extends StatelessWidget {
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Game id: ${game.id.substring(0, 10)}'),
+              Text(
+                'Game id: ${game.id.substring(0, 10)}',
+                style: const TextStyle(color: Colors.black),
+              ),
               const Divider(color: Colors.black),
-              Text('P1 Score: ${game.p1.board.totalScore}'),
-              Text('P2 Score: ${game.p2?.board.totalScore ?? 0}'),
+              Text(
+                'P1 Score: ${game.p1.board.totalScore}',
+                style: const TextStyle(color: Colors.black),
+              ),
+              Text(
+                'P2 Score: ${game.p2?.board.totalScore ?? 0}',
+                style: const TextStyle(color: Colors.black),
+              ),
             ],
           ),
           leading: Column(
@@ -42,7 +49,7 @@ class GameTile extends StatelessWidget {
                 Icons.do_not_disturb_on_total_silence,
                 color: game.isFull ? Colors.red : Colors.greenAccent,
               ),
-              Text(game.isFull ? 'Full' : 'Join\nGame'),
+              Text(game.isFull ? 'Full' : 'Join\nGame', style: const TextStyle(color: Colors.black)),
             ],
           ),
         ),

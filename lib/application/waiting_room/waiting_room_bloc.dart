@@ -25,13 +25,16 @@ class WaitingRoomBloc extends Bloc<WaitingRoomEvent, WaitingRoomState> {
       await emit.forEach(
         facade.getWaitingRoomsEvents(),
         onData: (dataText) {
+          // TODO: Refactor all this code into the facade
           final Json response = jsonDecode(dataText as String) as Json;
           final status = jsonDecode(response['status'] as String) as Json;
+          final connectedPlayers = response['connected_players'] as int;
           final activeGamesResponses = ActiveGamesResponses.fromJson(status);
           final games = facade.extractListOfGames(activeGamesResponses);
           return state.copyWith(
             isLoading: false,
             games: games,
+            connectedPlayers: connectedPlayers,
             channel: facade.channel,
           );
         },
