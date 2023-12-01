@@ -45,7 +45,15 @@ class GameBloc extends Bloc<GameEvent, GameState> {
               channel: facade.channel,
             );
           },
-        );
+        ).whenComplete(() {
+          print('*-'*100);
+          print('whenComplete');
+          print('*-'*100);
+        }).onError((error, stackTrace) {
+          print('*-'*100);
+          print('onError');
+          print('*-'*100);
+        });
         return;
       }
       // Because this is a new game We create a new id.

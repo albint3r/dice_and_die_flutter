@@ -21,16 +21,11 @@ class GameTile extends StatelessWidget {
         child: ListTile(
           onTap: game.isFull
               ? null
-              : () {
-                  context.router.replace(
+              : () => context.router.replace(
                     GameRoute(
                       game: game,
                     ),
-                  );
-                  context.read<WaitingRoomBloc>().add(
-                        const WaitingRoomEvent.goGame(),
-                      );
-                },
+                  ),
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

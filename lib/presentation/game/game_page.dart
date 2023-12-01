@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/game/game_bloc.dart';
+import '../../application/waiting_room/waiting_room_bloc.dart';
 import '../../domain/waiting_room/game.dart';
+import '../../domain/waiting_room/player.dart';
 import '../../injectables.dart';
 import 'widgets/body_game.dart';
 
@@ -23,10 +25,27 @@ class GamePage extends StatelessWidget {
         ..add(
           GameEvent.started(game),
         ),
-      child: Scaffold(
-        body: const BodyGame(),
-        appBar: AppBar(
-          title: const Text('Game Match'),
+      child: MultiBlocListener(
+        listeners: [
+          // This update the values of the user when:
+          // Enter a room
+          // Update the board score
+          // Leave the room
+          BlocListener<GameBloc, GameState>(
+            listenWhen: (prev, curr) =>
+                prev.player != curr.player && curr.player is Player,
+            listener: (context, state) {
+              context.read<WaitingRoomBloc>().add(
+                    const WaitingRoomEvent.reloadEvents(),
+                  );
+            },
+          ),
+        ],
+        child: Scaffold(
+          body: const BodyGame(),
+          appBar: AppBar(
+            title: const Text('Game Match'),
+          ),
         ),
       ),
     );
