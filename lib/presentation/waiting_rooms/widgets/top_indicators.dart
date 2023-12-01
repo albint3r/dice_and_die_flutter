@@ -15,8 +15,18 @@ class TopIndicators extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('Active Players: ${state.connectedPlayers}'),
-          Text('Active Games: ${games.length}'),
+          Row(
+            children: [
+              const Icon(Icons.people),
+              Text('Active Players: ${state.connectedPlayers}'),
+            ],
+          ),
+          Row(
+            children: [
+              const Icon(Icons.casino),
+              Text('Active Games: ${games.length}'),
+            ],
+          ),
         ],
       ),
     );
