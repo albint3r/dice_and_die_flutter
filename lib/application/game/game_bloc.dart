@@ -33,6 +33,9 @@ class GameBloc extends Bloc<GameEvent, GameState> {
             Game? game;
             final Json match = jsonDecode(data['match'] as String) as Json;
             game = Game.fromJson(match);
+            print('*-' * 100);
+            print(game);
+            print('*-' * 100);
             final player = game.p2;
             return state.copyWith(
               isLoading: false,

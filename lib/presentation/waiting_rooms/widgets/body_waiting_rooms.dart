@@ -20,7 +20,7 @@ class BodyWaitingRooms extends StatelessWidget {
       children: [
         ElevatedButton(
           onPressed: () {
-            context.router.push(GameRoute());
+            context.router.replace(GameRoute());
             context.read<WaitingRoomBloc>().add(
                   const WaitingRoomEvent.reloadEvents(),
                 );
