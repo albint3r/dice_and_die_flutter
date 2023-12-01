@@ -5,8 +5,8 @@ class ColorTheme {
         brightness: Brightness.light,
         primary: Color(0xff7984f2),
         onPrimary: Color(0xfffdfdfd),
-        secondary: Color(0xfffcfcfd),
-        onSecondary: Color(0xff000000),
+        secondary: Color(0xff341d1a),
+        onSecondary: Color(0xff505694),
         primaryContainer: Color(0xff188bf6),
         onPrimaryContainer: Color(0xfffdfdfd),
         secondaryContainer: Color(0xfff61818),
@@ -34,10 +34,10 @@ class ColorTheme {
       );
 
   static ColorScheme get dark => const ColorScheme(
-        brightness: Brightness.light,
+        brightness: Brightness.dark,
         primary: Color(0xff7984f2),
         onPrimary: Color(0xfffdfdfd),
-        secondary: Color(0xfffcfcfd),
+        secondary: Color(0xff341d1a),
         onSecondary: Color(0xff000000),
         primaryContainer: Color(0xff188bf6),
         onPrimaryContainer: Color(0xfffdfdfd),

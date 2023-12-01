@@ -1,10 +1,10 @@
-import 'package:dice_and_die_flutter/presentation/waiting_rooms/widgets/top_indicators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/waiting_room/waiting_room_bloc.dart';
 import 'buttons_row.dart';
 import 'game_tile.dart';
+import 'top_indicators.dart';
 
 class BodyWaitingRooms extends StatelessWidget {
   const BodyWaitingRooms({super.key});
