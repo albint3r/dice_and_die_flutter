@@ -25,7 +25,6 @@ class BodyWaitingRooms extends StatelessWidget {
             itemCount: games.length,
             itemBuilder: (context, index) {
               final game = games[index];
-              // return GameTile(game: game);
               return WaitingRoomCard(
                 game: game,
               );

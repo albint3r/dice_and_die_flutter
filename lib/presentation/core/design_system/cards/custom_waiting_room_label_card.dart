@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../domain/waiting_room/game.dart';
 import '../../theme/const_values.dart';
+import '../text/titleh1.dart';
 
 class CustomWaitingRoomLabelCard extends StatelessWidget {
   const CustomWaitingRoomLabelCard({super.key, required this.game});
@@ -23,14 +24,9 @@ class CustomWaitingRoomLabelCard extends StatelessWidget {
         height: waitingRoomLabelCardHeight,
         width: waitingRoomLabelCardWidth,
         child: Center(
-          child: Text(
-            game.isFull ? 'Full' : 'Join\nGame',
-            textAlign: TextAlign.end,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+          child: TitleH1(
+            text: game.isFull ? 'Full' : 'Join\nGame',
+            textAlign: TextAlign.right,
           ),
         ),
       ),

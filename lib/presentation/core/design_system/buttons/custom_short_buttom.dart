@@ -9,9 +9,14 @@ class CustomShortButton extends StatelessWidget {
     this.height = buttonHeight,
     this.isPrimary = false,
     required this.icon,
-  })  : assert(width >= shortButtonWidth,
-            'Width must be at least $shortButtonWidth'),
-        assert(height >= buttonHeight, 'Height must be at least $buttonHeight');
+  })  : assert(
+          width >= shortButtonWidth,
+          'Width must be at least $shortButtonWidth',
+        ),
+        assert(
+          height >= buttonHeight,
+          'Height must be at least $buttonHeight',
+        );
 
   final IconData icon;
   final double width;
@@ -70,12 +75,12 @@ class CustomShortButton extends StatelessWidget {
       backgroundColor: MaterialStateProperty.resolveWith<Color?>(
           (Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {
-          return isPrimary ? colorScheme.primary : colorScheme.onPrimary;
+          return colorScheme.onSecondary;
         }
         if (states.contains(MaterialState.hovered)) {
           return colorScheme.background;
         }
-        return colorScheme.onPrimary;
+        return isPrimary ? colorScheme.primary : colorScheme.onPrimary;
       }),
     );
   }
@@ -103,7 +108,10 @@ class CustomShortButton extends StatelessWidget {
             style: _buildButtonStyle(
               colorScheme,
             ),
-            child: Icon(icon),
+            child: Icon(icon,
+                color: isPrimary
+                    ? colorScheme.onPrimary
+                    : colorScheme.onBackground),
           ),
         )
       ],

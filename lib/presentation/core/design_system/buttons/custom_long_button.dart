@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../theme/const_values.dart';
+import '../text/titleh1.dart';
 
 class CustomLongButton extends StatelessWidget {
   const CustomLongButton({
@@ -8,7 +9,8 @@ class CustomLongButton extends StatelessWidget {
     this.width = longButtonWidth,
     this.height = buttonHeight,
     required this.text,
-  })  : assert(width >= longButtonWidth, 'Width must be at least $longButtonWidth'),
+  })  : assert(width >= longButtonWidth,
+            'Width must be at least $longButtonWidth'),
         assert(height >= buttonHeight, 'Height must be at least $buttonHeight');
 
   final String text;
@@ -31,6 +33,7 @@ class CustomLongButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    const zero = 0.0;
     return Stack(
       children: [
         Container(
@@ -42,8 +45,8 @@ class CustomLongButton extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 0,
-          left: 0,
+          top: zero,
+          left: zero,
           bottom: 5,
           child: ElevatedButton(
             onPressed: onPressed,
@@ -53,7 +56,7 @@ class CustomLongButton extends StatelessWidget {
                 height,
               ),
             ),
-            child: Text(text),
+            child: TitleH1(text: text),
           ),
         )
       ],
