@@ -17,6 +17,7 @@ class ColorTheme {
         onBackground: Color(0xff000000),
         surface: Color(0xfffdc234),
         onSurface: Color(0xff000000),
+        inversePrimary: Color(0xff3ed769),
         // tertiary: Color(0xff0091ea),
         // onTertiary: Color(0xffffffff),
         // tertiaryContainer: Color(0xffcfe4ff),

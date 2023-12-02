@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/waiting_room/waiting_room_bloc.dart';
 import 'buttons_row.dart';
-import 'game_tile.dart';
 import 'top_indicators.dart';
+import 'waiting_room_card.dart';
 
 class BodyWaitingRooms extends StatelessWidget {
   const BodyWaitingRooms({super.key});
@@ -19,12 +19,16 @@ class BodyWaitingRooms extends StatelessWidget {
     return Column(
       children: [
         const TopIndicators(),
+        // const WaitingRoomCard(),
         Expanded(
           child: ListView.builder(
             itemCount: games.length,
             itemBuilder: (context, index) {
               final game = games[index];
-              return GameTile(game: game);
+              // return GameTile(game: game);
+              return WaitingRoomCard(
+                game: game,
+              );
             },
           ),
         ),
