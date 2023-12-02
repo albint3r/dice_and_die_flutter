@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
-import 'color_theme.dart';
+import 'color_scheme_theme_data.dart';
+import 'elevated_button_theme_data.dart';
+import 'text_theme_data.dart';
 
 @singleton
 class ThemeConfig {
@@ -17,6 +19,12 @@ class ThemeConfig {
       scaffoldBackgroundColor: colorScheme.background,
       brightness: colorScheme.brightness,
       visualDensity: VisualDensity.standard,
+      elevatedButtonTheme: CustomElevatedButtonThemeData.themeData(
+        colorScheme,
+      ),
+      textTheme: TextThemeData.themeData(
+        colorScheme,
+      ),
     );
   }
 }

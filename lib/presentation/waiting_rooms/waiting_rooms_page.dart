@@ -9,10 +9,9 @@ class WaitingRoomsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const BodyWaitingRooms(),
-      appBar: AppBar(
-        title: const Text('Waiting Room'),
+    return const SafeArea(
+      child: Scaffold(
+        body: BodyWaitingRooms(),
       ),
     );
   }
