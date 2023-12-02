@@ -73,6 +73,7 @@ class RPSCustomPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+
     final Path path_0 = Path();
     path_0.moveTo(size.width * 0.003630518, size.height * 0.8420440);
     path_0.lineTo(size.width * 0.02707890, size.height * 0.1061943);

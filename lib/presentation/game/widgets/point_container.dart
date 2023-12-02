@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../domain/waiting_room/player.dart';
+import '../../core/design_system/text/titleh2.dart';
+import '../../core/theme/const_values.dart';
+import 'board/coin_custom_painter.dart';
 
 class PointContainer extends StatelessWidget {
   const PointContainer(this.value, {super.key});
@@ -9,25 +12,22 @@ class PointContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(
-          Radius.circular(
-            20,
+    return Stack(
+      children: [
+        Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(
+              Radius.circular(borderRadius),
+            ),
+          ),
+          width: shortButtonWidth,
+          height: 20,
+          child: Center(
+            child: TitleH2(value),
           ),
         ),
-      ),
-      width: 100,
-      height: 20,
-      child: Center(
-        child: Text(
-          value,
-          style: const TextStyle(
-            color: Colors.black,
-          ),
-        ),
-      ),
+      ],
     );
   }
 }
