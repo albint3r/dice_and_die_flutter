@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/game/game_bloc.dart';
+import '../../../../domain/waiting_room/game.dart';
 import '../../../../domain/waiting_room/game_state.dart';
 import '../../../../domain/waiting_room/player.dart';
+import '../../../core/design_system/text/titleh1.dart';
 
 const size = 60.0;
 
-class BoardDie extends StatelessWidget {
+class BoardDie extends StatefulWidget {
   const BoardDie({
     this.player,
     this.onTap,
@@ -18,30 +20,67 @@ class BoardDie extends StatelessWidget {
   final void Function()? onTap;
 
   @override
+  State<BoardDie> createState() => _BoardDieState();
+}
+
+class _BoardDieState extends State<BoardDie>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _angleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(
+        seconds: 10,
+      ),
+    );
+
+    _angleAnimation = Tween<double>(end: 0, begin: 360).animate(_controller);
+
+    _controller.repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  bool _isDiceRolling(Game? game) =>
+      widget.player?.id == game?.currentPlayer?.id &&
+      game?.state == GameAppState.rollDice;
+
+  @override
   Widget build(BuildContext context) {
     final state = context.watch<GameBloc>().state;
     final game = state.game;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    const originalPosition = 0.0;
     return InkWell(
-      onTap: onTap,
-      child: Card(
-        child: Container(
-          transform: player?.id == game?.currentPlayer?.id &&
-                  game!.state == GameAppState.rollDice
-              ? Matrix4.rotationZ(0.1) // Cambia el ángulo según tus necesidades
-              : Matrix4.rotationZ(0),
-          width: size,
-          height: size,
-          color: Colors.white,
-          child: Center(
-            child: Text(
-              "${player?.die.number ?? 0}",
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 40,
+      onTap: widget.onTap,
+      child: AnimatedBuilder(
+        animation: _angleAnimation,
+        builder: (context, child) {
+          return Transform.rotate(
+            angle:
+                _isDiceRolling(game) ? _angleAnimation.value : originalPosition,
+            child: Container(
+              width: size,
+              height: size,
+              color: colorScheme.onPrimary,
+              child: Center(
+                child: TitleH1(
+                  text: "${widget.player?.die.number ?? 0}",
+                  color: colorScheme.onBackground,
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

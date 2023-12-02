@@ -51,11 +51,9 @@ class PlayerIndicatorsColumn extends StatelessWidget {
                           const GameEvent.rollDice(),
                         ),
                   ),
-                  TurnIndicator.player(),
                 ]
               // This is the order of the element ofr the player 1
               : [
-                  TurnIndicator.opponentPlayer(),
                   BoardDie(
                     player: player,
                     onTap: () => context.read<GameBloc>().add(
