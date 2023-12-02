@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../core/theme/const_values.dart';
+import '../../../core/theme/const_values.dart';
 
 const dieSize = 35.0;
 
