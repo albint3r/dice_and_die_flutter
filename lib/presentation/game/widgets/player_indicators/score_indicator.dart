@@ -26,11 +26,8 @@ class ScoreIndicator extends StatelessWidget {
     final player = state.player;
     final opponentPlayer = state.opponentPlayer;
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: isOpponent
-          ? TitleH2('Score: ${opponentPlayer?.board.totalScore}')
-          : TitleH2('Score: ${player?.board.totalScore}'),
-    );
+    return isOpponent
+        ? TitleH2('Opponent Score: ${opponentPlayer?.board.totalScore}')
+        : TitleH2('Your Score: ${player?.board.totalScore}');
   }
 }

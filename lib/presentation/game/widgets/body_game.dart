@@ -40,7 +40,6 @@ class BodyGame extends StatelessWidget {
         PlayerGameArea(
           player: opponentPlayer,
         ),
-        const Gap(10),
         PlayerGameArea(
           player: player,
           isFirstPerson: true,

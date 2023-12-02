@@ -35,40 +35,37 @@ class PlayerIndicatorsColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Column(
-            mainAxisAlignment:
-                isFirstPerson ? MainAxisAlignment.start : MainAxisAlignment.end,
-            children: isFirstPerson
-                // This is the order of the element ofr the player 2
-                ? [
-                    ScoreIndicator.player(),
-                    BoardDie(
-                      player: player,
-                      onTap: () => context.read<GameBloc>().add(
-                            const GameEvent.rollDice(),
-                          ),
-                    ),
-                    TurnIndicator.player(),
-                  ]
-                // This is the order of the element ofr the player 1
-                : [
-                    TurnIndicator.opponentPlayer(),
-                    BoardDie(
-                      player: player,
-                      onTap: () => context.read<GameBloc>().add(
-                            const GameEvent.rollDice(),
-                          ),
-                    ),
-                    ScoreIndicator.opponentPlayer(),
-                  ],
-          ),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Column(
+          mainAxisAlignment:
+              isFirstPerson ? MainAxisAlignment.start : MainAxisAlignment.end,
+          children: isFirstPerson
+              // This is the order of the element ofr the player 2
+              ? [
+                  ScoreIndicator.player(),
+                  BoardDie(
+                    player: player,
+                    onTap: () => context.read<GameBloc>().add(
+                          const GameEvent.rollDice(),
+                        ),
+                  ),
+                  TurnIndicator.player(),
+                ]
+              // This is the order of the element ofr the player 1
+              : [
+                  TurnIndicator.opponentPlayer(),
+                  BoardDie(
+                    player: player,
+                    onTap: () => context.read<GameBloc>().add(
+                          const GameEvent.rollDice(),
+                        ),
+                  ),
+                  ScoreIndicator.opponentPlayer(),
+                ],
+        ),
+      ],
     );
   }
 }
