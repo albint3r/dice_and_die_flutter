@@ -34,12 +34,13 @@ class _BoardDieState extends State<BoardDie>
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(
-        seconds: 10,
+        seconds: 60,
       ),
     );
 
-    _angleAnimation = Tween<double>(end: 0, begin: 360).animate(_controller);
-
+    _angleAnimation = Tween<double>(end: 0, begin: 360).animate(
+      _controller,
+    );
     _controller.repeat();
   }
 
@@ -63,7 +64,7 @@ class _BoardDieState extends State<BoardDie>
     return InkWell(
       onTap: widget.onTap,
       child: AnimatedBuilder(
-        animation: _angleAnimation,
+        animation: _controller,
         builder: (context, child) {
           return Transform.rotate(
             angle:

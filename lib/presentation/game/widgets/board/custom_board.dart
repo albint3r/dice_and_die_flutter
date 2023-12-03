@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/game/game_bloc.dart';
 import '../../../../domain/waiting_room/player.dart';
+import '../../../core/theme/const_values.dart';
 import 'board_column.dart';
 
 class CustomBoard extends StatelessWidget {
@@ -30,12 +31,13 @@ class CustomBoard extends StatelessWidget {
         colorScheme: colorScheme,
       ),
       child: SizedBox(
-        width: 325,
+        width: waitingRoomCardWidth,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             BoardColumn(
               column: getColumnNumberViewOrder(player!.board.col1),
+              player: player,
               isFirstPerson: isFirstPerson,
               onLongPress: () => context.read<GameBloc>().add(
                     const GameEvent.selectColumn(1),
@@ -43,6 +45,7 @@ class CustomBoard extends StatelessWidget {
             ),
             BoardColumn(
               column: getColumnNumberViewOrder(player!.board.col2),
+              player: player,
               isFirstPerson: isFirstPerson,
               onLongPress: () => context.read<GameBloc>().add(
                     const GameEvent.selectColumn(2),
@@ -50,6 +53,7 @@ class CustomBoard extends StatelessWidget {
             ),
             BoardColumn(
               column: getColumnNumberViewOrder(player!.board.col3),
+              player: player,
               isFirstPerson: isFirstPerson,
               onLongPress: () => context.read<GameBloc>().add(
                     const GameEvent.selectColumn(3),
@@ -73,7 +77,6 @@ class RPSCustomPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-
     final Path path_0 = Path();
     path_0.moveTo(size.width * 0.003630518, size.height * 0.8420440);
     path_0.lineTo(size.width * 0.02707890, size.height * 0.1061943);

@@ -5,7 +5,9 @@ const buttonHeight = 50.0;
 const padding = 8.0;
 // Card Size:
 const waitingRoomCardHeight = 100.0;
-const waitingRoomCardWidth = 330.0;
+const waitingRoomCardWidth = 350.0;
+const columnWithMax = 85.0;
+const columnWithMain = 70.0;
 const waitingRoomLabelCardHeight = 65.0;
 const waitingRoomLabelCardWidth = 100.0;
 // Font Size:
