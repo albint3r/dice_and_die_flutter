@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../application/game/game_bloc.dart';
 import '../../../../domain/waiting_room/player.dart';
 import '../../../core/theme/const_values.dart';
-import 'board_column.dart';
+import 'animated_board_column.dart';
 
 class CustomBoard extends StatelessWidget {
   const CustomBoard({
@@ -37,7 +37,7 @@ class CustomBoard extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              BoardColumn(
+              AnimatedBoardColumn(
                 column: getColumnNumberViewOrder(player!.board.col1),
                 player: player,
                 isFirstPerson: isFirstPerson,
@@ -45,7 +45,7 @@ class CustomBoard extends StatelessWidget {
                       const GameEvent.selectColumn(1),
                     ),
               ),
-              BoardColumn(
+              AnimatedBoardColumn(
                 column: getColumnNumberViewOrder(player!.board.col2),
                 player: player,
                 isFirstPerson: isFirstPerson,
@@ -53,7 +53,7 @@ class CustomBoard extends StatelessWidget {
                       const GameEvent.selectColumn(2),
                     ),
               ),
-              BoardColumn(
+              AnimatedBoardColumn(
                 column: getColumnNumberViewOrder(player!.board.col3),
                 player: player,
                 isFirstPerson: isFirstPerson,

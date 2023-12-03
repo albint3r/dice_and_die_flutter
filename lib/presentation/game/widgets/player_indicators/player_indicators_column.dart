@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 import '../../../../application/game/game_bloc.dart';
 import '../../../../domain/waiting_room/player.dart';
 import '../../../core/theme/const_values.dart';
-import 'board_die.dart';
+import 'animation_board_die.dart';
 import 'score_indicator.dart';
 import 'turn_indicator.dart';
 
@@ -48,7 +48,7 @@ class PlayerIndicatorsColumn extends StatelessWidget {
               ? [
                   ScoreIndicator.player(),
                   const Gap(padding),
-                  BoardDie(
+                  AnimationBoardDie(
                     player: player,
                     onTap: () => context.read<GameBloc>().add(
                           const GameEvent.rollDice(),
@@ -57,7 +57,7 @@ class PlayerIndicatorsColumn extends StatelessWidget {
                 ]
               // This is the order of the element ofr the player 1
               : [
-                  BoardDie(
+                  AnimationBoardDie(
                     player: player,
                     onTap: () => context.read<GameBloc>().add(
                           const GameEvent.rollDice(),
