@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
 import '../../../application/game/game_bloc.dart';
 import '../../../domain/waiting_room/game_state.dart';
 import '../../../domain/waiting_room/player.dart';
-import 'player_game_area.dart';
+import 'board/player_game_area.dart';
 import 'podium_area/podium_area.dart';
 import 'waiting_game_room.dart';
 

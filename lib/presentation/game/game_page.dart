@@ -41,10 +41,9 @@ class GamePage extends StatelessWidget {
             },
           ),
         ],
-        child: Scaffold(
-          body: const BodyGame(),
-          appBar: AppBar(
-            title: const Text('Game Match'),
+        child: const SafeArea(
+          child: Scaffold(
+            body: BodyGame(),
           ),
         ),
       ),
