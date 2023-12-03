@@ -33,7 +33,9 @@ class CustomBoard extends StatelessWidget {
       child: SizedBox(
         width: waitingRoomCardWidth,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+          padding: const EdgeInsets.symmetric(
+            horizontal: columnPadding,
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

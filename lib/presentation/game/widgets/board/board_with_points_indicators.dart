@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../domain/waiting_room/player.dart';
-import '../points_row.dart';
+import '../score/points_row.dart';
 import 'custom_board.dart';
 
 class BoardWithPointsIndicators extends StatelessWidget {

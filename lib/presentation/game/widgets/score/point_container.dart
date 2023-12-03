@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../gen/assets.gen.dart';
-import '../../core/design_system/text/titleh2.dart';
-import '../../core/theme/const_values.dart';
+import '../../../../gen/assets.gen.dart';
+import '../../../core/design_system/text/titleh2.dart';
+import '../../../core/theme/const_values.dart';
 
 class PointContainer extends StatelessWidget {
   const PointContainer(this.value, {super.key});

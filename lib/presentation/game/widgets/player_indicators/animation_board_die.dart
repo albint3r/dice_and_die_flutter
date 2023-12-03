@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -5,7 +7,8 @@ import '../../../../application/game/game_bloc.dart';
 import '../../../../domain/waiting_room/game.dart';
 import '../../../../domain/waiting_room/game_state.dart';
 import '../../../../domain/waiting_room/player.dart';
-import 'board_die.dart';
+import '../../../core/design_system/text/titleh1.dart';
+import '../../../core/theme/const_values.dart';
 
 const size = 60.0;
 
@@ -26,7 +29,6 @@ class AnimationBoardDie extends StatefulWidget {
 class _AnimationBoardDieState extends State<AnimationBoardDie>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation<double> _angleAnimation;
 
   @override
   void initState() {
@@ -34,11 +36,10 @@ class _AnimationBoardDieState extends State<AnimationBoardDie>
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(
-        seconds: 60,
+        seconds: 5,
       ),
     );
 
-    _angleAnimation = Tween<double>(end: 0, begin: 360).animate(_controller);
     _controller.repeat();
   }
 
@@ -60,14 +61,13 @@ class _AnimationBoardDieState extends State<AnimationBoardDie>
       widget.player?.id == game?.currentPlayer?.id &&
       game?.state == GameAppState.rollDice;
 
-
-
   @override
   Widget build(BuildContext context) {
     final state = context.watch<GameBloc>().state;
     final game = state.game;
-    const originalPosition = 0.0;
-
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final Random random = Random();
     if (_isDiceRolling(game)) {
       _startAnimation();
     } else {
@@ -76,18 +76,37 @@ class _AnimationBoardDieState extends State<AnimationBoardDie>
 
     return InkWell(
       onTap: widget.onTap,
-      child: AnimatedBuilder(
-        animation: _controller,
-        child: BoardDie(
-          player: widget.player,
+      child: Card(
+        elevation: elevation,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            borderRadius,
+          ),
         ),
-        builder: (context, child) {
-          return Transform.rotate(
-            angle:
-                _isDiceRolling(game) ? _angleAnimation.value : originalPosition,
-            child: child,
-          );
-        },
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(
+              Radius.circular(8),
+            ),
+            color: colorScheme.onPrimary,
+          ),
+          width: size,
+          height: size,
+          child: Center(
+            child: AnimatedBuilder(
+              animation: _controller,
+              builder: (_, __) {
+                final int randomValue = random.nextInt(6) + 1;
+                return TitleH1(
+                  text: _isDiceRolling(game)
+                      ? "$randomValue"
+                      : "${widget.player?.die.number ?? 0}",
+                  color: colorScheme.onBackground,
+                );
+              },
+            ),
+          ),
+        ),
       ),
     );
   }

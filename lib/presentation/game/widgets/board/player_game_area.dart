@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../application/game/game_bloc.dart';
-import '../../../domain/waiting_room/player.dart';
-import 'board/board_with_points_indicators.dart';
-import 'player_indicators/player_indicators_column.dart';
+import '../../../../application/game/game_bloc.dart';
+import '../../../../domain/waiting_room/player.dart';
+import 'board_with_points_indicators.dart';
+import '../player_indicators/player_indicators_column.dart';
 
 class PlayerGameArea extends StatelessWidget {
   const PlayerGameArea({this.player, this.isFirstPerson = false, super.key});

@@ -3,6 +3,8 @@ const longButtonWidth = 135.0;
 const shortButtonWidth = 65.0;
 const buttonHeight = 50.0;
 const padding = 8.0;
+const columnPadding = 15.0;
+const elevation = 15.0;
 // Card Size:
 const waitingRoomCardHeight = 100.0;
 const waitingRoomCardWidth = 350.0;
