@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../theme/const_values.dart';
 import '../text/titleh1.dart';
 
-class CustomLongButton extends StatelessWidget {
+class CustomLongButton extends StatefulWidget {
   const CustomLongButton({
     this.onPressed,
     this.width = longButtonWidth,
@@ -18,6 +18,13 @@ class CustomLongButton extends StatelessWidget {
   final double height;
   final void Function()? onPressed;
 
+  @override
+  State<CustomLongButton> createState() => _CustomLongButtonState();
+}
+
+class _CustomLongButtonState extends State<CustomLongButton> {
+  bool isClicked = false;
+
   BoxDecoration _buildBoxDecoration(ColorScheme colorScheme) {
     return BoxDecoration(
       borderRadius: const BorderRadius.all(
@@ -29,6 +36,19 @@ class CustomLongButton extends StatelessWidget {
     );
   }
 
+  void _onPressed() {
+    setState(() {
+      isClicked = true;
+    });
+    widget.onPressed!();
+  }
+
+  void _onEnd() {
+    setState(() {
+      isClicked = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -38,25 +58,29 @@ class CustomLongButton extends StatelessWidget {
       children: [
         Container(
           padding: EdgeInsets.zero,
-          width: width,
-          height: height,
+          width: widget.width,
+          height: widget.height,
           decoration: _buildBoxDecoration(
             colorScheme,
           ),
         ),
-        Positioned(
+        AnimatedPositioned(
+          onEnd: _onEnd,
+          duration: animationButtonDuration,
           top: zero,
           left: zero,
           bottom: 5,
           child: ElevatedButton(
-            onPressed: onPressed,
+            onPressed: _onPressed,
             style: ElevatedButton.styleFrom(
               minimumSize: Size(
-                width,
-                height,
+                widget.width,
+                widget.height,
               ),
             ),
-            child: TitleH1(text: text),
+            child: TitleH1(
+              text: widget.text,
+            ),
           ),
         )
       ],

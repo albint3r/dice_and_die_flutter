@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../theme/const_values.dart';
 
-class CustomShortButton extends StatelessWidget {
+class CustomShortButton extends StatefulWidget {
   const CustomShortButton({
     this.onPressed,
     this.width = shortButtonWidth,
@@ -53,6 +53,13 @@ class CustomShortButton extends StatelessWidget {
     );
   }
 
+  @override
+  State<CustomShortButton> createState() => _CustomShortButtonState();
+}
+
+class _CustomShortButtonState extends State<CustomShortButton> {
+  bool isClicked = false;
+
   BoxDecoration _buildBoxDecoration(ColorScheme colorScheme) {
     return BoxDecoration(
       borderRadius: const BorderRadius.all(
@@ -68,8 +75,8 @@ class CustomShortButton extends StatelessWidget {
     return ButtonStyle(
       fixedSize: MaterialStateProperty.all<Size>(
         Size(
-          width,
-          height,
+          widget.width,
+          widget.height,
         ),
       ),
       backgroundColor: MaterialStateProperty.resolveWith<Color?>(
@@ -80,38 +87,57 @@ class CustomShortButton extends StatelessWidget {
         if (states.contains(MaterialState.hovered)) {
           return colorScheme.background;
         }
-        return isPrimary ? colorScheme.primary : colorScheme.onPrimary;
+        return widget.isPrimary ? colorScheme.primary : colorScheme.onPrimary;
       }),
     );
+  }
+
+  void _onPressed() {
+    setState(() {
+      isClicked = true;
+    });
+    widget.onPressed!();
+  }
+
+  void _onEnd() {
+    setState(() {
+      isClicked = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    const zero = 0.0;
     return Stack(
       children: [
         Container(
           padding: EdgeInsets.zero,
-          width: width,
-          height: height,
+          width: widget.width,
+          height: widget.height,
           decoration: _buildBoxDecoration(
             colorScheme,
           ),
         ),
-        Positioned(
-          top: 0,
-          left: 0,
-          bottom: 5,
+        AnimatedPositioned(
+          onEnd: _onEnd,
+          duration: animationButtonDuration,
+          top: zero,
+          left: zero,
+          bottom: isClicked ? zero : 5,
           child: ElevatedButton(
-            onPressed: onPressed,
+            // onPressed: widget.onPressed,
+            onPressed: _onPressed,
             style: _buildButtonStyle(
               colorScheme,
             ),
-            child: Icon(icon,
-                color: isPrimary
-                    ? colorScheme.onPrimary
-                    : colorScheme.onBackground),
+            child: Icon(
+              widget.icon,
+              color: widget.isPrimary
+                  ? colorScheme.onPrimary
+                  : colorScheme.onBackground,
+            ),
           ),
         )
       ],
