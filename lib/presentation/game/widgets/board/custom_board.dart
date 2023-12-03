@@ -32,34 +32,37 @@ class CustomBoard extends StatelessWidget {
       ),
       child: SizedBox(
         width: waitingRoomCardWidth,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            BoardColumn(
-              column: getColumnNumberViewOrder(player!.board.col1),
-              player: player,
-              isFirstPerson: isFirstPerson,
-              onLongPress: () => context.read<GameBloc>().add(
-                    const GameEvent.selectColumn(1),
-                  ),
-            ),
-            BoardColumn(
-              column: getColumnNumberViewOrder(player!.board.col2),
-              player: player,
-              isFirstPerson: isFirstPerson,
-              onLongPress: () => context.read<GameBloc>().add(
-                    const GameEvent.selectColumn(2),
-                  ),
-            ),
-            BoardColumn(
-              column: getColumnNumberViewOrder(player!.board.col3),
-              player: player,
-              isFirstPerson: isFirstPerson,
-              onLongPress: () => context.read<GameBloc>().add(
-                    const GameEvent.selectColumn(3),
-                  ),
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              BoardColumn(
+                column: getColumnNumberViewOrder(player!.board.col1),
+                player: player,
+                isFirstPerson: isFirstPerson,
+                onLongPress: () => context.read<GameBloc>().add(
+                      const GameEvent.selectColumn(1),
+                    ),
+              ),
+              BoardColumn(
+                column: getColumnNumberViewOrder(player!.board.col2),
+                player: player,
+                isFirstPerson: isFirstPerson,
+                onLongPress: () => context.read<GameBloc>().add(
+                      const GameEvent.selectColumn(2),
+                    ),
+              ),
+              BoardColumn(
+                column: getColumnNumberViewOrder(player!.board.col3),
+                player: player,
+                isFirstPerson: isFirstPerson,
+                onLongPress: () => context.read<GameBloc>().add(
+                      const GameEvent.selectColumn(3),
+                    ),
+              ),
+            ],
+          ),
         ),
       ),
     );

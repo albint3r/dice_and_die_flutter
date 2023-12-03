@@ -1,4 +1,4 @@
-import 'package:dice_and_die_flutter/domain/waiting_room/game.dart';
+import '../../../../domain/waiting_room/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -44,7 +44,7 @@ class _BoardColumnState extends State<BoardColumn>
 
     _paddingAnimation = Tween<double>(
       end: columnWithMax,
-      begin: columnWithMain,
+      begin: columnWithMin,
     ).animate(_controller);
 
     _controller.repeat(
@@ -78,6 +78,7 @@ class _BoardColumnState extends State<BoardColumn>
   bool _isSelectColumn(Game? game) {
     return game?.currentPlayer?.id == widget.player?.id &&
         game?.state == GameAppState.selectColumn;
+        // widget.column.length < 3;
   }
 
   @override
@@ -104,6 +105,8 @@ class _BoardColumnState extends State<BoardColumn>
                     Radius.circular(borderRadius),
                   ),
                 ),
+                // I use the width of the column and the row space around
+                // to create the padding effect
                 width: _isSelectColumn(game)
                     ? _paddingAnimation.value
                     : columnWithMax,

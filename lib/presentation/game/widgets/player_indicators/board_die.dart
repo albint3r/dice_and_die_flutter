@@ -6,6 +6,7 @@ import '../../../../domain/waiting_room/game.dart';
 import '../../../../domain/waiting_room/game_state.dart';
 import '../../../../domain/waiting_room/player.dart';
 import '../../../core/design_system/text/titleh1.dart';
+import '../../../core/theme/const_values.dart';
 
 const size = 60.0;
 
@@ -69,14 +70,27 @@ class _BoardDieState extends State<BoardDie>
           return Transform.rotate(
             angle:
                 _isDiceRolling(game) ? _angleAnimation.value : originalPosition,
-            child: Container(
-              width: size,
-              height: size,
-              color: colorScheme.onPrimary,
-              child: Center(
-                child: TitleH1(
-                  text: "${widget.player?.die.number ?? 0}",
-                  color: colorScheme.onBackground,
+            child: Card(
+              elevation: 15,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                  borderRadius,
+                ), // Ajusta el valor según tu preferencia
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(8),
+                  ),
+                  color: colorScheme.onPrimary,
+                ),
+                width: size,
+                height: size,
+                child: Center(
+                  child: TitleH1(
+                    text: "${widget.player?.die.number ?? 0}",
+                    color: colorScheme.onBackground,
+                  ),
                 ),
               ),
             ),
