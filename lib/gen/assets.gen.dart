@@ -12,12 +12,28 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/background_lose.png
+  AssetGenImage get backgroundLose =>
+      const AssetGenImage('assets/images/background_lose.png');
+
+  /// File path: assets/images/background_win.png
+  AssetGenImage get backgroundWin =>
+      const AssetGenImage('assets/images/background_win.png');
+
   /// File path: assets/images/monetface.png
   AssetGenImage get monetface =>
       const AssetGenImage('assets/images/monetface.png');
 
+  /// File path: assets/images/you_lose.png
+  AssetGenImage get youLose =>
+      const AssetGenImage('assets/images/you_lose.png');
+
+  /// File path: assets/images/you_win.png
+  AssetGenImage get youWin => const AssetGenImage('assets/images/you_win.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [monetface];
+  List<AssetGenImage> get values =>
+      [backgroundLose, backgroundWin, monetface, youLose, youWin];
 }
 
 class Assets {
