@@ -8,61 +8,97 @@ import 'id_label.dart';
 import 'names_score.dart';
 import 'waiting_room_play_button.dart';
 
-class WaitingRoomCard extends StatelessWidget {
+class WaitingRoomCard extends StatefulWidget {
   const WaitingRoomCard({super.key, required this.game});
 
   final Game game;
+
+  @override
+  State<WaitingRoomCard> createState() => _WaitingRoomCardState();
+}
+
+class _WaitingRoomCardState extends State<WaitingRoomCard>
+    with TickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _opacityAnimation;
+  late Animation<double> _curveAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(
+        milliseconds: 1500,
+      ),
+    );
+
+    _opacityAnimation = Tween<double>(begin: 0, end: 1).animate(_controller);
+    _curveAnimation = CurvedAnimation(parent: _opacityAnimation, curve: Curves.easeIn);
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     const spaceBetweenContainer = 20.0;
     const zeroDistance = 0.0;
     const topPosition = 40.0;
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Stack(
-            children: [
-              const SizedBox(
-                width: waitingRoomCardWidth + spaceBetweenContainer,
-                height: waitingRoomCardHeight,
-              ),
-              const Positioned(
-                right: zeroDistance + 15,
-                child: CustomWaitingRoomCard(),
-              ),
-              Positioned(
-                left: zeroDistance,
-                child: CustomWaitingRoomLabelCard(
-                  game: game,
+    return FadeTransition(
+      opacity: _curveAnimation,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Stack(
+              children: [
+                const SizedBox(
+                  width: waitingRoomCardWidth + spaceBetweenContainer,
+                  height: waitingRoomCardHeight,
                 ),
-              ),
-              Positioned(
-                right: zeroDistance,
-                top: waitingRoomCardHeight * .3,
-                child: WaitingRoomPlayButton(
-                  game: game,
+                const Positioned(
+                  right: zeroDistance + 15,
+                  child: CustomWaitingRoomCard(),
                 ),
-              ),
-              Positioned(
-                top: topPosition,
-                left: waitingRoomCardWidth * .40,
-                child: NamesScore(
-                  game: game,
+                Positioned(
+                  left: zeroDistance,
+                  child: CustomWaitingRoomLabelCard(
+                    game: widget.game,
+                  ),
                 ),
-              ),
-              Positioned(
-                top: 2.5,
-                right: topPosition + 10,
-                child: IdLabel(
-                  game: game,
+                Positioned(
+                  right: zeroDistance,
+                  top: waitingRoomCardHeight * .3,
+                  child: WaitingRoomPlayButton(
+                    game: widget.game,
+                  ),
                 ),
-              )
-            ],
-          ),
-        ],
+                Positioned(
+                  top: topPosition,
+                  left: waitingRoomCardWidth * .40,
+                  child: NamesScore(
+                    game: widget.game,
+                  ),
+                ),
+                Positioned(
+                  top: 2.5,
+                  right: topPosition + 10,
+                  child: IdLabel(
+                    game: widget.game,
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
