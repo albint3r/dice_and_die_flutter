@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/game/game_bloc.dart';
 import '../../../../application/game_notifications/game_notifications_bloc.dart';
+import '../../../../domain/waiting_room/game.dart';
+import '../../../../domain/waiting_room/player.dart';
 
 class BodyGameNotifications extends StatefulWidget {
   const BodyGameNotifications({super.key});
@@ -15,6 +17,7 @@ class _BodyGameNotificationsState extends State<BodyGameNotifications>
     with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _animationOffset;
+  late CurvedAnimation _curve;
 
   @override
   void initState() {
@@ -26,10 +29,29 @@ class _BodyGameNotificationsState extends State<BodyGameNotifications>
       ),
     );
 
+    _curve = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
+
     _animationOffset = Tween<Offset>(
-      begin: const Offset(-15, 0),
+      begin: const Offset(-10, 0),
       end: Offset.zero,
-    ).animate(_controller);
+    ).animate(_curve);
+
+    _controller.addStatusListener((status) async {
+      if (status == AnimationStatus.completed) {
+        await Future.delayed(const Duration(seconds: 2));
+        _controller.reverse();
+      }
+    });
+  }
+
+  String getPlayerTurnNotification(
+    Player player,
+    Game game,
+  ) {
+    if (player.id == game.currentPlayer!.id) {
+      return 'Is your turn: ${player.id.substring(0, 5)}';
+    }
+    return 'Is Opponent turn: ${game.currentPlayer!.id.substring(0, 5)}';
   }
 
   @override
@@ -52,7 +74,10 @@ class _BodyGameNotificationsState extends State<BodyGameNotifications>
             height: 100,
             child: Center(
               child: Text(
-                'Is player turn: ${state.game?.currentPlayer?.id}',
+                getPlayerTurnNotification(
+                  state.player!,
+                  state.game!,
+                ),
               ),
             ),
           ),
