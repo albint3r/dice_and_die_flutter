@@ -2,7 +2,6 @@ import 'package:injectable/injectable.dart';
 import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-import '../../domain/core/types.dart';
 import '../../domain/game/i_game_data_source.dart';
 import '../../domain/game/i_game_facade.dart';
 import '../../domain/waiting_room/game.dart';
@@ -18,6 +17,11 @@ class GameFacadeImpl implements IGameFacade {
   @override
   WebSocketChannel get channel => _channel;
 
+  bool get _existChannel => _channel is WebSocketChannel;
+
+  @override
+  String generateRandomId() => const Uuid().v4();
+
   @override
   Stream<dynamic> getGameEvents(String gameId) {
     _channel = _dataSource.getGameChannel(gameId);
@@ -25,14 +29,8 @@ class GameFacadeImpl implements IGameFacade {
   }
 
   @override
-  String generateRandomId() {
-    const uuid = Uuid();
-    return uuid.v4();
-  }
-
-  @override
-  void addGameEvent(Json playerInput) {
-    // TODO: implement addGameEvent
+  void addGameEvent(String playerInput) {
+    if (_existChannel) _channel.sink.add(playerInput);
   }
 
   @override

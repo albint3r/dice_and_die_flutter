@@ -46,13 +46,13 @@ class GameBloc extends Bloc<GameEvent, GameState> {
             );
           },
         ).whenComplete(() {
-          print('*-'*100);
+          print('*-' * 100);
           print('whenComplete');
-          print('*-'*100);
+          print('*-' * 100);
         }).onError((error, stackTrace) {
-          print('*-'*100);
+          print('*-' * 100);
           print('onError');
-          print('*-'*100);
+          print('*-' * 100);
         });
         return;
       }
@@ -79,17 +79,11 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       );
       return;
     });
-    on<_RollDice>((event, emit) async {
-      final channel = state.channel;
-      if (channel != null) {
-        channel.sink.add('{"message": "ok"}');
-      }
+    on<_RollDice>((event, emit) {
+      facade.addGameEvent('{"message": "ok"}');
     });
-    on<_SelectColumn>((event, emit) async {
-      final channel = state.channel;
-      if (channel != null) {
-        channel.sink.add('{"message": "${event.columnIndex}"}');
-      }
+    on<_SelectColumn>((event, emit) {
+      facade.addGameEvent('{"message": "${event.columnIndex}"}');
     });
   }
 }

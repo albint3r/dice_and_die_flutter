@@ -9,7 +9,7 @@ abstract interface class IGameFacade {
 
   Stream<dynamic> getGameEvents(String gameId);
 
-  void addGameEvent(Json playerInput);
+  void addGameEvent(String playerInput);
 
   String generateRandomId();
   Player? getOpponentPlayer(Player? player, Game? game);
