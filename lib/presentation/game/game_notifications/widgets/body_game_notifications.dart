@@ -5,6 +5,7 @@ import '../../../../application/game/game_bloc.dart';
 import '../../../../application/game_notifications/game_notifications_bloc.dart';
 import '../../../../domain/waiting_room/game.dart';
 import '../../../../domain/waiting_room/player.dart';
+import '../../../core/design_system/text/titleh1.dart';
 
 class BodyGameNotifications extends StatefulWidget {
   const BodyGameNotifications({super.key});
@@ -49,9 +50,9 @@ class _BodyGameNotificationsState extends State<BodyGameNotifications>
     Game game,
   ) {
     if (player.id == game.currentPlayer!.id) {
-      return 'Is your turn: ${player.id.substring(0, 5)}';
+      return 'Is your turn';
     }
-    return 'Is Opponent turn: ${game.currentPlayer!.id.substring(0, 5)}';
+    return 'Is Opponent turn';
   }
 
   @override
@@ -67,19 +68,11 @@ class _BodyGameNotificationsState extends State<BodyGameNotifications>
     return SlideTransition(
       position: _animationOffset,
       child: Center(
-        child: ColoredBox(
-          color: Colors.red,
-          child: SizedBox(
-            width: 300,
-            height: 100,
-            child: Center(
-              child: Text(
-                getPlayerTurnNotification(
-                  state.player!,
-                  state.game!,
-                ),
-              ),
-            ),
+        child: TitleH1(
+          fontSize: 35,
+          text: getPlayerTurnNotification(
+            state.player!,
+            state.game!,
           ),
         ),
       ),
