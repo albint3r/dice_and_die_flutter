@@ -2,7 +2,6 @@ import 'package:injectable/injectable.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../../domain/game/i_game_data_source.dart';
-import '../../domain/waiting_room/game.dart';
 
 @Injectable(as: IGameDataSource)
 class GameDataSourceImpl implements IGameDataSource {
@@ -14,7 +13,8 @@ class GameDataSourceImpl implements IGameDataSource {
 
   @override
   WebSocketChannel getGameChannel(String gameId) {
-    final uri = Uri.parse('ws://192.168.1.71:8000/ws/v1/game/$gameId');
+    // final uri = Uri.parse('ws://24.199.112.252:8001//ws/v1/game/$gameId');
+    final uri = Uri.parse('ws://24.199.112.252:8001/ws/v1/game/$gameId');
     return WebSocketChannel.connect(uri);
   }
 }
