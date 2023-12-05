@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import '../../../application/game/game_bloc.dart';
 import '../../../domain/waiting_room/game_state.dart';
 import '../../../domain/waiting_room/player.dart';
+import '../game_notifications/widgets/body_game_notifications.dart';
 import 'board/player_game_area.dart';
 import 'podium_area/podium_area.dart';
 import 'waiting_game_room.dart';
@@ -34,16 +35,21 @@ class BodyGame extends StatelessWidget {
       return PodiumArea(winnerPlayer: winnerPlayer);
     }
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Stack(
       children: [
-        PlayerGameArea(
-          player: opponentPlayer,
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            PlayerGameArea(
+              player: opponentPlayer,
+            ),
+            PlayerGameArea(
+              player: player,
+              isFirstPerson: true,
+            )
+          ],
         ),
-        PlayerGameArea(
-          player: player,
-          isFirstPerson: true,
-        )
+        const BodyGameNotifications(),
       ],
     );
   }

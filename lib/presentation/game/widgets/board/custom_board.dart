@@ -43,7 +43,7 @@ class CustomBoard extends StatelessWidget {
                 column: getColumnNumberViewOrder(player!.board.col1),
                 player: player,
                 isFirstPerson: isFirstPerson,
-                onLongPress: () => context.read<GameBloc>().add(
+                onTap: () => context.read<GameBloc>().add(
                       const GameEvent.selectColumn(1),
                     ),
               ),
@@ -51,7 +51,7 @@ class CustomBoard extends StatelessWidget {
                 column: getColumnNumberViewOrder(player!.board.col2),
                 player: player,
                 isFirstPerson: isFirstPerson,
-                onLongPress: () => context.read<GameBloc>().add(
+                onTap: () => context.read<GameBloc>().add(
                       const GameEvent.selectColumn(2),
                     ),
               ),
@@ -59,7 +59,7 @@ class CustomBoard extends StatelessWidget {
                 column: getColumnNumberViewOrder(player!.board.col3),
                 player: player,
                 isFirstPerson: isFirstPerson,
-                onLongPress: () => context.read<GameBloc>().add(
+                onTap: () => context.read<GameBloc>().add(
                       const GameEvent.selectColumn(3),
                     ),
               ),
