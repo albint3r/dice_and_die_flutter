@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/game/game_bloc.dart';
+import '../../application/game_notifications/game_notifications_bloc.dart';
 import '../../application/waiting_room/waiting_room_bloc.dart';
 import '../../domain/waiting_room/game.dart';
 import '../../domain/waiting_room/player.dart';
@@ -20,11 +21,18 @@ class GamePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<GameBloc>()
-        ..add(
-          GameEvent.started(game),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<GameBloc>()
+            ..add(
+              GameEvent.started(game),
+            ),
         ),
+        BlocProvider(
+          create: (context) => getIt<GameNotificationsBloc>(),
+        ),
+      ],
       child: MultiBlocListener(
         listeners: [
           // This update the values of the user when:
@@ -37,6 +45,16 @@ class GamePage extends StatelessWidget {
             listener: (context, state) {
               context.read<WaitingRoomBloc>().add(
                     const WaitingRoomEvent.reloadEvents(),
+                  );
+            },
+          ),
+          // This event listener create a ui notification to show witch player
+          // is going next.
+          BlocListener<GameBloc, GameState>(
+            listenWhen: (prev, curr) => prev.game?.state != curr.game?.state,
+            listener: (context, state) {
+              context.read<GameNotificationsBloc>().add(
+                    const GameNotificationsEvent.started(),
                   );
             },
           ),

@@ -39,7 +39,11 @@ class $AssetsImagesGen {
 class Assets {
   Assets._();
 
+  static const AssetGenImage appLogo = AssetGenImage('assets/app_logo.png');
   static const $AssetsImagesGen images = $AssetsImagesGen();
+
+  /// List of all assets
+  List<AssetGenImage> get values => [appLogo];
 }
 
 class AssetGenImage {
