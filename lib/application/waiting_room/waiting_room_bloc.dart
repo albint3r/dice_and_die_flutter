@@ -25,12 +25,10 @@ class WaitingRoomBloc extends Bloc<WaitingRoomEvent, WaitingRoomState> {
       await emit.forEach(
         facade.getWaitingRoomsEvents(),
         onData: (dataText) {
-          // TODO: Refactor all this code into the facade
-          final Json response = jsonDecode(dataText as String) as Json;
-          final status = jsonDecode(response['status'] as String) as Json;
-          final connectedPlayers = response['connected_players'] as int;
-          final activeGamesResponses = ActiveGamesResponses.fromJson(status);
-          final games = facade.extractListOfGames(activeGamesResponses);
+          // Add Games and Active user information in the waiting room
+          final (games, connectedPlayers) = facade.getGamesAndActiveUsers(
+            dataText as String,
+          );
           return state.copyWith(
             isLoading: false,
             games: games,
@@ -41,16 +39,10 @@ class WaitingRoomBloc extends Bloc<WaitingRoomEvent, WaitingRoomState> {
       );
     });
     on<_ReloadEvents>((event, emit) async {
-      final channel = state.channel;
-      if (channel != null) {
-        channel.sink.add('{"message": "reload_event"}');
-      }
+      facade.addWaitingRoomsEvent('{"message": "reload_event"}');
     });
     on<_GoGame>((event, emit) async {
-      final channel = state.channel;
-      if (channel != null) {
-        channel.sink.add('{"message": "go_game"}');
-      }
+      facade.addWaitingRoomsEvent('{"message": "go_game"}');
     });
   }
 }

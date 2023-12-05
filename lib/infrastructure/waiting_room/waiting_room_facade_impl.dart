@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:injectable/injectable.dart';
 import 'package:l/l.dart';
 import 'package:web_socket_channel/src/channel.dart';
@@ -14,6 +16,8 @@ class WaitingRoomFacadeImpl implements IWaitingRoomDFacade {
 
   final IWaitingRoomDataSource _dataSource;
   late final WebSocketChannel _channel;
+
+  bool get _existChannel => _channel is WebSocketChannel;
 
   @override
   WebSocketChannel get channel => _channel;
@@ -38,5 +42,20 @@ class WaitingRoomFacadeImpl implements IWaitingRoomDFacade {
       }
     }
     return result;
+  }
+
+  @override
+  void addWaitingRoomsEvent(String playerInput) {
+    if (_existChannel) _channel.sink.add(playerInput);
+  }
+
+  @override
+  (List<Game>, int) getGamesAndActiveUsers(String dataText) {
+    final Json response = jsonDecode(dataText) as Json;
+    final status = jsonDecode(response['status'] as String) as Json;
+    final connectedPlayers = response['connected_players'] as int;
+    final activeGamesResponses = ActiveGamesResponses.fromJson(status);
+    final List<Game> games = extractListOfGames(activeGamesResponses);
+    return (games, connectedPlayers);
   }
 }
