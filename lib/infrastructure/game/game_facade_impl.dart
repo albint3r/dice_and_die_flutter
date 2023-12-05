@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:injectable/injectable.dart';
 import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -18,6 +20,11 @@ class GameFacadeImpl implements IGameFacade {
   @override
   WebSocketChannel get channel => _channel;
 
+  bool get _existChannel => _channel is WebSocketChannel;
+
+  @override
+  String generateRandomId() => const Uuid().v4();
+
   @override
   Stream<dynamic> getGameEvents(String gameId) {
     _channel = _dataSource.getGameChannel(gameId);
@@ -25,14 +32,8 @@ class GameFacadeImpl implements IGameFacade {
   }
 
   @override
-  String generateRandomId() {
-    const uuid = Uuid();
-    return uuid.v4();
-  }
-
-  @override
-  void addGameEvent(Json playerInput) {
-    // TODO: implement addGameEvent
+  void addGameEvent(String playerInput) {
+    if (_existChannel) _channel.sink.add(playerInput);
   }
 
   @override
@@ -41,5 +42,22 @@ class GameFacadeImpl implements IGameFacade {
       return player.id == game.p1.id ? game.p2 : game.p1;
     }
     return null;
+  }
+
+  @override
+  (Game, Player) getGameAndPlayerMatch(String dataText, bool isPlayer1) {
+    // Convert Data in Json
+    final Json data = jsonDecode(dataText) as Json;
+    // Get Game Update
+    Game? game;
+    final Json match = jsonDecode(data['match'] as String) as Json;
+    game = Game.fromJson(match);
+    final Player player;
+    if (isPlayer1) {
+      player = game.p1;
+    } else {
+      player = game.p2!;
+    }
+    return (game, player);
   }
 }

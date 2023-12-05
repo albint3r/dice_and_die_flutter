@@ -7,10 +7,23 @@ import '../waiting_room/player.dart';
 abstract interface class IGameFacade {
   WebSocketChannel get channel;
 
-  Stream<dynamic> getGameEvents(String gameId);
+  Stream<dynamic> getGameEvents(
+    String gameId,
+  );
 
-  void addGameEvent(Json playerInput);
+  void addGameEvent(
+    String playerInput,
+  );
 
   String generateRandomId();
-  Player? getOpponentPlayer(Player? player, Game? game);
+
+  Player? getOpponentPlayer(
+    Player? player,
+    Game? game,
+  );
+
+  (Game, Player) getGameAndPlayerMatch(
+    String dataText,
+    bool isPlayer1,
+  );
 }

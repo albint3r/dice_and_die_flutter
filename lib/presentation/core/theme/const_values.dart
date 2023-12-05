@@ -1,3 +1,4 @@
+const websocketUri = 'ws://24.199.112.252:8001';
 const borderRadius = 15.0;
 const longButtonWidth = 135.0;
 const shortButtonWidth = 65.0;
@@ -10,7 +11,7 @@ const animationButtonDuration = Duration(milliseconds: 100);
 const waitingRoomCardHeight = 100.0;
 const waitingRoomCardWidth = 350.0;
 const columnWithMax = 85.0;
-const columnWithMin= 70.0;
+const columnWithMin = 70.0;
 const waitingRoomLabelCardHeight = 65.0;
 const waitingRoomLabelCardWidth = 100.0;
 // Font Size:
