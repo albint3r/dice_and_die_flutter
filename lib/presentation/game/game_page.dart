@@ -54,7 +54,9 @@ class GamePage extends StatelessWidget {
             listenWhen: (prev, curr) => prev.game?.state != curr.game?.state,
             listener: (context, state) {
               context.read<GameNotificationsBloc>().add(
-                    const GameNotificationsEvent.started(),
+                    GameNotificationsEvent.update(
+                      game: state.game!,
+                    ),
                   );
             },
           ),
