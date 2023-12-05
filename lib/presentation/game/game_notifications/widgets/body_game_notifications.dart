@@ -45,20 +45,39 @@ class _BodyGameNotificationsState extends State<BodyGameNotifications>
     });
   }
 
-  String getPlayerTurnNotification(
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  Widget getPlayerTurnNotification(
     Player player,
     Game game,
+    ColorScheme colorScheme,
   ) {
+    final String text;
+    final Color color;
     if (player.id == game.currentPlayer!.id) {
-      return 'Is your turn';
+      text = 'Your Turn';
+      color = colorScheme.primaryContainer;
+    } else {
+      text = 'Opponent Turn';
+      color = colorScheme.secondaryContainer;
     }
-    return 'Is Opponent turn';
+    return TitleH1(
+      text: text,
+      color: color,
+      fontSize: 35,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final gameNotification = context.watch<GameNotificationsBloc>().state;
     final state = context.watch<GameBloc>().state;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     if (!gameNotification.showNotifications) {
       _controller.reset();
       return const SizedBox.shrink();
@@ -68,12 +87,10 @@ class _BodyGameNotificationsState extends State<BodyGameNotifications>
     return SlideTransition(
       position: _animationOffset,
       child: Center(
-        child: TitleH1(
-          fontSize: 35,
-          text: getPlayerTurnNotification(
-            state.player!,
-            state.game!,
-          ),
+        child: getPlayerTurnNotification(
+          state.player!,
+          state.game!,
+          colorScheme,
         ),
       ),
     );

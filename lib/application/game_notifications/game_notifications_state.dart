@@ -6,8 +6,7 @@ class GameNotificationsState with _$GameNotificationsState {
     required bool showNotifications,
   }) = _GameNotificationsState;
 
-  factory GameNotificationsState.initial() =>
-      const GameNotificationsState(
+  factory GameNotificationsState.initial() => const GameNotificationsState(
         showNotifications: false,
       );
 }

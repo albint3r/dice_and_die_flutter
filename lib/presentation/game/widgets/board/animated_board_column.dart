@@ -6,7 +6,6 @@ import '../../../../domain/waiting_room/game.dart';
 import '../../../../domain/waiting_room/game_state.dart';
 import '../../../../domain/waiting_room/player.dart';
 import '../../../core/design_system/text/titleh1.dart';
-import '../../../core/design_system/text/titleh2.dart';
 import '../../../core/theme/const_values.dart';
 
 const dieSize = 35.0;
@@ -16,14 +15,14 @@ class AnimatedBoardColumn extends StatefulWidget {
     this.column = const [],
     this.player,
     required this.isFirstPerson,
-    this.onLongPress,
+    this.onTap,
     super.key,
   });
 
   final List<int> column;
   final Player? player;
   final bool isFirstPerson;
-  final void Function()? onLongPress;
+  final void Function()? onTap;
 
   @override
   State<AnimatedBoardColumn> createState() => _AnimatedBoardColumnState();
@@ -120,7 +119,8 @@ class _AnimatedBoardColumnState extends State<AnimatedBoardColumn>
 
     return Flexible(
       child: InkWell(
-        onLongPress: widget.onLongPress,
+        onTap: widget.onTap,
+        onLongPress: widget.onTap,
         child: Padding(
           padding: const EdgeInsets.only(
             top: padding,
