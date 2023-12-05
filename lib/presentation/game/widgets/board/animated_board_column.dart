@@ -54,6 +54,12 @@ class _AnimatedBoardColumnState extends State<AnimatedBoardColumn>
     );
   }
 
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   BoxDecoration _buildBoxDecoration(ColorScheme colorScheme) {
     return BoxDecoration(
       color: colorScheme.onPrimary,

@@ -58,7 +58,6 @@ class GameFacadeImpl implements IGameFacade {
     } else {
       player = game.p2!;
     }
-
     return (game, player);
   }
 }
