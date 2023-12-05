@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:injectable/injectable.dart';
 import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+import '../../domain/core/types.dart';
 import '../../domain/game/i_game_data_source.dart';
 import '../../domain/game/i_game_facade.dart';
 import '../../domain/waiting_room/game.dart';
@@ -39,5 +42,23 @@ class GameFacadeImpl implements IGameFacade {
       return player.id == game.p1.id ? game.p2 : game.p1;
     }
     return null;
+  }
+
+  @override
+  (Game, Player) getGameAndPlayerMatch(String dataText, bool isPlayer1) {
+    // Convert Data in Json
+    final Json data = jsonDecode(dataText) as Json;
+    // Get Game Update
+    Game? game;
+    final Json match = jsonDecode(data['match'] as String) as Json;
+    game = Game.fromJson(match);
+    final Player player;
+    if (isPlayer1) {
+      player = game.p1;
+    } else {
+      player = game.p2!;
+    }
+
+    return (game, player);
   }
 }
