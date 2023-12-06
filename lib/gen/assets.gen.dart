@@ -36,11 +36,33 @@ class $AssetsImagesGen {
       [backgroundLose, backgroundWin, monetface, youLose, youWin];
 }
 
+class $AssetsSoundsGen {
+  const $AssetsSoundsGen();
+
+  /// File path: assets/sounds/dice_random_rolling_effect.mp3
+  String get diceRandomRollingEffect =>
+      'assets/sounds/dice_random_rolling_effect.mp3';
+
+  /// File path: assets/sounds/dice_roll.mp3
+  String get diceRoll => 'assets/sounds/dice_roll.mp3';
+
+  /// File path: assets/sounds/piano_key.WAV
+  String get pianoKey => 'assets/sounds/piano_key.WAV';
+
+  /// File path: assets/sounds/slash1_sound.mp3
+  String get slash1Sound => 'assets/sounds/slash1_sound.mp3';
+
+  /// List of all assets
+  List<String> get values =>
+      [diceRandomRollingEffect, diceRoll, pianoKey, slash1Sound];
+}
+
 class Assets {
   Assets._();
 
   static const AssetGenImage appLogo = AssetGenImage('assets/app_logo.png');
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsSoundsGen sounds = $AssetsSoundsGen();
 
   /// List of all assets
   List<AssetGenImage> get values => [appLogo];

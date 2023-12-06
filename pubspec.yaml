@@ -2,7 +2,7 @@ name: dice_and_die_flutter
 description: A new Flutter project.
 publish_to: 'none'
 
-version: 1.0.0+3
+version: 1.0.0+5
 
 environment:
   sdk: '>=3.0.3 <4.0.0'
@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  audioplayers: ^5.2.1
   bloc: ^8.1.2
   flutter_bloc: ^8.1.3
   l: ^4.0.2
@@ -29,6 +30,7 @@ dependencies:
   uuid: ^3.0.0
   google_fonts: ^4.0.3
   flutter_launcher_icons: ^0.13.1
+
 
 
 dev_dependencies:
@@ -78,6 +80,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/sounds/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
