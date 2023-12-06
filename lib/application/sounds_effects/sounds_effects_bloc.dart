@@ -12,9 +12,6 @@ part 'sounds_effects_state.dart';
 @injectable
 class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
   SoundsEffectsBloc() : super(SoundsEffectsState.initial()) {
-    on<_Started>((event, emit) {
-      // TODO: implement event handler
-    });
     on<_PlayRollDice>((event, emit) async {
       emit(
         state.copyWith(
@@ -43,7 +40,17 @@ class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
       );
     });
     on<_StopRollDice>((event, emit) async {
+      // When the dice stop the throw dice start.
       state.rollDiceAudioPlayer?.stop();
+      emit(
+        state.copyWith(
+          throwDiceAudioPlayer: AudioPlayer(),
+        ),
+      );
+      await state.throwDiceAudioPlayer!.setSource(
+        AssetSource('sounds/dice_roll.mp3'),
+      );
+      state.throwDiceAudioPlayer?.resume();
     });
   }
 }
