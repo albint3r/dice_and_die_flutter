@@ -7,6 +7,8 @@ import '../waiting_room/player.dart';
 abstract interface class IGameFacade {
   WebSocketChannel get channel;
 
+  Future<void> disconnectChannel();
+
   Stream<dynamic> getGameEvents(
     String gameId,
   );

@@ -7,7 +7,6 @@ class GameState with _$GameState {
     Game? game,
     Player? player,
     Player? opponentPlayer,
-    WebSocketChannel? channel,
   }) = _GameState;
 
   const GameState._();

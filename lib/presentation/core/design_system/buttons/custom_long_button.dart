@@ -9,9 +9,14 @@ class CustomLongButton extends StatefulWidget {
     this.width = longButtonWidth,
     this.height = buttonHeight,
     required this.text,
-  })  : assert(width >= longButtonWidth,
-            'Width must be at least $longButtonWidth'),
-        assert(height >= buttonHeight, 'Height must be at least $buttonHeight');
+  })  : assert(
+          width >= longButtonWidth,
+          'Width must be at least $longButtonWidth',
+        ),
+        assert(
+          height >= buttonHeight,
+          'Height must be at least $buttonHeight',
+        );
 
   final String text;
   final double width;
@@ -40,7 +45,11 @@ class _CustomLongButtonState extends State<CustomLongButton> {
     setState(() {
       isClicked = true;
     });
-    widget.onPressed!();
+    // Without this you would have an error.
+    final wOnPressed = widget.onPressed;
+    if (wOnPressed != null) {
+      wOnPressed();
+    }
   }
 
   void _onEnd() {
@@ -71,7 +80,7 @@ class _CustomLongButtonState extends State<CustomLongButton> {
           left: zero,
           bottom: 5,
           child: ElevatedButton(
-            onPressed: _onPressed,
+            onPressed: widget.onPressed != null ? _onPressed : null,
             style: ElevatedButton.styleFrom(
               minimumSize: Size(
                 widget.width,

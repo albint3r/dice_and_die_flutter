@@ -60,4 +60,7 @@ class GameFacadeImpl implements IGameFacade {
     }
     return (game, player);
   }
+
+  @override
+  Future<void> disconnectChannel() async => await _channel.sink.close();
 }

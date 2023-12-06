@@ -1,11 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 
+import '../../domain/game/errors.dart';
 import '../../domain/game/i_game_facade.dart';
 import '../../domain/waiting_room/game.dart';
 import '../../domain/waiting_room/player.dart';
+import '../../injectables.dart';
+import '../../presentation/core/router/app_router.dart';
+import '../waiting_room/waiting_room_bloc.dart';
 
 part 'game_bloc.freezed.dart';
 
@@ -27,17 +30,24 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           // Because game exist you use the game Id to join the party
           facade.getGameEvents(game.id),
           onData: (dataText) {
-            final (game, player) = facade.getGameAndPlayerMatch(
-              dataText as String,
-              false,
-            );
-            return state.copyWith(
-              isLoading: false,
-              game: game,
-              player: player,
-              opponentPlayer: facade.getOpponentPlayer(player, game),
-              channel: facade.channel,
-            );
+            try {
+              final (game, player) = facade.getGameAndPlayerMatch(
+                dataText as String,
+                false,
+              );
+              return state.copyWith(
+                isLoading: false,
+                game: game,
+                player: player,
+                opponentPlayer: facade.getOpponentPlayer(player, game),
+              );
+            } catch (e) {
+              facade.disconnectChannel();
+              _leaveGame();
+              throw UnExistentGameError(
+                'P2 enter to a disconnect room. This websocket is no more working.',
+              );
+            }
           },
         );
         return;
@@ -56,7 +66,6 @@ class GameBloc extends Bloc<GameEvent, GameState> {
             game: game,
             player: player,
             opponentPlayer: facade.getOpponentPlayer(player, game),
-            channel: facade.channel,
           );
         },
       );
@@ -68,5 +77,20 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     on<_SelectColumn>((event, emit) {
       facade.addGameEvent('{"message": "${event.columnIndex}"}');
     });
+    on<_CancelMatch>((event, emit) async {
+      emit(
+        state.copyWith(
+          isLoading: true,
+        ),
+      );
+      await facade.disconnectChannel();
+      _leaveGame();
+    });
+  }
+
+  void _leaveGame() {
+    final router = getIt<AppRouter>();
+    router.replace(const WaitingRoomsRoute());
+    getIt<WaitingRoomBloc>().add(const WaitingRoomEvent.reloadEvents());
   }
 }

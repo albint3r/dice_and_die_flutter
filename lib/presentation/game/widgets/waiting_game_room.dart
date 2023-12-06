@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
+import '../../../application/game/game_bloc.dart';
+import '../../core/design_system/buttons/custom_long_button.dart';
 import '../../core/design_system/text/titleh1.dart';
 
 class WaitingGameRoom extends StatelessWidget {
@@ -20,6 +23,13 @@ class WaitingGameRoom extends StatelessWidget {
           ),
           const Gap(20),
           const CircularProgressIndicator(),
+          const Gap(15),
+          CustomLongButton(
+            onPressed: () => context.read<GameBloc>().add(
+                  const GameEvent.cancelMatch(),
+                ),
+            text: 'Cancel',
+          )
         ],
       ),
     );
