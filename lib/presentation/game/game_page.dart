@@ -9,6 +9,7 @@ import '../../application/waiting_room/waiting_room_bloc.dart';
 import '../../domain/waiting_room/game.dart';
 import '../../domain/waiting_room/player.dart';
 import '../../injectables.dart';
+import '../core/router/app_router.dart';
 import 'widgets/body_game.dart';
 
 @RoutePage()
@@ -60,6 +61,8 @@ class GamePage extends StatelessWidget {
                   );
             },
           ),
+          // This send a message to finished the current game, but need to notify
+          // the server that the game is disconnected.
         ],
         child: const SafeArea(
           child: Scaffold(

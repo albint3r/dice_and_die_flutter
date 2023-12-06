@@ -5,7 +5,11 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../../domain/game/i_game_facade.dart';
 import '../../domain/waiting_room/game.dart';
+import '../../domain/waiting_room/game_state.dart';
 import '../../domain/waiting_room/player.dart';
+import '../../injectables.dart';
+import '../../presentation/core/router/app_router.dart';
+import '../waiting_room/waiting_room_bloc.dart';
 
 part 'game_bloc.freezed.dart';
 
@@ -67,6 +71,19 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     });
     on<_SelectColumn>((event, emit) {
       facade.addGameEvent('{"message": "${event.columnIndex}"}');
+    });
+    on<_CancelMatch>((event, emit) async {
+      emit(
+        state.copyWith(
+          isCancelMatch: true,
+        ),
+      );
+      facade.channel.sink.close();
+      await Future.delayed(const Duration(seconds: 1));
+
+      final router = getIt<AppRouter>();
+      router.replace(const WaitingRoomsRoute());
+      getIt<WaitingRoomBloc>().add(const WaitingRoomEvent.reloadEvents());
     });
   }
 }
