@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/game/game_bloc.dart';
@@ -61,8 +60,6 @@ class GamePage extends StatelessWidget {
                   );
             },
           ),
-          // This send a message to finished the current game, but need to notify
-          // the server that the game is disconnected.
         ],
         child: const SafeArea(
           child: Scaffold(

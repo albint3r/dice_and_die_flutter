@@ -5,16 +5,13 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../../domain/game/i_game_facade.dart';
 import '../../domain/waiting_room/game.dart';
-import '../../domain/waiting_room/game_state.dart';
 import '../../domain/waiting_room/player.dart';
 import '../../injectables.dart';
 import '../../presentation/core/router/app_router.dart';
 import '../waiting_room/waiting_room_bloc.dart';
 
 part 'game_bloc.freezed.dart';
-
 part 'game_event.dart';
-
 part 'game_state.dart';
 
 @injectable
@@ -40,7 +37,6 @@ class GameBloc extends Bloc<GameEvent, GameState> {
               game: game,
               player: player,
               opponentPlayer: facade.getOpponentPlayer(player, game),
-              channel: facade.channel,
             );
           },
         );
@@ -60,7 +56,6 @@ class GameBloc extends Bloc<GameEvent, GameState> {
             game: game,
             player: player,
             opponentPlayer: facade.getOpponentPlayer(player, game),
-            channel: facade.channel,
           );
         },
       );
@@ -75,12 +70,10 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     on<_CancelMatch>((event, emit) async {
       emit(
         state.copyWith(
-          isCancelMatch: true,
+          isLoading: true,
         ),
       );
-      facade.channel.sink.close();
-      await Future.delayed(const Duration(seconds: 1));
-
+      await facade.disconnectChannel();
       final router = getIt<AppRouter>();
       router.replace(const WaitingRoomsRoute());
       getIt<WaitingRoomBloc>().add(const WaitingRoomEvent.reloadEvents());

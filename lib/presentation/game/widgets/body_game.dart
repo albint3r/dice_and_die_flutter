@@ -20,7 +20,7 @@ class BodyGame extends StatelessWidget {
     final player = state.player;
     final opponentPlayer = state.opponentPlayer;
 
-    if (state.isLoading && game == null) {
+    if (state.isLoading || game == null) {
       return const Center(
         child: CircularProgressIndicator(),
       );

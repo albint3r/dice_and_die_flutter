@@ -12,7 +12,6 @@ class WaitingGameRoom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final state = context.watch<GameBloc>().state;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -26,11 +25,9 @@ class WaitingGameRoom extends StatelessWidget {
           const CircularProgressIndicator(),
           const Gap(15),
           CustomLongButton(
-            onPressed: state.isCancelMatch
-                ? null
-                : () => context.read<GameBloc>().add(
-                      const GameEvent.cancelMatch(),
-                    ),
+            onPressed: () => context.read<GameBloc>().add(
+                  const GameEvent.cancelMatch(),
+                ),
             text: 'Cancel',
           )
         ],
