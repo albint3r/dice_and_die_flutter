@@ -72,7 +72,6 @@ class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
       // When the dice stop the throw dice start.
       await state.rollDiceAudioPlayer?.dispose();
       await state.throwDiceAudioPlayer?.dispose();
-      super.close();
     });
   }
 }
