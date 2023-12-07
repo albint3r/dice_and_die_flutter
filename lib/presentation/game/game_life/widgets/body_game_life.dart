@@ -4,7 +4,6 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import '../../../../application/game_life/game_life_bloc.dart';
 import '../../../../domain/waiting_room/player.dart';
-import '../../../core/design_system/text/titleh2.dart';
 import '../../../core/theme/const_values.dart';
 import 'player_points.dart';
 

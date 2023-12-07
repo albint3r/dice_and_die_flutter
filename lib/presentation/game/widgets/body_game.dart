@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 
 import '../../../application/game/game_bloc.dart';
 import '../../../domain/waiting_room/game_state.dart';
