@@ -6,7 +6,9 @@ import '../../domain/waiting_room/game.dart';
 import '../../domain/waiting_room/game_state.dart';
 
 part 'game_notifications_bloc.freezed.dart';
+
 part 'game_notifications_event.dart';
+
 part 'game_notifications_state.dart';
 
 @injectable
@@ -15,7 +17,9 @@ class GameNotificationsBloc
   GameNotificationsBloc() : super(GameNotificationsState.initial()) {
     on<_Update>((event, emit) {
       final game = event.game;
-      if (game.state == GameAppState.rollDice) {
+      final gameState = game.state;
+      if (gameState == GameAppState.rollDice ||
+          gameState == GameAppState.selectColumn) {
         emit(
           state.copyWith(
             showNotifications: true,

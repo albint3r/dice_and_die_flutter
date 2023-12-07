@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 
 import '../../../application/game/game_bloc.dart';
 import '../../../domain/waiting_room/game_state.dart';
 import '../../../domain/waiting_room/player.dart';
+import '../game_life/widgets/body_game_life.dart';
 import '../game_notifications/widgets/body_game_notifications.dart';
 import 'board/player_game_area.dart';
 import 'podium_area/podium_area.dart';
@@ -35,21 +35,28 @@ class BodyGame extends StatelessWidget {
       return PodiumArea(winnerPlayer: winnerPlayer);
     }
 
-    return Stack(
+    return Column(
       children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            PlayerGameArea(
-              player: opponentPlayer,
-            ),
-            PlayerGameArea(
-              player: player,
-              isFirstPerson: true,
-            )
-          ],
+        const BodyGameLife(),
+        Expanded(
+          child: Stack(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  PlayerGameArea(
+                    player: opponentPlayer,
+                  ),
+                  PlayerGameArea(
+                    player: player,
+                    isFirstPerson: true,
+                  )
+                ],
+              ),
+              const BodyGameNotifications(),
+            ],
+          ),
         ),
-        const BodyGameNotifications(),
       ],
     );
   }

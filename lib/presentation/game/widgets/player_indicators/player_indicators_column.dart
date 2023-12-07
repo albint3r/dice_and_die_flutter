@@ -4,10 +4,7 @@ import 'package:gap/gap.dart';
 
 import '../../../../application/game/game_bloc.dart';
 import '../../../../domain/waiting_room/player.dart';
-import '../../../core/theme/const_values.dart';
 import 'animation_board_die.dart';
-import 'score_indicator.dart';
-import 'turn_indicator.dart';
 
 class PlayerIndicatorsColumn extends StatelessWidget {
   const PlayerIndicatorsColumn({
@@ -46,8 +43,6 @@ class PlayerIndicatorsColumn extends StatelessWidget {
           children: isFirstPerson
               // This is the order of the element ofr the player 2
               ? [
-                  ScoreIndicator.player(),
-                  const Gap(padding),
                   AnimationBoardDie(
                     player: player,
                     onTap: () => context.read<GameBloc>().add(
@@ -63,8 +58,6 @@ class PlayerIndicatorsColumn extends StatelessWidget {
                           const GameEvent.rollDice(),
                         ),
                   ),
-                  const Gap(padding),
-                  ScoreIndicator.opponentPlayer(),
                   const Gap(5),
                 ],
         ),
