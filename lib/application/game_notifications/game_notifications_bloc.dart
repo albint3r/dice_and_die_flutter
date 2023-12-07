@@ -18,8 +18,7 @@ class GameNotificationsBloc
     on<_Update>((event, emit) {
       final game = event.game;
       final gameState = game.state;
-      if (gameState == GameAppState.rollDice ||
-          gameState == GameAppState.selectColumn) {
+      if (gameState == GameAppState.rollDice) {
         emit(
           state.copyWith(
             showNotifications: true,
@@ -27,6 +26,7 @@ class GameNotificationsBloc
         );
         return;
       }
+
       emit(
         state.copyWith(
           showNotifications: false,
