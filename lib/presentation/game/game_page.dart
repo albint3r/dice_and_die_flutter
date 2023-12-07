@@ -66,9 +66,10 @@ class GamePage extends StatelessWidget {
           ),
           // This listener helps to reproduce the sound on each State Stage
           BlocListener<GameBloc, GameState>(
-            listenWhen: (prev, curr) => prev.game?.state != curr.game?.state,
+            listenWhen: (prev, curr) =>
+                prev.game?.state != curr.game?.state &&
+                curr.game?.state != GameAppState.finishGame,
             listener: (context, state) {
-              // Todo: add logic here!
               if (state.game?.state == GameAppState.rollDice) {
                 context.read<SoundsEffectsBloc>().add(
                       const SoundsEffectsEvent.playRollDice(),
@@ -79,6 +80,17 @@ class GamePage extends StatelessWidget {
                       const SoundsEffectsEvent.stopRollDice(),
                     );
               }
+            },
+          ),
+          // Dispose All the controls to avoid sound errors after the game finish.
+          BlocListener<GameBloc, GameState>(
+            listenWhen: (prev, curr) =>
+                prev.game?.state != curr.game?.state &&
+                curr.game?.state == GameAppState.finishGame,
+            listener: (context, state) {
+              context.read<SoundsEffectsBloc>().add(
+                    const SoundsEffectsEvent.disposeRollDice(),
+                  );
             },
           ),
           // If the sound dice effect is completed it means the user

@@ -5,4 +5,5 @@ class SoundsEffectsEvent with _$SoundsEffectsEvent {
   const factory SoundsEffectsEvent.playRollDice() = _PlayRollDice;
 
   const factory SoundsEffectsEvent.stopRollDice() = _StopRollDice;
+  const factory SoundsEffectsEvent.disposeRollDice() = _DisposeRollDice;
 }
