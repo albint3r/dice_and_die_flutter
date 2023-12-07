@@ -5,6 +5,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import '../../../../application/game_life/game_life_bloc.dart';
 import '../../../../domain/waiting_room/player.dart';
 import '../../../core/design_system/text/titleh2.dart';
+import '../../../core/theme/const_values.dart';
 import 'player_points.dart';
 
 class BodyGameLife extends StatelessWidget {
@@ -26,7 +27,7 @@ class BodyGameLife extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(padding),
       child: Row(
         children: [
           PlayerPoints(player: player, name: 'You'),
@@ -37,7 +38,7 @@ class BodyGameLife extends StatelessWidget {
                 opponentPlayer,
               ),
               lineHeight: 15,
-              barRadius: const Radius.circular(20),
+              barRadius: const Radius.circular(borderRadius),
               animationDuration: 1,
               animation: true,
               animateFromLastPercent: true,
