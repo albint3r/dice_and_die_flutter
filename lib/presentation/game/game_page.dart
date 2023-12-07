@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/game/game_bloc.dart';
+import '../../application/game_life/game_life_bloc.dart';
 import '../../application/game_notifications/game_notifications_bloc.dart';
 import '../../application/sounds_effects/sounds_effects_bloc.dart';
 import '../../application/waiting_room/waiting_room_bloc.dart';
@@ -35,6 +36,9 @@ class GamePage extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => getIt<SoundsEffectsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GameLifeBloc>(),
         )
       ],
       child: MultiBlocListener(
@@ -102,6 +106,18 @@ class GamePage extends StatelessWidget {
             listener: (context, state) => context.read<GameBloc>().add(
                   const GameEvent.rollDice(),
                 ),
+          ),
+          // This Listener update the Game Life Score on each players:
+          BlocListener<GameBloc, GameState>(
+            listenWhen: (prev, curr) => prev.game != curr.game,
+            listener: (context, state) {
+              context.read<GameLifeBloc>().add(
+                    GameLifeEvent.updatePoints(
+                      game: state.game!,
+                      player: state.player!,
+                    ),
+                  );
+            },
           )
         ],
         child: const SafeArea(
