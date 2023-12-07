@@ -16,42 +16,44 @@ part 'sounds_effects_state.dart';
 class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
   SoundsEffectsBloc() : super(SoundsEffectsState.initial()) {
     on<_PlayRollDice>((event, emit) async {
-      emit(
-        state.copyWith(
-          isRollDiceSoundComplete: false,
-          rollDiceAudioPlayer: AudioPlayer(),
-        ),
-      );
-      final rollDiceAudioPlayer = state.rollDiceAudioPlayer;
-      await rollDiceAudioPlayer!.setSource(
-        AssetSource(
-          'sounds/dice_random_rolling_effect.mp3',
-        ),
-      );
-
       try {
-        if (rollDiceAudioPlayer.state != PlayerState.disposed) {
+        emit(
+          state.copyWith(
+            isRollDiceSoundComplete: false,
+            rollDiceAudioPlayer: AudioPlayer(),
+          ),
+        );
+        final rollDiceAudioPlayer = state.rollDiceAudioPlayer;
+        await rollDiceAudioPlayer!.setSource(
+          AssetSource(
+            'sounds/dice_random_rolling_effect.mp3',
+          ),
+        );
+
+        if (rollDiceAudioPlayer != null &&
+            rollDiceAudioPlayer.state != PlayerState.disposed) {
           await rollDiceAudioPlayer.resume();
         }
+        // Check if the sound stop. This will alert the dice auto throw
+        await emit.forEach(
+          rollDiceAudioPlayer.eventStream,
+          onData: (data) {
+            if (rollDiceAudioPlayer.state == PlayerState.completed) {
+              return state.copyWith(
+                isRollDiceSoundComplete: true,
+              );
+            }
+            return state;
+          },
+        );
       } catch (e) {
-        l.d(
+        l.e(
           SoundGameError(
-            'The sound controller was disposed. This is common error after the game is finished and the dispose controller listener triggers: $e',
+            'The sound controller was disposed. This is common error after the '
+            'game is finished and the dispose controller listener triggers: $e',
           ),
         );
       }
-      // Check if the sound stop. This will alert the dice auto throw
-      await emit.forEach(
-        rollDiceAudioPlayer.eventStream,
-        onData: (data) {
-          if (rollDiceAudioPlayer.state == PlayerState.completed) {
-            return state.copyWith(
-              isRollDiceSoundComplete: true,
-            );
-          }
-          return state;
-        },
-      );
     });
     on<_StopRollDice>((event, emit) async {
       // When the dice stop the throw dice start.
@@ -70,6 +72,7 @@ class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
       // When the dice stop the throw dice start.
       await state.rollDiceAudioPlayer?.dispose();
       await state.throwDiceAudioPlayer?.dispose();
+      super.close();
     });
   }
 }
