@@ -4,10 +4,7 @@ import 'package:gap/gap.dart';
 
 import '../../../../application/game/game_bloc.dart';
 import '../../../../domain/waiting_room/player.dart';
-import '../../../core/theme/const_values.dart';
 import 'animation_board_die.dart';
-import 'score_indicator.dart';
-import 'turn_indicator.dart';
 
 class PlayerIndicatorsColumn extends StatelessWidget {
   const PlayerIndicatorsColumn({
