@@ -2,6 +2,9 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:l/l.dart';
+
+import '../../domain/game/errors.dart';
 
 part 'sounds_effects_bloc.freezed.dart';
 
@@ -26,8 +29,16 @@ class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
         ),
       );
 
-      if (rollDiceAudioPlayer.state != PlayerState.disposed) {
-        await rollDiceAudioPlayer.resume();
+      try {
+        if (rollDiceAudioPlayer.state != PlayerState.disposed) {
+          await rollDiceAudioPlayer.resume();
+        }
+      } catch (e) {
+        l.d(
+          SoundGameError(
+            'The sound controller was disposed. This is common error after the game is finished and the dispose controller listener triggers',
+          ),
+        );
       }
       // Check if the sound stop. This will alert the dice auto throw
       await emit.forEach(
