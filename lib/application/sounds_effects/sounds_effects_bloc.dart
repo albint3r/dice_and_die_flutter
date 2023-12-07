@@ -25,7 +25,10 @@ class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
           'sounds/dice_random_rolling_effect.mp3',
         ),
       );
-      rollDiceAudioPlayer.resume();
+
+      if (rollDiceAudioPlayer.state != PlayerState.disposed) {
+        await rollDiceAudioPlayer.resume();
+      }
       // Check if the sound stop. This will alert the dice auto throw
       await emit.forEach(
         rollDiceAudioPlayer.eventStream,
@@ -41,7 +44,7 @@ class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
     });
     on<_StopRollDice>((event, emit) async {
       // When the dice stop the throw dice start.
-      state.rollDiceAudioPlayer?.stop();
+      await state.rollDiceAudioPlayer?.stop();
       emit(
         state.copyWith(
           throwDiceAudioPlayer: AudioPlayer(),
@@ -51,6 +54,11 @@ class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
         AssetSource('sounds/dice_roll.mp3'),
       );
       state.throwDiceAudioPlayer?.resume();
+    });
+    on<_DisposeRollDice>((event, emit) async {
+      // When the dice stop the throw dice start.
+      await state.rollDiceAudioPlayer?.dispose();
+      await state.throwDiceAudioPlayer?.dispose();
     });
   }
 }
