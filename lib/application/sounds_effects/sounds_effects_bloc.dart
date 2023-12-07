@@ -36,7 +36,7 @@ class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
       } catch (e) {
         l.d(
           SoundGameError(
-            'The sound controller was disposed. This is common error after the game is finished and the dispose controller listener triggers',
+            'The sound controller was disposed. This is common error after the game is finished and the dispose controller listener triggers: $e',
           ),
         );
       }

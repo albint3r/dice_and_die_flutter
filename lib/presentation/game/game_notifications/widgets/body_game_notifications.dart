@@ -40,7 +40,9 @@ class _BodyGameNotificationsState extends State<BodyGameNotifications>
     _controller.addStatusListener((status) async {
       if (status == AnimationStatus.completed) {
         await Future.delayed(const Duration(seconds: 2));
-        _controller.reverse();
+        if (_controller.status != AnimationStatus.dismissed) {
+          _controller.reverse();
+        }
       }
     });
   }
