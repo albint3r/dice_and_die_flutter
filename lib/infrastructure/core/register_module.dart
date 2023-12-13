@@ -21,7 +21,7 @@ abstract class RegisterModule {
       );
     } else {
       return Uri.http(
-        '192.168.1.71:8000',
+        '192.168.1.71:8001',
         path,
       );
     }
