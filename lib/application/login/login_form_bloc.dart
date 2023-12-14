@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+import '../../domain/auth/errors/auth_error.dart';
 import '../../domain/login/i_login_form_facade.dart';
 
 part 'login_form_event.dart';
@@ -19,6 +20,15 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
         state.copyWith(
           isLoading: false,
           formGroup: facade.fromGroup,
+          error: null,
+        ),
+      );
+    });
+    on<_SetError>((event, emit) {
+      emit(
+        state.copyWith(
+          isLoading: false,
+          error: event.error,
         ),
       );
     });

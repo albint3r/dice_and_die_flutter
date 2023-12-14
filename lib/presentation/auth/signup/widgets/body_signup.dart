@@ -16,7 +16,7 @@ class BodySignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     final form = context.watch<SignupBloc>().state;
     final auth = context.watch<AuthBloc>().state;
-    final error = auth.error;
+    final error = form.error;
     if (auth.isLoading || form.isLoading) {
       return const Center(
         child: CircularProgressIndicator(),

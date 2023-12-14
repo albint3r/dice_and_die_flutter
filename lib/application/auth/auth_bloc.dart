@@ -75,14 +75,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           );
         }
       } catch (e) {
-        emit(
-          state.copyWith(
-            isLoading: false,
-            error: AuthError(
-              errorMsg: 'Account Already Exist',
-              type: AuthErrorType.signUp,
-            ),
-          ),
+        _notifyError(
+          emit,
+          'Invalid password or account',
+          AuthErrorType.signUp,
         );
       }
     });
@@ -101,20 +97,41 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           );
         }
       } catch (e) {
-        emit(
-          state.copyWith(
-            isLoading: false,
-            error: AuthError(
-              errorMsg: 'User Or Password Incorrect',
-              type: AuthErrorType.logIn,
-            ),
-          ),
+        _notifyError(
+          emit,
+          'Account already exist.',
+          AuthErrorType.logIn,
         );
       }
     });
     on<_LogOut>((event, emit) async {
       await _logOut(emit, facade);
     });
+  }
+
+  /// Emit the error for every listener trigger their event if apply the condition
+  ///
+  /// The condition are defined by the error type, if the error type match
+  /// it would trigger the bloc listener. Generally related with login, signing.
+  void _notifyError(
+    Emitter<AuthState> emit,
+    String errorMsg,
+    AuthErrorType type,
+  ) {
+    emit(
+      state.copyWith(
+        isLoading: false,
+        error: AuthError(
+          errorMsg: errorMsg,
+          type: type,
+        ),
+      ),
+    );
+    emit(
+      state.copyWith(
+        error: null,
+      ),
+    );
   }
 
   Future<void> _logOut(Emitter<AuthState> emit, IAuthFacade facade) async {

@@ -5,6 +5,7 @@ class LoginFormState with _$LoginFormState {
   factory LoginFormState({
     required bool isLoading,
     FormGroup? formGroup,
+    AuthError? error,
   }) = _LoginFormState;
 
   factory LoginFormState.initial() => LoginFormState(

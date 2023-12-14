@@ -2,7 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../application/auth/auth_bloc.dart';
 import '../../../application/login/login_form_bloc.dart';
+import '../../../domain/auth/errors/auth_error.dart';
 import '../../../injectables.dart';
 import 'widgets/body_login.dart';
 
@@ -17,9 +19,18 @@ class LoginPage extends StatelessWidget {
         ..add(
           const LoginFormEvent.started(),
         ),
-      child: const SafeArea(
-        child: Scaffold(
-          body: BodyLogIn(),
+      child: BlocListener<AuthBloc, AuthState>(
+        listenWhen: (pre, curr) =>
+            pre.error != curr.error && curr.error?.type == AuthErrorType.logIn,
+        listener: (context, state) => context.read<LoginFormBloc>().add(
+              LoginFormEvent.setError(
+                state.error!,
+              ),
+            ),
+        child: const SafeArea(
+          child: Scaffold(
+            body: BodyLogIn(),
+          ),
         ),
       ),
     );
