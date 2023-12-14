@@ -5,11 +5,11 @@ import 'package:injectable/injectable.dart';
 import '../../domain/auth/app_user.dart';
 import '../../domain/auth/i_auth_facade.dart';
 
+part 'auth_bloc.freezed.dart';
+
 part 'auth_event.dart';
 
 part 'auth_state.dart';
-
-part 'auth_bloc.freezed.dart';
 
 @lazySingleton
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
@@ -61,6 +61,54 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           ),
         );
       }
+    });
+
+    on<_SigInWithEmailAndPassword>((event, emit) async {
+      emit(
+        state.copyWith(
+          isLoading: true,
+        ),
+      );
+      final form = event.loginRawValues;
+      final email = form['email'];
+      final password = form['password'];
+      // Validate the Form have email and password information.
+      if (email is String && password is String) {
+        final response = await facade.signIn(
+          email,
+          password,
+        );
+        emit(
+          state.copyWith(
+            sessionToken: response.sessionToken,
+            appUser: response.appUser,
+          ),
+        );
+        await facade.saveSessionTokenInPref(
+          state.sessionToken,
+        );
+        await Future.delayed(const Duration(seconds: 1));
+        emit(
+          state.copyWith(
+            isLoading: false,
+          ),
+        );
+      }
+    });
+    on<_LogOut>((event, emit) async {
+      emit(
+        state.copyWith(
+          isLoading: true,
+        ),
+      );
+      await facade.pref.deleteSessionToken();
+      emit(
+        state.copyWith(
+          appUser: null,
+          sessionToken: '',
+          isLoading: false,
+        ),
+      );
     });
   }
 }

@@ -35,9 +35,27 @@ class AuthDataSourceImpl implements IAuthDataSource {
   }
 
   @override
-  Future<AuthResponse> signIn(String email, String password) {
-    // TODO: implement signIn
-    throw UnimplementedError();
+  Future<AuthResponse> signIn(String email, String password) async {
+    final response = await _dio.post(
+      '/auth/v1/signin',
+      data: {
+        'email': email,
+        'password': password,
+      },
+    );
+    final data = response.data as Json;
+    if (response.statusCode == 403) {
+      throw Exception('Bad session token credentials');
+    }
+    if (response.statusCode == 401) {
+      throw Exception('Bad session token credentials');
+    }
+    if (response.statusCode == 409) {
+      throw Exception('User already Exist.');
+    }
+    if (response.statusCode == 422) {
+      throw Exception('Validation Error');
+    }
+    return AuthResponse.fromJson(data);
   }
-
 }

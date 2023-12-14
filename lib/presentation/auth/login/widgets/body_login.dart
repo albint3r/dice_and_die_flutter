@@ -41,7 +41,15 @@ class BodyLogIn extends StatelessWidget {
                 builder: (context, form, _) {
                   return CustomLongButton(
                     text: 'Create Account',
-                    onPressed: form.valid ? () => print('Algo') : null,
+                    // User Add the data to the Auth event
+                    // Email and Password
+                    onPressed: form.valid
+                        ? () => context.read<AuthBloc>().add(
+                              AuthEvent.sigInWithEmailAndPassword(
+                                form.rawValue,
+                              ),
+                            )
+                        : null,
                     width: 300,
                   );
                 },

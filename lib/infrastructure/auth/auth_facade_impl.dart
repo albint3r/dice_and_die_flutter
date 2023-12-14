@@ -39,10 +39,11 @@ class AuthFacadeImpl implements IAuthFacade {
   }
 
   @override
-  Future<AuthResponse> signIn(String email, String password) {
-    // TODO: implement signIn
-    throw UnimplementedError();
-  }
+  Future<AuthResponse> signIn(String email, String password) =>
+      _dataSource.signIn(
+        email,
+        password,
+      );
 
   @override
   Future<void> saveSessionTokenInPref(String sessionToken) async =>
