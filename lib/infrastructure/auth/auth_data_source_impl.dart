@@ -25,9 +25,6 @@ class AuthDataSourceImpl implements IAuthDataSource {
       options: FastHeader.getOptions(sessionToken),
     );
     final data = response.data as Json;
-    print('*-'*100);
-    print('data->$data');
-    print('*-'*100);
     if (response.statusCode == 403) {
       throw Exception('Bad session token credentials');
     }

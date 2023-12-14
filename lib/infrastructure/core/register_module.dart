@@ -6,6 +6,9 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:l/l.dart';
 
+import '../auth/auth_interceptors.dart';
+import 'custom_interceptors.dart';
+
 @module
 abstract class RegisterModule {
   @singleton
@@ -45,11 +48,14 @@ abstract class RegisterModule {
   Dio getDio(
     BaseOptions options,
     Iterable<Interceptor> interceptors,
+    AuthInterceptor auth,
   ) {
     final dio = Dio(
       options,
     );
-    dio.interceptors.addAll(interceptors);
+    dio.interceptors
+      ..addAll(interceptors)
+      ..add(auth);
     return dio;
   }
 

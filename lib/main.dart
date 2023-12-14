@@ -25,7 +25,7 @@ Future<void> main() async {
         BlocProvider.value(
           value: getIt<AuthBloc>()
             ..add(
-              AuthEvent.started(
+              AuthEvent.validateInitialSessionToken(
                 sessionToken: sessionToke,
               ),
             ),

@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:l/l.dart';
 
-import 'user_preference.dart';
+import '../core/user_preference.dart';
 
 @injectable
-class CustomInterceptors extends Interceptor {
-  CustomInterceptors(this._userPreference);
+class AuthInterceptor extends Interceptor {
+  AuthInterceptor(this._userPreference);
 
   final UserPreference _userPreference;
 
@@ -16,9 +16,9 @@ class CustomInterceptors extends Interceptor {
     l.d('REQUEST[${options.method}] => PATH: ${options.path}');
     // If Token exist add header to
     final sessionToken = await _userPreference.getSessionToken();
+    // Add Session token to navigation user headers
     if (sessionToken.isNotEmpty) {
       options.headers['Authorization'] = 'Bearer $sessionToken';
-      l.d('headers[${options.headers}]');
     }
     super.onRequest(options, handler);
   }
@@ -33,7 +33,12 @@ class CustomInterceptors extends Interceptor {
   @override
   Future<void> onError(
       DioException err, ErrorInterceptorHandler handler) async {
-    l.d('ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
+    final statusCode = err.response?.statusCode;
+    l.d('ERROR[$statusCode] => PATH: ${err.requestOptions.path}');
+    // If Have error session Token terminate the user session.
+    if (statusCode == 401 || statusCode == 403) {
+      await _userPreference.deleteSessionToken();
+    }
     super.onError(err, handler);
   }
 }

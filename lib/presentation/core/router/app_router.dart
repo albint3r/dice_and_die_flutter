@@ -40,8 +40,6 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
   ) async {
     if (kDebugMode) {
       l.d('.' * 50);
-      l.d('${_auth.state.appUser}');
-      l.d(_auth.state.sessionToken);
       l.d('Current Page :" [${router.current.name}]  to Next Page -> [${resolver.route.name}]');
       l.d('.' * 50);
     }

@@ -14,7 +14,7 @@ part 'auth_bloc.freezed.dart';
 @lazySingleton
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc(IAuthFacade facade) : super(AuthState.initial()) {
-    on<_Started>((event, emit) async {
+    on<_ValidateInitialSessionToken>((event, emit) async {
       final sessionToken = event.sessionToken;
       if (sessionToken.isEmpty) {
         emit(
@@ -40,7 +40,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await facade.saveSessionTokenInPref(
           state.sessionToken,
         );
-
+        await Future.delayed(const Duration(seconds: 1));
         emit(
           state.copyWith(
             isLoading: false,
