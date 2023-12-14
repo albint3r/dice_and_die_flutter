@@ -4,6 +4,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../../application/auth/auth_bloc.dart';
 import '../../../../application/login/login_form_bloc.dart';
+import '../../../core/design_system/buttons/custom_long_button.dart';
 
 class BodyLogIn extends StatelessWidget {
   const BodyLogIn({super.key});
@@ -30,11 +31,21 @@ class BodyLogIn extends StatelessWidget {
               ),
               ReactiveTextField(
                 formControlName: 'password',
+                obscureText: true,
               ),
               ReactiveTextField(
                 formControlName: 'confirm_password',
+                obscureText: true,
+              ),
+              ReactiveFormConsumer(
+                builder: (context, form, _) {
+                  return CustomLongButton(
+                    text: 'Create Account',
+                    onPressed: form.valid ? () => print('Algo') : null,
+                    width: 300,
+                  );
+                },
               )
-
             ],
           ),
         ),
