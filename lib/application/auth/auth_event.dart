@@ -2,8 +2,6 @@ part of 'auth_bloc.dart';
 
 @freezed
 class AuthEvent with _$AuthEvent {
-  const factory AuthEvent.validateInitialSessionToken({
-    required String sessionToken,
-  }) = _ValidateInitialSessionToken;
-
+  const factory AuthEvent.validateInitialSessionToken() =
+      _ValidateInitialSessionToken;
 }

@@ -15,7 +15,10 @@ part 'auth_bloc.freezed.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc(IAuthFacade facade) : super(AuthState.initial()) {
     on<_ValidateInitialSessionToken>((event, emit) async {
-      final sessionToken = event.sessionToken;
+      // Initialize the Share Preference to obtain the Session Token
+      await facade.pref.init();
+      final sessionToken = await facade.pref.getSessionToken();
+      // If Session token get User data from the server
       if (sessionToken.isEmpty) {
         emit(
           state.copyWith(
@@ -37,6 +40,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         );
         // Wait 1 second to avoid overlap the login screen with the
         // Waiting room screen.
+        // Update the Session token every time the user open the app.
         await facade.saveSessionTokenInPref(
           state.sessionToken,
         );

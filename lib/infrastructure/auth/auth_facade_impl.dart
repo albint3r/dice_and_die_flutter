@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../domain/auth/i_auth_data_source.dart';
 import '../../domain/auth/i_auth_facade.dart';
@@ -14,6 +15,10 @@ class AuthFacadeImpl implements IAuthFacade {
 
   final IAuthDataSource _dataSource;
   final UserPreference _userPreference;
+
+  @override
+  // TODO: implement pref
+  UserPreference get pref => _userPreference;
 
   @override
   Future<AuthResponse> logIn(String email, String password) {

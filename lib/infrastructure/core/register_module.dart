@@ -7,7 +7,6 @@ import 'package:injectable/injectable.dart';
 import 'package:l/l.dart';
 
 import '../auth/auth_interceptors.dart';
-import 'custom_interceptors.dart';
 
 @module
 abstract class RegisterModule {
