@@ -32,6 +32,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   percent_indicator: ^4.2.3
   shared_preferences: ^2.2.2
+  reactive_forms: ^16.1.1
 
 
 

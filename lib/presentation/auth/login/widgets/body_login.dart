@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../../application/auth/auth_bloc.dart';
-
+import '../../../../application/login/login_form_bloc.dart';
 
 class BodyLogIn extends StatelessWidget {
   const BodyLogIn({super.key});
@@ -10,7 +11,34 @@ class BodyLogIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthBloc>().state;
-    if(auth.isLoading) return const Center(child: CircularProgressIndicator(),);
-    return const Placeholder();
+    final form = context.watch<LoginFormBloc>().state;
+    if (auth.isLoading || form.isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+    return ReactiveForm(
+      formGroup: form.formGroup!,
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ReactiveTextField(
+                formControlName: 'email',
+              ),
+              ReactiveTextField(
+                formControlName: 'password',
+              ),
+              ReactiveTextField(
+                formControlName: 'confirm_password',
+              )
+
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
