@@ -7,6 +7,7 @@ import '../../../application/auth/auth_bloc.dart';
 import '../../../domain/auth/app_user.dart';
 import '../../../domain/waiting_room/game.dart';
 import '../../auth/login/login_page.dart';
+import '../../auth/signup/signup_page.dart';
 import '../../game/game_page.dart';
 import '../../waiting_rooms/waiting_rooms_page.dart';
 
@@ -31,6 +32,9 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
         AutoRoute(
           page: LoginRoute.page,
         ),
+        AutoRoute(
+          page: SignUpRoute.page,
+        ),
       ];
 
   @override
@@ -46,7 +50,8 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
     final appUser = _auth.state.appUser;
     final sessionToken = _auth.state.sessionToken;
     if ((appUser is AppUser && sessionToken.isNotEmpty) ||
-        resolver.route.name == LoginRoute.name) {
+        resolver.route.name == LoginRoute.name ||
+        resolver.route.name == SignUpRoute.name) {
       resolver.next();
     } else {
       resolver.redirect(const LoginRoute());

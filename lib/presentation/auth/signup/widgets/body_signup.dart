@@ -4,18 +4,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../../application/auth/auth_bloc.dart';
-import '../../../../application/login/login_form_bloc.dart';
+import '../../../../application/signin/signup_bloc.dart';
 import '../../../core/design_system/buttons/custom_long_button.dart';
 import '../../../core/router/app_router.dart';
 
-class BodyLogIn extends StatelessWidget {
-  const BodyLogIn({super.key});
+class BodySignUp extends StatelessWidget {
+  const BodySignUp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final auth = context.watch<AuthBloc>().state;
-    final form = context.watch<LoginFormBloc>().state;
-    if (auth.isLoading || form.isLoading) {
+    final form = context.watch<SignupBloc>().state;
+    if (form.isLoading) {
       return const Center(
         child: CircularProgressIndicator(),
       );
@@ -35,15 +34,19 @@ class BodyLogIn extends StatelessWidget {
                 formControlName: 'password',
                 obscureText: true,
               ),
+              ReactiveTextField(
+                formControlName: 'confirm_password',
+                obscureText: true,
+              ),
               ReactiveFormConsumer(
                 builder: (context, form, _) {
                   return CustomLongButton(
-                    text: 'LogIn Account',
+                    text: 'SignUp Account',
                     // User Add the data to the Auth event
                     // Email and Password
                     onPressed: form.valid
                         ? () => context.read<AuthBloc>().add(
-                              AuthEvent.logInWithEmailAndPassword(
+                              AuthEvent.sigInWithEmailAndPassword(
                                 form.rawValue,
                               ),
                             )
@@ -54,9 +57,9 @@ class BodyLogIn extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () => context.router.replaceAll([
-                  const SignUpRoute(),
+                  const LoginRoute(),
                 ]),
-                child: const Text('Go to SignIn'),
+                child: const Text('Go to LogIn'),
               )
             ],
           ),

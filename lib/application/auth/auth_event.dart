@@ -9,5 +9,9 @@ class AuthEvent with _$AuthEvent {
     Map<String, Object?> loginRawValues,
   ) = _SigInWithEmailAndPassword;
 
+  const factory AuthEvent.logInWithEmailAndPassword(
+    Map<String, Object?> loginRawValues,
+  ) = _LogInWithEmailAndPassword;
+
   const factory AuthEvent.logOut() = _LogOut;
 }

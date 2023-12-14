@@ -95,13 +95,47 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         );
       }
     });
+    on<_LogInWithEmailAndPassword>((event, emit) async {
+      {
+        emit(
+          state.copyWith(
+            isLoading: true,
+          ),
+        );
+        final form = event.loginRawValues;
+        final email = form['email'];
+        final password = form['password'];
+        // Validate the Form have email and password information.
+        if (email is String && password is String) {
+          final response = await facade.logIn(
+            email,
+            password,
+          );
+          emit(
+            state.copyWith(
+              sessionToken: response.sessionToken,
+              appUser: response.appUser,
+            ),
+          );
+          await facade.saveSessionTokenInPref(
+            state.sessionToken,
+          );
+          await Future.delayed(const Duration(seconds: 1));
+          emit(
+            state.copyWith(
+              isLoading: false,
+            ),
+          );
+        }
+      }
+    });
     on<_LogOut>((event, emit) async {
       emit(
         state.copyWith(
           isLoading: true,
         ),
       );
-      await facade.pref.deleteSessionToken();
+      await facade.logOut();
       emit(
         state.copyWith(
           appUser: null,

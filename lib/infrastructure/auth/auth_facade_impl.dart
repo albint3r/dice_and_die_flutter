@@ -17,26 +17,23 @@ class AuthFacadeImpl implements IAuthFacade {
   final UserPreference _userPreference;
 
   @override
-  // TODO: implement pref
   UserPreference get pref => _userPreference;
 
   @override
-  Future<AuthResponse> logIn(String email, String password) {
-    // TODO: implement logIn
-    throw UnimplementedError();
-  }
+  Future<AuthResponse> logIn(String email, String password) =>
+      _dataSource.logIn(
+        email,
+        password,
+      );
 
   @override
-  Future<void> logOut() {
-    // TODO: implement logOut
-    throw UnimplementedError();
-  }
+  Future<void> logOut() => _userPreference.deleteSessionToken();
 
   @override
-  Future<AuthResponse> loginFromSessionToken(String sessionToken) {
-    final response = _dataSource.logInFromSessionToken(sessionToken);
-    return response;
-  }
+  Future<AuthResponse> loginFromSessionToken(String sessionToken) =>
+      _dataSource.logInFromSessionToken(
+        sessionToken,
+      );
 
   @override
   Future<AuthResponse> signIn(String email, String password) =>
@@ -46,12 +43,12 @@ class AuthFacadeImpl implements IAuthFacade {
       );
 
   @override
-  Future<void> saveSessionTokenInPref(String sessionToken) async =>
-      await _userPreference.setSessionToken(
+  Future<void> saveSessionTokenInPref(String sessionToken) =>
+      _userPreference.setSessionToken(
         sessionToken,
       );
 
   @override
-  Future<void> deleteSessionTokenInPref() async =>
-      await _userPreference.deleteSessionToken();
+  Future<void> deleteSessionTokenInPref() =>
+      _userPreference.deleteSessionToken();
 }
