@@ -18,11 +18,12 @@ Future<void> main() async {
   // Create A Global Message Key to Display The Bloc observer logs in terminal
   final messengerKey = GlobalKey<ScaffoldMessengerState>();
   Bloc.observer = AppBlocObserver(messengerKey);
+
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => getIt<AuthBloc>()
+        BlocProvider.value(
+          value: getIt<AuthBloc>()
             ..add(
               AuthEvent.started(
                 sessionToken: sessionToke,

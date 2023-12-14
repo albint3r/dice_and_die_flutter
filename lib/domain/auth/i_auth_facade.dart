@@ -16,4 +16,10 @@ abstract interface class IAuthFacade {
   );
 
   Future<void> logOut();
+
+  Future<void> saveSessionTokenInPref(
+    String sessionToken,
+  );
+
+  Future<void> deleteSessionTokenInPref();
 }

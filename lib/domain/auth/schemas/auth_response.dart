@@ -10,12 +10,12 @@ part 'auth_response.g.dart';
 @freezed
 class AuthResponse with _$AuthResponse {
   const factory AuthResponse({
-    required AppUser appUser,
-    required String sessionToken,
-    required int statusCode,
+    @JsonKey(name: 'user') required AppUser appUser,
+    @JsonKey(name: 'session_token')required String sessionToken,
+    @JsonKey(name: 'status_code')required int statusCode,
   }) = _AuthResponse;
 
-  AuthResponse._();
+  const AuthResponse._();
 
   factory AuthResponse.fromJson(Json json) => _$AuthResponseFromJson(json);
 }

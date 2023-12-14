@@ -3,12 +3,17 @@ import 'package:injectable/injectable.dart';
 import '../../domain/auth/i_auth_data_source.dart';
 import '../../domain/auth/i_auth_facade.dart';
 import '../../domain/auth/schemas/auth_response.dart';
+import '../core/user_preference.dart';
 
 @Injectable(as: IAuthFacade)
 class AuthFacadeImpl implements IAuthFacade {
-  AuthFacadeImpl(this._dataSource);
+  AuthFacadeImpl(
+    this._dataSource,
+    this._userPreference,
+  );
 
   final IAuthDataSource _dataSource;
+  final UserPreference _userPreference;
 
   @override
   Future<AuthResponse> logIn(String email, String password) {
@@ -24,8 +29,8 @@ class AuthFacadeImpl implements IAuthFacade {
 
   @override
   Future<AuthResponse> loginFromSessionToken(String sessionToken) {
-    // TODO: implement loginFromSessionToken
-    throw UnimplementedError();
+    final response = _dataSource.logInFromSessionToken(sessionToken);
+    return response;
   }
 
   @override
@@ -33,4 +38,14 @@ class AuthFacadeImpl implements IAuthFacade {
     // TODO: implement signIn
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> saveSessionTokenInPref(String sessionToken) async =>
+      await _userPreference.setSessionToken(
+        sessionToken,
+      );
+
+  @override
+  Future<void> deleteSessionTokenInPref() async =>
+      await _userPreference.deleteSessionToken();
 }
