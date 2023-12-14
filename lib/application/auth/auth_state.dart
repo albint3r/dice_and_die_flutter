@@ -6,6 +6,7 @@ class AuthState with _$AuthState {
     required bool isLoading,
     AppUser? appUser,
     required String sessionToken,
+    AuthError? error,
   }) = _AuthState;
 
   factory AuthState.initial() => AuthState(

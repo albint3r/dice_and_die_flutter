@@ -5,6 +5,8 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../../application/auth/auth_bloc.dart';
 import '../../../../application/login/login_form_bloc.dart';
+import '../../../../domain/auth/errors/auth_error.dart';
+
 import '../../../core/design_system/buttons/custom_long_button.dart';
 import '../../../core/router/app_router.dart';
 
@@ -14,6 +16,7 @@ class BodyLogIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthBloc>().state;
+    final error = auth.error;
     final form = context.watch<LoginFormBloc>().state;
     if (auth.isLoading || form.isLoading) {
       return const Center(
@@ -35,6 +38,7 @@ class BodyLogIn extends StatelessWidget {
                 formControlName: 'password',
                 obscureText: true,
               ),
+              if (error?.type == AuthErrorType.logIn) Text(error!.errorMsg),
               ReactiveFormConsumer(
                 builder: (context, form, _) {
                   return CustomLongButton(
