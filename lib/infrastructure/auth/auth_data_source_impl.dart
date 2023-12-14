@@ -12,10 +12,13 @@ class AuthDataSourceImpl implements IAuthDataSource {
 
   final Dio _dio;
 
-  @override
-  Future<AuthResponse> logIn(String email, String password) async {
+  Future<AuthResponse> _logInOrSignUp(
+    String email,
+    String password,
+    String url,
+  ) async {
     final response = await _dio.post(
-      '/auth/v1/login',
+      url,
       data: {
         'email': email,
         'password': password,
@@ -36,6 +39,20 @@ class AuthDataSourceImpl implements IAuthDataSource {
     }
     return AuthResponse.fromJson(data);
   }
+
+  @override
+  Future<AuthResponse> logIn(String email, String password) => _logInOrSignUp(
+        email,
+        password,
+        '/auth/v1/login',
+      );
+
+  @override
+  Future<AuthResponse> signIn(String email, String password) => _logInOrSignUp(
+        email,
+        password,
+        '/auth/v1/signin',
+      );
 
   @override
   Future<AuthResponse> logInFromSessionToken(String sessionToken) async {
@@ -49,31 +66,6 @@ class AuthDataSourceImpl implements IAuthDataSource {
     }
     if (response.statusCode == 401) {
       throw Exception('Bad session token credentials');
-    }
-    return AuthResponse.fromJson(data);
-  }
-
-  @override
-  Future<AuthResponse> signIn(String email, String password) async {
-    final response = await _dio.post(
-      '/auth/v1/signin',
-      data: {
-        'email': email,
-        'password': password,
-      },
-    );
-    final data = response.data as Json;
-    if (response.statusCode == 403) {
-      throw Exception('Bad session token credentials');
-    }
-    if (response.statusCode == 401) {
-      throw Exception('Bad session token credentials');
-    }
-    if (response.statusCode == 409) {
-      throw Exception('User already Exist.');
-    }
-    if (response.statusCode == 422) {
-      throw Exception('Validation Error');
     }
     return AuthResponse.fromJson(data);
   }
