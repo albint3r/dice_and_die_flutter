@@ -99,7 +99,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } catch (e) {
         _notifyError(
           emit,
-          'Account already exist.',
+          'Invalid password or account',
           AuthErrorType.logIn,
         );
       }
