@@ -8,7 +8,7 @@ class ConfirmPasswordField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CustomAppTexTField(
-      formControlName: 'password',
+      formControlName: 'confirm password',
       obscureText: true,
       suffixIcon: Icon(Icons.password),
     );

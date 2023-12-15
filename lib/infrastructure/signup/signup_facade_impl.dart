@@ -21,12 +21,12 @@ class SignupFacadeImpl implements ISignUpFacade {
           Validators.maxLength(20),
         ],
       ),
-      'confirm_password': FormControl<String>()
+      'confirm password': FormControl<String>(),
     },
     validators: [
       Validators.mustMatch(
         'password',
-        'confirm_password',
+        'confirm password',
       )
     ],
   );
