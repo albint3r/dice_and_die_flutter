@@ -1,4 +1,3 @@
-import 'package:dice_and_die_flutter/presentation/core/theme/const_values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -8,6 +7,7 @@ import 'domain/auth/app_user.dart';
 import 'injectables.dart';
 import 'presentation/core/router/app_router.dart';
 import 'presentation/core/router/material_app_router_delegate.dart';
+import 'presentation/core/theme/const_values.dart';
 import 'presentation/core/theme/theme_config.dart';
 
 class App extends StatelessWidget {
