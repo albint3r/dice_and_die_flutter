@@ -22,17 +22,17 @@ class BodyWaitingRooms extends StatelessWidget {
     }
     return Column(
       children: [
-        CustomLongButton(
-          text: 'Logout',
-          onPressed: () {
-            context.read<AuthBloc>().add(
-                  const AuthEvent.logOut(),
-                );
-            context.router.replaceAll([
-              const LoginRoute(),
-            ]);
-          },
-        ),
+        // CustomLongButton(
+        //   text: 'Logout',
+        //   onPressed: () {
+        //     context.read<AuthBloc>().add(
+        //           const AuthEvent.logOut(),
+        //         );
+        //     context.router.replaceAll([
+        //       const LoginRoute(),
+        //     ]);
+        //   },
+        // ),
         const TopIndicators(),
         // const WaitingRoomCard(),
         Expanded(
