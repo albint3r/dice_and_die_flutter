@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/auth/auth_bloc.dart';
 import '../../../../application/signin/signup_bloc.dart';
+import '../../../core/theme/const_values.dart';
 import '../../login/widgets/name_logo.dart';
 import 'sigin_form.dart';
 
@@ -24,7 +25,7 @@ class BodySignUp extends StatelessWidget {
         Expanded(
           child: Padding(
             padding: EdgeInsets.all(
-              8.0,
+              padding,
             ),
             child: SignInForm(),
           ),

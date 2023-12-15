@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../application/auth/auth_bloc.dart';
 import '../../../../application/login/login_form_bloc.dart';
 import '../../../core/design_system/text/titleh1.dart';
+import '../../../core/theme/const_values.dart';
 import 'login_form.dart';
 import 'name_logo.dart';
 
@@ -25,7 +26,7 @@ class BodyLogIn extends StatelessWidget {
         Expanded(
           child: Padding(
             padding: EdgeInsets.all(
-              8.0,
+              padding,
             ),
             child: LoginForm(),
           ),
