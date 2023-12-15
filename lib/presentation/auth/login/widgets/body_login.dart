@@ -8,7 +8,10 @@ import '../../../../application/login/login_form_bloc.dart';
 import '../../../../domain/auth/errors/auth_error.dart';
 
 import '../../../core/design_system/buttons/custom_long_button.dart';
+import '../../../core/design_system/form_fields/custom_app_text_field.dart';
 import '../../../core/router/app_router.dart';
+import '../../signup/widgets/email_field.dart';
+import '../../signup/widgets/password_field.dart';
 
 class BodyLogIn extends StatelessWidget {
   const BodyLogIn({super.key});
@@ -32,13 +35,8 @@ class BodyLogIn extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ReactiveTextField(
-                formControlName: 'email',
-              ),
-              ReactiveTextField(
-                formControlName: 'password',
-                obscureText: true,
-              ),
+              const EmailField(),
+              const PasswordField(),
               if (error?.type == AuthErrorType.logIn) Text(error!.errorMsg),
               ReactiveFormConsumer(
                 builder: (context, form, _) {
