@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../buttons/custom_short_buttom.dart';
+import '../text/titleh1.dart';
+import 'widgets/user_information.dart';
 
 abstract class AppBarSize {
   static double get topContainerPositionPer => 95;
@@ -77,12 +79,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           top: AppBarSize.titlePositionPer,
           left: 0,
           right: 0,
-          child: Text(
-            title,
+          child: TitleH1(
+            text: title,
             textAlign: TextAlign.center,
-            style: theme.textTheme.titleLarge,
           ),
-        )
+        ),
+        Positioned(
+          child: UserInformation(width),
+        ),
       ],
     );
   }
@@ -93,7 +97,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 //Copy this CustomPainter code to the Bottom of the File
 class CustomAppBarPainter extends CustomPainter {
-
   const CustomAppBarPainter(this.colorScheme);
 
   final ColorScheme colorScheme;
