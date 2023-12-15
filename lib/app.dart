@@ -1,6 +1,7 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:dice_and_die_flutter/presentation/core/theme/const_values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 import 'application/auth/auth_bloc.dart';
 import 'domain/auth/app_user.dart';
@@ -27,12 +28,15 @@ class App extends StatelessWidget {
       listener: (context, state) => appRouter.replaceAll([
         const WaitingRoomsRoute(),
       ]),
-      child: MaterialAppRouterDelegate.router(
-        'Dice and Die',
-        appRouter: appRouter,
-        themeConfig: themeConfig,
-        messengerKey: messengerKey,
-        context: context,
+      child: ReactiveFormConfig(
+        validationMessages: validationMessages,
+        child: MaterialAppRouterDelegate.router(
+          'Dice and Die',
+          appRouter: appRouter,
+          themeConfig: themeConfig,
+          messengerKey: messengerKey,
+          context: context,
+        ),
       ),
     );
   }
