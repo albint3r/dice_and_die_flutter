@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/auth/auth_bloc.dart';
 import '../../../../application/signin/signup_bloc.dart';
+import '../../login/widgets/name_logo.dart';
 import 'sigin_form.dart';
 
 class BodySignUp extends StatelessWidget {
@@ -17,6 +18,18 @@ class BodySignUp extends StatelessWidget {
         child: CircularProgressIndicator(),
       );
     }
-    return const SignInForm();
+    return const Column(
+      children: [
+        NameLogo(),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(
+              8.0,
+            ),
+            child: SignInForm(),
+          ),
+        ),
+      ],
+    );
   }
 }

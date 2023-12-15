@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/auth/auth_bloc.dart';
 import '../../../../application/login/login_form_bloc.dart';
+import '../../../core/design_system/text/titleh1.dart';
 import 'login_form.dart';
+import 'name_logo.dart';
 
 class BodyLogIn extends StatelessWidget {
   const BodyLogIn({super.key});
@@ -17,6 +19,18 @@ class BodyLogIn extends StatelessWidget {
         child: CircularProgressIndicator(),
       );
     }
-    return const LoginForm();
+    return const Column(
+      children: [
+        NameLogo(),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(
+              8.0,
+            ),
+            child: LoginForm(),
+          ),
+        ),
+      ],
+    );
   }
 }
