@@ -23,10 +23,7 @@ Future<void> main() async {
             ),
         ),
         BlocProvider(
-          create: (context) => getIt<WaitingRoomBloc>()
-            ..add(
-              const WaitingRoomEvent.started(),
-            ),
+          create: (context) => getIt<WaitingRoomBloc>(),
         ),
       ],
       child: App(messengerKey: messengerKey),
