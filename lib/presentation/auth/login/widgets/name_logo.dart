@@ -16,7 +16,7 @@ class NameLogo extends StatelessWidget {
       child: TitleH1(
         text: 'Dice And DIe',
         fontSize: 50,
-        color: colorScheme.primary,
+        color: colorScheme.onSecondary,
       ),
     );
   }

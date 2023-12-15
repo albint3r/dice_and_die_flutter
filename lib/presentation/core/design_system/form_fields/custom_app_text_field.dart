@@ -20,15 +20,23 @@ class CustomAppTexTField extends StatelessWidget {
     //The size box create the effect to hacker the field. When the
     // error field appears don't move up the field,
     // because is inside this space.
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final style = theme.textTheme.titleMedium?.copyWith(
+      color: colorScheme.onSecondary,
+    );
     return SizedBox(
       height: 90,
       child: ReactiveTextField(
         formControlName: formControlName,
         obscureText: obscureText,
+        style: style,
         decoration: InputDecoration(
           labelText: formControlName,
           hintText: hintText,
           suffixIcon: suffixIcon,
+          labelStyle: style,
+          suffixIconColor: colorScheme.onSecondary,
         ),
       ),
     );
