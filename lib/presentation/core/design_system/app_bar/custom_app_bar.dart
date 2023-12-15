@@ -5,11 +5,11 @@ import '../buttons/custom_short_buttom.dart';
 abstract class AppBarSize {
   static double get topContainerPositionPer => 95;
 
-  static double get bottomContainerPositionPer => 190;
+  static double get bottomContainerPositionPer => 150;
 
   static double get iconPositionPer => 35;
 
-  static double get titlePositionPer => 115;
+  static double get titlePositionPer => 95;
 }
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -69,6 +69,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           top: 40,
           child: CustomShortButton(
             icon: icon,
+            onPressed: onPress,
           ),
         ),
         Positioned(
@@ -87,7 +88,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size(200, 200);
+  Size get preferredSize => const Size(500, 200);
 }
 
 //Copy this CustomPainter code to the Bottom of the File

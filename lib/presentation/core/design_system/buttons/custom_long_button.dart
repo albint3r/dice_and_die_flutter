@@ -66,7 +66,6 @@ class _CustomLongButtonState extends State<CustomLongButton> {
     return Stack(
       children: [
         Container(
-          padding: EdgeInsets.zero,
           width: widget.width,
           height: widget.height,
           decoration: _buildBoxDecoration(
@@ -78,6 +77,7 @@ class _CustomLongButtonState extends State<CustomLongButton> {
           duration: animationButtonDuration,
           top: zero,
           left: zero,
+          right: zero,
           bottom: 5,
           child: ElevatedButton(
             onPressed: widget.onPressed != null ? _onPressed : null,
