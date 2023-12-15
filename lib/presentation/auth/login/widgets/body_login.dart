@@ -12,6 +12,7 @@ import '../../../core/design_system/form_fields/custom_app_text_field.dart';
 import '../../../core/router/app_router.dart';
 import '../../signup/widgets/email_field.dart';
 import '../../signup/widgets/password_field.dart';
+import 'login_button.dart';
 
 class BodyLogIn extends StatelessWidget {
   const BodyLogIn({super.key});
@@ -38,29 +39,13 @@ class BodyLogIn extends StatelessWidget {
               const EmailField(),
               const PasswordField(),
               if (error?.type == AuthErrorType.logIn) Text(error!.errorMsg),
-              ReactiveFormConsumer(
-                builder: (context, form, _) {
-                  return CustomLongButton(
-                    text: 'LogIn Account',
-                    // User Add the data to the Auth event
-                    // Email and Password
-                    onPressed: form.valid
-                        ? () => context.read<AuthBloc>().add(
-                              AuthEvent.logInWithEmailAndPassword(
-                                form.rawValue,
-                              ),
-                            )
-                        : null,
-                    width: 300,
-                  );
-                },
-              ),
+              const LogInButton(),
               TextButton(
                 onPressed: () => context.router.replaceAll([
                   const SignUpRoute(),
                 ]),
                 child: const Text('Go to SignIn'),
-              )
+              ),
             ],
           ),
         ),

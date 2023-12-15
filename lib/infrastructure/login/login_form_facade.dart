@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_forms/src/models/models.dart';
 
 import '../../domain/login/i_login_form_facade.dart';
 
@@ -20,7 +19,6 @@ class LoginFormFacade implements ILoginFormFacade {
           Validators.minLength(8),
         ],
       ),
-      'confirm_password': FormControl<String>(),
     },
   );
 
