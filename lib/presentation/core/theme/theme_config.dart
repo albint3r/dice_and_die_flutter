@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 
 import 'color_scheme_theme_data.dart';
 import 'elevated_button_theme_data.dart';
+import 'input_decorator_theme_data.dart';
 import 'text_theme_data.dart';
 
 @singleton
@@ -23,6 +24,9 @@ class ThemeConfig {
         colorScheme,
       ),
       textTheme: TextThemeData.themeData(
+        colorScheme,
+      ),
+      inputDecorationTheme: CustomInputDecoratorThemeData.themeData(
         colorScheme,
       ),
     );

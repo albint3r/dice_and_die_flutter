@@ -2,7 +2,7 @@ name: dice_and_die_flutter
 description: A new Flutter project.
 publish_to: 'none'
 
-version: 1.0.0+9
+version: 1.0.0+11
 
 environment:
   sdk: '>=3.0.3 <4.0.0'
@@ -31,6 +31,8 @@ dependencies:
   google_fonts: ^4.0.3
   flutter_launcher_icons: ^0.13.1
   percent_indicator: ^4.2.3
+  shared_preferences: ^2.2.2
+  reactive_forms: ^16.1.1
 
 
 
