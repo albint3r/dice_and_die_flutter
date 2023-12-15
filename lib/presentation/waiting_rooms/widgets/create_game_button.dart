@@ -11,7 +11,10 @@ class CreateGameButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+      padding: const EdgeInsets.symmetric(
+        vertical: 20,
+        horizontal: 15,
+      ),
       child: CustomLongButton(
         text: 'Create Game',
         width: size.width,
