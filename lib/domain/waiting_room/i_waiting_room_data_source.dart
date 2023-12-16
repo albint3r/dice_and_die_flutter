@@ -7,5 +7,5 @@ abstract interface class IWaitingRoomDataSource {
 
 
 
-  WebSocketChannel getWebsocketWaitingRooms();
+  WebSocketChannel getWebsocketWaitingRooms(String sessionToken);
 }

@@ -9,15 +9,23 @@ import '../../domain/waiting_room/game.dart';
 import '../../domain/waiting_room/i_waiting_room_data_source.dart';
 import '../../domain/waiting_room/i_waiting_room_facade.dart';
 import '../../domain/waiting_room/responses.dart';
+import '../core/user_preference.dart';
 
 @Injectable(as: IWaitingRoomDFacade)
 class WaitingRoomFacadeImpl implements IWaitingRoomDFacade {
-  WaitingRoomFacadeImpl(this._dataSource);
+  WaitingRoomFacadeImpl(
+    this._dataSource,
+    this._pref,
+  );
 
   final IWaitingRoomDataSource _dataSource;
+  final UserPreference _pref;
   late final WebSocketChannel _channel;
 
   bool get _existChannel => _channel is WebSocketChannel;
+
+  @override
+  UserPreference get pref => _pref;
 
   @override
   WebSocketChannel get channel => _channel;
@@ -26,8 +34,8 @@ class WaitingRoomFacadeImpl implements IWaitingRoomDFacade {
   Future<List<Game>> getWaitingRooms() => _dataSource.getWaitingRooms();
 
   @override
-  Stream getWaitingRoomsEvents() {
-    _channel = _dataSource.getWebsocketWaitingRooms();
+  Stream getWaitingRoomsEvents(String tokenSession) {
+    _channel = _dataSource.getWebsocketWaitingRooms(tokenSession);
     return _channel.stream;
   }
 

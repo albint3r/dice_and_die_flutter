@@ -25,6 +25,7 @@ class App extends StatelessWidget {
     final themeConfig = getIt<ThemeConfig>();
     return MultiBlocListener(
       listeners: [
+        // Redirect user when connect to waiting room
         BlocListener<AuthBloc, AuthState>(
           listenWhen: (pre, curr) =>
               pre.appUser != curr.appUser && curr.appUser is AppUser,
