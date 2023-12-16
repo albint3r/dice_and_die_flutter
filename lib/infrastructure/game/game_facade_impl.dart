@@ -63,6 +63,7 @@ class GameFacadeImpl implements IGameFacade {
     // Convert Data in Json
     final Json data = jsonDecode(dataText) as Json;
     // Get Game Update
+
     Game? game;
     final Json match = jsonDecode(data['match'] as String) as Json;
     game = Game.fromJson(match);
@@ -72,6 +73,7 @@ class GameFacadeImpl implements IGameFacade {
     } else {
       player = game.p2!;
     }
+
     return (game, player);
   }
 
