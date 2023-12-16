@@ -28,7 +28,9 @@ class App extends StatelessWidget {
         // Redirect user when connect to waiting room
         BlocListener<AuthBloc, AuthState>(
           listenWhen: (pre, curr) =>
-              pre.appUser != curr.appUser && curr.appUser is AppUser,
+              pre.appUser != curr.appUser &&
+              curr.appUser is AppUser &&
+              !curr.isAfterGame,
           listener: (context, state) => appRouter.replaceAll([
             const WaitingRoomsRoute(),
           ]),
@@ -36,7 +38,9 @@ class App extends StatelessWidget {
         // This Load all the games after the user login to the App.
         BlocListener<AuthBloc, AuthState>(
           listenWhen: (pre, curr) =>
-              pre.appUser != curr.appUser && curr.appUser is AppUser,
+              pre.appUser != curr.appUser &&
+              curr.appUser is AppUser &&
+              !curr.isAfterGame,
           listener: (context, state) => context.read<WaitingRoomBloc>().add(
                 const WaitingRoomEvent.started(),
               ),

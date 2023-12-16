@@ -18,6 +18,10 @@ class UserLevelProgressBarPodium extends StatelessWidget {
     return SizedBox(
       width: 300,
       child: LinearPercentIndicator(
+        animationDuration: 5,
+        animateFromLastPercent: true,
+        restartAnimation: true,
+        curve: Curves.bounceIn,
         width: 250,
         lineHeight: progressBarHeight,
         percent:

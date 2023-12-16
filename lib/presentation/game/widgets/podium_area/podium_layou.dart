@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../application/auth/auth_bloc.dart';
+import '../../../../application/game/game_bloc.dart';
+import '../../../../domain/waiting_room/game.dart';
 import '../../../../domain/waiting_room/player.dart';
 import '../../../core/design_system/app_bar/widgets/user_level_progress_bar_podium.dart';
 import '../../../core/design_system/buttons/custom_long_button.dart';
@@ -27,13 +29,21 @@ class PodiumLayout extends StatelessWidget {
   final ImageProvider<Object> backGroundImage;
   final Widget textImage;
 
-  int _getWinPoints(AuthState auth) =>
-      player.appUser!.userLevel.expPoints - auth.appUser!.userLevel.expPoints;
-
+  int _getWinPoints(
+    AuthState auth,
+    Game game,
+  ) {
+    if (game.winnerPlayer == player) {
+      return (game.p1.board.totalScore - game.p2!.board.totalScore).abs();
+    }
+    return player.appUser!.userLevel.expPoints -
+        auth.appUser!.userLevel.expPoints;
+  }
 
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthBloc>().state;
+    final game = context.watch<GameBloc>().state;
     final width = MediaQuery.of(context).size.width;
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
@@ -53,7 +63,10 @@ class PodiumLayout extends StatelessWidget {
               child: Column(
                 children: [
                   TitleH1(
-                    text: 'Exp Won: ${_getWinPoints(auth)}',
+                    text: 'Exp Won: ${_getWinPoints(
+                      auth,
+                      game.game!,
+                    )}',
                     fontSize: 50,
                     color: colorScheme.onSecondary,
                   ),
@@ -78,9 +91,14 @@ class PodiumLayout extends StatelessWidget {
             CustomLongButton(
               text: 'Go Back Menu',
               width: waitingRoomCardWidth * .80,
-              onPressed: () => context.router.replace(
-                const WaitingRoomsRoute(),
-              ),
+              onPressed: () {
+                context.router.replace(
+                  const WaitingRoomsRoute(),
+                );
+                context.read<AuthBloc>().add(
+                      AuthEvent.notifyUserUpdatesAfterGameEnds(player.appUser!),
+                    );
+              },
             ),
           ],
         ),
