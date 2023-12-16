@@ -13,5 +13,9 @@ class AuthEvent with _$AuthEvent {
     Map<String, Object?> loginRawValues,
   ) = _LogInWithEmailAndPassword;
 
+  const factory AuthEvent.notifyUserUpdatesAfterGameEnds(
+    AppUser appUser,
+  ) = _NotifyUserUpdatesAfterGameEnds;
+
   const factory AuthEvent.logOut() = _LogOut;
 }

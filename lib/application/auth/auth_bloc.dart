@@ -107,6 +107,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_LogOut>((event, emit) async {
       await _logOut(emit, facade);
     });
+    on<_NotifyUserUpdatesAfterGameEnds>((event, emit) async {
+      emit(
+        state.copyWith(
+          isAfterGame: true,
+          appUser: event.appUser,
+        ),
+      );
+      emit(
+        state.copyWith(
+          isAfterGame: false,
+        ),
+      );
+    });
   }
 
   /// Emit the error for every listener trigger their event if apply the condition

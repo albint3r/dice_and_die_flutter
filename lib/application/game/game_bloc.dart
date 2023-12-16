@@ -92,6 +92,17 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       await facade.disconnectChannel();
       _leaveGame();
     });
+    on<_UpdateWinnerProfile>((event, emit) async {
+      final response = await facade.updateUserProfile();
+      emit(
+        state.copyWith(
+          isLoading: false,
+          player: state.player?.copyWith(
+            appUser: response.appUser,
+          ),
+        ),
+      );
+    });
   }
 
   void _leaveGame() {

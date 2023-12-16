@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+import '../../domain/auth/schemas/auth_response.dart';
 import '../../domain/core/types.dart';
 import '../../domain/game/i_game_data_source.dart';
 import '../../domain/game/i_game_facade.dart';
@@ -63,6 +64,7 @@ class GameFacadeImpl implements IGameFacade {
     // Convert Data in Json
     final Json data = jsonDecode(dataText) as Json;
     // Get Game Update
+
     Game? game;
     final Json match = jsonDecode(data['match'] as String) as Json;
     game = Game.fromJson(match);
@@ -72,9 +74,13 @@ class GameFacadeImpl implements IGameFacade {
     } else {
       player = game.p2!;
     }
+
     return (game, player);
   }
 
   @override
   Future<void> disconnectChannel() async => await _channel.sink.close();
+
+  @override
+  Future<AuthResponse> updateUserProfile() => _dataSource.updateUserProfile();
 }

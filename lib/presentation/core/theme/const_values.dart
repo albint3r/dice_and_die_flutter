@@ -8,6 +8,7 @@ const shortButtonWidth = 65.0;
 const buttonHeight = 50.0;
 const padding = 8.0;
 const columnPadding = 15.0;
+const progressBarHeight = 30.0;
 const elevation = 15.0;
 const animationButtonDuration = Duration(milliseconds: 100);
 // Card Size:

@@ -1,6 +1,7 @@
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../../infrastructure/core/user_preference.dart';
+import '../auth/schemas/auth_response.dart';
 import '../core/types.dart';
 import '../waiting_room/game.dart';
 import '../waiting_room/player.dart';
@@ -32,4 +33,6 @@ abstract interface class IGameFacade {
     String dataText,
     bool isPlayer1,
   );
+
+  Future<AuthResponse> updateUserProfile();
 }
