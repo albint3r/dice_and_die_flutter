@@ -57,9 +57,11 @@ class GamePage extends StatelessWidget {
             },
           ),
           // This event listener create a ui notification to show witch player
-          // is going next.
+          // is going next. This is the mid banner in the board.
           BlocListener<GameBloc, GameState>(
-            listenWhen: (prev, curr) => prev.game?.state != curr.game?.state,
+            listenWhen: (prev, curr) =>
+                prev.game?.state != curr.game?.state &&
+                curr.game?.state != GameAppState.finishGame,
             listener: (context, state) {
               context.read<GameNotificationsBloc>().add(
                     GameNotificationsEvent.update(
@@ -94,6 +96,17 @@ class GamePage extends StatelessWidget {
             listener: (context, state) {
               context.read<SoundsEffectsBloc>().add(
                     const SoundsEffectsEvent.disposeRollDice(),
+                  );
+            },
+          ),
+          // Validate if the winner is the app user to update the level points
+          BlocListener<GameBloc, GameState>(
+            listenWhen: (prev, curr) =>
+                prev.game?.state != curr.game?.state &&
+                curr.game?.state == GameAppState.finishGame,
+            listener: (context, state) {
+              context.read<GameBloc>().add(
+                    const GameEvent.updateWinnerProfile(),
                   );
             },
           ),

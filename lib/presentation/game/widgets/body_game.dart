@@ -50,7 +50,7 @@ class BodyGame extends StatelessWidget {
                   PlayerGameArea(
                     player: player,
                     isFirstPerson: true,
-                  )
+                  ),
                 ],
               ),
               const BodyGameNotifications(),
