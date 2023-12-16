@@ -7,8 +7,11 @@ import '../../presentation/core/theme/const_values.dart';
 @Injectable(as: IGameDataSource)
 class GameDataSourceImpl implements IGameDataSource {
   @override
-  WebSocketChannel getGameChannel(String gameId) {
-    final uri = Uri.parse('$websocketUri/ws/v1/game/$gameId');
+  WebSocketChannel getGameChannel(
+    String gameId,
+    String sessionToken,
+  ) {
+    final uri = Uri.parse('$websocketUri/ws/v1/game/$gameId/$sessionToken');
     return WebSocketChannel.connect(uri);
   }
 }

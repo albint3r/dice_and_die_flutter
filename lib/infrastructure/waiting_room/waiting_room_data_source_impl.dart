@@ -30,8 +30,8 @@ class WaitingRoomDataSourceImpl implements IWaitingRoomDataSource {
   }
 
   @override
-  WebSocketChannel getWebsocketWaitingRooms() {
-    final uri = Uri.parse('$websocketUri/ws/v1/waiting_rooms');
+  WebSocketChannel getWebsocketWaitingRooms(String sessionToken) {
+    final uri = Uri.parse('$websocketUri/ws/v1/waiting_rooms/$sessionToken');
     return WebSocketChannel.connect(uri);
   }
 }

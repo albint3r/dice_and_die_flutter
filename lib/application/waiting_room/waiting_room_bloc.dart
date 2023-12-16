@@ -19,7 +19,9 @@ class WaitingRoomBloc extends Bloc<WaitingRoomEvent, WaitingRoomState> {
     on<_Started>((event, emit) async {
       // Add WebSocket events
       await emit.forEach(
-        facade.getWaitingRoomsEvents(),
+        facade.getWaitingRoomsEvents(
+          await facade.pref.getSessionToken(),
+        ),
         onData: (dataText) {
           // Add Games and Active user information in the waiting room
           final (games, connectedPlayers) = facade.getGamesAndActiveUsers(
@@ -32,7 +34,13 @@ class WaitingRoomBloc extends Bloc<WaitingRoomEvent, WaitingRoomState> {
             channel: facade.channel,
           );
         },
-      );
+      ).onError((error, stackTrace) async {
+        // Todo: Add error to create a listener that kill the project
+        await facade.pref.deleteSessionToken();
+        print('*-1' * 100);
+        print(error);
+        print('*-1' * 100);
+      });
     });
     on<_ReloadEvents>((event, emit) async {
       facade.addWaitingRoomsEvent('{"message": "reload_event"}');

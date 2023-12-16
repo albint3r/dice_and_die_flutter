@@ -1,5 +1,4 @@
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../domain/auth/i_auth_data_source.dart';
 import '../../domain/auth/i_auth_facade.dart';

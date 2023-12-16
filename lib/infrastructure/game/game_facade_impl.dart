@@ -9,11 +9,16 @@ import '../../domain/game/i_game_data_source.dart';
 import '../../domain/game/i_game_facade.dart';
 import '../../domain/waiting_room/game.dart';
 import '../../domain/waiting_room/player.dart';
+import '../core/user_preference.dart';
 
 @Injectable(as: IGameFacade)
 class GameFacadeImpl implements IGameFacade {
-  GameFacadeImpl(this._dataSource);
+  GameFacadeImpl(
+    this._dataSource,
+    this._pref,
+  );
 
+  final UserPreference _pref;
   final IGameDataSource _dataSource;
   late final WebSocketChannel _channel;
 
@@ -23,11 +28,20 @@ class GameFacadeImpl implements IGameFacade {
   bool get _existChannel => _channel is WebSocketChannel;
 
   @override
+  UserPreference get pref => _pref;
+
+  @override
   String generateRandomId() => const Uuid().v4();
 
   @override
-  Stream<dynamic> getGameEvents(String gameId) {
-    _channel = _dataSource.getGameChannel(gameId);
+  Stream<dynamic> getGameEvents(
+    String gameId,
+    String sessionToken,
+  ) {
+    _channel = _dataSource.getGameChannel(
+      gameId,
+      sessionToken,
+    );
     return channel.stream;
   }
 
