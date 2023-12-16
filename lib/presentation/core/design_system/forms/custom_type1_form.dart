@@ -32,7 +32,7 @@ class CustomType1Form extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
-              child: Column(
+              child: ListView(
                 children: listFields,
               ),
             ),
