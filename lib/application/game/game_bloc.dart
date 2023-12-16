@@ -28,7 +28,10 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       if (game is Game) {
         await emit.forEach(
           // Because game exist you use the game Id to join the party
-          facade.getGameEvents(game.id),
+          facade.getGameEvents(
+            game.id,
+            await facade.pref.getSessionToken(),
+          ),
           onData: (dataText) {
             try {
               final (game, player) = facade.getGameAndPlayerMatch(
@@ -49,13 +52,16 @@ class GameBloc extends Bloc<GameEvent, GameState> {
               );
             }
           },
-        );
+        ).onError((error, stackTrace) => facade.pref.deleteSessionToken());
         return;
       }
       // Because this is a new game We create a new id.
       final randomGameId = facade.generateRandomId();
       await emit.forEach(
-        facade.getGameEvents(randomGameId),
+        facade.getGameEvents(
+          randomGameId,
+          await facade.pref.getSessionToken(),
+        ),
         onData: (dataText) {
           final (game, player) = facade.getGameAndPlayerMatch(
             dataText as String,
@@ -68,7 +74,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
             opponentPlayer: facade.getOpponentPlayer(player, game),
           );
         },
-      );
+      ).onError((error, stackTrace) => facade.pref.deleteSessionToken());
       return;
     });
     on<_RollDice>((event, emit) {
