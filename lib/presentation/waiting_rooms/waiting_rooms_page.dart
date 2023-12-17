@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/waiting_room/waiting_room_bloc.dart';
 import '../core/design_system/app_bar/custom_app_bar.dart';
+import '../core/design_system/dialog/custom_dialog_menu.dart';
 import 'widgets/body_waiting_rooms.dart';
 
 @RoutePage()
@@ -16,10 +17,15 @@ class WaitingRoomsPage extends StatelessWidget {
       child: Scaffold(
         appBar: CustomAppBar(
           title: 'Battle Arena',
-          icon: Icons.refresh,
-          onPress: () => context.read<WaitingRoomBloc>().add(
-                const WaitingRoomEvent.reloadEvents(),
-              ),
+          icon: Icons.menu,
+          onPress: () {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return const CustomDialogMenu();
+              },
+            );
+          },
         ),
         body: const BodyWaitingRooms(),
       ),

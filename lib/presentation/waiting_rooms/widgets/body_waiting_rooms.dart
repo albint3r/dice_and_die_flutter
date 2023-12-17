@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/waiting_room/waiting_room_bloc.dart';
 import 'create_game_button.dart';
+import 'refresh_button.dart';
 import 'top_indicators.dart';
 import 'waiting_room_card.dart';
 
@@ -31,7 +32,16 @@ class BodyWaitingRooms extends StatelessWidget {
             },
           ),
         ),
-        const CreateGameButton()
+        const Padding(
+          padding: EdgeInsets.all(4.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CreateGameButton(),
+              RefreshButton(),
+            ],
+          ),
+        ),
         // const ButtonsRow(),
       ],
     );

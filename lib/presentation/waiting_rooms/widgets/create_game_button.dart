@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/design_system/buttons/custom_long_button.dart';
 import '../../core/router/app_router.dart';
+import '../../core/theme/const_values.dart';
 
 class CreateGameButton extends StatelessWidget {
   const CreateGameButton({super.key});
@@ -10,17 +11,11 @@ class CreateGameButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 20,
-        horizontal: 15,
-      ),
-      child: CustomLongButton(
-        text: 'Create Game',
-        width: size.width,
-        onPressed: () => context.router.replace(
-          GameRoute(),
-        ),
+    return CustomLongButton(
+      text: 'Create Game',
+      width: size.width - (shortButtonWidth + padding + 5),
+      onPressed: () => context.router.replace(
+        GameRoute(),
       ),
     );
   }
