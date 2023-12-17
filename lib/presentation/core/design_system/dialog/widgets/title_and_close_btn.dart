@@ -20,7 +20,7 @@ class TitleAndCloseBtn extends StatelessWidget {
         CustomShortButton(
           icon: Icons.close,
           onPressed: () => context.router.pop(),
-        )
+        ),
       ],
     );
   }

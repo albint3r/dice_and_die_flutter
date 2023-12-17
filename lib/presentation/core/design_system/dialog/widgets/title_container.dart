@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../text/titleh1.dart';
 
-
 class TitleContainer extends StatelessWidget {
   const TitleContainer({super.key});
 
   BoxDecoration _boxDecoration(ColorScheme colorScheme) => BoxDecoration(
-        color: colorScheme.primary,
+        color: colorScheme.background,
         borderRadius: const BorderRadius.all(Radius.circular(8)),
         border: Border.all(
           color: colorScheme.secondary,
@@ -23,11 +22,14 @@ class TitleContainer extends StatelessWidget {
       width: 300,
       height: 50,
       decoration: _boxDecoration(colorScheme),
-      child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10,
+        ),
         child: TitleH1(
           fontSize: 40,
           text: 'Menu',
+          color: colorScheme.onSecondary,
         ),
       ),
     );

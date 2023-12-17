@@ -1,7 +1,7 @@
 import 'package:reactive_forms/reactive_forms.dart';
 
-// const websocketUri = 'ws://146.190.134.20:8001';
-const websocketUri = 'ws://192.168.1.71:8001';
+const websocketUri = 'ws://146.190.134.20:8001';
+// const websocketUri = 'ws://192.168.1.71:8001';
 const borderRadius = 15.0;
 const longButtonWidth = 135.0;
 const shortButtonWidth = 65.0;
