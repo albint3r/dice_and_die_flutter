@@ -1,7 +1,10 @@
+import 'package:dice_and_die_flutter/presentation/waiting_rooms/widgets/refresh_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
 import '../../../application/waiting_room/waiting_room_bloc.dart';
+import '../../core/design_system/buttons/custom_short_buttom.dart';
 import 'create_game_button.dart';
 import 'top_indicators.dart';
 import 'waiting_room_card.dart';
@@ -31,7 +34,16 @@ class BodyWaitingRooms extends StatelessWidget {
             },
           ),
         ),
-        const CreateGameButton()
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CreateGameButton(),
+              RefreshButton(),
+            ],
+          ),
+        ),
         // const ButtonsRow(),
       ],
     );

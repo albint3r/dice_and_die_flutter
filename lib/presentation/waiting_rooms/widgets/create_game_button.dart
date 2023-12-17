@@ -9,19 +9,20 @@ class CreateGameButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 20,
-        horizontal: 15,
-      ),
-      child: CustomLongButton(
-        text: 'Create Game',
-        width: size.width,
-        onPressed: () => context.router.replace(
-          GameRoute(),
-        ),
-      ),
+    final size = MediaQuery
+        .of(context)
+        .size;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return CustomLongButton(
+          text: 'Create Game',
+          width: size.width * .78,
+          onPressed: () =>
+              context.router.replace(
+                GameRoute(),
+              ),
+        );
+      },
     );
   }
 }
