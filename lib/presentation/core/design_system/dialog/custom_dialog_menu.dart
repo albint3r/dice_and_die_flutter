@@ -37,13 +37,13 @@ class CustomDialogMenu extends StatelessWidget {
       ),
       child: Container(
         decoration:
-            _boxDecoration(colorScheme.background, colorScheme.onPrimary),
+            _boxDecoration(colorScheme.primary, colorScheme.primary),
         child: Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Container(
             decoration: _boxDecoration(
-              colorScheme.surface,
-              colorScheme.surface.withOpacity(.5),
+              colorScheme.onSecondary,
+              colorScheme.primary,
             ),
             child: const Padding(
               padding: EdgeInsets.only(

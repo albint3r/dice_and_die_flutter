@@ -7,7 +7,7 @@ class TitleContainer extends StatelessWidget {
   const TitleContainer({super.key});
 
   BoxDecoration _boxDecoration(ColorScheme colorScheme) => BoxDecoration(
-        color: colorScheme.background,
+        color: colorScheme.primary,
         borderRadius: const BorderRadius.all(Radius.circular(8)),
         border: Border.all(
           color: colorScheme.secondary,
@@ -26,7 +26,8 @@ class TitleContainer extends StatelessWidget {
       child: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 10),
         child: TitleH1(
-          text: 'translation.menuLabel',
+          fontSize: 40,
+          text: 'Menu',
         ),
       ),
     );

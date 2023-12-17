@@ -16,7 +16,7 @@ class CreateGameButton extends StatelessWidget {
       builder: (context, constraints) {
         return CustomLongButton(
           text: 'Create Game',
-          width: size.width * .78,
+          width: size.width * .80,
           onPressed: () =>
               context.router.replace(
                 GameRoute(),
