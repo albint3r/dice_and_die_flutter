@@ -10,13 +10,17 @@ class BodyProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Column(
-        children: [
-          Gap(30),
-          ProfileImage(),
-          Gap(padding),
-          UserAccountInformation(),
+    return Center(
+      child: ListView(
+        children: const [
+          Column(
+            children: [
+              Gap(30),
+              ProfileImage(),
+              Gap(padding),
+              UserAccountInformation(),
+            ],
+          ),
         ],
       ),
     );
