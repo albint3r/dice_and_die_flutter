@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../application/waiting_room/waiting_room_bloc.dart';
 import '../core/design_system/app_bar/custom_app_bar.dart';
 import '../core/design_system/dialog/custom_dialog_menu.dart';
 import 'widgets/body_waiting_rooms.dart';

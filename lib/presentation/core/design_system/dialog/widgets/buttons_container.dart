@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
+import '../../../router/app_router.dart';
 import '../../buttons/custom_long_button.dart';
 
 class ButtonsContainer extends StatelessWidget {
@@ -27,13 +29,15 @@ class ButtonsContainer extends StatelessWidget {
         child: Column(
           children: [
             CustomLongButton(
-              text: 'World Ranking',
+              text: 'Profile',
               width: size.width * .80,
+              onPressed: () => context.router.push(const ProfileRoute()),
             ),
             const Gap(10),
             CustomLongButton(
-              text: 'Update Name',
+              text: 'Ranking',
               width: size.width * .80,
+              onPressed: () {},
             ),
           ],
         ),

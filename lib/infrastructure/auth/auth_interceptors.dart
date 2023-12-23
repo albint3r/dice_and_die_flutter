@@ -5,14 +5,16 @@ import 'package:l/l.dart';
 import '../core/user_preference.dart';
 
 @injectable
-class AuthInterceptor extends Interceptor {
-  AuthInterceptor(this._userPreference);
+class AuthInterceptors extends Interceptor {
+  AuthInterceptors(this._userPreference);
 
   final UserPreference _userPreference;
 
   @override
   Future<void> onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
     l.d('REQUEST[${options.method}] => PATH: ${options.path}');
     // If Token exist add header to
     final sessionToken = await _userPreference.getSessionToken();
@@ -25,14 +27,18 @@ class AuthInterceptor extends Interceptor {
 
   @override
   Future<void> onResponse(
-      Response response, ResponseInterceptorHandler handler) async {
+    Response response,
+    ResponseInterceptorHandler handler,
+  ) async {
     l.d('RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
     super.onResponse(response, handler);
   }
 
   @override
   Future<void> onError(
-      DioException err, ErrorInterceptorHandler handler) async {
+    DioException err,
+    ErrorInterceptorHandler handler,
+  ) async {
     final statusCode = err.response?.statusCode;
     l.d('ERROR[$statusCode] => PATH: ${err.requestOptions.path}');
     // If Have error session Token terminate the user session.
