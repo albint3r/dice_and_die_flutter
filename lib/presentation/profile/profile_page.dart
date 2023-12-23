@@ -14,7 +14,7 @@ class ProfilePage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: CustomAppBar(
-          title: 'Battle Arena',
+          title: 'Account',
           icon: Icons.arrow_back,
           onPress: () => context.router.pop(),
         ),

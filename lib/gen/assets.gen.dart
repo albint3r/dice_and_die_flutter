@@ -61,11 +61,13 @@ class Assets {
   Assets._();
 
   static const AssetGenImage appLogo = AssetGenImage('assets/app_logo.png');
+  static const AssetGenImage defaultAvatar =
+      AssetGenImage('assets/default_avatar.png');
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsSoundsGen sounds = $AssetsSoundsGen();
 
   /// List of all assets
-  List<AssetGenImage> get values => [appLogo];
+  List<AssetGenImage> get values => [appLogo, defaultAvatar];
 }
 
 class AssetGenImage {
