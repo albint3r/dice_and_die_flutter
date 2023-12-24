@@ -32,6 +32,10 @@ Map<String, String Function(dynamic error)> validationMessages = {
   ValidationMessage.required: (error) => 'Field must not be empty',
   ValidationMessage.email: (error) => 'Must enter a valid email',
   ValidationMessage.minLength: (error) => 'The min length is 8',
-  ValidationMessage.maxLength: (error) => 'The min length is 20',
+  ValidationMessage.maxLength: (error) {
+    final requiredLength = error['requiredLength'] as int;
+    final actualLength = error['actualLength'] as int;
+    return 'The min length is $requiredLength. You have: $actualLength';
+  },
   ValidationMessage.mustMatch: (error) => 'Password not match',
 };

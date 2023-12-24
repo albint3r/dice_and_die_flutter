@@ -37,7 +37,6 @@ class ButtonsContainer extends StatelessWidget {
             CustomLongButton(
               text: 'Ranking',
               width: size.width * .80,
-              onPressed: () {},
             ),
           ],
         ),

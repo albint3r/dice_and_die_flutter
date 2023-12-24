@@ -39,7 +39,7 @@ class GamePage extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => getIt<GameLifeBloc>(),
-        )
+        ),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -131,7 +131,7 @@ class GamePage extends StatelessWidget {
                     ),
                   );
             },
-          )
+          ),
         ],
         child: const SafeArea(
           child: Scaffold(

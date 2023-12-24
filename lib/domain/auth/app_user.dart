@@ -22,4 +22,5 @@ class AppUser with _$AppUser {
   const AppUser._();
 
   factory AppUser.fromJson(Json json) => _$AppUserFromJson(json);
+
 }

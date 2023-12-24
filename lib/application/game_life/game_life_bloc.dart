@@ -18,14 +18,15 @@ class GameLifeBloc extends Bloc<GameLifeEvent, GameLifeState> {
     on<_UpdatePoints>((event, emit) {
       final game = event.game;
       final player = event.player;
+      final opponentPlayer = facade.getOpponentPlayer(
+        game,
+        player,
+      );
       emit(
         state.copyWith(
           game: game,
           player: player,
-          opponentPlayer: facade.getOpponentPlayer(
-            game,
-            player,
-          ),
+          opponentPlayer:opponentPlayer,
         ),
       );
     });
