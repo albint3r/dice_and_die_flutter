@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../core/types.dart';
+import 'rank.dart';
 
 part 'user_level.freezed.dart';
 
@@ -18,4 +19,6 @@ class UserLevel with _$UserLevel {
   const UserLevel._();
 
   factory UserLevel.fromJson(Json json) => _$UserLevelFromJson(json);
+
+  Rank get rank => Rank.values[rankId - 1];
 }

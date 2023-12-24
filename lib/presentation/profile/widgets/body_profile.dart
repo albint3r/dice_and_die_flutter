@@ -1,3 +1,4 @@
+import 'package:dice_and_die_flutter/presentation/profile/widgets/rank_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -8,14 +9,13 @@ import '../../core/theme/const_values.dart';
 import 'profile_image.dart';
 import 'user_account_information.dart';
 
-
-
 class BodyProfile extends StatelessWidget {
   const BodyProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthBloc>().state;
+    final appUser = auth.appUser;
     return Center(
       child: ListView(
         children: [
@@ -23,8 +23,9 @@ class BodyProfile extends StatelessWidget {
             children: [
               const Gap(padding * 3),
               const ProfileImage(),
-              const Gap(padding* 3),
-              UserLevelProgressBarPodium(auth.appUser!),
+              const Gap(padding * 3),
+              UserLevelProgressBarPodium(appUser!),
+              RankInfo(appUser),
               const Gap(padding),
               const UserAccountInformation(),
             ],
