@@ -30,11 +30,17 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       );
     });
     on<_SendChange>((event, emit) {
+      // First close all option to click again the field.
       emit(
         state.copyWith(
           isEditing: false,
         ),
       );
+      final name = facade.name;
+
+      if (name.isNotEmpty) {
+        facade.updateName(name);
+      }
     });
   }
 }

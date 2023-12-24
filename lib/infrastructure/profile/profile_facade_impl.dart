@@ -17,4 +17,12 @@ class ProfileFacadeImpl implements IProfileFacade {
 
   @override
   FormGroup get formGroup => _formGroup;
+
+  @override
+  String get name => _formGroup.control('name').value as String;
+
+  @override
+  Future<void> updateName(String name) => _dataSource.updateNameAndLastName(
+        name,
+      );
 }
