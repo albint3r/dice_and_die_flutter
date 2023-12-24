@@ -6,6 +6,7 @@ import '../../../../application/game_life/game_life_bloc.dart';
 import '../../../../domain/waiting_room/player.dart';
 import '../../../core/theme/const_values.dart';
 import 'player_points.dart';
+import 'players_names.dart';
 
 class BodyGameLife extends StatelessWidget {
   const BodyGameLife({super.key});
@@ -27,36 +28,36 @@ class BodyGameLife extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     return Padding(
       padding: const EdgeInsets.all(padding),
-      child: Row(
+      child: Column(
         children: [
-          PlayerPoints(
-            player: player,
-            name: player!.appUser?.name is String &&
-                    player.appUser!.name.isNotEmpty
-                ? player.appUser!.name
-                : 'You',
-          ),
-          Expanded(
-            child: LinearPercentIndicator(
-              percent: _getPlayersPercentage(
-                player,
-                opponentPlayer,
+          Row(
+            children: [
+              PlayerPoints(
+                player: player,
               ),
-              lineHeight: 15,
-              barRadius: const Radius.circular(borderRadius),
-              animationDuration: 1,
-              animation: true,
-              animateFromLastPercent: true,
-              backgroundColor: colorScheme.secondaryContainer,
-              progressColor: colorScheme.primaryContainer,
-            ),
+              Expanded(
+                child: LinearPercentIndicator(
+                  percent: _getPlayersPercentage(
+                    player,
+                    opponentPlayer,
+                  ),
+                  lineHeight: 15,
+                  barRadius: const Radius.circular(borderRadius),
+                  animationDuration: 1,
+                  animation: true,
+                  animateFromLastPercent: true,
+                  backgroundColor: colorScheme.secondaryContainer,
+                  progressColor: colorScheme.primaryContainer,
+                ),
+              ),
+              PlayerPoints(
+                player: opponentPlayer,
+              ),
+            ],
           ),
-          PlayerPoints(
-            player: opponentPlayer,
-            name: opponentPlayer!.appUser?.name is String &&
-                    opponentPlayer.appUser!.name.isNotEmpty
-                ? opponentPlayer.appUser!.name
-                : 'Opponent',
+          PlayersNames(
+            player: player!,
+            opponentPlayer: opponentPlayer!,
           ),
         ],
       ),
