@@ -5,5 +5,5 @@ abstract interface class IProfileFacade {
 
   String get name;
 
-  Future<void> updateName(String name);
+  Future<String> updateName(String name);
 }

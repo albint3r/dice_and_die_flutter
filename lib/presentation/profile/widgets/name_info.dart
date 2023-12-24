@@ -5,7 +5,7 @@ import '../../../application/auth/auth_bloc.dart';
 import '../../../application/profile/profile_bloc.dart';
 import '../../../domain/auth/app_user.dart';
 import '../../core/design_system/buttons/custom_text_button.dart';
-import '../../core/design_system/text/text_body.dart';
+import '../../core/design_system/text/titleh2.dart';
 
 class NameInfo extends StatelessWidget {
   const NameInfo({super.key});
@@ -24,7 +24,7 @@ class NameInfo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        TextBody(_displayNameFormat(appUser!)),
+        TitleH2(_displayNameFormat(appUser!)),
         CustomTextButton(
           text: 'Edit',
           onPressed: () => context.read<ProfileBloc>().add(

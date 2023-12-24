@@ -28,7 +28,7 @@ class UserAccountInformation extends StatelessWidget {
           const AccountNameField(),
           const Gap(padding),
           const TitleH2('Joined:'),
-          TextBody(auth.appUser?.creationDate.toString() ?? ''),
+          TitleH2(auth.appUser?.creationDate.toString() ?? ''),
         ],
       ),
     );

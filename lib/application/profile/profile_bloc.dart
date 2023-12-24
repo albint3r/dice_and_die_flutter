@@ -29,7 +29,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         ),
       );
     });
-    on<_SendChange>((event, emit) {
+    on<_SendChange>((event, emit) async {
       // First close all option to click again the field.
       emit(
         state.copyWith(
@@ -39,7 +39,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       final name = facade.name;
 
       if (name.isNotEmpty) {
-        facade.updateName(name);
+        final newUserName = await facade.updateName(name);
+        emit(
+          state.copyWith(
+            newUserName: newUserName,
+          ),
+        );
+        // Just update to notify the update name listener
+        emit(
+          state.copyWith(
+            newUserName: '',
+          ),
+        );
       }
     });
   }
