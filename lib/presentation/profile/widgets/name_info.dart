@@ -6,6 +6,7 @@ import '../../../application/profile/profile_bloc.dart';
 import '../../../domain/auth/app_user.dart';
 import '../../core/design_system/buttons/custom_text_button.dart';
 import '../../core/design_system/text/titleh2.dart';
+import '../../core/theme/const_values.dart';
 
 class NameInfo extends StatelessWidget {
   const NameInfo({super.key});
@@ -17,6 +18,21 @@ class NameInfo extends StatelessWidget {
     return "No Name";
   }
 
+  Widget _getStaticBox(Widget widget) {
+    return SizedBox(
+      height: inputFieldHeightStaticBox,
+      child: Align(
+        alignment: Alignment.topRight,
+        child: SizedBox(
+          height: inputFieldHeight,
+          child: Center(
+            child: widget,
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthBloc>().state;
@@ -24,12 +40,18 @@ class NameInfo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        TitleH2(_displayNameFormat(appUser!)),
-        CustomTextButton(
-          text: 'Edit',
-          onPressed: () => context.read<ProfileBloc>().add(
-                const ProfileEvent.isEditing(),
-              ),
+        _getStaticBox(
+          TitleH2(
+            _displayNameFormat(appUser!),
+          ),
+        ),
+        _getStaticBox(
+          CustomTextButton(
+            text: 'Edit',
+            onPressed: () => context.read<ProfileBloc>().add(
+                  const ProfileEvent.isEditing(),
+                ),
+          ),
         ),
       ],
     );

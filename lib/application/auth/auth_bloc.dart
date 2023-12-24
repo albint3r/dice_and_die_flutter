@@ -8,9 +8,7 @@ import '../../domain/auth/i_auth_facade.dart';
 import '../../domain/auth/schemas/auth_response.dart';
 
 part 'auth_bloc.freezed.dart';
-
 part 'auth_event.dart';
-
 part 'auth_state.dart';
 
 @lazySingleton
@@ -123,9 +121,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_UpdateUserName>((event, emit) async {
       emit(
         state.copyWith(
+          isAfterGame: true,
           appUser: state.appUser?.copyWith(
             name: event.newUserName,
           ),
+        ),
+      );
+      emit(
+        state.copyWith(
+          isAfterGame: false,
         ),
       );
     });
