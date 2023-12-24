@@ -19,6 +19,7 @@ class PlayersNames extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextBody(
               player.appUser?.name is String && player.appUser!.name.isNotEmpty
@@ -29,6 +30,7 @@ class PlayersNames extends StatelessWidget {
           ],
         ),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             TextBody(
               opponentPlayer.appUser?.name is String &&
@@ -36,7 +38,9 @@ class PlayersNames extends StatelessWidget {
                   ? opponentPlayer.appUser!.name
                   : 'Opponent',
             ),
-            TextBody('Lvl. ${opponentPlayer.appUser?.userLevel.level}'),
+            TextBody(
+              'Lvl. ${opponentPlayer.appUser?.userLevel.level}',
+            ),
           ],
         ),
       ],

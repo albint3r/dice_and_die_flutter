@@ -52,6 +52,7 @@ class BodyGameLife extends StatelessWidget {
               ),
               PlayerPoints(
                 player: opponentPlayer,
+                align: Alignment.centerRight,
               ),
             ],
           ),
