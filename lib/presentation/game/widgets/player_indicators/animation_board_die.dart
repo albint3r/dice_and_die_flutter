@@ -10,7 +10,7 @@ import '../../../../domain/waiting_room/player.dart';
 import '../../../core/design_system/text/titleh1.dart';
 import '../../../core/theme/const_values.dart';
 
-const size = 60.0;
+const size = 50.0;
 
 class AnimationBoardDie extends StatefulWidget {
   const AnimationBoardDie({
@@ -43,12 +43,6 @@ class _AnimationBoardDieState extends State<AnimationBoardDie>
     _controller.repeat();
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
   void _startAnimation() {
     _controller.repeat();
   }
@@ -60,6 +54,12 @@ class _AnimationBoardDieState extends State<AnimationBoardDie>
   bool _isDiceRolling(Game? game) =>
       widget.player?.id == game?.currentPlayer?.id &&
       game?.state == GameAppState.rollDice;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,9 +78,9 @@ class _AnimationBoardDieState extends State<AnimationBoardDie>
       onTap: widget.onTap,
       child: Card(
         elevation: elevation,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            borderRadius,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(borderRadius),
           ),
         ),
         child: Container(
