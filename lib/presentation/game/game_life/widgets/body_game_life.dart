@@ -29,7 +29,13 @@ class BodyGameLife extends StatelessWidget {
       padding: const EdgeInsets.all(padding),
       child: Row(
         children: [
-          PlayerPoints(player: player, name: 'You'),
+          PlayerPoints(
+            player: player,
+            name: player!.appUser?.name is String &&
+                    player.appUser!.name.isNotEmpty
+                ? player.appUser!.name
+                : 'You',
+          ),
           Expanded(
             child: LinearPercentIndicator(
               percent: _getPlayersPercentage(
@@ -45,7 +51,13 @@ class BodyGameLife extends StatelessWidget {
               progressColor: colorScheme.primaryContainer,
             ),
           ),
-          PlayerPoints(player: opponentPlayer, name: 'Opponent'),
+          PlayerPoints(
+            player: opponentPlayer,
+            name: opponentPlayer!.appUser?.name is String &&
+                    opponentPlayer.appUser!.name.isNotEmpty
+                ? opponentPlayer.appUser!.name
+                : 'Opponent',
+          ),
         ],
       ),
     );
