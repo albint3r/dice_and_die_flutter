@@ -6,6 +6,7 @@ import 'widgets/title_and_close_btn.dart';
 
 abstract class MenuSize {
   static double get horizontalPadding => .05;
+
   static double get verticalPadding => .1;
 }
 
@@ -36,14 +37,16 @@ class CustomDialogMenu extends StatelessWidget {
         vertical: height * MenuSize.verticalPadding,
       ),
       child: Container(
-        decoration:
-            _boxDecoration(colorScheme.primary, colorScheme.primary),
+        decoration: _boxDecoration(
+          colorScheme.secondary,
+          colorScheme.primary,
+        ),
         child: Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Container(
             decoration: _boxDecoration(
               colorScheme.onSecondary,
-              colorScheme.primary,
+              colorScheme.secondary,
             ),
             child: const Padding(
               padding: EdgeInsets.only(

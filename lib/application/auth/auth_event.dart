@@ -18,4 +18,8 @@ class AuthEvent with _$AuthEvent {
   ) = _NotifyUserUpdatesAfterGameEnds;
 
   const factory AuthEvent.logOut() = _LogOut;
+
+  const factory AuthEvent.updateUserName(
+    String newUserName,
+  ) = _UpdateUserName;
 }

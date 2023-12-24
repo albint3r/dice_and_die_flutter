@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+import '../../theme/const_values.dart';
+
 class CustomAppTexTField extends StatelessWidget {
   const CustomAppTexTField({
     required this.formControlName,
@@ -26,7 +28,7 @@ class CustomAppTexTField extends StatelessWidget {
       color: colorScheme.onSecondary,
     );
     return SizedBox(
-      height: 90,
+      height: inputFieldHeightStaticBox,
       child: ReactiveTextField(
         formControlName: formControlName,
         obscureText: obscureText,
