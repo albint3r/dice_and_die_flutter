@@ -120,6 +120,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ),
       );
     });
+    on<_UpdateUserName>((event, emit) async {
+      emit(
+        state.copyWith(
+          appUser: state.appUser?.copyWith(
+            name: event.newUserName,
+          ),
+        ),
+      );
+    });
   }
 
   /// Emit the error for every listener trigger their event if apply the condition

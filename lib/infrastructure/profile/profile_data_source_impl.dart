@@ -3,7 +3,6 @@ import 'package:injectable/injectable.dart';
 
 import '../../domain/core/types.dart';
 import '../../domain/profile/i_profile_data_source.dart';
-import '../../domain/profile/response_update_user_name.dart';
 
 @Injectable(as: IProfileDataSource)
 class ProfileDataSourceImpl implements IProfileDataSource {
