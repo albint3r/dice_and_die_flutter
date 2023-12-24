@@ -27,11 +27,17 @@ class AccountNameField extends StatelessWidget {
             child: CustomAppTexTField(
               formControlName: 'name',
               hintText: 'name',
-              suffixIcon: IconButton(
-                onPressed: () => context.read<ProfileBloc>().add(
-                      const ProfileEvent.sendChange(),
-                    ),
-                icon: const Icon(Icons.send),
+              suffixIcon: ReactiveFormConsumer(
+                builder: (_, form, __) {
+                  return IconButton(
+                    onPressed: form.valid
+                        ? () => context.read<ProfileBloc>().add(
+                              const ProfileEvent.sendChange(),
+                            )
+                        : null,
+                    icon: const Icon(Icons.send),
+                  );
+                },
               ),
             ),
           )

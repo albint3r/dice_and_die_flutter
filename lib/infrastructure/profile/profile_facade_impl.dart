@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_forms/src/models/models.dart';
 
 import '../../domain/profile/i_profile_data_source.dart';
@@ -11,8 +12,13 @@ class ProfileFacadeImpl implements IProfileFacade {
   final IProfileDataSource _dataSource;
 
   final FormGroup _formGroup = FormGroup({
-    'name': FormControl(value: ''),
-    'lastName': FormControl(value: ''),
+    'name': FormControl(
+      value: '',
+      validators: [
+        Validators.required,
+        Validators.maxLength(15),
+      ],
+    ),
   });
 
   @override
@@ -22,5 +28,7 @@ class ProfileFacadeImpl implements IProfileFacade {
   String get name => _formGroup.control('name').value as String;
 
   @override
-  Future<String> updateName(String name) => _dataSource.updateName(name);
+  Future<String> updateName(String name) => _dataSource.updateName(
+        name.toLowerCase(),
+      );
 }
