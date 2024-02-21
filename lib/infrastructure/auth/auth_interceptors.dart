@@ -15,7 +15,7 @@ class AuthInterceptors extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    l.d('REQUEST[${options.method}] => PATH: ${options.path}');
+    l.i('REQUEST[${options.method}] => PATH: ${options.path}');
     // If Token exist add header to
     final sessionToken = await _userPreference.getSessionToken();
     // Add Session token to navigation user headers
@@ -30,7 +30,7 @@ class AuthInterceptors extends Interceptor {
     Response response,
     ResponseInterceptorHandler handler,
   ) async {
-    l.d('RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
+    l.i('RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
     super.onResponse(response, handler);
   }
 
@@ -40,7 +40,7 @@ class AuthInterceptors extends Interceptor {
     ErrorInterceptorHandler handler,
   ) async {
     final statusCode = err.response?.statusCode;
-    l.d('ERROR[$statusCode] => PATH: ${err.requestOptions.path}');
+    l.i('ERROR[$statusCode] => PATH: ${err.requestOptions.path}');
     // If Have error session Token terminate the user session.
     if (statusCode == 401 || statusCode == 403) {
       await _userPreference.deleteSessionToken();
