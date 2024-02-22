@@ -16,20 +16,23 @@ class AuthDataSourceImpl implements IAuthDataSource {
   Future<AuthResponse> logIn(String email, String password) => _logInOrSignUp(
         email,
         password,
-        '/auth/v1/login',
+        // '/auth/v1/login',
+        '/v2/auth/login',
       );
 
   @override
   Future<AuthResponse> signIn(String email, String password) => _logInOrSignUp(
         email,
         password,
-        '/auth/v1/signin',
+        // '/auth/v1/signin',
+        '/v2/auth/signin',
       );
 
   @override
   Future<AuthResponse> logInFromSessionToken(String sessionToken) async {
     final response = await _dio.post(
-      '/auth/v1/login/token',
+      // '/auth/v1/login/token',
+      '/v2/auth/login/token',
       options: FastHeader.getOptions(sessionToken),
     );
     final data = response.data as Json;
