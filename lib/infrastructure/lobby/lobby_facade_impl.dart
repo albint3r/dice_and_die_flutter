@@ -26,18 +26,12 @@ class LobbyFacadeImpl implements ILobbyFacade {
 
   @override
   void loadActiveGames(dynamic data) {
-    print('*-' * 100);
-    print('data -> $data');
-    print('type -> ${data.runtimeType}');
-    final response = jsonDecode(data.toString()) as String;
-    print('response -> $response');
-    print('type -> ${response.runtimeType}');
-    print('*-' * 100);
-    final response2 = jsonDecode(response);
-    print('response2 -> $response2');
-    print('type -> ${response2.runtimeType}');
-    final x = Lobby.fromJson(response2 as Json);
-    print('x-> $x');
-    print('*-' * 100);
+    final stringData = jsonDecode(data.toString()) as String;
+    final jsonData = jsonDecode(stringData) as Json;
+    final lobby = Lobby.fromJson(jsonData);
+    final responseLobby = ResponseLobby(
+      lobby: lobby,
+      totalPlayers: jsonData['total_players'] as int,
+    );
   }
 }
