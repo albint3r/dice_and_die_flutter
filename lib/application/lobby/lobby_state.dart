@@ -5,12 +5,14 @@ class LobbyState with _$LobbyState {
   const factory LobbyState({
     required bool isLoading,
     required int totalPlayer,
-    required List<Game> games,
+    required Lobby lobby,
   }) = _LobbyState;
 
   factory LobbyState.initial() => const LobbyState(
         isLoading: true,
         totalPlayer: 0,
-        games: <Game>[],
+        lobby: Lobby(
+          activeGames: {},
+        ),
       );
 }

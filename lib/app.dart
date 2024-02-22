@@ -25,17 +25,6 @@ class App extends StatelessWidget {
     final themeConfig = getIt<ThemeConfig>();
     return MultiBlocListener(
       listeners: [
-        // Redirect user when connect to waiting room
-        BlocListener<AuthBloc, AuthState>(
-          // listenWhen: (pre, curr) =>
-          //     pre.appUser != curr.appUser &&
-          //     curr.appUser is AppUser &&
-          //     !curr.isAfterGame,
-          listenWhen: (pre, curr) => pre.sessionToken != curr.sessionToken,
-          listener: (context, state) => appRouter.replaceAll([
-            const WaitingRoomsRoute(),
-          ]),
-        ),
         // This Load all the games after the user login to the App.
         BlocListener<AuthBloc, AuthState>(
           listenWhen: (pre, curr) =>
