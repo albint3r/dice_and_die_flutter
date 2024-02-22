@@ -5,21 +5,21 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 import '../../domain/auth/schemas/auth_response.dart';
 import '../../domain/core/types.dart';
 import '../../domain/game/i_game_data_source.dart';
-import '../../presentation/core/theme/const_values.dart';
 
 @Injectable(as: IGameDataSource)
 class GameDataSourceImpl implements IGameDataSource {
-
-  GameDataSourceImpl(this._dio);
+  GameDataSourceImpl(this._dio, this._uri);
 
   final Dio _dio;
+  final Uri _uri;
 
   @override
   WebSocketChannel getGameChannel(
     String gameId,
     String sessionToken,
   ) {
-    final uri = Uri.parse('$websocketUri/ws/v1/game/$gameId/$sessionToken');
+    final path = '/ws/v1/game/$gameId/$sessionToken';
+    final uri = _uri.replace(scheme: 'ws', path: path);
     return WebSocketChannel.connect(uri);
   }
 

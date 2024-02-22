@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:l/l.dart';
 import 'package:web_socket_channel/src/channel.dart';
 
 import '../../domain/core/types.dart';
@@ -10,9 +11,11 @@ import '../../presentation/core/theme/const_values.dart';
 
 @Injectable(as: IWaitingRoomDataSource)
 class WaitingRoomDataSourceImpl implements IWaitingRoomDataSource {
-  WaitingRoomDataSourceImpl(this._dio);
+  WaitingRoomDataSourceImpl(this._dio,
+      this._uri,);
 
   final Dio _dio;
+  final Uri _uri;
 
   @override
   Future<List<Game>> getWaitingRooms() async {
@@ -31,7 +34,8 @@ class WaitingRoomDataSourceImpl implements IWaitingRoomDataSource {
 
   @override
   WebSocketChannel getWebsocketWaitingRooms(String sessionToken) {
-    final uri = Uri.parse('$websocketUri/ws/v1/waiting_rooms/$sessionToken');
+    final path = '/ws/v1/waiting_rooms/$sessionToken';
+    final uri = _uri.replace(scheme: 'ws', path: path);
     return WebSocketChannel.connect(uri);
   }
 }

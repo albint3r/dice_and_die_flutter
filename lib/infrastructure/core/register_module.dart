@@ -12,22 +12,11 @@ import '../auth/auth_interceptors.dart';
 abstract class RegisterModule {
   @singleton
   Uri getUri() {
-    const hostKey = 'HOST';
-    const path = '/';
-    if (const bool.hasEnvironment(hostKey)) {
-      return Uri(
-        scheme: 'http',
-        host: const String.fromEnvironment(hostKey),
-        port: 8081,
-        path: path,
-      );
-    } else {
-      return Uri.http(
-        '146.190.134.20:8001',
-        // '192.168.1.71:8001', //test
-        path,
-      );
-    }
+    return Uri(
+      scheme: 'http',
+      host: '146.190.134.20',
+      port: 8001,
+    );
   }
 
   @injectable
@@ -44,7 +33,18 @@ abstract class RegisterModule {
     );
   }
 
-  @lazySingleton
+  @injectable
+  Iterable<Interceptor> getInterceptors() {
+    if (kDebugMode) {
+      return [
+        LogInterceptor(logPrint: l.i),
+        DioInterceptToCurl(),
+      ];
+    }
+    return [];
+  }
+
+  @singleton
   Dio getDio(
     BaseOptions options,
     Iterable<Interceptor> interceptors,
@@ -57,16 +57,5 @@ abstract class RegisterModule {
       ..addAll(interceptors)
       ..add(auth);
     return dio;
-  }
-
-  @injectable
-  Iterable<Interceptor> getInterceptors() {
-    if (kDebugMode) {
-      return [
-        LogInterceptor(logPrint: l.d),
-        DioInterceptToCurl(),
-      ];
-    }
-    return [];
   }
 }
