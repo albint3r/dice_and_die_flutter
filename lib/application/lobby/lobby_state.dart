@@ -6,6 +6,7 @@ class LobbyState with _$LobbyState {
     required bool isLoading,
     required int totalPlayer,
     required Lobby lobby,
+    WebSocketChannel? channel,
   }) = _LobbyState;
 
   factory LobbyState.initial() => const LobbyState(

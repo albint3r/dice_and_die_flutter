@@ -10,7 +10,7 @@ part 'lobby.g.dart';
 @freezed
 class Lobby with _$Lobby {
   const factory Lobby({
-    required Map<String, Game> activeGames,
+    @JsonKey(name: 'active_games')required Map<String, Game> activeGames,
   }) = _Lobby;
 
   const Lobby._();

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import 'application/auth/auth_bloc.dart';
+import 'application/lobby/lobby_bloc.dart';
 import 'application/waiting_room/waiting_room_bloc.dart';
 import 'domain/auth/app_user.dart';
 import 'injectables.dart';
@@ -27,12 +28,9 @@ class App extends StatelessWidget {
       listeners: [
         // This Load all the games after the user login to the App.
         BlocListener<AuthBloc, AuthState>(
-          listenWhen: (pre, curr) =>
-              pre.appUser != curr.appUser &&
-              curr.appUser is AppUser &&
-              !curr.isAfterGame,
-          listener: (context, state) => context.read<WaitingRoomBloc>().add(
-                const WaitingRoomEvent.started(),
+          listenWhen: (pre, curr) => pre.sessionToken != curr.sessionToken,
+          listener: (context, state) => context.read<LobbyBloc>().add(
+                const LobbyEvent.loadLobbyGames(),
               ),
         ),
       ],

@@ -9,7 +9,7 @@ part 'die.g.dart';
 @freezed
 class Die with _$Die {
   const factory Die({
-    @JsonKey(name: 'current_number') required int currentNumber,
+    @JsonKey(name: 'current_number') int? currentNumber,
     @Default(1) int minHead,
     @Default(6) int maxHead,
   }) = _Die;

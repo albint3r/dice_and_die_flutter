@@ -13,8 +13,8 @@ part 'player.g.dart';
 class Player with _$Player {
   const factory Player({
     required String id,
-    required AppUser appUser,
-    required Board maxHead,
+    @JsonKey(name: 'user') required AppUser appUser,
+    required Board board,
     required Die die,
   }) = _Player;
 

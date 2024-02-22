@@ -1,7 +1,8 @@
+import 'package:dice_and_die_flutter/domain/game2/entities/player.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../core/types.dart';
-import '../../waiting_room/player.dart';
+
 import '../enums/enum_game_state.dart';
 
 part 'game.freezed.dart';

@@ -1,18 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:l/l.dart';
 import 'package:web_socket_channel/src/channel.dart';
 
 import '../../domain/core/types.dart';
 import '../../domain/waiting_room/game.dart';
 import '../../domain/waiting_room/i_waiting_room_data_source.dart';
 import '../../domain/waiting_room/responses.dart';
-import '../../presentation/core/theme/const_values.dart';
 
 @Injectable(as: IWaitingRoomDataSource)
 class WaitingRoomDataSourceImpl implements IWaitingRoomDataSource {
-  WaitingRoomDataSourceImpl(this._dio,
-      this._uri,);
+  WaitingRoomDataSourceImpl(
+    this._dio,
+    this._uri,
+  );
 
   final Dio _dio;
   final Uri _uri;

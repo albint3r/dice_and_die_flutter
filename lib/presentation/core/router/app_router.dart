@@ -9,6 +9,7 @@ import '../../../domain/waiting_room/game.dart';
 import '../../auth/login/login_page.dart';
 import '../../auth/signup/signup_page.dart';
 import '../../game/game_page.dart';
+import '../../lobby/lobby_page.dart';
 import '../../profile/profile_page.dart';
 import '../../waiting_rooms/waiting_rooms_page.dart';
 
@@ -24,8 +25,12 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
-          initial: true,
+          // initial: true,
           page: WaitingRoomsRoute.page,
+        ),
+        AutoRoute(
+          initial: true,
+          page: LobbyRoute.page,
         ),
         AutoRoute(
           page: GameRoute.page,

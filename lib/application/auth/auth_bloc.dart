@@ -80,7 +80,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (state.sessionToken.isNotEmpty) {
           final router = getIt<AppRouter>();
           router.replaceAll([
-            const WaitingRoomsRoute(),
+            const LobbyRoute(),
           ]);
           await Future.delayed(const Duration(seconds: 1));
           emit(
@@ -115,7 +115,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (state.sessionToken.isNotEmpty) {
           final router = getIt<AppRouter>();
           router.replaceAll([
-            const WaitingRoomsRoute(),
+            const LobbyRoute(),
           ]);
           await Future.delayed(const Duration(seconds: 1));
           emit(

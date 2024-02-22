@@ -23,6 +23,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: GamePage(game: args.game),
       );
     },
+    LobbyRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const LobbyPage(),
+      );
+    },
     LoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -76,6 +82,20 @@ class GameRouteArgs {
   String toString() {
     return 'GameRouteArgs{game: $game}';
   }
+}
+
+/// generated route for
+/// [LobbyPage]
+class LobbyRoute extends PageRouteInfo<void> {
+  const LobbyRoute({List<PageRouteInfo>? children})
+      : super(
+          LobbyRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LobbyRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
