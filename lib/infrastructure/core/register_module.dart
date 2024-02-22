@@ -44,7 +44,7 @@ abstract class RegisterModule {
     return [];
   }
 
-  @lazySingleton
+  @singleton
   Dio getDio(
     BaseOptions options,
     Iterable<Interceptor> interceptors,

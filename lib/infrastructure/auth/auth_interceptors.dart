@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:l/l.dart';
@@ -20,7 +22,7 @@ class AuthInterceptors extends Interceptor {
     final sessionToken = await _userPreference.getSessionToken();
     // Add Session token to navigation user headers
     if (sessionToken.isNotEmpty) {
-      options.headers['Authorization'] = 'Bearer $sessionToken';
+      options.headers[HttpHeaders.authorizationHeader] = 'Bearer $sessionToken';
     }
     super.onRequest(options, handler);
   }
