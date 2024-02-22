@@ -52,7 +52,7 @@ class AppBlocObserver extends BlocObserver {
   @override
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
-    l.d(transition);
+    l.e(transition);
   }
 
   /// Extract the error message to display in the Log Terminal.
