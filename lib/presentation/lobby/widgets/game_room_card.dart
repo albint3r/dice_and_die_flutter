@@ -4,20 +4,20 @@ import '../../../domain/game2/entities/game.dart';
 import '../../core/design_system/cards/custom_waiting_room_card.dart';
 import '../../core/design_system/cards/custom_waiting_room_label_card.dart';
 import '../../core/theme/const_values.dart';
+import 'game_room_play_button.dart';
 import 'id_label.dart';
 import 'names_score.dart';
-import 'waiting_room_play_button.dart';
 
-class WaitingRoomCard extends StatefulWidget {
-  const WaitingRoomCard({super.key, required this.game});
+class GameRoomCard extends StatefulWidget {
+  const GameRoomCard({super.key, required this.game});
 
   final Game game;
 
   @override
-  State<WaitingRoomCard> createState() => _WaitingRoomCardState();
+  State<GameRoomCard> createState() => _GameRoomCardState();
 }
 
-class _WaitingRoomCardState extends State<WaitingRoomCard>
+class _GameRoomCardState extends State<GameRoomCard>
     with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _opacityAnimation;
@@ -78,7 +78,7 @@ class _WaitingRoomCardState extends State<WaitingRoomCard>
                 Positioned(
                   right: zeroDistance,
                   top: waitingRoomCardHeight * .3,
-                  child: WaitingRoomPlayButton(
+                  child: GameRoomPlayButton(
                     game: widget.game,
                   ),
                 ),

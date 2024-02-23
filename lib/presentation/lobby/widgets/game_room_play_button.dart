@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../domain/game2/entities/game.dart';
 import '../../core/design_system/buttons/custom_short_buttom.dart';
 
-class WaitingRoomPlayButton extends StatelessWidget {
-  const WaitingRoomPlayButton({super.key, required this.game});
+class GameRoomPlayButton extends StatelessWidget {
+  const GameRoomPlayButton({super.key, required this.game});
 
   final Game game;
 

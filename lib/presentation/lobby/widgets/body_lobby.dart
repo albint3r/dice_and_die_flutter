@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/lobby/lobby_bloc.dart';
-import 'top_indicators.dart';
 import 'create_game_button.dart';
 import 'refresh_button.dart';
-import 'waiting_room_card.dart';
+import 'top_indicators.dart';
+import 'game_room_card.dart';
 
 class BodyLobby extends StatelessWidget {
   const BodyLobby({super.key});
@@ -24,7 +24,7 @@ class BodyLobby extends StatelessWidget {
             itemCount: games.length,
             itemBuilder: (context, index) {
               final game = games[index];
-              return WaitingRoomCard(
+              return GameRoomCard(
                 game: game,
               );
             },
