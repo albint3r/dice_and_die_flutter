@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:web_socket_channel/src/channel.dart';
 
 import '../../domain/core/types.dart';
-import '../../domain/lobby/entities/lobby.dart';
+import '../../domain/lobby/errors/errors.dart';
 import '../../domain/lobby/schemas/response.dart';
 import '../../domain/lobby/use_case/i_lobby_data_source.dart';
 import '../../domain/lobby/use_case/i_lobby_facade.dart';
@@ -26,8 +26,14 @@ class LobbyFacadeImpl implements ILobbyFacade {
 
   @override
   ResponseLobby loadActiveGames(dynamic data) {
-    final stringData = jsonDecode(data.toString()) as String;
-    final jsonData = jsonDecode(stringData) as Json;
-    return ResponseLobby.fromJson(jsonData);
+    try {
+      final stringData = jsonDecode(data.toString()) as String;
+      final jsonData = jsonDecode(stringData) as Json;
+      return ResponseLobby.fromJson(jsonData);
+    } catch (e) {
+      throw ErrorLoadingActiveGames(
+        "You cant load the active games. This is your data: $data and this is your error: $e;",
+      );
+    }
   }
 }
