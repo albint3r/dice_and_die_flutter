@@ -25,7 +25,11 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
         state.channel!.stream,
         onData: (data) {
           final response = facade.loadActiveGames(data);
-          return state;
+          return state.copyWith(
+            lobby: response.lobby,
+            totalPlayer: response.totalPlayers,
+            isLoading: false,
+          );
         },
       ).onError((error, stackTrac) {
         print('*|' * 100);
