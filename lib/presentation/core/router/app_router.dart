@@ -9,6 +9,8 @@ import '../../../domain/waiting_room/game.dart';
 import '../../auth/login/login_page.dart';
 import '../../auth/signup/signup_page.dart';
 import '../../game/game_page.dart';
+import '../../game2/create_game_page.dart';
+import '../../game2/join_game_page.dart';
 import '../../lobby/lobby_page.dart';
 import '../../profile/profile_page.dart';
 
@@ -29,6 +31,12 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
         ),
         AutoRoute(
           page: GameRoute.page,
+        ),
+        AutoRoute(
+          page: CreateGameRoute.page,
+        ),
+        AutoRoute(
+          page: JoinGameRoute.page,
         ),
         AutoRoute(
           page: LoginRoute.page,
