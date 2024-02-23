@@ -24,7 +24,7 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
       await emit.forEach(
         state.channel!.stream,
         onData: (data) {
-          facade.loadActiveGames(data);
+          final response = facade.loadActiveGames(data);
           return state;
         },
       ).onError((error, stackTrac) {

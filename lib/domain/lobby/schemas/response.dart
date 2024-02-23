@@ -10,7 +10,7 @@ part 'response.g.dart';
 @freezed
 class ResponseLobby with _$ResponseLobby {
   const factory ResponseLobby({
-    @JsonKey(name: 'active_games') required Lobby lobby,
+    required Lobby lobby,
     @JsonKey(name: 'total_players') required int totalPlayers,
   }) = _ReponseLobby;
 

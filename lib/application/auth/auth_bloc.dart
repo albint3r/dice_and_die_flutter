@@ -48,12 +48,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await facade.saveSessionTokenInPref(
           state.sessionToken,
         );
-        await Future.delayed(const Duration(seconds: 1));
-        emit(
-          state.copyWith(
-            isLoading: false,
-          ),
-        );
+        // Navigate to the Lobby After the user logging
+        if (state.sessionToken.isNotEmpty) {
+          final router = getIt<AppRouter>();
+          router.replaceAll([
+            const LobbyRoute(),
+          ]);
+          await Future.delayed(const Duration(seconds: 1));
+          emit(
+            state.copyWith(
+              isLoading: false,
+            ),
+          );
+        }
       } catch (e) {
         // If the LoginFrom Session Token Fail
         // it means the token session expired or is invalid.

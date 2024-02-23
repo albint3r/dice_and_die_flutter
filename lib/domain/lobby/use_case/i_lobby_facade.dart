@@ -1,11 +1,11 @@
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-import '../entities/lobby.dart';
+import '../schemas/response.dart';
 
 abstract interface class ILobbyFacade {
   WebSocketChannel get channel;
 
   WebSocketChannel getLobbyChannel();
 
-  void loadActiveGames(dynamic data);
+  ResponseLobby loadActiveGames(dynamic data);
 }
