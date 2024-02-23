@@ -14,7 +14,7 @@ class LobbyFacadeImpl implements ILobbyFacade {
   LobbyFacadeImpl(this._dataSource);
 
   final ILobbyDataSource _dataSource;
-  late final WebSocketChannel _channel;
+  late WebSocketChannel _channel;
 
   @override
   WebSocketChannel get channel => _channel;
@@ -36,4 +36,9 @@ class LobbyFacadeImpl implements ILobbyFacade {
       );
     }
   }
+
+  @override
+  void updateLobbyActiveGames() => _channel.sink.add(
+        '{"event": "update_games"}',
+      );
 }

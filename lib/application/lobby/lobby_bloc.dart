@@ -1,12 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:web_socket_channel/status.dart' as status;
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../../domain/lobby/entities/lobby.dart';
 import '../../domain/lobby/use_case/i_lobby_facade.dart';
-import 'package:web_socket_channel/status.dart' as status;
-
 import '../../injectables.dart';
 import '../../presentation/core/router/app_router.dart';
 
@@ -35,13 +34,8 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
             isLoading: false,
           );
         },
-      ).onError((error, stackTrac) {
-        print('*|' * 100);
-        print('ESTA PASANDO ESTE ERROR EN LOBBY');
-        print('error -> $error');
-        print('stackTrac -> $stackTrac');
-        print('*|' * 100);
-      }).whenComplete(() {
+      ).whenComplete(() {
+        // Restart All
         state.channel!.sink.close(status.goingAway);
         emit(
           state.copyWith(
@@ -59,8 +53,8 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
         );
       });
     });
-    on<_UpdateLobbyGames>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<_UpdateLobbyGames>(
+      (event, emit) => facade.updateLobbyActiveGames(),
+    );
   }
 }

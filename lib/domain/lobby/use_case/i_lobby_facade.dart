@@ -8,4 +8,6 @@ abstract interface class ILobbyFacade {
   WebSocketChannel getLobbyChannel();
 
   ResponseLobby loadActiveGames(dynamic data);
+
+  void updateLobbyActiveGames();
 }
