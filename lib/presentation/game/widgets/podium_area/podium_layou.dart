@@ -93,7 +93,7 @@ class PodiumLayout extends StatelessWidget {
               width: waitingRoomCardWidth * .80,
               onPressed: () {
                 context.router.replace(
-                  const WaitingRoomsRoute(),
+                  const LobbyRoute(),
                 );
                 context.read<AuthBloc>().add(
                       AuthEvent.notifyUserUpdatesAfterGameEnds(player.appUser!),

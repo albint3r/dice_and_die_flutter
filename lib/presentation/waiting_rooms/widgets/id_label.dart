@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../domain/waiting_room/game.dart';
+import '../../../domain/game2/entities/game.dart';
 import '../../core/design_system/text/text_body_small.dart';
 
 class IdLabel extends StatelessWidget {
@@ -11,7 +11,7 @@ class IdLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextBodySmall(
-      "ID: ${game.id.substring(0, 5)}",
+      "ID: ${game.gameId.substring(0, 5)}",
     );
   }
 }

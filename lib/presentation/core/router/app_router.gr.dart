@@ -47,12 +47,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SignUpPage(),
       );
     },
-    WaitingRoomsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const WaitingRoomsPage(),
-      );
-    },
   };
 }
 
@@ -136,20 +130,6 @@ class SignUpRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SignUpRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [WaitingRoomsPage]
-class WaitingRoomsRoute extends PageRouteInfo<void> {
-  const WaitingRoomsRoute({List<PageRouteInfo>? children})
-      : super(
-          WaitingRoomsRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'WaitingRoomsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

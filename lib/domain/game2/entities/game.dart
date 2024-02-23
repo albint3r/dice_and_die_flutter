@@ -24,4 +24,6 @@ class Game with _$Game {
   const Game._();
 
   factory Game.fromJson(Json json) => _$GameFromJson(json);
+
+  bool get isFull => p2 is Player;
 }

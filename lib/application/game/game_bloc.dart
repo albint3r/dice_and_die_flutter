@@ -107,7 +107,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
 
   void _leaveGame() {
     final router = getIt<AppRouter>();
-    router.replace(const WaitingRoomsRoute());
+    router.replace(const LobbyRoute());
     getIt<WaitingRoomBloc>().add(const WaitingRoomEvent.reloadEvents());
   }
 }
