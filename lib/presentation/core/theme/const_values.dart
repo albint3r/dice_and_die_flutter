@@ -1,5 +1,5 @@
 import 'package:reactive_forms/reactive_forms.dart';
-
+const bottomAppBarHeight = 80.0;
 const borderRadius = 15.0;
 const longButtonWidth = 135.0;
 const shortButtonWidth = 65.0;

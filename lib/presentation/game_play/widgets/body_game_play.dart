@@ -1,8 +1,8 @@
-import 'package:dice_and_die_flutter/presentation/game_play/widgets/bottom_app_game_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/game_play/game_play_bloc.dart';
+import 'game_area.dart';
 
 class BodyGamePlay extends StatelessWidget {
   const BodyGamePlay({super.key});
@@ -16,7 +16,10 @@ class BodyGamePlay extends StatelessWidget {
       );
     }
     return const Column(
-      children: [],
+      children: [
+        GameArea(),
+        GameArea(),
+      ],
     );
   }
 }
