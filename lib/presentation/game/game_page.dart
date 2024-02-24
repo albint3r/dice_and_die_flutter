@@ -13,7 +13,6 @@ import '../../domain/waiting_room/player.dart';
 import '../../injectables.dart';
 import 'widgets/body_game.dart';
 
-@RoutePage()
 class GamePage extends StatelessWidget {
   const GamePage({
     this.game,

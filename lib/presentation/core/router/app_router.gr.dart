@@ -21,12 +21,11 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CreateGamePage(),
       );
     },
-    GameRoute.name: (routeData) {
-      final args =
-          routeData.argsAs<GameRouteArgs>(orElse: () => const GameRouteArgs());
+    JoinGameRoute.name: (routeData) {
+      final args = routeData.argsAs<JoinGameRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: GamePage(game: args.game),
+        child: JoinGamePage(game: args.game),
       );
     },
     LobbyRoute.name: (routeData) {
@@ -71,30 +70,31 @@ class CreateGameRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [GamePage]
-class GameRoute extends PageRouteInfo<GameRouteArgs> {
-  GameRoute({
-    Game? game,
+/// [JoinGamePage]
+class JoinGameRoute extends PageRouteInfo<JoinGameRouteArgs> {
+  JoinGameRoute({
+    required Game game,
     List<PageRouteInfo>? children,
   }) : super(
-          GameRoute.name,
-          args: GameRouteArgs(game: game),
+          JoinGameRoute.name,
+          args: JoinGameRouteArgs(game: game),
           initialChildren: children,
         );
 
-  static const String name = 'GameRoute';
+  static const String name = 'JoinGameRoute';
 
-  static const PageInfo<GameRouteArgs> page = PageInfo<GameRouteArgs>(name);
+  static const PageInfo<JoinGameRouteArgs> page =
+      PageInfo<JoinGameRouteArgs>(name);
 }
 
-class GameRouteArgs {
-  const GameRouteArgs({this.game});
+class JoinGameRouteArgs {
+  const JoinGameRouteArgs({required this.game});
 
-  final Game? game;
+  final Game game;
 
   @override
   String toString() {
-    return 'GameRouteArgs{game: $game}';
+    return 'JoinGameRouteArgs{game: $game}';
   }
 }
 

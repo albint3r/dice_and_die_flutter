@@ -46,8 +46,32 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         },
       );
     });
-    on<_JoinGame>((event, emit) {
-      // TODO: implement event handler
+    on<_JoinGame>((event, emit) async {
+      final channel = facade.getGamePlayChannel();
+      await emit.forEach(
+        channel.stream,
+        onData: (data) {
+          final response = facade.loadGamePlay(data);
+          return state.copyWith(
+            isLoading: false,
+            game: response.game,
+            player: response.game.p2,
+          );
+        },
+      ).whenComplete(
+        () {
+          channel.sink.close(status.goingAway);
+          emit(
+            state.copyWith(
+              isLoading: true,
+              game: null,
+              player: null,
+            ),
+          );
+          final router = getIt<AppRouter>();
+          router.pop();
+        },
+      );
     });
   }
 }
