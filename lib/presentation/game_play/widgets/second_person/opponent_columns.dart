@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../core/theme/const_values.dart';
 
-class PlayerColumn extends StatelessWidget {
-  const PlayerColumn({super.key});
+class OpponentColumns extends StatelessWidget {
+  const OpponentColumns({super.key});
 
   BoxDecoration _buildBoxDecoration({
     required Color bgColor,
@@ -45,22 +45,22 @@ class PlayerColumn extends StatelessWidget {
               children: [
                 Container(
                   decoration: _buildBoxDecoration(
-                    bgColor: coloScheme.onPrimary,
-                    borderColor: coloScheme.secondary,
-                  ),
-                  constraints: BoxConstraints(
-                    maxWidth: constraints.maxWidth * .90,
-                    maxHeight: constraints.maxHeight * .10,
-                  ),
-                ),
-                Container(
-                  decoration: _buildBoxDecoration(
                     bgColor: coloScheme.onBackground,
                     borderColor: coloScheme.onPrimary,
                   ),
                   constraints: BoxConstraints(
                     maxWidth: constraints.maxWidth * .90,
                     maxHeight: constraints.maxHeight * .85,
+                  ),
+                ),
+                Container(
+                  decoration: _buildBoxDecoration(
+                    bgColor: coloScheme.onPrimary,
+                    borderColor: coloScheme.secondary,
+                  ),
+                  constraints: BoxConstraints(
+                    maxWidth: constraints.maxWidth * .90,
+                    maxHeight: constraints.maxHeight * .10,
                   ),
                 ),
               ],

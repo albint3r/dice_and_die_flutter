@@ -1,3 +1,4 @@
+import 'package:dice_and_die_flutter/presentation/game_play/widgets/second_person/opponent_columns.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,12 +13,13 @@ class SecondPersonArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final heightWithoutBottomBar = (size.height - (bottomAppBarHeight + 20)) / 2;
+    final heightWithoutBottomBar =
+        (size.height - (bottomAppBarHeight + 20)) / 2;
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final state = context.watch<GamePlayBloc>().state;
     if (state.opponentPlayer is Player) {
-      return Container(
+      return SizedBox(
         height: heightWithoutBottomBar,
         width: size.width,
         child: Column(
@@ -30,6 +32,13 @@ class SecondPersonArea extends StatelessWidget {
             GameBoard(
               color: colorScheme.secondaryContainer,
               player: state.opponentPlayer!,
+              child: const Row(
+                children: [
+                  OpponentColumns(),
+                  OpponentColumns(),
+                  OpponentColumns(),
+                ],
+              ),
             ),
           ],
         ),
