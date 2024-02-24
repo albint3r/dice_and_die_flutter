@@ -1,11 +1,13 @@
 import 'package:dice_and_die_flutter/presentation/game_play/widgets/second_person/opponent_columns.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../application/game_play/game_play_bloc.dart';
 import '../../../../domain/game2/entities/player.dart';
 import '../../../core/theme/const_values.dart';
 import '../game_board.dart';
+import '../play_die.dart';
 
 class SecondPersonArea extends StatelessWidget {
   const SecondPersonArea({super.key});
@@ -19,16 +21,16 @@ class SecondPersonArea extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final state = context.watch<GamePlayBloc>().state;
     if (state.opponentPlayer is Player) {
-      return SizedBox(
+      return Container(
         height: heightWithoutBottomBar,
         width: size.width,
+        color: colorScheme.secondaryContainer.withOpacity(
+          .2,
+        ),
         child: Column(
           children: [
-            Container(
-              color: Colors.greenAccent,
-              height: 50,
-              width: 50,
-            ),
+            Gap(50),
+            const PlayDie(),
             GameBoard(
               color: colorScheme.secondaryContainer,
               player: state.opponentPlayer!,

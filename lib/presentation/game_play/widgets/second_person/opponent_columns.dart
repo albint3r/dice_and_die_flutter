@@ -49,8 +49,8 @@ class OpponentColumns extends StatelessWidget {
                     borderColor: coloScheme.onPrimary,
                   ),
                   constraints: BoxConstraints(
-                    maxWidth: constraints.maxWidth * .90,
-                    maxHeight: constraints.maxHeight * .85,
+                    maxWidth: constraints.maxWidth * perWithColumn,
+                    maxHeight: constraints.maxHeight * perMaxHeightColumn,
                   ),
                 ),
                 Container(
@@ -59,8 +59,8 @@ class OpponentColumns extends StatelessWidget {
                     borderColor: coloScheme.secondary,
                   ),
                   constraints: BoxConstraints(
-                    maxWidth: constraints.maxWidth * .90,
-                    maxHeight: constraints.maxHeight * .10,
+                    maxWidth: constraints.maxWidth * perWithColumn,
+                    maxHeight: constraints.maxHeight * perMaxHeightScoreField,
                   ),
                 ),
               ],

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../application/game_play/game_play_bloc.dart';
 import '../../../../domain/game2/entities/player.dart';
 import '../../../core/theme/const_values.dart';
 import '../game_board.dart';
+import '../play_die.dart';
 import 'player_column.dart';
 
 class FirstPersonArea extends StatelessWidget {
@@ -36,11 +38,8 @@ class FirstPersonArea extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              color: Colors.greenAccent,
-              height: 50,
-              width: 50,
-            ),
+            const PlayDie(),
+            Gap(50)
           ],
         ),
       );

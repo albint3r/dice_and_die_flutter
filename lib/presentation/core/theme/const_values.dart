@@ -3,6 +3,9 @@ const maxWidthBoard = 800.0;
 const minWidthBoard = 600.0;
 const blurRadiusBoard = 10.0;
 const spreadRadius = 3.0;
+const perWithColumn = .80;
+const perMaxHeightColumn = .85;
+const perMaxHeightScoreField = .10;
 
 
 const bottomAppBarHeight = 80.0;
