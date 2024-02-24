@@ -21,9 +21,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
       await emit.forEach(
         channel.stream,
         onData: (data) {
-          print('*-' * 100);
-          print('data->$data');
-          print('*-' * 100);
+          facade.loadGamePlay(data);
           return state;
         },
       );

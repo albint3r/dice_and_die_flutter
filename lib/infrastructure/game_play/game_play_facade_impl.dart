@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:injectable/injectable.dart';
 import 'package:web_socket_channel/src/channel.dart';
 
+import '../../domain/core/types.dart';
+import '../../domain/game2/schemas/response.dart';
 import '../../domain/game2/use_case/i_game_play_data_source.dart';
 import '../../domain/game2/use_case/i_game_play_facade.dart';
 
@@ -29,5 +33,12 @@ class GamePlayFacadeImpl implements IGamePlayFacade {
   @override
   void sendEmote() {
     // TODO: implement sendEmote
+  }
+
+  @override
+  ResponseGame loadGamePlay(dynamic data) {
+    final stringData = jsonDecode(data.toString()) as String;
+    final jsonData = jsonDecode(stringData) as Json;
+    return ResponseGame.fromJson(jsonData);
   }
 }
