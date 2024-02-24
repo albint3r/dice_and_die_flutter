@@ -6,7 +6,6 @@ class GamePlayState with _$GamePlayState {
     required bool isLoading,
     Game? game,
     Player? player,
-    WebSocketChannel? channel,
   }) = _GamePlayState;
 
   factory GamePlayState.initial() => const GamePlayState(
