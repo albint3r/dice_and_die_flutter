@@ -49,10 +49,13 @@ class GameBoard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(padding),
         child: Container(
+          constraints: BoxConstraints(
+            maxWidth: 800,
+            minWidth: 600,
+          ),
           decoration: _getBuildBoxDecoration(
             colorScheme,
           ),
-          width: width * 0.80,
           child: Center(child: Text('User: ${player.appUser.name}')),
         ),
       ),
