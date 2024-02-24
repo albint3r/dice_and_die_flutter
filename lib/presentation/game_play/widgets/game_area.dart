@@ -11,7 +11,6 @@ class GameArea extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final heightWithoutBottomBar = (size.height - bottomAppBarHeight) / 2;
     return Container(
-      color: Colors.red,
       height: heightWithoutBottomBar,
       width: size.width,
       child: const Column(
