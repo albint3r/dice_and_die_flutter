@@ -30,8 +30,6 @@ class FirstPersonArea extends StatelessWidget {
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  // Expanded(child: PlayerColumn()),
-                  // Expanded(child: PlayerColumn()),
                   PlayerColumn(),
                   PlayerColumn(),
                   PlayerColumn(),

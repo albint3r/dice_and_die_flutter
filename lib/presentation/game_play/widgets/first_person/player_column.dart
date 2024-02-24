@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/theme/const_values.dart';
-
 class PlayerColumn extends StatelessWidget {
   const PlayerColumn({super.key});
 
@@ -9,25 +7,32 @@ class PlayerColumn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.all(padding),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              color: Colors.white,
-              constraints: const BoxConstraints(
-                maxWidth: 200,
-                maxHeight: 50,
-              ),
-            ),
-            Container(
-              color: Colors.greenAccent,
-              constraints: const BoxConstraints(
-                maxWidth: 200,
-                maxHeight: 270,
-              ),
-            ),
-          ],
+        padding: const EdgeInsets.all(8.0),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            print('*-' * 100);
+            print('constraints-->$constraints');
+            print('*-' * 100);
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  color: Colors.white,
+                  constraints: BoxConstraints(
+                    maxWidth: constraints.maxWidth * .90,
+                    maxHeight: constraints.maxHeight * .20,
+                  ),
+                ),
+                Container(
+                  color: Colors.greenAccent,
+                  constraints: BoxConstraints(
+                    maxWidth: constraints.maxWidth * .90,
+                    maxHeight: constraints.maxHeight * .80,
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
