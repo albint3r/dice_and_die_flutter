@@ -21,6 +21,7 @@ class SecondPersonArea extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final state = context.watch<GamePlayBloc>().state;
     if (state.opponentPlayer is Player) {
+      final columns = state.opponentPlayer!.board.columns;
       return Container(
         height: heightWithoutBottomBar,
         width: size.width,
@@ -36,11 +37,11 @@ class SecondPersonArea extends StatelessWidget {
             GameBoard(
               color: colorScheme.secondaryContainer,
               player: state.opponentPlayer!,
-              child: const Row(
+              child: Row(
                 children: [
-                  OpponentColumns(),
-                  OpponentColumns(),
-                  OpponentColumns(),
+                  OpponentColumns(column: columns[1]!),
+                  OpponentColumns(column: columns[2]!),
+                  OpponentColumns(column: columns[3]!),
                 ],
               ),
             ),

@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../../../domain/game2/entities/b_column.dart';
 import '../../../core/theme/const_values.dart';
+import '../column_dice.dart';
 
 class OpponentColumns extends StatelessWidget {
-  const OpponentColumns({super.key});
+  const OpponentColumns({
+    required this.column,
+  });
+
+  final BColumn column;
 
   BoxDecoration _buildBoxDecoration({
     required Color bgColor,
@@ -51,6 +57,11 @@ class OpponentColumns extends StatelessWidget {
                   constraints: BoxConstraints(
                     maxWidth: constraints.maxWidth * perWithColumn,
                     maxHeight: constraints.maxHeight * perMaxHeightColumn,
+                  ),
+                  child: ColumnDice(
+                    column: column,
+                    constraints: constraints,
+                    applyReversed: true,
                   ),
                 ),
                 Container(

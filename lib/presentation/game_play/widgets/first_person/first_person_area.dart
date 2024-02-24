@@ -39,9 +39,7 @@ class FirstPersonArea extends StatelessWidget {
                 ],
               ),
             ),
-            PlayDie(
-              number: state.player?.die.currentNumber,
-            ),
+            PlayDie(number: state.player?.die.currentNumber),
             Gap(50),
           ],
         ),
