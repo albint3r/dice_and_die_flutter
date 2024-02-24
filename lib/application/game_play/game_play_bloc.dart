@@ -28,6 +28,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
             isLoading: false,
             game: response.game,
             player: response.game.p1,
+            opponentPlayer: response.game.p2,
           );
         },
       ).whenComplete(
@@ -55,6 +56,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
             isLoading: false,
             game: response.game,
             player: response.game.p2,
+            opponentPlayer: response.game.p1,
           );
         },
       ).whenComplete(

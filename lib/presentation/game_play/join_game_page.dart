@@ -6,6 +6,8 @@ import '../../application/game_play/game_play_bloc.dart';
 import '../../domain/game2/entities/game.dart';
 import '../../injectables.dart';
 import 'widgets/body_game_play.dart';
+import 'widgets/bottom_app_game_bar.dart';
+import 'widgets/floating_action_game_play_button.dart';
 
 @RoutePage()
 class JoinGamePage extends StatelessWidget {
@@ -26,7 +28,15 @@ class JoinGamePage extends StatelessWidget {
             ),
         ),
       ],
-      child: const BodyGamePlay(),
+      child: const SafeArea(
+        child: Scaffold(
+          body: BodyGamePlay(),
+          bottomNavigationBar: BottomAppGameBar(),
+          floatingActionButton: FloatingActionGamePlayButton(),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+        ),
+      ),
     );
   }
 }

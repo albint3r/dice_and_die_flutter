@@ -1,8 +1,9 @@
+import 'package:dice_and_die_flutter/presentation/game_play/widgets/second_person/second_person_area.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/game_play/game_play_bloc.dart';
-import 'game_area.dart';
+import 'first_person/first_person_area.dart';
 
 class BodyGamePlay extends StatelessWidget {
   const BodyGamePlay({super.key});
@@ -16,9 +17,14 @@ class BodyGamePlay extends StatelessWidget {
       );
     }
     return const Column(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        GameArea(),
-        GameArea(),
+        SecondPersonArea(),
+        // Divider(
+        //   color: Colors.black,
+        //   height: 10,
+        // ),
+        FirstPersonArea(),
       ],
     );
   }
