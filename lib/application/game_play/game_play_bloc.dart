@@ -1,20 +1,19 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:bloc/bloc.dart';
-import 'package:dice_and_die_flutter/domain/game2/use_case/i_game_play_facade.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:web_socket_channel/status.dart' as status;
 
 import '../../domain/game2/entities/game.dart';
 import '../../domain/game2/entities/player.dart';
+import '../../domain/game2/use_case/i_game_play_facade.dart';
 import '../../injectables.dart';
 import '../../presentation/core/router/app_router.dart';
+
+part 'game_play_bloc.freezed.dart';
 
 part 'game_play_event.dart';
 
 part 'game_play_state.dart';
-
-part 'game_play_bloc.freezed.dart';
 
 @injectable
 class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
