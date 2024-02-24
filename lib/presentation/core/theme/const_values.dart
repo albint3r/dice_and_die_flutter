@@ -1,4 +1,10 @@
 import 'package:reactive_forms/reactive_forms.dart';
+const maxWidthBoard = 800.0;
+const minWidthBoard = 600.0;
+const blurRadiusBoard = 10.0;
+const spreadRadius = 3.0;
+
+
 const bottomAppBarHeight = 80.0;
 const borderRadius = 15.0;
 const longButtonWidth = 135.0;

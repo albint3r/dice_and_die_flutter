@@ -7,11 +7,13 @@ class GameBoard extends StatelessWidget {
   const GameBoard({
     required this.player,
     required this.color,
+    this.child,
     super.key,
   });
 
   final Player player;
   final Color color;
+  final Widget? child;
 
   BoxDecoration _getBuildBoxDecoration(ColorScheme colorScheme) {
     return BoxDecoration(
@@ -27,14 +29,14 @@ class GameBoard extends StatelessWidget {
     return [
       BoxShadow(
         color: color,
-        blurRadius: 10,
-        spreadRadius: 3,
+        blurRadius: blurRadiusBoard,
+        spreadRadius: spreadRadius,
         offset: const Offset(4, 4),
       ),
       BoxShadow(
         color: colorScheme.onPrimaryContainer,
-        blurRadius: 10,
-        spreadRadius: 3,
+        blurRadius: blurRadiusBoard,
+        spreadRadius: spreadRadius,
         offset: const Offset(-4, -4),
       ),
     ];
@@ -44,19 +46,18 @@ class GameBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final width = MediaQuery.of(context).size.width;
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(padding),
         child: Container(
-          constraints: BoxConstraints(
-            maxWidth: 800,
-            minWidth: 600,
+          constraints: const BoxConstraints(
+            maxWidth: maxWidthBoard,
+            minWidth: minWidthBoard,
           ),
           decoration: _getBuildBoxDecoration(
             colorScheme,
           ),
-          child: Center(child: Text('User: ${player.appUser.name}')),
+          child: child,
         ),
       ),
     );

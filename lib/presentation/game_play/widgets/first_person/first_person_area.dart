@@ -5,6 +5,7 @@ import '../../../../application/game_play/game_play_bloc.dart';
 import '../../../../domain/game2/entities/player.dart';
 import '../../../core/theme/const_values.dart';
 import '../game_board.dart';
+import 'player_column.dart';
 
 class FirstPersonArea extends StatelessWidget {
   const FirstPersonArea({super.key});
@@ -18,7 +19,7 @@ class FirstPersonArea extends StatelessWidget {
     final state = context.watch<GamePlayBloc>().state;
 
     if (state.player is Player) {
-      return Container(
+      return SizedBox(
         height: heightWithoutBottomBar,
         width: size.width,
         child: Column(
@@ -26,12 +27,22 @@ class FirstPersonArea extends StatelessWidget {
             GameBoard(
               color: colorScheme.onSecondary,
               player: state.player!,
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  // Expanded(child: PlayerColumn()),
+                  // Expanded(child: PlayerColumn()),
+                  PlayerColumn(),
+                  PlayerColumn(),
+                  PlayerColumn(),
+                ],
+              ),
             ),
             Container(
               color: Colors.greenAccent,
               height: 50,
               width: 50,
-            )
+            ),
           ],
         ),
       );
