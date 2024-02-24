@@ -1,12 +1,11 @@
-// import 'package:flutter/material.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/game_play/game_play_bloc.dart';
 import '../../../../domain/game2/entities/b_column.dart';
 import '../../../core/theme/const_values.dart';
-import '../column_dice.dart';
+import '../column_values.dart';
+import '../score_field.dart';
 
 class PlayerColumn extends StatelessWidget {
   const PlayerColumn({
@@ -55,15 +54,9 @@ class PlayerColumn extends StatelessWidget {
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  decoration: _buildBoxDecoration(
-                    bgColor: coloScheme.onPrimary,
-                    borderColor: coloScheme.secondary,
-                  ),
-                  constraints: BoxConstraints(
-                    maxWidth: constraints.maxWidth * perWithColumn,
-                    maxHeight: constraints.maxHeight * perMaxHeightScoreField,
-                  ),
+                ScoreField(
+                  constraints: constraints,
+                  column: column,
                 ),
                 GestureDetector(
                   onTap: () => context.read<GamePlayBloc>().add(
@@ -78,7 +71,7 @@ class PlayerColumn extends StatelessWidget {
                       maxWidth: constraints.maxWidth * perWithColumn,
                       maxHeight: constraints.maxHeight * perMaxHeightColumn,
                     ),
-                    child: ColumnDice(
+                    child: ColumnValues(
                       column: column,
                       constraints: constraints,
                     ),

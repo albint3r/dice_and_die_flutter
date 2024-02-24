@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../domain/game2/entities/b_column.dart';
 import '../../../core/theme/const_values.dart';
-import '../column_dice.dart';
+import '../column_values.dart';
+import '../score_field.dart';
 
 class OpponentColumns extends StatelessWidget {
   const OpponentColumns({
@@ -58,21 +59,15 @@ class OpponentColumns extends StatelessWidget {
                     maxWidth: constraints.maxWidth * perWithColumn,
                     maxHeight: constraints.maxHeight * perMaxHeightColumn,
                   ),
-                  child: ColumnDice(
+                  child: ColumnValues(
                     column: column,
                     constraints: constraints,
                     applyReversed: true,
                   ),
                 ),
-                Container(
-                  decoration: _buildBoxDecoration(
-                    bgColor: coloScheme.onPrimary,
-                    borderColor: coloScheme.secondary,
-                  ),
-                  constraints: BoxConstraints(
-                    maxWidth: constraints.maxWidth * perWithColumn,
-                    maxHeight: constraints.maxHeight * perMaxHeightScoreField,
-                  ),
+                ScoreField(
+                  constraints: constraints,
+                  column: column,
                 ),
               ],
             );
