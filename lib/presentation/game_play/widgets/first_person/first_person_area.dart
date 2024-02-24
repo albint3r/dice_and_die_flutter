@@ -21,6 +21,7 @@ class FirstPersonArea extends StatelessWidget {
     final state = context.watch<GamePlayBloc>().state;
 
     if (state.player is Player) {
+      final columns = state.player!.board.columns;
       return SizedBox(
         height: heightWithoutBottomBar,
         width: size.width,
@@ -29,17 +30,19 @@ class FirstPersonArea extends StatelessWidget {
             GameBoard(
               color: colorScheme.onSecondary,
               player: state.player!,
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  PlayerColumn(),
-                  PlayerColumn(),
-                  PlayerColumn(),
+                  PlayerColumn(index: 1, column: columns[1]!),
+                  PlayerColumn(index: 2, column: columns[2]!),
+                  PlayerColumn(index: 3, column: columns[3]!),
                 ],
               ),
             ),
-            const PlayDie(),
-            Gap(50)
+            PlayDie(
+              number: state.player?.die.currentNumber,
+            ),
+            Gap(50),
           ],
         ),
       );

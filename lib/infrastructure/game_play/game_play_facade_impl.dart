@@ -22,14 +22,10 @@ class GamePlayFacadeImpl implements IGamePlayFacade {
   }
 
   @override
-  void rollDice() {
-    // TODO: implement rollDice
-  }
+  void rollDice() => _channel.sink.add('{"event": "roll"}');
 
   @override
-  void selectColumn() {
-    // TODO: implement selectColumn
-  }
+  void selectColumn(int index) => _channel.sink.add('{"event": "$index"}');
 
   @override
   void sendEmote() {

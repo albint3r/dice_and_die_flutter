@@ -1,9 +1,21 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../application/game_play/game_play_bloc.dart';
+import '../../../../domain/game2/entities/b_column.dart';
+import '../../../core/design_system/text/titleh2.dart';
 import '../../../core/theme/const_values.dart';
 
 class PlayerColumn extends StatelessWidget {
-  const PlayerColumn({super.key});
+  const PlayerColumn({
+    required this.index,
+    required this.column,
+  });
+
+  final int index;
+  final BColumn column;
 
   BoxDecoration _buildBoxDecoration({
     required Color bgColor,
@@ -53,14 +65,42 @@ class PlayerColumn extends StatelessWidget {
                     maxHeight: constraints.maxHeight * perMaxHeightScoreField,
                   ),
                 ),
-                Container(
-                  decoration: _buildBoxDecoration(
-                    bgColor: coloScheme.onBackground,
-                    borderColor: coloScheme.onPrimary,
-                  ),
-                  constraints: BoxConstraints(
-                    maxWidth: constraints.maxWidth * perWithColumn,
-                    maxHeight: constraints.maxHeight * perMaxHeightColumn,
+                GestureDetector(
+                  onTap: () => context.read<GamePlayBloc>().add(
+                        GamePlayEvent.selectColumn(index),
+                      ),
+                  child: Container(
+                    decoration: _buildBoxDecoration(
+                      bgColor: coloScheme.onBackground,
+                      borderColor: coloScheme.onPrimary,
+                    ),
+                    constraints: BoxConstraints(
+                      maxWidth: constraints.maxWidth * perWithColumn,
+                      maxHeight: constraints.maxHeight * perMaxHeightColumn,
+                    ),
+                    child: SizedBox(
+                      width: constraints.maxWidth * perWithColumn,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: column.values
+                            .map(
+                              (e) => Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    color: Colors.white,
+                                    width: 40,
+                                    height: 40,
+                                    child: Center(
+                                      child: TitleH2('$e'),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    ),
                   ),
                 ),
               ],

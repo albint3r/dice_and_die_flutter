@@ -30,7 +30,9 @@ class SecondPersonArea extends StatelessWidget {
         child: Column(
           children: [
             Gap(50),
-            const PlayDie(),
+            PlayDie(
+              number: state.opponentPlayer?.die.currentNumber,
+            ),
             GameBoard(
               color: colorScheme.secondaryContainer,
               player: state.opponentPlayer!,

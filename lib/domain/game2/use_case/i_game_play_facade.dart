@@ -9,7 +9,7 @@ abstract interface class IGamePlayFacade {
 
   void rollDice();
 
-  void selectColumn();
+  void selectColumn(int index);
 
   void sendEmote();
 }

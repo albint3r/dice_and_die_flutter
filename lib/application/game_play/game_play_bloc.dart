@@ -74,5 +74,11 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         },
       );
     });
+    on<_RollDice>((event, emit) async {
+      facade.rollDice();
+    });
+    on<_SelectColumn>((event, emit) async {
+      facade.selectColumn(event.index);
+    });
   }
 }

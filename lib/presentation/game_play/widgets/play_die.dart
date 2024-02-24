@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../application/game_play/game_play_bloc.dart';
 import '../../core/design_system/text/titleh1.dart';
 
 class PlayDie extends StatelessWidget {
-  const PlayDie({super.key});
+  const PlayDie({
+    required this.number,
+    super.key,
+  });
+
+  final int? number;
 
   BoxDecoration _buildBoxDecoration(ColorScheme colorScheme) {
     return BoxDecoration(
@@ -29,14 +36,19 @@ class PlayDie extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    return Container(
-      decoration: _buildBoxDecoration(colorScheme),
-      height: 50,
-      width: 50,
-      child: Center(
-        child: TitleH1(
-          text: '5',
-          color: colorScheme.secondary,
+    return GestureDetector(
+      onTap: () => context.read<GamePlayBloc>().add(
+            const GamePlayEvent.rollDice(),
+          ),
+      child: Container(
+        decoration: _buildBoxDecoration(colorScheme),
+        height: 50,
+        width: 50,
+        child: Center(
+          child: TitleH1(
+            text: '${number ?? ''}',
+            color: colorScheme.secondary,
+          ),
         ),
       ),
     );
