@@ -20,10 +20,7 @@ class BodyGamePlay extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         SecondPersonArea(),
-        // Divider(
-        //   color: Colors.black,
-        //   height: 10,
-        // ),
+        Divider(color: Colors.black, height: 10, thickness: 5),
         FirstPersonArea(),
       ],
     );
