@@ -40,6 +40,13 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LoginPage(),
       );
     },
+    PodiumRoute.name: (routeData) {
+      final args = routeData.argsAs<PodiumRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: PodiumPage(winnerPlayer: args.winnerPlayer),
+      );
+    },
     ProfileRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -124,6 +131,34 @@ class LoginRoute extends PageRouteInfo<void> {
   static const String name = 'LoginRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [PodiumPage]
+class PodiumRoute extends PageRouteInfo<PodiumRouteArgs> {
+  PodiumRoute({
+    required Player winnerPlayer,
+    List<PageRouteInfo>? children,
+  }) : super(
+          PodiumRoute.name,
+          args: PodiumRouteArgs(winnerPlayer: winnerPlayer),
+          initialChildren: children,
+        );
+
+  static const String name = 'PodiumRoute';
+
+  static const PageInfo<PodiumRouteArgs> page = PageInfo<PodiumRouteArgs>(name);
+}
+
+class PodiumRouteArgs {
+  const PodiumRouteArgs({required this.winnerPlayer});
+
+  final Player winnerPlayer;
+
+  @override
+  String toString() {
+    return 'PodiumRouteArgs{winnerPlayer: $winnerPlayer}';
+  }
 }
 
 /// generated route for
