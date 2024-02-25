@@ -19,7 +19,8 @@ part 'game_play_state.dart';
 class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
   GamePlayBloc(IGamePlayFacade facade) : super(GamePlayState.initial()) {
     on<_CreateGame>((event, emit) async {
-      final channel = facade.getGamePlayChannel();
+      final randomId = facade.generateRandomId();
+      final channel = facade.getGamePlayChannel(randomId);
       await emit.forEach(
         channel.stream,
         onData: (data) {
@@ -47,7 +48,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
       );
     });
     on<_JoinGame>((event, emit) async {
-      final channel = facade.getGamePlayChannel();
+      final channel = facade.getGamePlayChannel(event.game.gameId);
       await emit.forEach(
         channel.stream,
         onData: (data) {

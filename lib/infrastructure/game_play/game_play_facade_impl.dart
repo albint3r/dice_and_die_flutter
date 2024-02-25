@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:injectable/injectable.dart';
+import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/src/channel.dart';
 
 import '../../domain/core/types.dart';
@@ -17,8 +18,11 @@ class GamePlayFacadeImpl implements IGamePlayFacade {
   late WebSocketChannel _channel;
 
   @override
-  WebSocketChannel getGamePlayChannel() {
-    return _channel = _dataSource.getGamePlayChannel('gameId');
+  String generateRandomId() => const Uuid().v4();
+
+  @override
+  WebSocketChannel getGamePlayChannel(String gameId) {
+    return _channel = _dataSource.getGamePlayChannel(gameId);
   }
 
   @override
