@@ -9,6 +9,7 @@ class BottomAppGameBar extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     return BottomAppBar(
       color: colorScheme.primary,
+      height: 35,
       shape: const CircularNotchedRectangle(),
     );
   }

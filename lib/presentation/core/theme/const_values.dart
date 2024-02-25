@@ -8,7 +8,7 @@ const perMaxHeightColumn = .85;
 const perMaxHeightScoreField = .10;
 
 
-const bottomAppBarHeight = 80.0;
+const bottomAppBarHeight = 35.0;
 const borderRadius = 15.0;
 const longButtonWidth = 135.0;
 const shortButtonWidth = 65.0;

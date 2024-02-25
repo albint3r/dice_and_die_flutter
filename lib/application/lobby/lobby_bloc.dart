@@ -51,6 +51,10 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
             const LoginRoute(),
           ],
         );
+      }).onError((error, stackTrace) {
+        print('*-'*100);
+        print('error->$error');
+        print('*-'*100);
       });
     });
     on<_UpdateLobbyGames>(
