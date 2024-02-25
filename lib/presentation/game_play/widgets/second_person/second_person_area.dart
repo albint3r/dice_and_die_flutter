@@ -1,14 +1,14 @@
-import 'package:dice_and_die_flutter/presentation/game_play/widgets/second_person/opponent_columns.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 
 import '../../../../application/game_play/game_play_bloc.dart';
 import '../../../../domain/game2/entities/player.dart';
 import '../../../core/theme/const_values.dart';
+import '../first_person/turn_player_indicator.dart';
 import '../game_board.dart';
 import '../play_die.dart';
 import '../top_life_indicator_bar.dart';
+import 'opponent_columns.dart';
 
 class SecondPersonArea extends StatelessWidget {
   const SecondPersonArea({super.key});
@@ -20,6 +20,7 @@ class SecondPersonArea extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final state = context.watch<GamePlayBloc>().state;
+    final opponent = state.opponentPlayer;
     if (state.opponentPlayer is Player) {
       final columns = state.opponentPlayer!.board.columns;
       return Container(
@@ -31,12 +32,20 @@ class SecondPersonArea extends StatelessWidget {
         child: Column(
           children: [
             const TopLifeIndicatorBar(),
-            PlayDie(
-              number: state.opponentPlayer?.die.currentNumber,
+            Row(
+              children: [
+                // this space is to fill the empty space and have 3 columns
+                const Expanded(child: SizedBox()),
+                PlayDie(number: opponent?.die.currentNumber),
+                TurnPlayerIndicator(
+                  reverse: true,
+                  isTurn: state.game?.currentPlayer == opponent,
+                ),
+              ],
             ),
             GameBoard(
               color: colorScheme.secondaryContainer,
-              player: state.opponentPlayer!,
+              player: opponent!,
               child: Row(
                 children: [
                   OpponentColumns(column: columns[1]!),

@@ -1,3 +1,4 @@
+import 'package:dice_and_die_flutter/presentation/game_play/widgets/first_person/turn_player_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -19,6 +20,7 @@ class FirstPersonArea extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final state = context.watch<GamePlayBloc>().state;
+    final player = state.player;
 
     if (state.player is Player) {
       final columns = state.player!.board.columns;
@@ -29,7 +31,7 @@ class FirstPersonArea extends StatelessWidget {
           children: [
             GameBoard(
               color: colorScheme.onSecondary,
-              player: state.player!,
+              player: player!,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -39,8 +41,17 @@ class FirstPersonArea extends StatelessWidget {
                 ],
               ),
             ),
-            PlayDie(number: state.player?.die.currentNumber),
-            Gap(50),
+            Row(
+              children: [
+                TurnPlayerIndicator(
+                  isTurn: state.game?.currentPlayer == player,
+                ),
+                PlayDie(number: player.die.currentNumber),
+                // this space is to fill the empty space and have 3 columns
+                const Expanded(child: SizedBox()),
+              ],
+            ),
+            const Gap(50),
           ],
         ),
       );

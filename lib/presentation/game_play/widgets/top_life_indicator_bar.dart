@@ -10,6 +10,8 @@ import '../../core/theme/const_values.dart';
 class TopLifeIndicatorBar extends StatelessWidget {
   const TopLifeIndicatorBar({super.key});
 
+  /// Return a percentage between 0 and 1. In case players start game
+  /// and not have points it will return .5 because each player have 50%.
   double _getPercentage(GamePlayState state) {
     final opponentBoardScore = state.opponentPlayer!.board.score;
     final playerBoardScore = state.opponentPlayer!.board.score;
