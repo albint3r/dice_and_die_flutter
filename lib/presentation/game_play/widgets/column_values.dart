@@ -21,23 +21,23 @@ class ColumnValues extends StatelessWidget {
     if (applyReversed) {
       valuesToShow = valuesToShow.reversed.toList();
     }
-
     return SizedBox(
       width: constraints.maxWidth * perWithColumn,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment:
+            applyReversed ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: valuesToShow
             .map(
-              (e) => Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    color: Colors.white,
-                    width: 40,
-                    height: 40,
-                    child: Center(
-                      child: TitleH2('$e'),
-                    ),
+              (e) => Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                ),
+                child: Container(
+                  color: Colors.white,
+                  width: 40,
+                  height: 40,
+                  child: Center(
+                    child: TitleH2('$e'),
                   ),
                 ),
               ),
