@@ -8,6 +8,7 @@ import '../../../../domain/game2/entities/player.dart';
 import '../../../core/theme/const_values.dart';
 import '../game_board.dart';
 import '../play_die.dart';
+import '../top_life_indicator_bar.dart';
 
 class SecondPersonArea extends StatelessWidget {
   const SecondPersonArea({super.key});
@@ -29,7 +30,7 @@ class SecondPersonArea extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Gap(50),
+            const TopLifeIndicatorBar(),
             PlayDie(
               number: state.opponentPlayer?.die.currentNumber,
             ),
