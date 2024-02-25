@@ -62,7 +62,7 @@ class TopLifeIndicatorBar extends StatelessWidget {
                 TextBody('${state.player?.appUser.name}'),
                 TextBody('${state.opponentPlayer?.appUser.name}'),
               ],
-            )
+            ),
           ],
         ),
       ),
