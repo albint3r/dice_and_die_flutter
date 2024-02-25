@@ -1,4 +1,3 @@
-import 'package:dice_and_die_flutter/presentation/game_play/widgets/first_person/turn_player_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -9,6 +8,7 @@ import '../../../core/theme/const_values.dart';
 import '../game_board.dart';
 import '../play_die.dart';
 import 'player_column.dart';
+import 'turn_player_indicator.dart';
 
 class FirstPersonArea extends StatelessWidget {
   const FirstPersonArea({super.key});
