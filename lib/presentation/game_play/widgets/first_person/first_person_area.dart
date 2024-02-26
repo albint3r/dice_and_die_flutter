@@ -16,7 +16,7 @@ class FirstPersonArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final heightWithoutBottomBar = (size.height / 2) - (bottomAppBarHeight + 8);
+    final heightWithoutBottomBar = (size.height / 2) - (bottomAppBarHeight + 10);
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final state = context.watch<GamePlayBloc>().state;
