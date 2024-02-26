@@ -35,15 +35,18 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
       ).whenComplete(
         () {
           channel.sink.close(status.goingAway);
-          emit(
-            state.copyWith(
-              isLoading: true,
-              game: null,
-              player: null,
+          final player = state.player;
+          final game = state.game;
+          final winnerPlayer = facade.getWinnerPlayer(game!, player!);
+          final router = getIt<AppRouter>();
+          router.replace(
+            PodiumRoute(
+              game: game,
+              player: player,
+              opponentPlayer: state.opponentPlayer!,
+              winnerPlayer: winnerPlayer,
             ),
           );
-          final router = getIt<AppRouter>();
-          router.pop();
         },
       );
     });
@@ -63,15 +66,18 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
       ).whenComplete(
         () {
           channel.sink.close(status.goingAway);
-          emit(
-            state.copyWith(
-              isLoading: true,
-              game: null,
-              player: null,
+          final player = state.player;
+          final game = state.game;
+          final winnerPlayer = facade.getWinnerPlayer(game!, player!);
+          final router = getIt<AppRouter>();
+          router.replace(
+            PodiumRoute(
+              game: game,
+              player: player,
+              opponentPlayer: state.opponentPlayer!,
+              winnerPlayer: winnerPlayer,
             ),
           );
-          final router = getIt<AppRouter>();
-          router.pop();
         },
       );
     });
@@ -80,6 +86,29 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
     });
     on<_SelectColumn>((event, emit) async {
       facade.selectColumn(event.index);
+    });
+    on<_GetWinnerPlayer>((event, emit) async {
+      facade.getWinnerPlayer(state.game!, state.player!);
+      try {
+        facade.channel.sink.close(status.goingAway);
+      } catch (e) {
+        print('-*' * 100);
+        print('_GetWinnerPlayer ERROR: $e');
+        print('-*' * 100);
+      }
+
+      final player = state.player;
+      final game = state.game;
+      final winnerPlayer = facade.getWinnerPlayer(game!, player!);
+      final router = getIt<AppRouter>();
+      router.replace(
+        PodiumRoute(
+          game: game,
+          player: player,
+          opponentPlayer: state.opponentPlayer!,
+          winnerPlayer: winnerPlayer,
+        ),
+      );
     });
   }
 }

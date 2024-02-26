@@ -11,4 +11,6 @@ class GamePlayEvent with _$GamePlayEvent {
   const factory GamePlayEvent.rollDice() = _RollDice;
 
   const factory GamePlayEvent.selectColumn(int index) = _SelectColumn;
+
+  const factory GamePlayEvent.getWinnerPlayer() = _GetWinnerPlayer;
 }

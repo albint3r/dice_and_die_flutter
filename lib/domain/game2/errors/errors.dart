@@ -8,3 +8,14 @@ class ErrorLoadingGamePlay implements Exception {
     return "[ErrorLoadingGamePlay]: $message";
   }
 }
+
+class NoWinnerValidator implements Exception {
+  NoWinnerValidator(this.message);
+
+  final String message;
+
+  @override
+  String toString() {
+    return "[NoWinnerValidator]: $message";
+  }
+}

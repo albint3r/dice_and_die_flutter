@@ -5,6 +5,8 @@ import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/src/channel.dart';
 
 import '../../domain/core/types.dart';
+import '../../domain/game2/entities/game.dart';
+import '../../domain/game2/entities/player.dart';
 import '../../domain/game2/errors/errors.dart';
 import '../../domain/game2/schemas/response.dart';
 import '../../domain/game2/use_case/i_game_play_data_source.dart';
@@ -16,6 +18,9 @@ class GamePlayFacadeImpl implements IGamePlayFacade {
 
   final IGamePlayDataSource _dataSource;
   late WebSocketChannel _channel;
+
+  @override
+  WebSocketChannel get channel => _channel;
 
   @override
   String generateRandomId() => const Uuid().v4();
@@ -49,4 +54,17 @@ class GamePlayFacadeImpl implements IGamePlayFacade {
       );
     }
   }
+
+  @override
+  (Player, Player?) getWinnerPlayer(Game game, Player player) {
+    final winnerPlayer = game.winnerPlayer;
+    if (winnerPlayer is List<Player?>) {
+      return (winnerPlayer[0]!, winnerPlayer[1]);
+    }
+    throw NoWinnerValidator(
+      "You don't have a winner in the get Winner Player.",
+    );
+  }
+
+
 }

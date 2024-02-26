@@ -5,8 +5,8 @@ import 'package:gap/gap.dart';
 
 import '../../../../application/auth/auth_bloc.dart';
 import '../../../../application/game/game_bloc.dart';
+import '../../../../domain/game2/entities/game.dart';
 import '../../../../domain/game2/entities/player.dart';
-import '../../../../domain/waiting_room/game.dart';
 import '../../../core/design_system/app_bar/widgets/user_level_progress_bar_podium.dart';
 import '../../../core/design_system/buttons/custom_long_button.dart';
 import '../../../core/design_system/text/titleh1.dart';
@@ -20,11 +20,14 @@ class BodyPodiumArea extends StatelessWidget {
     required this.opponentPlayer,
     required this.backGroundImage,
     required this.textImage,
+    required this.game,
   });
 
   final Player player;
 
   final Player opponentPlayer;
+
+  final Game game;
 
   final ImageProvider<Object> backGroundImage;
   final Widget textImage;
@@ -33,8 +36,9 @@ class BodyPodiumArea extends StatelessWidget {
     AuthState auth,
     Game game,
   ) {
+    // TODO: FIX THIS LOGIC, BECAUSE ALL THE PLAYERS ARE SANDED TO THE LOST AREA
     if (player == game.winnerPlayer) {
-      return (game.p1.board.totalScore - game.p2!.board.totalScore).abs();
+      return (game.p1.board.score - game.p2!.board.score).abs();
     }
     return player.appUser.userLevel.expPoints -
         auth.appUser!.userLevel.expPoints;
@@ -43,7 +47,6 @@ class BodyPodiumArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthBloc>().state;
-    final game = context.watch<GameBloc>().state;
     final width = MediaQuery.of(context).size.width;
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
@@ -65,7 +68,7 @@ class BodyPodiumArea extends StatelessWidget {
                   TitleH1(
                     text: 'Exp Won: ${_getWinPoints(
                       auth,
-                      game.game!,
+                      game,
                     )}',
                     fontSize: 50,
                     color: colorScheme.onSecondary,

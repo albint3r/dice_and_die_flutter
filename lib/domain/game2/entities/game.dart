@@ -15,7 +15,7 @@ class Game with _$Game {
     required Player p1,
     Player? p2,
     @JsonKey(name: 'current_player') Player? currentPlayer,
-    @JsonKey(name: 'winner_player') Player? winnerPlayer,
+    @JsonKey(name: 'winner_player') List<Player?>? winnerPlayer,
     @JsonKey(name: 'current_turn') required int currentTurn,
     @JsonKey(name: 'state') required EnumGameState? gameState,
   }) = _Game;

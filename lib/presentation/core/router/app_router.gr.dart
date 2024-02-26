@@ -44,7 +44,12 @@ abstract class _$AppRouter extends RootStackRouter {
       final args = routeData.argsAs<PodiumRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: PodiumPage(winnerPlayer: args.winnerPlayer),
+        child: PodiumPage(
+          player: args.player,
+          opponentPlayer: args.opponentPlayer,
+          winnerPlayer: args.winnerPlayer,
+          game: args.game,
+        ),
       );
     },
     ProfileRoute.name: (routeData) {
@@ -137,11 +142,19 @@ class LoginRoute extends PageRouteInfo<void> {
 /// [PodiumPage]
 class PodiumRoute extends PageRouteInfo<PodiumRouteArgs> {
   PodiumRoute({
-    required Player winnerPlayer,
+    required Player player,
+    required Player opponentPlayer,
+    required (Player, Player?) winnerPlayer,
+    required Game game,
     List<PageRouteInfo>? children,
   }) : super(
           PodiumRoute.name,
-          args: PodiumRouteArgs(winnerPlayer: winnerPlayer),
+          args: PodiumRouteArgs(
+            player: player,
+            opponentPlayer: opponentPlayer,
+            winnerPlayer: winnerPlayer,
+            game: game,
+          ),
           initialChildren: children,
         );
 
@@ -151,13 +164,24 @@ class PodiumRoute extends PageRouteInfo<PodiumRouteArgs> {
 }
 
 class PodiumRouteArgs {
-  const PodiumRouteArgs({required this.winnerPlayer});
+  const PodiumRouteArgs({
+    required this.player,
+    required this.opponentPlayer,
+    required this.winnerPlayer,
+    required this.game,
+  });
 
-  final Player winnerPlayer;
+  final Player player;
+
+  final Player opponentPlayer;
+
+  final (Player, Player?) winnerPlayer;
+
+  final Game game;
 
   @override
   String toString() {
-    return 'PodiumRouteArgs{winnerPlayer: $winnerPlayer}';
+    return 'PodiumRouteArgs{player: $player, opponentPlayer: $opponentPlayer, winnerPlayer: $winnerPlayer, game: $game}';
   }
 }
 

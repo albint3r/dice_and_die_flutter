@@ -22,11 +22,11 @@ class BodyGamePlay extends StatelessWidget {
         BlocListener<GamePlayBloc, GamePlayState>(
           listenWhen: (pre, curr) =>
               pre.game?.winnerPlayer != curr.game?.winnerPlayer &&
-              curr.game?.winnerPlayer is Player,
-          listener: (context, state) {
-            print('We have a winner');
-          },
-        )
+              curr.game?.winnerPlayer is List<Player?>,
+          listener: (context, state) => context.read<GamePlayBloc>().add(
+                const GamePlayEvent.getWinnerPlayer(),
+              ),
+        ),
       ],
       child: const Column(
         mainAxisAlignment: MainAxisAlignment.end,
