@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/game_play/game_play_bloc.dart';
 import '../../../domain/game2/entities/player.dart';
+import '../../../domain/game2/enums/enum_game_state.dart';
+import '../../game/widgets/waiting_game_room.dart';
 import 'first_person/first_person_area.dart';
 import 'second_person/second_person_area.dart';
 
@@ -16,6 +18,9 @@ class BodyGamePlay extends StatelessWidget {
       const Center(
         child: CircularProgressIndicator(),
       );
+    }
+    if (gamePlay.game?.gameState == EnumGameState.waitingOpponent) {
+      return const WaitingGameRoom();
     }
     return MultiBlocListener(
       listeners: [
