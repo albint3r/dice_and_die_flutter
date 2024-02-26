@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../application/auth/auth_bloc.dart';
-import '../../../../application/game/game_bloc.dart';
 import '../../../../domain/game2/entities/game.dart';
 import '../../../../domain/game2/entities/player.dart';
 import '../../../core/design_system/app_bar/widgets/user_level_progress_bar_podium.dart';
@@ -36,10 +35,6 @@ class BodyPodiumArea extends StatelessWidget {
     AuthState auth,
     Game game,
   ) {
-    // TODO: FIX THIS LOGIC, BECAUSE ALL THE PLAYERS ARE SANDED TO THE LOST AREA
-    if (player == game.winnerPlayer) {
-      return (game.p1.board.score - game.p2!.board.score).abs();
-    }
     return player.appUser.userLevel.expPoints -
         auth.appUser!.userLevel.expPoints;
   }

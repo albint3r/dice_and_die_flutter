@@ -21,6 +21,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
     on<_CreateGame>((event, emit) async {
       final randomId = facade.generateRandomId();
       final channel = facade.getGamePlayChannel(randomId);
+      await channel.ready;
       await emit.forEach(
         channel.stream,
         onData: (data) {
@@ -34,7 +35,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         },
       ).whenComplete(
         () {
-          channel.sink.close(status.goingAway);
+          channel.sink.close(status.normalClosure);
           final player = state.player;
           final game = state.game;
           final winnerPlayer = facade.getWinnerPlayer(game!, player!);
@@ -65,7 +66,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         },
       ).whenComplete(
         () {
-          channel.sink.close(status.goingAway);
+          channel.sink.close(status.normalClosure);
           final player = state.player;
           final game = state.game;
           final winnerPlayer = facade.getWinnerPlayer(game!, player!);
@@ -90,7 +91,8 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
     on<_GetWinnerPlayer>((event, emit) async {
       facade.getWinnerPlayer(state.game!, state.player!);
       try {
-        facade.channel.sink.close(status.goingAway);
+        facade.channel.closeReason;
+        facade.channel.sink.close(status.normalClosure);
       } catch (e) {
         print('-*' * 100);
         print('_GetWinnerPlayer ERROR: $e');
