@@ -1,4 +1,7 @@
 import 'package:reactive_forms/reactive_forms.dart';
+//DEFAULT BASE WIN POINTS
+const baseExpPoints = 15;
+///
 const maxWidthBoard = 800.0;
 const minWidthBoard = 600.0;
 const blurRadiusBoard = 10.0;

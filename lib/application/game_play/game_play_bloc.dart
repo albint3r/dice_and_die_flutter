@@ -125,7 +125,6 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         print('_GetWinnerPlayer ERROR: $e');
         print('-*' * 100);
       }
-
       final player = state.player;
       final game = state.game;
       final winnerPlayer = facade.getWinnerPlayer(game!, player!);

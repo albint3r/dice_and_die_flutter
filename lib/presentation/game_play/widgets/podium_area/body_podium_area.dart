@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
-import '../../../../application/auth/auth_bloc.dart';
 import '../../../../application/lobby/lobby_bloc.dart';
-import '../../../../domain/game2/entities/game.dart';
 import '../../../../domain/game2/entities/player.dart';
 import '../../../core/design_system/app_bar/widgets/user_level_progress_bar_podium.dart';
 import '../../../core/design_system/buttons/custom_long_button.dart';
@@ -20,29 +18,28 @@ class BodyPodiumArea extends StatelessWidget {
     required this.opponentPlayer,
     required this.backGroundImage,
     required this.textImage,
-    required this.game,
+    required this.winnerPlayer,
   });
 
   final Player player;
 
   final Player opponentPlayer;
 
-  final Game game;
+  final Player winnerPlayer;
 
   final ImageProvider<Object> backGroundImage;
   final Widget textImage;
 
-  int _getWinPoints(
-    AuthState auth,
-    Game game,
-  ) {
-    return player.appUser.userLevel.expPoints -
-        auth.appUser!.userLevel.expPoints;
+  int _getWinPoints() {
+    if (winnerPlayer == player) {
+      return (player.board.score - opponentPlayer.board.score).abs() +
+          baseExpPoints;
+    }
+    return 0;
   }
 
   @override
   Widget build(BuildContext context) {
-    final auth = context.watch<AuthBloc>().state;
     final width = MediaQuery.of(context).size.width;
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
@@ -62,10 +59,7 @@ class BodyPodiumArea extends StatelessWidget {
               child: Column(
                 children: [
                   TitleH1(
-                    text: 'Exp Won: ${_getWinPoints(
-                      auth,
-                      game,
-                    )}',
+                    text: 'Exp Won: ${_getWinPoints()}',
                     fontSize: 50,
                     color: colorScheme.onSecondary,
                   ),

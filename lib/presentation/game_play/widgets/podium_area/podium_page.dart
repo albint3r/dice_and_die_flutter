@@ -28,7 +28,7 @@ class PodiumPage extends StatelessWidget {
 
     if (isTie) {
       return BodyPodiumArea(
-        game: game,
+        winnerPlayer: player,
         player: player,
         opponentPlayer: opponentPlayer,
         backGroundImage: Assets.images.backgroundWin.provider(),
@@ -37,7 +37,7 @@ class PodiumPage extends StatelessWidget {
     }
     if (isPlayerWinner) {
       return BodyPodiumArea(
-        game: game,
+        winnerPlayer: winner,
         player: player,
         opponentPlayer: opponentPlayer,
         backGroundImage: Assets.images.backgroundWin.provider(),
@@ -45,7 +45,7 @@ class PodiumPage extends StatelessWidget {
       );
     }
     return BodyPodiumArea(
-      game: game,
+      winnerPlayer: winner,
       player: player,
       opponentPlayer: opponentPlayer,
       backGroundImage: Assets.images.backgroundLose.provider(),
