@@ -9,6 +9,7 @@ import '../../domain/game2/errors/errors.dart';
 import '../../domain/game2/use_case/i_game_play_facade.dart';
 import '../../injectables.dart';
 import '../../presentation/core/router/app_router.dart';
+import '../lobby/lobby_bloc.dart';
 
 part 'game_play_bloc.freezed.dart';
 
@@ -23,6 +24,8 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
       final randomId = facade.generateRandomId();
       final channel = facade.getGamePlayChannel(randomId);
       await channel.ready;
+      final lobby = getIt<LobbyBloc>();
+      // lobby.add(LobbyEvent.updateLobbyGames());
       await emit.forEach(
         channel.stream,
         onData: (data) {
@@ -53,7 +56,12 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
                 winnerPlayer: winnerPlayer,
               ),
             );
-          } on NoWinnerValidator catch (_) {
+          } on NoWinnerExistError catch (_) {
+            emit(
+              state.copyWith(
+                game: null,
+              ),
+            );
             router.replaceAll([const LobbyRoute()]);
           }
         },
@@ -91,7 +99,12 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
                 winnerPlayer: winnerPlayer,
               ),
             );
-          } on NoWinnerValidator catch (_) {
+          } on NoWinnerExistError catch (_) {
+            emit(
+              state.copyWith(
+                game: null,
+              ),
+            );
             router.pop();
           }
         },

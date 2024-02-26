@@ -9,8 +9,8 @@ class ErrorLoadingGamePlay implements Exception {
   }
 }
 
-class NoWinnerValidator implements Exception {
-  NoWinnerValidator(this.message);
+class NoWinnerExistError implements Exception {
+  NoWinnerExistError(this.message);
 
   final String message;
 

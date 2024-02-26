@@ -52,13 +52,18 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
           ],
         );
       }).onError((error, stackTrace) {
-        print('*-'*100);
+        print('*-' * 100);
         print('error->$error');
-        print('*-'*100);
+        print('*-' * 100);
       });
     });
     on<_UpdateLobbyGames>(
-      (event, emit) => facade.updateLobbyActiveGames(),
+      (event, emit) {
+        print('*-' * 100);
+        print('error->$_UpdateLobbyGames');
+        print('*-' * 100);
+        facade.updateLobbyActiveGames();
+      },
     );
   }
 }

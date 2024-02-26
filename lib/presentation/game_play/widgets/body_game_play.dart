@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/game_play/game_play_bloc.dart';
+import '../../../application/lobby/lobby_bloc.dart';
 import '../../../domain/game2/entities/player.dart';
 import '../../../domain/game2/enums/enum_game_state.dart';
 import 'first_person/first_person_area.dart';
@@ -14,13 +15,13 @@ class BodyGamePlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gamePlay = context.watch<GamePlayBloc>().state;
+    final isWaitingOpponent = gamePlay.game?.p2 == null;
     if (gamePlay.isLoading) {
       const Center(
         child: CircularProgressIndicator(),
       );
     }
-    if (gamePlay.game?.gameState == EnumGameState.waitingOpponent ||
-        gamePlay.game?.p2 == null) {
+    if (isWaitingOpponent) {
       return const WaitingGameRoom();
     }
     return MultiBlocListener(

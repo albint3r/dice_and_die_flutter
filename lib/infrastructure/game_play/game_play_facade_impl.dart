@@ -61,7 +61,7 @@ class GamePlayFacadeImpl implements IGamePlayFacade {
     if (winnerPlayer is List<Player?>) {
       return (winnerPlayer[0]!, winnerPlayer[1]);
     }
-    throw NoWinnerValidator(
+    throw NoWinnerExistError(
       "You don't have a winner in the get Winner Player.",
     );
   }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/game_play/game_play_bloc.dart';
+import '../../application/lobby/lobby_bloc.dart';
 import '../../injectables.dart';
 import 'widgets/body_game_play.dart';
 
