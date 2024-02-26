@@ -68,7 +68,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await _logOut(emit, facade);
       }
     });
-
     on<_SigInWithEmailAndPassword>((event, emit) async {
       try {
         final form = event.loginRawValues;
@@ -145,28 +144,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_NotifyUserUpdatesAfterGameEnds>((event, emit) async {
       emit(
         state.copyWith(
-          isAfterGame: true,
           appUser: event.appUser,
-        ),
-      );
-      emit(
-        state.copyWith(
-          isAfterGame: false,
         ),
       );
     });
     on<_UpdateUserName>((event, emit) async {
       emit(
         state.copyWith(
-          isAfterGame: true,
           appUser: state.appUser?.copyWith(
             name: event.newUserName,
           ),
-        ),
-      );
-      emit(
-        state.copyWith(
-          isAfterGame: false,
         ),
       );
     });

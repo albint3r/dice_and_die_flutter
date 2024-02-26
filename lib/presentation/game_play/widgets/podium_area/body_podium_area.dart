@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../application/auth/auth_bloc.dart';
 import '../../../../application/lobby/lobby_bloc.dart';
 import '../../../../domain/game2/entities/player.dart';
 import '../../../../domain/game2/enums/enum_game_state.dart';
@@ -96,6 +97,11 @@ class BodyPodiumArea extends StatelessWidget {
                 context.router.replaceAll(
                   [const LobbyRoute()],
                 );
+                context.read<AuthBloc>().add(
+                      AuthEvent.notifyUserUpdatesAfterGameEnds(
+                        player.appUser,
+                      ),
+                    );
                 context.read<LobbyBloc>().add(
                       const LobbyEvent.updateLobbyGames(),
                     );
