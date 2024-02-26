@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../application/auth/auth_bloc.dart';
+import '../../../../application/lobby/lobby_bloc.dart';
 import '../../../../domain/game2/entities/game.dart';
 import '../../../../domain/game2/entities/player.dart';
 import '../../../core/design_system/app_bar/widgets/user_level_progress_bar_podium.dart';
@@ -92,13 +93,11 @@ class BodyPodiumArea extends StatelessWidget {
               text: 'Go Back Menu',
               width: waitingRoomCardWidth * .80,
               onPressed: () {
-                context.router.replace(
-                  const LobbyRoute(),
+                context.router.replaceAll(
+                  [const LobbyRoute()],
                 );
-                context.read<AuthBloc>().add(
-                      AuthEvent.notifyUserUpdatesAfterGameEnds(
-                        player.appUser,
-                      ),
+                context.read<LobbyBloc>().add(
+                      const LobbyEvent.updateLobbyGames(),
                     );
               },
             ),

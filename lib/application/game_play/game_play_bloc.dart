@@ -40,9 +40,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         },
       ).whenComplete(
         () {
-          print('-*' * 100);
-          print('__CreateGame -whenComplete');
-          print('-*' * 100);
+
           final router = getIt<AppRouter>();
           try {
             channel.sink.close(status.normalClosure);
@@ -86,9 +84,6 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         },
       ).whenComplete(
         () {
-          print('-*' * 100);
-          print('_JoinGame -whenComplete');
-          print('-*' * 100);
           final router = getIt<AppRouter>();
           try {
             channel.sink.close(status.normalClosure);
@@ -147,6 +142,8 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
     on<_Disconnect>((event, emit) async {
       facade.channel.closeReason;
       facade.channel.sink.close(status.normalClosure);
+      final lobby = getIt<LobbyBloc>();
+      lobby.add(const LobbyEvent.updateLobbyGames());
     });
   }
 }
