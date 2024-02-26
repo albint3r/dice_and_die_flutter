@@ -13,4 +13,6 @@ class GamePlayEvent with _$GamePlayEvent {
   const factory GamePlayEvent.selectColumn(int index) = _SelectColumn;
 
   const factory GamePlayEvent.getWinnerPlayer() = _GetWinnerPlayer;
+
+  const factory GamePlayEvent.disconnect() = _Disconnect;
 }

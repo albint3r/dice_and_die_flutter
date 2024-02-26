@@ -5,6 +5,7 @@ import 'package:web_socket_channel/status.dart' as status;
 
 import '../../domain/game2/entities/game.dart';
 import '../../domain/game2/entities/player.dart';
+import '../../domain/game2/errors/errors.dart';
 import '../../domain/game2/use_case/i_game_play_facade.dart';
 import '../../injectables.dart';
 import '../../presentation/core/router/app_router.dart';
@@ -35,19 +36,26 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         },
       ).whenComplete(
         () {
-          channel.sink.close(status.normalClosure);
-          final player = state.player;
-          final game = state.game;
-          final winnerPlayer = facade.getWinnerPlayer(game!, player!);
+          print('-*' * 100);
+          print('__CreateGame -whenComplete');
+          print('-*' * 100);
           final router = getIt<AppRouter>();
-          router.replace(
-            PodiumRoute(
-              game: game,
-              player: player,
-              opponentPlayer: state.opponentPlayer!,
-              winnerPlayer: winnerPlayer,
-            ),
-          );
+          try {
+            channel.sink.close(status.normalClosure);
+            final player = state.player;
+            final game = state.game;
+            final winnerPlayer = facade.getWinnerPlayer(game!, player!);
+            router.replace(
+              PodiumRoute(
+                game: game,
+                player: player,
+                opponentPlayer: state.opponentPlayer!,
+                winnerPlayer: winnerPlayer,
+              ),
+            );
+          } on NoWinnerValidator catch (_) {
+            router.replaceAll([const LobbyRoute()]);
+          }
         },
       );
     });
@@ -66,19 +74,26 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         },
       ).whenComplete(
         () {
-          channel.sink.close(status.normalClosure);
-          final player = state.player;
-          final game = state.game;
-          final winnerPlayer = facade.getWinnerPlayer(game!, player!);
+          print('-*' * 100);
+          print('_JoinGame -whenComplete');
+          print('-*' * 100);
           final router = getIt<AppRouter>();
-          router.replace(
-            PodiumRoute(
-              game: game,
-              player: player,
-              opponentPlayer: state.opponentPlayer!,
-              winnerPlayer: winnerPlayer,
-            ),
-          );
+          try {
+            channel.sink.close(status.normalClosure);
+            final player = state.player;
+            final game = state.game;
+            final winnerPlayer = facade.getWinnerPlayer(game!, player!);
+            router.replace(
+              PodiumRoute(
+                game: game,
+                player: player,
+                opponentPlayer: state.opponentPlayer!,
+                winnerPlayer: winnerPlayer,
+              ),
+            );
+          } on NoWinnerValidator catch (_) {
+            router.pop();
+          }
         },
       );
     });
@@ -111,6 +126,10 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
           winnerPlayer: winnerPlayer,
         ),
       );
+    });
+    on<_Disconnect>((event, emit) async {
+      facade.channel.closeReason;
+      facade.channel.sink.close(status.normalClosure);
     });
   }
 }
