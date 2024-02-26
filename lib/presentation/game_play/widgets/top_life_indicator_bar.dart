@@ -12,9 +12,7 @@ class TopLifeIndicatorBar extends StatelessWidget {
 
   /// Return a percentage between 0 and 1. In case players start game
   /// and not have points it will return .5 because each player have 50%.
-  double _getPercentage(GamePlayState state) {
-    final opponentBoardScore = state.opponentPlayer!.board.score;
-    final playerBoardScore = state.opponentPlayer!.board.score;
+  double _getPercentage(int playerBoardScore, int opponentBoardScore) {
     if (opponentBoardScore == 0 && playerBoardScore == 0) {
       return .5;
     }
@@ -50,8 +48,11 @@ class TopLifeIndicatorBar extends StatelessWidget {
             ),
             LinearPercentIndicator(
               padding: EdgeInsets.zero,
-              percent: _getPercentage(state),
-              restartAnimation: true,
+              percent: _getPercentage(
+                state.player?.board.score ?? 0,
+                state.opponentPlayer?.board.score ?? 0,
+              ),
+              // restartAnimation: true,
               barRadius: const Radius.circular(15),
               lineHeight: 15,
               width: width,
