@@ -15,7 +15,7 @@ part 'lobby_event.dart';
 
 part 'lobby_state.dart';
 
-@injectable
+@singleton
 class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
   LobbyBloc(ILobbyFacade facade) : super(LobbyState.initial()) {
     on<_LoadLobbyGames>((event, emit) async {
@@ -51,17 +51,10 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
             const LoginRoute(),
           ],
         );
-      }).onError((error, stackTrace) {
-        print('*-' * 100);
-        print('error->$error');
-        print('*-' * 100);
       });
     });
     on<_UpdateLobbyGames>(
       (event, emit) {
-        print('*-' * 100);
-        print('error->$_UpdateLobbyGames');
-        print('*-' * 100);
         facade.updateLobbyActiveGames();
       },
     );

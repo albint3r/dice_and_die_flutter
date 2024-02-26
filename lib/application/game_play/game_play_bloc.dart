@@ -24,8 +24,9 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
       final randomId = facade.generateRandomId();
       final channel = facade.getGamePlayChannel(randomId);
       await channel.ready;
+      // Just notify the lobby it creates a new game
       final lobby = getIt<LobbyBloc>();
-      // lobby.add(LobbyEvent.updateLobbyGames());
+      lobby.add(const LobbyEvent.updateLobbyGames());
       await emit.forEach(
         channel.stream,
         onData: (data) {
@@ -69,6 +70,9 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
     });
     on<_JoinGame>((event, emit) async {
       final channel = facade.getGamePlayChannel(event.game.gameId);
+      // Just notify the lobby a new user enter to the game.
+      final lobby = getIt<LobbyBloc>();
+      lobby.add(const LobbyEvent.updateLobbyGames());
       await emit.forEach(
         channel.stream,
         onData: (data) {
