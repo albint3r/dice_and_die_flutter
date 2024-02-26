@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 
 import '../../../../application/lobby/lobby_bloc.dart';
 import '../../../../domain/game2/entities/player.dart';
+import '../../../../domain/game2/enums/enum_game_state.dart';
 import '../../../core/design_system/app_bar/widgets/user_level_progress_bar_podium.dart';
 import '../../../core/design_system/buttons/custom_long_button.dart';
 import '../../../core/design_system/text/titleh1.dart';
@@ -19,6 +20,7 @@ class BodyPodiumArea extends StatelessWidget {
     required this.backGroundImage,
     required this.textImage,
     required this.winnerPlayer,
+    required this.gameState,
   });
 
   final Player player;
@@ -26,11 +28,15 @@ class BodyPodiumArea extends StatelessWidget {
   final Player opponentPlayer;
 
   final Player winnerPlayer;
+  final EnumGameState gameState;
 
   final ImageProvider<Object> backGroundImage;
   final Widget textImage;
 
   int _getWinPoints() {
+    if (gameState == EnumGameState.disconnectPlayer) {
+      return baseExpPoints;
+    }
     if (winnerPlayer == player) {
       return (player.board.score - opponentPlayer.board.score).abs() +
           baseExpPoints;
