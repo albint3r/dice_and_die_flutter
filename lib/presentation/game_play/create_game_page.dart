@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/game_play/game_play_bloc.dart';
+import '../../application/sounds_effects/sounds_effects_bloc.dart';
 import '../../domain/game2/entities/player.dart';
 import '../../injectables.dart';
 import 'widgets/body_game_play.dart';
@@ -22,6 +23,9 @@ class CreateGamePage extends StatelessWidget {
             ..add(
               const GamePlayEvent.createGame(),
             ),
+        ),
+        BlocProvider(
+          create: (context) => getIt<SoundsEffectsBloc>(),
         ),
       ],
       child: Builder(
