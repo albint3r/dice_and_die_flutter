@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,7 +13,6 @@ class PlayDie extends StatefulWidget {
   const PlayDie({
     required this.number,
     required this.player,
-    super.key,
   });
 
   final int? number;
@@ -26,8 +24,6 @@ class PlayDie extends StatefulWidget {
 
 class _PlayDieState extends State<PlayDie> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  AudioPlayer _rollDiceAudioPlayer = AudioPlayer();
-  AudioPlayer _throwDiceAudioPlayer = AudioPlayer();
 
   @override
   void initState() {
@@ -37,23 +33,7 @@ class _PlayDieState extends State<PlayDie> with SingleTickerProviderStateMixin {
       duration: const Duration(
         seconds: 5,
       ),
-    )..repeat();
-    _initAudioPlayer();
-  }
-
-  void _initAudioPlayer() async {
-    _rollDiceAudioPlayer = AudioPlayer();
-    await _rollDiceAudioPlayer.setSource(
-      AssetSource(
-        'sounds/dice_random_rolling_effect.mp3',
-      ),
     );
-    await _throwDiceAudioPlayer.setSource(
-      AssetSource(
-        'sounds/dice_roll.mp3',
-      ),
-    );
-    _rollDiceAudioPlayer.resume();
   }
 
   bool _isPlayerTurn(GamePlayState state) =>
@@ -64,7 +44,6 @@ class _PlayDieState extends State<PlayDie> with SingleTickerProviderStateMixin {
     print('*|' * 100);
     print('_startAnimation->${widget.player}');
     print('*|' * 100);
-    _rollDiceAudioPlayer.resume();
     _controller.repeat();
   }
 
@@ -72,15 +51,13 @@ class _PlayDieState extends State<PlayDie> with SingleTickerProviderStateMixin {
     print('*|' * 100);
     print('_stopAnimation-> ${widget.player}');
     print('*|' * 100);
-    _rollDiceAudioPlayer.stop();
     _controller.stop();
   }
 
   @override
   void dispose() {
     _controller.dispose();
-    _rollDiceAudioPlayer.dispose();
-    _throwDiceAudioPlayer.dispose();
+
     super.dispose();
   }
 
