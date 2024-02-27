@@ -42,7 +42,6 @@ class _PlayDieState extends State<PlayDie> with SingleTickerProviderStateMixin {
       state.game!.gameState == EnumGameState.rollDice;
 
   void _startAnimation() {
-
     context.read<SoundsEffectsBloc>().add(
           const SoundsEffectsEvent.playRollDice(),
         );

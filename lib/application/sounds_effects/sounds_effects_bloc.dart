@@ -30,8 +30,7 @@ class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
           ),
         );
 
-        if (rollDiceAudioPlayer != null &&
-            rollDiceAudioPlayer.state != PlayerState.disposed) {
+        if (rollDiceAudioPlayer.state != PlayerState.disposed) {
           await rollDiceAudioPlayer.resume();
         }
         // Check if the sound stop. This will alert the dice auto throw

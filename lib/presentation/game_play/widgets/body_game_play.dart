@@ -40,7 +40,7 @@ class BodyGamePlay extends StatelessWidget {
           listener: (context, state) => context.read<GamePlayBloc>().add(
                 const GamePlayEvent.rollDice(),
               ),
-        )
+        ),
       ],
       child: ListView(
         // mainAxisAlignment: MainAxisAlignment.end,
