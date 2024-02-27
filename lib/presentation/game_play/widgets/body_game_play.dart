@@ -33,9 +33,9 @@ class BodyGamePlay extends StatelessWidget {
               ),
         ),
       ],
-      child: const Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
+      child: ListView(
+        // mainAxisAlignment: MainAxisAlignment.end,
+        children: const [
           SecondPersonArea(),
           Divider(color: Colors.black, height: 10, thickness: 5),
           FirstPersonArea(),

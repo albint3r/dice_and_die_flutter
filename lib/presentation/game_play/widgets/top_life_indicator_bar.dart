@@ -24,7 +24,7 @@ class TopLifeIndicatorBar extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final state = context.watch<GamePlayBloc>().state;
-    const width = 380.0;
+    const width = 360.0;
 
     return Padding(
       padding: const EdgeInsets.all(padding),

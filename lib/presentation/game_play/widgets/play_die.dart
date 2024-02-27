@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,6 +26,8 @@ class PlayDie extends StatefulWidget {
 
 class _PlayDieState extends State<PlayDie> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  AudioPlayer? _rollDiceAudioPlayer;
+  AudioPlayer? _throwDiceAudioPlayer;
 
   @override
   void initState() {
@@ -42,16 +45,25 @@ class _PlayDieState extends State<PlayDie> with SingleTickerProviderStateMixin {
       state.game!.gameState == EnumGameState.rollDice;
 
   void _startAnimation() {
+    _rollDiceAudioPlayer = AudioPlayer();
+    _rollDiceAudioPlayer!.setSource(
+      AssetSource(
+        'sounds/dice_random_rolling_effect.mp3',
+      ),
+    );
+    _rollDiceAudioPlayer!.resume();
     _controller.repeat();
   }
 
   void _stopAnimation() {
+    _rollDiceAudioPlayer?.stop();
     _controller.stop();
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    _rollDiceAudioPlayer?.dispose();
     super.dispose();
   }
 
