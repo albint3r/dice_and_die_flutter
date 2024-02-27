@@ -12,7 +12,7 @@ part 'sounds_effects_event.dart';
 
 part 'sounds_effects_state.dart';
 
-@lazySingleton
+@injectable
 class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
   SoundsEffectsBloc() : super(SoundsEffectsState.initial()) {
     on<_PlayRollDice>((event, emit) async {
@@ -56,7 +56,14 @@ class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
     });
     on<_StopRollDice>((event, emit) async {
       // When the dice stop the throw dice start.
-      await state.rollDiceAudioPlayer?.stop();
+      try {
+        await state.rollDiceAudioPlayer?.stop();
+      } catch (e, stackTrace) {
+        throw SoundGameError(
+          'The Sound Controller have Android Problems: $e',
+        );
+      }
+
       emit(
         state.copyWith(
           throwDiceAudioPlayer: AudioPlayer(),
