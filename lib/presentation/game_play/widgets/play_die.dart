@@ -26,8 +26,8 @@ class PlayDie extends StatefulWidget {
 
 class _PlayDieState extends State<PlayDie> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  AudioPlayer? _rollDiceAudioPlayer;
-  AudioPlayer? _throwDiceAudioPlayer;
+  AudioPlayer _rollDiceAudioPlayer = AudioPlayer();
+  AudioPlayer _throwDiceAudioPlayer = AudioPlayer();
 
   @override
   void initState() {
@@ -38,6 +38,17 @@ class _PlayDieState extends State<PlayDie> with SingleTickerProviderStateMixin {
         seconds: 5,
       ),
     )..repeat();
+    _initAudioPlayer();
+  }
+
+  void _initAudioPlayer() async {
+    _rollDiceAudioPlayer = AudioPlayer();
+    await _rollDiceAudioPlayer.setSource(
+      AssetSource(
+        'sounds/dice_random_rolling_effect.mp3',
+      ),
+    );
+    _rollDiceAudioPlayer.resume();
   }
 
   bool _isPlayerTurn(GamePlayState state) =>
@@ -45,25 +56,25 @@ class _PlayDieState extends State<PlayDie> with SingleTickerProviderStateMixin {
       state.game!.gameState == EnumGameState.rollDice;
 
   void _startAnimation() {
-    _rollDiceAudioPlayer = AudioPlayer();
-    _rollDiceAudioPlayer!.setSource(
-      AssetSource(
-        'sounds/dice_random_rolling_effect.mp3',
-      ),
-    );
-    _rollDiceAudioPlayer!.resume();
+    print('*|' * 100);
+    print('_startAnimation->${widget.player}');
+    print('*|' * 100);
+    _rollDiceAudioPlayer.resume();
     _controller.repeat();
   }
 
   void _stopAnimation() {
-    _rollDiceAudioPlayer?.stop();
+    print('*|' * 100);
+    print('_stopAnimation-> ${widget.player}');
+    print('*|' * 100);
+    _rollDiceAudioPlayer.stop();
     _controller.stop();
   }
 
   @override
   void dispose() {
     _controller.dispose();
-    _rollDiceAudioPlayer?.dispose();
+    _rollDiceAudioPlayer.dispose();
     super.dispose();
   }
 
@@ -109,7 +120,7 @@ class _PlayDieState extends State<PlayDie> with SingleTickerProviderStateMixin {
         child: Center(
           child: AnimatedBuilder(
             animation: _controller,
-            builder: (_, child) {
+            builder: (_, __) {
               final int randomValue = random.nextInt(6) + 1;
               return TitleH1(
                 text: _isPlayerTurn(state)
