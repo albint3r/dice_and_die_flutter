@@ -28,45 +28,52 @@ class TopLifeIndicatorBar extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.all(padding),
-      child: SizedBox(
-        height: 60,
-        width: width,
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Card(
+        color: colorScheme.onPrimary,
+        elevation: 12,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            height: 60,
+            width: width,
+            child: Column(
               children: [
-                TitleH1(
-                  text: '${state.player?.board.score}',
-                  color: colorScheme.secondary,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TitleH1(
+                      text: '${state.player?.board.score}',
+                      color: colorScheme.secondary,
+                    ),
+                    TitleH1(
+                      text: '${state.opponentPlayer?.board.score}',
+                      color: colorScheme.secondary,
+                    ),
+                  ],
                 ),
-                TitleH1(
-                  text: '${state.opponentPlayer?.board.score}',
-                  color: colorScheme.secondary,
+                LinearPercentIndicator(
+                  padding: EdgeInsets.zero,
+                  percent: _getPercentage(
+                    state.player?.board.score ?? 0,
+                    state.opponentPlayer?.board.score ?? 0,
+                  ),
+                  // restartAnimation: true,
+                  barRadius: const Radius.circular(15),
+                  lineHeight: 15,
+                  width: width,
+                  backgroundColor: colorScheme.secondaryContainer,
+                  progressColor: colorScheme.onSecondary,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextBody('${state.player?.appUser.name}'),
+                    TextBody('${state.opponentPlayer?.appUser.name}'),
+                  ],
                 ),
               ],
             ),
-            LinearPercentIndicator(
-              padding: EdgeInsets.zero,
-              percent: _getPercentage(
-                state.player?.board.score ?? 0,
-                state.opponentPlayer?.board.score ?? 0,
-              ),
-              // restartAnimation: true,
-              barRadius: const Radius.circular(15),
-              lineHeight: 15,
-              width: width,
-              backgroundColor: colorScheme.secondaryContainer,
-              progressColor: colorScheme.onSecondary,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextBody('${state.player?.appUser.name}'),
-                TextBody('${state.opponentPlayer?.appUser.name}'),
-              ],
-            ),
-          ],
+          ),
         ),
       ),
     );
