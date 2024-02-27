@@ -16,13 +16,14 @@ class FirstPersonArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final heightWithoutBottomBar = (size.height / 2) - (bottomAppBarHeight + 10);
+    final heightWithoutBottomBar =
+        (size.height / 2) - (bottomAppBarHeight + 10);
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final state = context.watch<GamePlayBloc>().state;
     final player = state.player;
 
-    if (state.player is Player) {
+    if (player is Player) {
       final columns = state.player!.board.columns;
       return SizedBox(
         height: heightWithoutBottomBar,
@@ -31,7 +32,7 @@ class FirstPersonArea extends StatelessWidget {
           children: [
             GameBoard(
               color: colorScheme.onSecondary,
-              player: player!,
+              player: player,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -46,7 +47,10 @@ class FirstPersonArea extends StatelessWidget {
                 TurnPlayerIndicator(
                   isTurn: state.game?.currentPlayer == player,
                 ),
-                PlayDie(number: player.die.currentNumber),
+                PlayDie(
+                  number: player.die.currentNumber,
+                  player: player,
+                ),
                 // this space is to fill the empty space and have 3 columns
                 const Expanded(child: SizedBox()),
               ],
