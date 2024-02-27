@@ -35,7 +35,7 @@ class ColumnValues extends StatelessWidget {
     if (applyReversed) {
       valuesToShow = valuesToShow.reversed.toList();
     }
-    final diceSize = (constraints.maxHeight - 100) / 3;
+    final diceSize = (constraints.maxHeight - 110) / 3;
 
     return SizedBox(
       width: constraints.maxWidth * perWithColumn,
@@ -44,20 +44,18 @@ class ColumnValues extends StatelessWidget {
             applyReversed ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: valuesToShow
             .map(
-              (e) => Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 10,
+              (e) => Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                ),
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxHeight: diceSize,
+                    maxWidth: diceSize,
                   ),
-                  child: Container(
-                    constraints: BoxConstraints(
-                      maxHeight: diceSize,
-                      maxWidth: diceSize,
-                    ),
-                    decoration: _buildBoxDecoration(colorScheme),
-                    child: Center(
-                      child: TitleH2('$e'),
-                    ),
+                  decoration: _buildBoxDecoration(colorScheme),
+                  child: Center(
+                    child: TitleH2('$e'),
                   ),
                 ),
               ),
