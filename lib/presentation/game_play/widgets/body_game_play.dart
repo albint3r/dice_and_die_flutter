@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/game_play/game_play_bloc.dart';
+import '../../../application/sounds_effects/sounds_effects_bloc.dart';
 import '../../../domain/game2/entities/player.dart';
 import 'first_person/first_person_area.dart';
 import 'second_person/second_person_area.dart';
@@ -32,6 +33,14 @@ class BodyGamePlay extends StatelessWidget {
                 const GamePlayEvent.getWinnerPlayer(),
               ),
         ),
+        BlocListener<SoundsEffectsBloc, SoundsEffectsState>(
+          listenWhen: (pre, curr) =>
+              pre.isRollDiceSoundComplete != curr.isRollDiceSoundComplete &&
+              curr.isRollDiceSoundComplete,
+          listener: (context, state) => context.read<GamePlayBloc>().add(
+                const GamePlayEvent.rollDice(),
+              ),
+        )
       ],
       child: ListView(
         // mainAxisAlignment: MainAxisAlignment.end,

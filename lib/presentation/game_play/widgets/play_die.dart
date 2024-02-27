@@ -42,9 +42,7 @@ class _PlayDieState extends State<PlayDie> with SingleTickerProviderStateMixin {
       state.game!.gameState == EnumGameState.rollDice;
 
   void _startAnimation() {
-    print('*|' * 100);
-    print('_startAnimation->${widget.player}');
-    print('*|' * 100);
+
     context.read<SoundsEffectsBloc>().add(
           const SoundsEffectsEvent.playRollDice(),
         );
@@ -52,9 +50,6 @@ class _PlayDieState extends State<PlayDie> with SingleTickerProviderStateMixin {
   }
 
   void _stopAnimation() {
-    print('*|' * 100);
-    print('_stopAnimation-> ${widget.player}');
-    print('*|' * 100);
     final state = context.watch<GamePlayBloc>().state;
     if (state.game!.gameState == EnumGameState.selectColumn) {
       context.read<SoundsEffectsBloc>().add(

@@ -12,7 +12,7 @@ part 'sounds_effects_event.dart';
 
 part 'sounds_effects_state.dart';
 
-@injectable
+@lazySingleton
 class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
   SoundsEffectsBloc() : super(SoundsEffectsState.initial()) {
     on<_PlayRollDice>((event, emit) async {
