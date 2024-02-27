@@ -48,6 +48,11 @@ class _PlayDieState extends State<PlayDie> with SingleTickerProviderStateMixin {
         'sounds/dice_random_rolling_effect.mp3',
       ),
     );
+    await _throwDiceAudioPlayer.setSource(
+      AssetSource(
+        'sounds/dice_roll.mp3',
+      ),
+    );
     _rollDiceAudioPlayer.resume();
   }
 
@@ -75,6 +80,7 @@ class _PlayDieState extends State<PlayDie> with SingleTickerProviderStateMixin {
   void dispose() {
     _controller.dispose();
     _rollDiceAudioPlayer.dispose();
+    _throwDiceAudioPlayer.dispose();
     super.dispose();
   }
 
