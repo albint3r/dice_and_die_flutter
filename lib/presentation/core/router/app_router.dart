@@ -5,12 +5,15 @@ import 'package:l/l.dart';
 
 import '../../../application/auth/auth_bloc.dart';
 import '../../../domain/auth/app_user.dart';
-import '../../../domain/waiting_room/game.dart';
+import '../../../domain/game2/entities/game.dart';
+import '../../../domain/game2/entities/player.dart';
 import '../../auth/login/login_page.dart';
 import '../../auth/signup/signup_page.dart';
-import '../../game/game_page.dart';
+import '../../game_play/create_game_page.dart';
+import '../../game_play/join_game_page.dart';
+import '../../game_play/widgets/podium_area/podium_page.dart';
+import '../../lobby/lobby_page.dart';
 import '../../profile/profile_page.dart';
-import '../../waiting_rooms/waiting_rooms_page.dart';
 
 part 'app_router.gr.dart';
 
@@ -25,10 +28,16 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
   List<AutoRoute> get routes => [
         AutoRoute(
           initial: true,
-          page: WaitingRoomsRoute.page,
+          page: LobbyRoute.page,
         ),
         AutoRoute(
-          page: GameRoute.page,
+          page: CreateGameRoute.page,
+        ),
+        AutoRoute(
+          page: JoinGameRoute.page,
+        ),
+        AutoRoute(
+          page: PodiumRoute.page,
         ),
         AutoRoute(
           page: LoginRoute.page,

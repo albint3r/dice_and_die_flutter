@@ -8,7 +8,7 @@ import '../game_life/widgets/body_game_life.dart';
 import '../game_notifications/widgets/body_game_notifications.dart';
 import 'board/player_game_area.dart';
 import 'podium_area/podium_area.dart';
-import 'waiting_game_room.dart';
+import '../../game_play/widgets/waiting_game_room.dart';
 
 class BodyGame extends StatelessWidget {
   const BodyGame({super.key});

@@ -1,32 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../application/waiting_room/waiting_room_bloc.dart';
+import '../../../application/lobby/lobby_bloc.dart';
 import 'create_game_button.dart';
 import 'refresh_button.dart';
 import 'top_indicators.dart';
-import 'waiting_room_card.dart';
+import 'game_room_card.dart';
 
-class BodyWaitingRooms extends StatelessWidget {
-  const BodyWaitingRooms({super.key});
+class BodyLobby extends StatelessWidget {
+  const BodyLobby({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<WaitingRoomBloc>().state;
-    final games = state.games;
-    if (state.isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    }
+    final lobby = context.watch<LobbyBloc>().state;
+    if (lobby.isLoading) const Center(child: CircularProgressIndicator());
+    final games = lobby.lobby.activeGames?.values.toList() ?? [];
+
     return Column(
       children: [
         const TopIndicators(),
-        // const WaitingRoomCard(),
         Expanded(
           child: ListView.builder(
             itemCount: games.length,
             itemBuilder: (context, index) {
               final game = games[index];
-              return WaitingRoomCard(
+              return GameRoomCard(
                 game: game,
               );
             },

@@ -1,5 +1,18 @@
 import 'package:reactive_forms/reactive_forms.dart';
+//DEFAULT BASE WIN POINTS
+const baseExpPoints = 15;
+const dieSize = 50.0;
+///
+const maxWidthBoard = 800.0;
+const minWidthBoard = 600.0;
+const blurRadiusBoard = 10.0;
+const spreadRadius = 3.0;
+const perWithColumn = .80;
+const perMaxHeightColumn = .85;
+const perMaxHeightScoreField = .10;
 
+
+const bottomAppBarHeight = 35.0;
 const borderRadius = 15.0;
 const longButtonWidth = 135.0;
 const shortButtonWidth = 65.0;

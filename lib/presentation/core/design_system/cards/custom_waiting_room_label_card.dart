@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../domain/waiting_room/game.dart';
+import '../../../../domain/game2/entities/game.dart';
 import '../../theme/const_values.dart';
 import '../text/titleh1.dart';
 

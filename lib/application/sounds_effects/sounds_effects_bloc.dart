@@ -12,7 +12,7 @@ part 'sounds_effects_event.dart';
 
 part 'sounds_effects_state.dart';
 
-@injectable
+@lazySingleton
 class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
   SoundsEffectsBloc() : super(SoundsEffectsState.initial()) {
     on<_PlayRollDice>((event, emit) async {
@@ -30,8 +30,7 @@ class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
           ),
         );
 
-        if (rollDiceAudioPlayer != null &&
-            rollDiceAudioPlayer.state != PlayerState.disposed) {
+        if (rollDiceAudioPlayer.state != PlayerState.disposed) {
           await rollDiceAudioPlayer.resume();
         }
         // Check if the sound stop. This will alert the dice auto throw

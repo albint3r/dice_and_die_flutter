@@ -7,12 +7,10 @@ class AuthState with _$AuthState {
     AppUser? appUser,
     required String sessionToken,
     AuthError? error,
-    required bool isAfterGame,
   }) = _AuthState;
 
   factory AuthState.initial() => AuthState(
         isLoading: true,
-        isAfterGame: false,
         sessionToken: '',
       );
 }

@@ -16,7 +16,7 @@ class ProfileDataSourceImpl implements IProfileDataSource {
   ) async {
     try {
       final response = await _dio.put(
-        '/user/v1/update',
+        '/v2/auth/profile',
         data: {
           "name": name,
           "last_name": "",

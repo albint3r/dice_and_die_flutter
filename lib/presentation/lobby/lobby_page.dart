@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 
 import '../core/design_system/app_bar/custom_app_bar.dart';
 import '../core/design_system/dialog/custom_dialog_menu.dart';
-import 'widgets/body_waiting_rooms.dart';
+import 'widgets/body_lobby.dart';
 
 @RoutePage()
-class WaitingRoomsPage extends StatelessWidget {
-  const WaitingRoomsPage({super.key});
+class LobbyPage extends StatelessWidget {
+  const LobbyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: CustomAppBar(
-          title: 'Battle Arena',
+          title: 'Lobby Games',
           icon: Icons.menu,
           onPress: () {
             showDialog(
@@ -25,7 +25,7 @@ class WaitingRoomsPage extends StatelessWidget {
             );
           },
         ),
-        body: const BodyWaitingRooms(),
+        body: const BodyLobby(),
       ),
     );
   }

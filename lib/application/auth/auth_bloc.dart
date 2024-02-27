@@ -6,9 +6,13 @@ import '../../domain/auth/app_user.dart';
 import '../../domain/auth/errors/auth_error.dart';
 import '../../domain/auth/i_auth_facade.dart';
 import '../../domain/auth/schemas/auth_response.dart';
+import '../../injectables.dart';
+import '../../presentation/core/router/app_router.dart';
 
 part 'auth_bloc.freezed.dart';
+
 part 'auth_event.dart';
+
 part 'auth_state.dart';
 
 @lazySingleton
@@ -44,12 +48,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await facade.saveSessionTokenInPref(
           state.sessionToken,
         );
-        await Future.delayed(const Duration(seconds: 1));
-        emit(
-          state.copyWith(
-            isLoading: false,
-          ),
-        );
+        // Navigate to the Lobby After the user logging
+        if (state.sessionToken.isNotEmpty) {
+          final router = getIt<AppRouter>();
+          router.replaceAll([
+            const LobbyRoute(),
+          ]);
+          await Future.delayed(const Duration(seconds: 1));
+          emit(
+            state.copyWith(
+              isLoading: false,
+            ),
+          );
+        }
       } catch (e) {
         // If the LoginFrom Session Token Fail
         // it means the token session expired or is invalid.
@@ -57,7 +68,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await _logOut(emit, facade);
       }
     });
-
     on<_SigInWithEmailAndPassword>((event, emit) async {
       try {
         final form = event.loginRawValues;
@@ -70,6 +80,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             emit,
             facade,
             facade.signIn,
+          );
+        }
+        // Navigate to the Lobby After the user logging
+        if (state.sessionToken.isNotEmpty) {
+          final router = getIt<AppRouter>();
+          router.replaceAll([
+            const LobbyRoute(),
+          ]);
+          await Future.delayed(const Duration(seconds: 1));
+          emit(
+            state.copyWith(
+              isLoading: false,
+            ),
           );
         }
       } catch (e) {
@@ -94,6 +117,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             facade.logIn,
           );
         }
+        // Navigate to the Lobby After the user logging
+        if (state.sessionToken.isNotEmpty) {
+          final router = getIt<AppRouter>();
+          router.replaceAll([
+            const LobbyRoute(),
+          ]);
+          await Future.delayed(const Duration(seconds: 1));
+          emit(
+            state.copyWith(
+              isLoading: false,
+            ),
+          );
+        }
       } catch (e) {
         _notifyError(
           emit,
@@ -108,28 +144,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_NotifyUserUpdatesAfterGameEnds>((event, emit) async {
       emit(
         state.copyWith(
-          isAfterGame: true,
           appUser: event.appUser,
-        ),
-      );
-      emit(
-        state.copyWith(
-          isAfterGame: false,
         ),
       );
     });
     on<_UpdateUserName>((event, emit) async {
       emit(
         state.copyWith(
-          isAfterGame: true,
           appUser: state.appUser?.copyWith(
             name: event.newUserName,
           ),
-        ),
-      );
-      emit(
-        state.copyWith(
-          isAfterGame: false,
         ),
       );
     });
@@ -203,12 +227,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
     await facade.saveSessionTokenInPref(
       state.sessionToken,
-    );
-    await Future.delayed(const Duration(seconds: 1));
-    emit(
-      state.copyWith(
-        isLoading: false,
-      ),
     );
   }
 }

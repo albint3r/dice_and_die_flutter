@@ -12,6 +12,7 @@ part 'app_user.g.dart';
 class AppUser with _$AppUser {
   const factory AppUser({
     @JsonKey(name: 'creation_date') required DateTime creationDate,
+    @JsonKey(name: 'user_id') required String userId,
     required String name,
     @JsonKey(name: 'last_name') required String lastName,
     @JsonKey(name: 'is_verify') required bool isVerify,
@@ -22,5 +23,4 @@ class AppUser with _$AppUser {
   const AppUser._();
 
   factory AppUser.fromJson(Json json) => _$AppUserFromJson(json);
-
 }
