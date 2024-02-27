@@ -142,7 +142,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
       facade.channel.sink.close(status.normalClosure);
       await Future.delayed(
         const Duration(
-          seconds: 2,
+          milliseconds: 1500,
         ),
       );
       getIt<LobbyBloc>().add(
