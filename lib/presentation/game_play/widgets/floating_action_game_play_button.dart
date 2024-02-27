@@ -5,10 +5,13 @@ class FloatingActionGamePlayButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     return FloatingActionButton(
+      backgroundColor: colorScheme.onSecondary,
       onPressed: () {},
-      child: const Text('Hello'),
       shape: const CircleBorder(),
+      child: const Text('Chat'),
     );
   }
 }
