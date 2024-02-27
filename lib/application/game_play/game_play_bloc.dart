@@ -40,7 +40,6 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         },
       ).whenComplete(
         () {
-
           final router = getIt<AppRouter>();
           try {
             channel.sink.close(status.normalClosure);
@@ -141,8 +140,14 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
     on<_Disconnect>((event, emit) async {
       facade.channel.closeReason;
       facade.channel.sink.close(status.normalClosure);
-      final lobby = getIt<LobbyBloc>();
-      lobby.add(const LobbyEvent.updateLobbyGames());
+      await Future.delayed(
+        const Duration(
+          seconds: 2,
+        ),
+      );
+      getIt<LobbyBloc>().add(
+        const LobbyEvent.updateLobbyGames(),
+      );
     });
   }
 }

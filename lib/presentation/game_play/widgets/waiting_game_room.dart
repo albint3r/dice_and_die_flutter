@@ -29,7 +29,7 @@ class WaitingGameRoom extends StatelessWidget {
                   const GamePlayEvent.disconnect(),
                 ),
             text: 'Cancel',
-          )
+          ),
         ],
       ),
     );
