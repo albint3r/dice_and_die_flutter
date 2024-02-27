@@ -15,23 +15,34 @@ class ColumnValues extends StatelessWidget {
   final BoxConstraints constraints;
   final bool applyReversed;
 
+  BoxDecoration _buildBoxDecoration(ColorScheme colorScheme) {
+    return BoxDecoration(
+      color: colorScheme.onPrimary,
+      borderRadius: const BorderRadius.all(
+        Radius.circular(
+          borderRadius,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     List<int> valuesToShow = column.values.toList();
     if (applyReversed) {
       valuesToShow = valuesToShow.reversed.toList();
     }
     final diceSize = (constraints.maxHeight - 100) / 3;
-    print('*-' * 100);
-    print('diceSize->${diceSize}');
-    print('*-' * 100);
+
     return SizedBox(
       width: constraints.maxWidth * perWithColumn,
       child: Column(
         mainAxisAlignment:
             applyReversed ? MainAxisAlignment.end : MainAxisAlignment.start,
-        // children: valuesToShow
-        children: [1, 2, 3]
+        children: valuesToShow
             .map(
               (e) => Expanded(
                 child: Padding(
@@ -39,11 +50,11 @@ class ColumnValues extends StatelessWidget {
                     vertical: 10,
                   ),
                   child: Container(
-                    color: Colors.white,
                     constraints: BoxConstraints(
                       maxHeight: diceSize,
                       maxWidth: diceSize,
                     ),
+                    decoration: _buildBoxDecoration(colorScheme),
                     child: Center(
                       child: TitleH2('$e'),
                     ),
