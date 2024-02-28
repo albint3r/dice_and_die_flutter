@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import '../../../application/game_play/game_play_bloc.dart';
+import '../../../domain/game2/enums/emote.dart';
 
 class FloatingActionGamePlayButton extends StatefulWidget {
   const FloatingActionGamePlayButton({super.key});
@@ -28,18 +29,43 @@ class _FloatingActionGamePlayButtonState
       overlayOpacity: .5,
       overlayColor: colorScheme.onBackground,
       openCloseDial: isDialOpen,
+      switchLabelPosition: true,
       // onPress: _toggle,
       children: [
         SpeedDialChild(
+          label: 'Hello',
+          onTap: () => context.read<GamePlayBloc>().add(
+                const GamePlayEvent.sendEmote(Emote.hello),
+              ),
+        ),
+        SpeedDialChild(
+          label: 'Help',
+          onTap: () => context.read<GamePlayBloc>().add(
+                const GamePlayEvent.sendEmote(Emote.help),
+              ),
+        ),
+        SpeedDialChild(
           label: 'JaJaJa',
           onTap: () => context.read<GamePlayBloc>().add(
-                const GamePlayEvent.sendEmote(1),
+                const GamePlayEvent.sendEmote(Emote.jajaja),
+              ),
+        ),
+        SpeedDialChild(
+          label: 'Nice',
+          onTap: () => context.read<GamePlayBloc>().add(
+                const GamePlayEvent.sendEmote(Emote.nice),
               ),
         ),
         SpeedDialChild(
           label: 'Sorry',
           onTap: () => context.read<GamePlayBloc>().add(
-                const GamePlayEvent.sendEmote(2),
+                const GamePlayEvent.sendEmote(Emote.sorry),
+              ),
+        ),
+        SpeedDialChild(
+          label: 'Thinking',
+          onTap: () => context.read<GamePlayBloc>().add(
+                const GamePlayEvent.sendEmote(Emote.thinking),
               ),
         ),
       ],

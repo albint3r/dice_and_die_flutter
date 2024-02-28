@@ -7,6 +7,7 @@ import 'package:web_socket_channel/src/channel.dart';
 import '../../domain/core/types.dart';
 import '../../domain/game2/entities/game.dart';
 import '../../domain/game2/entities/player.dart';
+import '../../domain/game2/enums/emote.dart';
 import '../../domain/game2/errors/errors.dart';
 import '../../domain/game2/schemas/response.dart';
 import '../../domain/game2/use_case/i_game_play_data_source.dart';
@@ -37,8 +38,8 @@ class GamePlayFacadeImpl implements IGamePlayFacade {
   void selectColumn(int index) => _channel.sink.add('{"event": "$index"}');
 
   @override
-  void sendEmote() {
-    // TODO: implement sendEmote
+  void sendEmote(Emote emote) {
+    _channel.sink.add('{"event": "emote", "extras":{"emote":"${emote.name}"}}');
   }
 
   @override
@@ -65,6 +66,4 @@ class GamePlayFacadeImpl implements IGamePlayFacade {
       "You don't have a winner in the get Winner Player.",
     );
   }
-
-
 }

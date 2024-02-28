@@ -14,7 +14,7 @@ class GamePlayEvent with _$GamePlayEvent {
 
   const factory GamePlayEvent.getWinnerPlayer() = _GetWinnerPlayer;
 
-  const factory GamePlayEvent.sendEmote(int index) = _SendEmote;
+  const factory GamePlayEvent.sendEmote(Emote chatEmote) = _SendEmote;
 
   const factory GamePlayEvent.disconnect() = _Disconnect;
 }

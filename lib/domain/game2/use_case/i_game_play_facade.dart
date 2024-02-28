@@ -2,6 +2,7 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../entities/game.dart';
 import '../entities/player.dart';
+import '../enums/emote.dart';
 import '../schemas/response.dart';
 
 abstract interface class IGamePlayFacade {
@@ -17,7 +18,7 @@ abstract interface class IGamePlayFacade {
 
   void selectColumn(int index);
 
-  void sendEmote();
+  void sendEmote(Emote emote);
 
   (Player, Player?) getWinnerPlayer(Game game, Player player);
 }

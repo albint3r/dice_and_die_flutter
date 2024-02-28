@@ -5,6 +5,7 @@ import 'package:web_socket_channel/status.dart' as status;
 
 import '../../domain/game2/entities/game.dart';
 import '../../domain/game2/entities/player.dart';
+import '../../domain/game2/enums/emote.dart';
 import '../../domain/game2/errors/errors.dart';
 import '../../domain/game2/use_case/i_game_play_facade.dart';
 import '../../injectables.dart';
@@ -150,9 +151,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
       );
     });
     on<_SendEmote>((event, emit) async {
-      print('*-' * 100);
-      print('Index->${event.index}');
-      print('*-' * 100);
+      facade.sendEmote(event.chatEmote);
     });
   }
 }
