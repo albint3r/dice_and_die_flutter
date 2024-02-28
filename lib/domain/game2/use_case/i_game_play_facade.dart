@@ -22,5 +22,5 @@ abstract interface class IGamePlayFacade {
 
   (Player, Player?) getWinnerPlayer(Game game, Player player);
 
-  void listeningChatMessage(ResponseGame response);
+  ResponseEmoteExtras? listeningChatMessage(ResponseGame response);
 }

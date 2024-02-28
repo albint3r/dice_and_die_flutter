@@ -7,6 +7,7 @@ class GamePlayState with _$GamePlayState {
     Game? game,
     Player? player,
     Player? opponentPlayer,
+    ResponseEmoteExtras? emoteExtras
   }) = _GamePlayState;
 
   factory GamePlayState.initial() => const GamePlayState(

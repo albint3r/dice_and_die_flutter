@@ -8,6 +8,7 @@ import '../../domain/core/types.dart';
 import '../../domain/game2/entities/game.dart';
 import '../../domain/game2/entities/player.dart';
 import '../../domain/game2/enums/emote.dart';
+import '../../domain/game2/enums/enum_game_event.dart';
 import '../../domain/game2/errors/errors.dart';
 import '../../domain/game2/schemas/response.dart';
 import '../../domain/game2/use_case/i_game_play_data_source.dart';
@@ -68,25 +69,21 @@ class GamePlayFacadeImpl implements IGamePlayFacade {
   }
 
   @override
-  void listeningChatMessage(ResponseGame response) {
-    if (response.message == 'emote') {
-      ResponseEmoteExtras responseEmoteExtras;
+  ResponseEmoteExtras? listeningChatMessage(ResponseGame response) {
+    if (response.message == EnumGameEvent.emote.name) {
+      ResponseEmoteExtras emoteExtras;
       final extras = response.extras;
       try {
-        responseEmoteExtras = ResponseEmoteExtras.fromJson(extras);
+        emoteExtras = ResponseEmoteExtras.fromJson(extras);
       } catch (e) {
-        responseEmoteExtras = ResponseEmoteExtras(
+        emoteExtras = ResponseEmoteExtras(
           emote: Emote.invalidInputEvent,
           playerId: '',
           time: DateTime.now(),
         );
-        if(responseEmoteExtras.emote != Emote.invalidInputEvent) {
-
-        }
       }
-
-      print('responseEmoteExtras->$responseEmoteExtras');
-      print('*-' * 100);
+      if (emoteExtras.emote != Emote.invalidInputEvent) return emoteExtras;
     }
+    return null;
   }
 }

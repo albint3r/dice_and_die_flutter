@@ -7,6 +7,7 @@ import '../../domain/game2/entities/game.dart';
 import '../../domain/game2/entities/player.dart';
 import '../../domain/game2/enums/emote.dart';
 import '../../domain/game2/errors/errors.dart';
+import '../../domain/game2/schemas/response.dart';
 import '../../domain/game2/use_case/i_game_play_facade.dart';
 import '../../injectables.dart';
 import '../../presentation/core/router/app_router.dart';
@@ -32,12 +33,16 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         channel.stream,
         onData: (data) {
           final response = facade.loadGamePlay(data);
-          facade.listeningChatMessage(response);
+          final emoteExtras = facade.listeningChatMessage(response);
+          print('*-' * 100);
+          print('emoteExtras->$emoteExtras');
+          print('*-' * 100);
           return state.copyWith(
             isLoading: false,
             game: response.game,
             player: response.game.p1,
             opponentPlayer: response.game.p2,
+            emoteExtras: emoteExtras,
           );
         },
       ).whenComplete(
@@ -76,12 +81,16 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         channel.stream,
         onData: (data) {
           final response = facade.loadGamePlay(data);
-          facade.listeningChatMessage(response);
+          final emoteExtras = facade.listeningChatMessage(response);
+          print('*-' * 100);
+          print('emoteExtras->$emoteExtras');
+          print('*-' * 100);
           return state.copyWith(
             isLoading: false,
             game: response.game,
             player: response.game.p2,
             opponentPlayer: response.game.p1,
+            emoteExtras: emoteExtras,
           );
         },
       ).whenComplete(
