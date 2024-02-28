@@ -50,7 +50,10 @@ class _PlayDieState extends State<PlayDie> with SingleTickerProviderStateMixin {
 
   void _stopAnimation() {
     final state = context.watch<GamePlayBloc>().state;
-    if (state.game!.gameState == EnumGameState.selectColumn) {
+    // have null emote extras avoid the emote event trigger the sound
+    // of the throw dice.
+    if (state.game!.gameState == EnumGameState.selectColumn &&
+        state.emoteExtras == null) {
       context.read<SoundsEffectsBloc>().add(
             const SoundsEffectsEvent.stopRollDice(),
           );

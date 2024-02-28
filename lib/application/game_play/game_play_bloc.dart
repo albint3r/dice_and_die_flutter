@@ -82,15 +82,19 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         onData: (data) {
           final response = facade.loadGamePlay(data);
           final emoteExtras = facade.listeningChatMessage(response);
-          print('*-' * 100);
-          print('emoteExtras->$emoteExtras');
-          print('*-' * 100);
+          // Send only emote if exist. This helps to avoid the dice
+          // roll again and make the sound affect.
+          if (emoteExtras is ResponseEmoteExtras) {
+            return state.copyWith(
+              emoteExtras: emoteExtras,
+            );
+          }
           return state.copyWith(
             isLoading: false,
             game: response.game,
             player: response.game.p2,
             opponentPlayer: response.game.p1,
-            emoteExtras: emoteExtras,
+            emoteExtras: null,
           );
         },
       ).whenComplete(
