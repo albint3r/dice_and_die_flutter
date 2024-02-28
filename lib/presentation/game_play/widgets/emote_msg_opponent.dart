@@ -6,6 +6,7 @@ import '../../../domain/game2/enums/emote.dart';
 import '../../../domain/game2/schemas/response.dart';
 import '../../../gen/assets.gen.dart';
 
+// TODO: REFACTORIZAR ESTA EN FUNCIOES MAS SIMPLES y su funcion clon
 class EmoteMsgOpponent extends StatelessWidget {
   const EmoteMsgOpponent(this.emoteExtras);
 
@@ -41,7 +42,10 @@ class EmoteMsgOpponent extends StatelessWidget {
       opacity: state.isVisibleOpponentEmote ? 1.0 : 0.0,
       duration: const Duration(milliseconds: 500),
       child: Center(
-        child: getEmote(emoteExtras.emote),
+        child: SizedBox(
+          width: 200,
+          child: getEmote(emoteExtras.emote),
+        ),
       ),
     );
   }

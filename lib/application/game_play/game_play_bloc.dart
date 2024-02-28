@@ -19,6 +19,7 @@ part 'game_play_event.dart';
 
 part 'game_play_state.dart';
 
+// TODO: REFACTORIZAR ESTA EN FUNCIOES MAS SIMPLES
 @injectable
 class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
   GamePlayBloc(IGamePlayFacade facade) : super(GamePlayState.initial()) {
@@ -181,7 +182,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
       );
     });
     on<_SendEmote>((event, emit) async {
-        facade.sendEmote(event.chatEmote);
+      facade.sendEmote(event.chatEmote);
     });
     on<_ShowEmotePlayer>((event, emit) async {
       emit(

@@ -23,8 +23,19 @@ class BodyGamePlay extends StatelessWidget {
       );
     }
     if (isWaitingOpponent) {
-      return const WaitingGameRoom();
+      // todo: REFACTORIZAR LOS LISTENERS EN FUNCIONES QUE SE REPITEN
+      return BlocListener<GamePlayBloc, GamePlayState>(
+        listenWhen: (pre, curr) {
+          return pre.game?.gameState != curr.game?.gameState &&
+              curr.game?.gameState == EnumGameState.rollDice;
+        },
+        listener: (context, state) => context.read<SoundsEffectsBloc>().add(
+              const SoundsEffectsEvent.playRollDice(),
+            ),
+        child: const WaitingGameRoom(),
+      );
     }
+    // todo: REFACTORIZAR LOS LISTENERS EN FUNCIONES QUE SE REPITEN
     return MultiBlocListener(
       listeners: [
         BlocListener<GamePlayBloc, GamePlayState>(
@@ -36,9 +47,10 @@ class BodyGamePlay extends StatelessWidget {
               ),
         ),
         BlocListener<GamePlayBloc, GamePlayState>(
-          listenWhen: (pre, curr) =>
-              pre.game?.gameState != curr.game?.gameState &&
-              curr.game?.gameState == EnumGameState.rollDice,
+          listenWhen: (pre, curr) {
+            return pre.game?.gameState != curr.game?.gameState &&
+                curr.game?.gameState == EnumGameState.rollDice;
+          },
           listener: (context, state) => context.read<SoundsEffectsBloc>().add(
                 const SoundsEffectsEvent.playRollDice(),
               ),

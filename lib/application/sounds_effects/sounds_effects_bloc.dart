@@ -12,6 +12,7 @@ part 'sounds_effects_event.dart';
 
 part 'sounds_effects_state.dart';
 
+// TODO: REFACTORIZAR ESTA EN FUNCIOES MAS SIMPLES
 @injectable
 class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
   SoundsEffectsBloc() : super(SoundsEffectsState.initial()) {

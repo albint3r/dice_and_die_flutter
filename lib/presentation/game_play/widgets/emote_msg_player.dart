@@ -6,11 +6,11 @@ import '../../../domain/game2/enums/emote.dart';
 import '../../../domain/game2/schemas/response.dart';
 import '../../../gen/assets.gen.dart';
 
+// TODO: REFACTORIZAR ESTA EN FUNCIOES MAS SIMPLES y su funcion clon
 class EmoteMsgPlayer extends StatelessWidget {
   const EmoteMsgPlayer(this.emoteExtras);
 
   final ResponseEmoteExtras emoteExtras;
-
 
   Widget getEmote(Emote emote) {
     switch (emote) {
