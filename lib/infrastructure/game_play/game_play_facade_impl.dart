@@ -66,4 +66,16 @@ class GamePlayFacadeImpl implements IGamePlayFacade {
       "You don't have a winner in the get Winner Player.",
     );
   }
+
+  @override
+  void listeningChatMessage(ResponseGame response) {
+    if (response.message == 'emote') {
+      final extras = response.extras;
+      print('*-' * 100);
+      print('Extras->$extras');
+      print('Extras->${extras.runtimeType}');
+      print('emote->${extras['emote']}');
+      print('*-' * 100);
+    }
+  }
 }

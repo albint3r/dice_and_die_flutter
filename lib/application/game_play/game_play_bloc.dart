@@ -32,6 +32,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         channel.stream,
         onData: (data) {
           final response = facade.loadGamePlay(data);
+          facade.listeningChatMessage(response);
           return state.copyWith(
             isLoading: false,
             game: response.game,
@@ -75,6 +76,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         channel.stream,
         onData: (data) {
           final response = facade.loadGamePlay(data);
+          facade.listeningChatMessage(response);
           return state.copyWith(
             isLoading: false,
             game: response.game,
