@@ -181,7 +181,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
       );
     });
     on<_SendEmote>((event, emit) async {
-      facade.sendEmote(event.chatEmote);
+        facade.sendEmote(event.chatEmote);
     });
     on<_ShowEmotePlayer>((event, emit) async {
       emit(

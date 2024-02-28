@@ -66,7 +66,6 @@ class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
       emit(
         state.copyWith(
           throwDiceAudioPlayer: AudioPlayer(),
-          isRollDiceSoundComplete: false,
         ),
       );
       await state.throwDiceAudioPlayer!.setSource(

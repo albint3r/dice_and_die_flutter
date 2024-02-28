@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../application/game_play/game_play_bloc.dart';
 import '../../../application/sounds_effects/sounds_effects_bloc.dart';
 import '../../../domain/game2/entities/player.dart';
+import '../../../domain/game2/enums/enum_game_state.dart';
 import '../../../domain/game2/schemas/response.dart';
 import 'first_person/first_person_area.dart';
 import 'second_person/second_person_area.dart';
@@ -32,6 +33,22 @@ class BodyGamePlay extends StatelessWidget {
               curr.game?.winnerPlayer is List<Player?>,
           listener: (context, state) => context.read<GamePlayBloc>().add(
                 const GamePlayEvent.getWinnerPlayer(),
+              ),
+        ),
+        BlocListener<GamePlayBloc, GamePlayState>(
+          listenWhen: (pre, curr) =>
+              pre.game?.gameState != curr.game?.gameState &&
+              curr.game?.gameState == EnumGameState.rollDice,
+          listener: (context, state) => context.read<SoundsEffectsBloc>().add(
+                const SoundsEffectsEvent.playRollDice(),
+              ),
+        ),
+        BlocListener<GamePlayBloc, GamePlayState>(
+          listenWhen: (pre, curr) =>
+              pre.game?.gameState != curr.game?.gameState &&
+              curr.game?.gameState == EnumGameState.selectColumn,
+          listener: (context, state) => context.read<SoundsEffectsBloc>().add(
+                const SoundsEffectsEvent.stopRollDice(),
               ),
         ),
         BlocListener<SoundsEffectsBloc, SoundsEffectsState>(
