@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 
 import '../../../../application/game_play/game_play_bloc.dart';
 import '../../../../domain/game2/entities/player.dart';
+import '../../../../domain/game2/schemas/response.dart';
 import '../../../core/theme/const_values.dart';
 import '../game_board.dart';
 import '../play_die.dart';
@@ -28,34 +29,45 @@ class FirstPersonArea extends StatelessWidget {
       return SizedBox(
         height: heightWithoutBottomBar,
         width: size.width,
-        child: Column(
+        child: Stack(
           children: [
-            GameBoard(
-              color: colorScheme.onSecondary,
-              player: player,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  PlayerColumn(index: 1, column: columns[1]!),
-                  PlayerColumn(index: 2, column: columns[2]!),
-                  PlayerColumn(index: 3, column: columns[3]!),
-                ],
-              ),
-            ),
-            Row(
+            Column(
               children: [
-                TurnPlayerIndicator(
-                  isTurn: state.game?.currentPlayer == player,
-                ),
-                PlayDie(
-                  number: player.die.currentNumber,
+                GameBoard(
+                  color: colorScheme.onSecondary,
                   player: player,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      PlayerColumn(index: 1, column: columns[1]!),
+                      PlayerColumn(index: 2, column: columns[2]!),
+                      PlayerColumn(index: 3, column: columns[3]!),
+                    ],
+                  ),
                 ),
-                // this space is to fill the empty space and have 3 columns
-                const Expanded(child: SizedBox()),
+                Row(
+                  children: [
+                    TurnPlayerIndicator(
+                      isTurn: state.game?.currentPlayer == player,
+                    ),
+                    PlayDie(
+                      number: player.die.currentNumber,
+                      player: player,
+                    ),
+                    // this space is to fill the empty space and have 3 columns
+                    const Expanded(child: SizedBox()),
+                  ],
+                ),
+                const Gap(50),
               ],
             ),
-            const Gap(50),
+            if (state.emoteExtras is ResponseEmoteExtras)
+              Center(
+                child: Container(
+                  color: Colors.red,
+                  child: Text('Emote:${state.emoteExtras?.emote}'),
+                ),
+              ),
           ],
         ),
       );
