@@ -34,15 +34,24 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         onData: (data) {
           final response = facade.loadGamePlay(data);
           final emoteExtras = facade.listeningChatMessage(response);
-          print('*-' * 100);
-          print('emoteExtras->$emoteExtras');
-          print('*-' * 100);
+
+          if (emoteExtras is ResponseEmoteExtras &&
+              emoteExtras.playerId == state.player?.id) {
+            return state.copyWith(
+              emoteExtrasPlayer: emoteExtras,
+            );
+          }
+          if (emoteExtras is ResponseEmoteExtras &&
+              emoteExtras.playerId == state.opponentPlayer?.id) {
+            return state.copyWith(
+              emoteExtrasOpponent: emoteExtras,
+            );
+          }
           return state.copyWith(
             isLoading: false,
             game: response.game,
             player: response.game.p1,
             opponentPlayer: response.game.p2,
-            emoteExtras: emoteExtras,
           );
         },
       ).whenComplete(
@@ -84,9 +93,16 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
           final emoteExtras = facade.listeningChatMessage(response);
           // Send only emote if exist. This helps to avoid the dice
           // roll again and make the sound affect.
-          if (emoteExtras is ResponseEmoteExtras) {
+          if (emoteExtras is ResponseEmoteExtras &&
+              emoteExtras.playerId == state.player?.id) {
             return state.copyWith(
-              emoteExtras: emoteExtras,
+              emoteExtrasPlayer: emoteExtras,
+            );
+          }
+          if (emoteExtras is ResponseEmoteExtras &&
+              emoteExtras.playerId == state.opponentPlayer?.id) {
+            return state.copyWith(
+              emoteExtrasOpponent: emoteExtras,
             );
           }
           return state.copyWith(
@@ -94,7 +110,6 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
             game: response.game,
             player: response.game.p2,
             opponentPlayer: response.game.p1,
-            emoteExtras: null,
           );
         },
       ).whenComplete(
@@ -167,6 +182,52 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
     });
     on<_SendEmote>((event, emit) async {
       facade.sendEmote(event.chatEmote);
+    });
+    on<_ShowEmotePlayer>((event, emit) async {
+      emit(
+        state.copyWith(
+          isVisiblePlayerEmote: true,
+        ),
+      );
+      await Future.delayed(
+        const Duration(seconds: 2),
+      );
+      emit(
+        state.copyWith(
+          isVisiblePlayerEmote: false,
+        ),
+      );
+      await Future.delayed(
+        const Duration(seconds: 1),
+      );
+      emit(
+        state.copyWith(
+          emoteExtrasPlayer: null,
+        ),
+      );
+    });
+    on<_ShowEmoteOpponent>((event, emit) async {
+      emit(
+        state.copyWith(
+          isVisibleOpponentEmote: true,
+        ),
+      );
+      await Future.delayed(
+        const Duration(seconds: 2),
+      );
+      emit(
+        state.copyWith(
+          isVisibleOpponentEmote: false,
+        ),
+      );
+      await Future.delayed(
+        const Duration(seconds: 1),
+      );
+      emit(
+        state.copyWith(
+          emoteExtrasOpponent: null,
+        ),
+      );
     });
   }
 }

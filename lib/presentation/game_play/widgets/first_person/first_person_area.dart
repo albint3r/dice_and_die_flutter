@@ -6,6 +6,7 @@ import '../../../../application/game_play/game_play_bloc.dart';
 import '../../../../domain/game2/entities/player.dart';
 import '../../../../domain/game2/schemas/response.dart';
 import '../../../core/theme/const_values.dart';
+import '../emote_msg_player.dart';
 import '../game_board.dart';
 import '../play_die.dart';
 import 'player_column.dart';
@@ -61,12 +62,9 @@ class FirstPersonArea extends StatelessWidget {
                 const Gap(50),
               ],
             ),
-            if (state.emoteExtras is ResponseEmoteExtras)
-              Center(
-                child: Container(
-                  color: Colors.red,
-                  child: Text('Emote:${state.emoteExtras?.emote}'),
-                ),
+            if (state.emoteExtrasPlayer is ResponseEmoteExtras)
+              EmoteMsgPlayer(
+                state.emoteExtrasPlayer!,
               ),
           ],
         ),

@@ -16,5 +16,9 @@ class GamePlayEvent with _$GamePlayEvent {
 
   const factory GamePlayEvent.sendEmote(Emote chatEmote) = _SendEmote;
 
+  const factory GamePlayEvent.showEmotePlayer() = _ShowEmotePlayer;
+
+  const factory GamePlayEvent.showEmoteOpponent() = _ShowEmoteOpponent;
+
   const factory GamePlayEvent.disconnect() = _Disconnect;
 }

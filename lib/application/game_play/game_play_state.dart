@@ -7,10 +7,15 @@ class GamePlayState with _$GamePlayState {
     Game? game,
     Player? player,
     Player? opponentPlayer,
-    ResponseEmoteExtras? emoteExtras
+    ResponseEmoteExtras? emoteExtrasPlayer,
+    required bool isVisiblePlayerEmote,
+    ResponseEmoteExtras? emoteExtrasOpponent,
+    required bool isVisibleOpponentEmote,
   }) = _GamePlayState;
 
   factory GamePlayState.initial() => const GamePlayState(
         isLoading: true,
+        isVisiblePlayerEmote: false,
+        isVisibleOpponentEmote: false,
       );
 }

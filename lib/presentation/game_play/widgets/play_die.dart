@@ -53,7 +53,8 @@ class _PlayDieState extends State<PlayDie> with SingleTickerProviderStateMixin {
     // have null emote extras avoid the emote event trigger the sound
     // of the throw dice.
     if (state.game!.gameState == EnumGameState.selectColumn &&
-        state.emoteExtras == null) {
+        (state.emoteExtrasPlayer == null &&
+            state.emoteExtrasOpponent == null)) {
       context.read<SoundsEffectsBloc>().add(
             const SoundsEffectsEvent.stopRollDice(),
           );
