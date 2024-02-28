@@ -33,21 +33,15 @@ class _FloatingActionGamePlayButtonState
       // onPress: _toggle,
       children: [
         SpeedDialChild(
+          label: 'haha',
+          onTap: () => context.read<GamePlayBloc>().add(
+                const GamePlayEvent.sendEmote(Emote.haha),
+              ),
+        ),
+        SpeedDialChild(
           label: 'Hello',
           onTap: () => context.read<GamePlayBloc>().add(
                 const GamePlayEvent.sendEmote(Emote.hello),
-              ),
-        ),
-        SpeedDialChild(
-          label: 'Help',
-          onTap: () => context.read<GamePlayBloc>().add(
-                const GamePlayEvent.sendEmote(Emote.help),
-              ),
-        ),
-        SpeedDialChild(
-          label: 'JaJaJa',
-          onTap: () => context.read<GamePlayBloc>().add(
-                const GamePlayEvent.sendEmote(Emote.jajaja),
               ),
         ),
         SpeedDialChild(
@@ -57,17 +51,35 @@ class _FloatingActionGamePlayButtonState
               ),
         ),
         SpeedDialChild(
+          label: 'OMG',
+          onTap: () => context.read<GamePlayBloc>().add(
+                const GamePlayEvent.sendEmote(Emote.omg),
+              ),
+        ),
+        SpeedDialChild(
           label: 'Sorry',
           onTap: () => context.read<GamePlayBloc>().add(
                 const GamePlayEvent.sendEmote(Emote.sorry),
               ),
         ),
         SpeedDialChild(
-          label: 'Thinking',
+          label: 'Wow',
           onTap: () => context.read<GamePlayBloc>().add(
-                const GamePlayEvent.sendEmote(Emote.thinking),
+                const GamePlayEvent.sendEmote(Emote.wow),
               ),
         ),
+        SpeedDialChild(
+          label: 'WTF',
+          onTap: () => context.read<GamePlayBloc>().add(
+                const GamePlayEvent.sendEmote(Emote.wtf),
+              ),
+        ),
+        SpeedDialChild(
+          label: 'Yes',
+          onTap: () => context.read<GamePlayBloc>().add(
+                const GamePlayEvent.sendEmote(Emote.yes),
+              ),
+        )
       ],
       child: const Icon(Icons.chat),
     );

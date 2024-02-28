@@ -1,12 +1,14 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 enum Emote {
+  haha,
   hello,
-  help,
+  nice,
+  omg,
   @JsonValue('invalid_input_event')
   invalidInputEvent,
-  jajaja,
-  nice,
   sorry,
-  thinking,
+  wow,
+  wtf,
+  yes,
 }
