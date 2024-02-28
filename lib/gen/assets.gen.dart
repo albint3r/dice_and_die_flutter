@@ -20,6 +20,8 @@ class $AssetsImagesGen {
   AssetGenImage get backgroundWin =>
       const AssetGenImage('assets/images/background_win.png');
 
+  $AssetsImagesEmotesGen get emotes => const $AssetsImagesEmotesGen();
+
   /// File path: assets/images/monetface.png
   AssetGenImage get monetface =>
       const AssetGenImage('assets/images/monetface.png');
@@ -55,6 +57,42 @@ class $AssetsSoundsGen {
   /// List of all assets
   List<String> get values =>
       [diceRandomRollingEffect, diceRoll, pianoKey, slash1Sound];
+}
+
+class $AssetsImagesEmotesGen {
+  const $AssetsImagesEmotesGen();
+
+  /// File path: assets/images/emotes/haha.png
+  AssetGenImage get haha =>
+      const AssetGenImage('assets/images/emotes/haha.png');
+
+  /// File path: assets/images/emotes/hello.png
+  AssetGenImage get hello =>
+      const AssetGenImage('assets/images/emotes/hello.png');
+
+  /// File path: assets/images/emotes/nice.png
+  AssetGenImage get nice =>
+      const AssetGenImage('assets/images/emotes/nice.png');
+
+  /// File path: assets/images/emotes/omg.png
+  AssetGenImage get omg => const AssetGenImage('assets/images/emotes/omg.png');
+
+  /// File path: assets/images/emotes/sorry.png
+  AssetGenImage get sorry =>
+      const AssetGenImage('assets/images/emotes/sorry.png');
+
+  /// File path: assets/images/emotes/wow.png
+  AssetGenImage get wow => const AssetGenImage('assets/images/emotes/wow.png');
+
+  /// File path: assets/images/emotes/wtf.png
+  AssetGenImage get wtf => const AssetGenImage('assets/images/emotes/wtf.png');
+
+  /// File path: assets/images/emotes/yes.png
+  AssetGenImage get yes => const AssetGenImage('assets/images/emotes/yes.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values =>
+      [haha, hello, nice, omg, sorry, wow, wtf, yes];
 }
 
 class Assets {

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/game_play/game_play_bloc.dart';
-import '../../../application/sounds_effects/sounds_effects_bloc.dart';
 import '../../../domain/game2/entities/player.dart';
 import '../../../domain/game2/enums/enum_game_state.dart';
 import '../../core/design_system/text/titleh1.dart';
@@ -42,19 +41,10 @@ class _PlayDieState extends State<PlayDie> with SingleTickerProviderStateMixin {
       state.game!.gameState == EnumGameState.rollDice;
 
   void _startAnimation() {
-    context.read<SoundsEffectsBloc>().add(
-          const SoundsEffectsEvent.playRollDice(),
-        );
     _controller.repeat();
   }
 
   void _stopAnimation() {
-    final state = context.watch<GamePlayBloc>().state;
-    if (state.game!.gameState == EnumGameState.selectColumn) {
-      context.read<SoundsEffectsBloc>().add(
-            const SoundsEffectsEvent.stopRollDice(),
-          );
-    }
     _controller.stop();
   }
 

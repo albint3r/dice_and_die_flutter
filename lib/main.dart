@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'app.dart';
 import 'application/auth/auth_bloc.dart';
 import 'application/lobby/lobby_bloc.dart';
-import 'application/waiting_room/waiting_room_bloc.dart';
 import 'infrastructure/core/app_bloc_observer.dart';
 import 'injectables.dart';
 
@@ -22,9 +21,6 @@ Future<void> main() async {
             ..add(
               const AuthEvent.validateInitialSessionToken(),
             ),
-        ),
-        BlocProvider(
-          create: (context) => getIt<WaitingRoomBloc>(),
         ),
         BlocProvider(
           create: (context) => getIt<LobbyBloc>(),

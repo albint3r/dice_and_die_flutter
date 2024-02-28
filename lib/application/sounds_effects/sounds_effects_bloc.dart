@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:l/l.dart';
 
-import '../../domain/game/errors.dart';
+import '../../domain/game2/errors/errors.dart';
 
 part 'sounds_effects_bloc.freezed.dart';
 
@@ -12,6 +12,7 @@ part 'sounds_effects_event.dart';
 
 part 'sounds_effects_state.dart';
 
+// TODO: REFACTORIZAR ESTA EN FUNCIOES MAS SIMPLES
 @injectable
 class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
   SoundsEffectsBloc() : super(SoundsEffectsState.initial()) {
@@ -63,7 +64,6 @@ class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
           'The Sound Controller have Android Problems: $e',
         );
       }
-
       emit(
         state.copyWith(
           throwDiceAudioPlayer: AudioPlayer(),

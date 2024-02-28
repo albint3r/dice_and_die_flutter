@@ -19,3 +19,14 @@ class NoWinnerExistError implements Exception {
     return "[NoWinnerValidator]: $message";
   }
 }
+
+class SoundGameError implements Exception {
+  SoundGameError(this.message);
+
+  final String message;
+
+  @override
+  String toString() {
+    return "[SoundGameError]: $message";
+  }
+}

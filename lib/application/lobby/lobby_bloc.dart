@@ -55,9 +55,6 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
     });
     on<_UpdateLobbyGames>(
       (event, emit) {
-        print('*-'*100);
-        print('_UpdateLobbyGames');
-        print('*-'*100);
         facade.updateLobbyActiveGames();
       },
     );
