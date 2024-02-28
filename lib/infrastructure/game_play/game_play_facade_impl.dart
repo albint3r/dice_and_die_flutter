@@ -70,11 +70,22 @@ class GamePlayFacadeImpl implements IGamePlayFacade {
   @override
   void listeningChatMessage(ResponseGame response) {
     if (response.message == 'emote') {
+      ResponseEmoteExtras responseEmoteExtras;
       final extras = response.extras;
-      print('*-' * 100);
-      print('Extras->$extras');
-      print('Extras->${extras.runtimeType}');
-      print('emote->${extras['emote']}');
+      try {
+        responseEmoteExtras = ResponseEmoteExtras.fromJson(extras);
+      } catch (e) {
+        responseEmoteExtras = ResponseEmoteExtras(
+          emote: Emote.invalidInputEvent,
+          playerId: '',
+          time: DateTime.now(),
+        );
+        if(responseEmoteExtras.emote != Emote.invalidInputEvent) {
+
+        }
+      }
+
+      print('responseEmoteExtras->$responseEmoteExtras');
       print('*-' * 100);
     }
   }
