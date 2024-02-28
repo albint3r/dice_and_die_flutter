@@ -1,5 +1,5 @@
-import '../waiting_room/game.dart';
+import '../game2/entities/game.dart';
 
 typedef Json = Map<String, dynamic>;
-typedef Games = List<Game>;
+
 typedef ActiveGames = Map<String, Game>;
