@@ -6,7 +6,6 @@ import 'package:l/l.dart';
 
 import '../../domain/game2/errors/errors.dart';
 
-
 part 'sounds_effects_bloc.freezed.dart';
 
 part 'sounds_effects_event.dart';
@@ -64,10 +63,10 @@ class SoundsEffectsBloc extends Bloc<SoundsEffectsEvent, SoundsEffectsState> {
           'The Sound Controller have Android Problems: $e',
         );
       }
-
       emit(
         state.copyWith(
           throwDiceAudioPlayer: AudioPlayer(),
+          isRollDiceSoundComplete: false,
         ),
       );
       await state.throwDiceAudioPlayer!.setSource(
