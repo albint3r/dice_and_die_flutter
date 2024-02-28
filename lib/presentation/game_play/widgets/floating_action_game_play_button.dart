@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
-import '../../core/design_system/text/text_body.dart';
+import '../../../application/game_play/game_play_bloc.dart';
 
 class FloatingActionGamePlayButton extends StatefulWidget {
   const FloatingActionGamePlayButton({super.key});
@@ -15,8 +16,6 @@ class _FloatingActionGamePlayButtonState
     extends State<FloatingActionGamePlayButton> {
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
 
-  void _toggle() => setState(() => isDialOpen.value = !isDialOpen.value);
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -26,14 +25,22 @@ class _FloatingActionGamePlayButtonState
       curve: Curves.bounceIn,
       elevation: 5,
       backgroundColor: colorScheme.onSecondary,
+      overlayOpacity: .5,
+      overlayColor: colorScheme.onBackground,
       openCloseDial: isDialOpen,
-      onPress: _toggle,
+      // onPress: _toggle,
       children: [
         SpeedDialChild(
-          child: const Icon(Icons.send),
+          label: 'JaJaJa',
+          onTap: () => context.read<GamePlayBloc>().add(
+                const GamePlayEvent.sendEmote(1),
+              ),
         ),
         SpeedDialChild(
-          child: const Icon(Icons.money),
+          label: 'Sorry',
+          onTap: () => context.read<GamePlayBloc>().add(
+                const GamePlayEvent.sendEmote(2),
+              ),
         ),
       ],
       child: const Icon(Icons.chat),

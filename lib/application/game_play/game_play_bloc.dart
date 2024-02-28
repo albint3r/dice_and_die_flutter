@@ -149,5 +149,10 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         const LobbyEvent.updateLobbyGames(),
       );
     });
+    on<_SendEmote>((event, emit) async {
+      print('*-' * 100);
+      print('Index->${event.index}');
+      print('*-' * 100);
+    });
   }
 }
