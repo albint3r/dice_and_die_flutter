@@ -19,12 +19,21 @@ class BodyGamePlay extends StatelessWidget {
     final isWaitingOpponent = gamePlay.game?.p2 == null;
     if (gamePlay.existGameError) {
       return const WaitingGameRoom(
-        text: 'Room not longer exist.\nYou will be return to the lobby',
+        text: 'Connection Fail.\nYou will be return to the lobby',
         isButton: false,
       );
     }
     if (gamePlay.isLoading) {
-      return const WaitingGameRoom(text: 'Validating Game Room...');
+      return BlocListener<GamePlayBloc, GamePlayState>(
+        listenWhen: (pre, curr) {
+          return pre.game?.gameState != curr.game?.gameState &&
+              curr.game?.gameState == EnumGameState.rollDice;
+        },
+        listener: (context, state) => context.read<SoundsEffectsBloc>().add(
+              const SoundsEffectsEvent.playRollDice(),
+            ),
+        child: const WaitingGameRoom(text: 'Validating Waiting Room'),
+      );
     }
     if (isWaitingOpponent) {
       // todo: REFACTORIZAR LOS LISTENERS EN FUNCIONES QUE SE REPITEN
