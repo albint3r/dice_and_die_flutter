@@ -24,8 +24,7 @@ part 'game_play_state.dart';
 class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
   GamePlayBloc(IGamePlayFacade facade) : super(GamePlayState.initial()) {
     on<_CreateGame>((event, emit) async {
-      final randomId = facade.generateRandomId();
-      final channel = facade.getGamePlayChannel(randomId);
+      final channel = facade.getGamePlayChannel('new_game');
       await channel.ready;
       // Just notify the lobby it creates a new game
       final lobby = getIt<LobbyBloc>();
@@ -83,62 +82,75 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
       );
     });
     on<_JoinGame>((event, emit) async {
-      final channel = facade.getGamePlayChannel(event.game.gameId);
-      // Just notify the lobby a new user enter to the game.
-      final lobby = getIt<LobbyBloc>();
-      lobby.add(const LobbyEvent.updateLobbyGames());
-      await emit.forEach(
-        channel.stream,
-        onData: (data) {
-          final response = facade.loadGamePlay(data);
-          final emoteExtras = facade.listeningChatMessage(response);
-          // Send only emote if exist. This helps to avoid the dice
-          // roll again and make the sound affect.
-          if (emoteExtras is ResponseEmoteExtras &&
-              emoteExtras.playerId == state.player?.id) {
+      try {
+        final channel = facade.getGamePlayChannel(event.game.gameId);
+        await channel.ready;
+        // Just notify the lobby a new user enter to the game.
+        final lobby = getIt<LobbyBloc>();
+        lobby.add(const LobbyEvent.updateLobbyGames());
+        await emit.forEach(
+          channel.stream,
+          onData: (data) {
+            final response = facade.loadGamePlay(data);
+            final emoteExtras = facade.listeningChatMessage(response);
+            // Send only emote if exist. This helps to avoid the dice
+            // roll again and make the sound affect.
+            if (emoteExtras is ResponseEmoteExtras &&
+                emoteExtras.playerId == state.player?.id) {
+              return state.copyWith(
+                emoteExtrasPlayer: emoteExtras,
+              );
+            }
+            if (emoteExtras is ResponseEmoteExtras &&
+                emoteExtras.playerId == state.opponentPlayer?.id) {
+              return state.copyWith(
+                emoteExtrasOpponent: emoteExtras,
+              );
+            }
             return state.copyWith(
-              emoteExtrasPlayer: emoteExtras,
+              isLoading: false,
+              game: response.game,
+              player: response.game.p2,
+              opponentPlayer: response.game.p1,
             );
-          }
-          if (emoteExtras is ResponseEmoteExtras &&
-              emoteExtras.playerId == state.opponentPlayer?.id) {
-            return state.copyWith(
-              emoteExtrasOpponent: emoteExtras,
-            );
-          }
-          return state.copyWith(
-            isLoading: false,
-            game: response.game,
-            player: response.game.p2,
-            opponentPlayer: response.game.p1,
-          );
-        },
-      ).whenComplete(
-        () {
-          final router = getIt<AppRouter>();
-          try {
-            channel.sink.close(status.normalClosure);
-            final player = state.player;
-            final game = state.game;
-            final winnerPlayer = facade.getWinnerPlayer(game!, player!);
-            router.replace(
-              PodiumRoute(
-                game: game,
-                player: player,
-                opponentPlayer: state.opponentPlayer!,
-                winnerPlayer: winnerPlayer,
-              ),
-            );
-          } on NoWinnerExistError catch (_) {
-            emit(
-              state.copyWith(
-                game: null,
-              ),
-            );
-            router.pop();
-          }
-        },
-      );
+          },
+        ).whenComplete(
+          () {
+            final router = getIt<AppRouter>();
+            try {
+              channel.sink.close(status.normalClosure);
+              final player = state.player;
+              final game = state.game;
+              final winnerPlayer = facade.getWinnerPlayer(game!, player!);
+              router.replace(
+                PodiumRoute(
+                  game: game,
+                  player: player,
+                  opponentPlayer: state.opponentPlayer!,
+                  winnerPlayer: winnerPlayer,
+                ),
+              );
+            } on NoWinnerExistError catch (_) {
+              emit(
+                state.copyWith(
+                  game: null,
+                ),
+              );
+              router.pop();
+            }
+          },
+        );
+      } catch (e) {
+        emit(
+          state.copyWith(
+            existGameError: true,
+          ),
+        );
+        await Future.delayed(
+          const Duration(seconds: 3),
+        );
+        getIt<AppRouter>().replaceAll([const LobbyRoute()]);
+      }
     });
     on<_RollDice>((event, emit) async {
       facade.rollDice();
@@ -171,10 +183,10 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
     });
     on<_Disconnect>((event, emit) async {
       facade.channel.closeReason;
-      facade.channel.sink.close(status.normalClosure);
+      await facade.channel.sink.close(status.normalClosure);
       await Future.delayed(
         const Duration(
-          milliseconds: 1500,
+          milliseconds: 500,
         ),
       );
       getIt<LobbyBloc>().add(

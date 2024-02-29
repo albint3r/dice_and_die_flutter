@@ -17,10 +17,14 @@ class BodyGamePlay extends StatelessWidget {
   Widget build(BuildContext context) {
     final gamePlay = context.watch<GamePlayBloc>().state;
     final isWaitingOpponent = gamePlay.game?.p2 == null;
-    if (gamePlay.isLoading) {
-      const Center(
-        child: CircularProgressIndicator(),
+    if (gamePlay.existGameError) {
+      return const WaitingGameRoom(
+        text: 'Room not longer exist.\nYou will be return to the lobby',
+        isButton: false,
       );
+    }
+    if (gamePlay.isLoading) {
+      return const WaitingGameRoom(text: 'Validating Game Room...');
     }
     if (isWaitingOpponent) {
       // todo: REFACTORIZAR LOS LISTENERS EN FUNCIONES QUE SE REPITEN
@@ -32,7 +36,7 @@ class BodyGamePlay extends StatelessWidget {
         listener: (context, state) => context.read<SoundsEffectsBloc>().add(
               const SoundsEffectsEvent.playRollDice(),
             ),
-        child: const WaitingGameRoom(),
+        child: const WaitingGameRoom(text: 'Waiting Player\nJoin Match'),
       );
     }
     // todo: REFACTORIZAR LOS LISTENERS EN FUNCIONES QUE SE REPITEN
