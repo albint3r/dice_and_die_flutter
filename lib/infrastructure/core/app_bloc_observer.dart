@@ -38,7 +38,7 @@ class AppBlocObserver extends BlocObserver {
         ..showSnackBar(
           SnackBar(
             content: Text(
-              message ?? 'Ocurrio un error inesperado',
+              message ?? '[Bloc Error] $error',
               style: TextStyle(
                 color: theme.colorScheme.onErrorContainer,
               ),

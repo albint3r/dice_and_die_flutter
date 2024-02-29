@@ -7,6 +7,7 @@ class GamePlayState with _$GamePlayState {
     Game? game,
     Player? player,
     Player? opponentPlayer,
+    required bool existGameError,
     ResponseEmoteExtras? emoteExtrasPlayer,
     required bool isVisiblePlayerEmote,
     ResponseEmoteExtras? emoteExtrasOpponent,
@@ -17,5 +18,6 @@ class GamePlayState with _$GamePlayState {
         isLoading: true,
         isVisiblePlayerEmote: false,
         isVisibleOpponentEmote: false,
+        existGameError: false,
       );
 }

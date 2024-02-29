@@ -17,6 +17,12 @@ class BodyGamePlay extends StatelessWidget {
   Widget build(BuildContext context) {
     final gamePlay = context.watch<GamePlayBloc>().state;
     final isWaitingOpponent = gamePlay.game?.p2 == null;
+    if (gamePlay.existGameError) {
+      return const WaitingGameRoom(
+        text: 'Room not longer exist.\nYou will be return to the lobby',
+        isButton: false,
+      );
+    }
     if (gamePlay.isLoading) {
       return const WaitingGameRoom(text: 'Validating Game Room...');
     }

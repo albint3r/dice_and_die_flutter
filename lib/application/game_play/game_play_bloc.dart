@@ -84,9 +84,9 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
     });
     on<_JoinGame>((event, emit) async {
       try {
-        print('*|'*100);
+        print('*|' * 100);
         print(state.isLoading);
-        print('*|'*100);
+        print('*|' * 100);
         final channel = facade.getGamePlayChannel(event.game.gameId);
         await channel.ready;
         // Just notify the lobby a new user enter to the game.
@@ -145,6 +145,14 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
           },
         );
       } catch (e) {
+        emit(
+          state.copyWith(
+            existGameError: true,
+          ),
+        );
+        await Future.delayed(
+          const Duration(seconds: 3),
+        );
         getIt<AppRouter>().replaceAll([const LobbyRoute()]);
       }
     });
@@ -182,7 +190,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
       await facade.channel.sink.close(status.normalClosure);
       await Future.delayed(
         const Duration(
-          milliseconds: 1500,
+          milliseconds: 500,
         ),
       );
       getIt<LobbyBloc>().add(
