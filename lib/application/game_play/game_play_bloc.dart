@@ -24,7 +24,6 @@ part 'game_play_state.dart';
 class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
   GamePlayBloc(IGamePlayFacade facade) : super(GamePlayState.initial()) {
     on<_CreateGame>((event, emit) async {
-      // final randomId = facade.generateRandomId();
       final channel = facade.getGamePlayChannel('new_game');
       await channel.ready;
       // Just notify the lobby it creates a new game
@@ -84,9 +83,6 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
     });
     on<_JoinGame>((event, emit) async {
       try {
-        print('*|' * 100);
-        print(state.isLoading);
-        print('*|' * 100);
         final channel = facade.getGamePlayChannel(event.game.gameId);
         await channel.ready;
         // Just notify the lobby a new user enter to the game.
