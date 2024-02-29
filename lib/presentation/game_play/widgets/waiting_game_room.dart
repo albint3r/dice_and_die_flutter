@@ -7,7 +7,13 @@ import '../../core/design_system/buttons/custom_long_button.dart';
 import '../../core/design_system/text/titleh1.dart';
 
 class WaitingGameRoom extends StatelessWidget {
-  const WaitingGameRoom({super.key});
+  const WaitingGameRoom({
+    required this.text,
+    this.isButton = true,
+  });
+
+  final String text;
+  final bool isButton;
 
   @override
   Widget build(BuildContext context) {
@@ -17,19 +23,20 @@ class WaitingGameRoom extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TitleH1(
-            text: 'Waiting Player\nJoin Match',
+            text: text,
             textAlign: TextAlign.center,
             color: colorScheme.onBackground,
           ),
           const Gap(20),
           const CircularProgressIndicator(),
           const Gap(15),
-          CustomLongButton(
-            onPressed: () => context.read<GamePlayBloc>().add(
-                  const GamePlayEvent.disconnect(),
-                ),
-            text: 'Cancel',
-          ),
+          if (isButton)
+            CustomLongButton(
+              onPressed: () => context.read<GamePlayBloc>().add(
+                    const GamePlayEvent.disconnect(),
+                  ),
+              text: 'Cancel',
+            ),
         ],
       ),
     );
