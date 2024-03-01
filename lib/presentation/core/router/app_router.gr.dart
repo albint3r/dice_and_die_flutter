@@ -15,17 +15,12 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    CreateGameRoute.name: (routeData) {
+    CreateOrJoinGameRoute.name: (routeData) {
+      final args = routeData.argsAs<CreateOrJoinGameRouteArgs>(
+          orElse: () => const CreateOrJoinGameRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const CreateGamePage(),
-      );
-    },
-    JoinGameRoute.name: (routeData) {
-      final args = routeData.argsAs<JoinGameRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: JoinGamePage(game: args.game),
+        child: CreateOrJoinGamePage(game: args.game),
       );
     },
     LobbyRoute.name: (routeData) {
@@ -68,45 +63,31 @@ abstract class _$AppRouter extends RootStackRouter {
 }
 
 /// generated route for
-/// [CreateGamePage]
-class CreateGameRoute extends PageRouteInfo<void> {
-  const CreateGameRoute({List<PageRouteInfo>? children})
-      : super(
-          CreateGameRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'CreateGameRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [JoinGamePage]
-class JoinGameRoute extends PageRouteInfo<JoinGameRouteArgs> {
-  JoinGameRoute({
-    required Game game,
+/// [CreateOrJoinGamePage]
+class CreateOrJoinGameRoute extends PageRouteInfo<CreateOrJoinGameRouteArgs> {
+  CreateOrJoinGameRoute({
+    Game? game,
     List<PageRouteInfo>? children,
   }) : super(
-          JoinGameRoute.name,
-          args: JoinGameRouteArgs(game: game),
+          CreateOrJoinGameRoute.name,
+          args: CreateOrJoinGameRouteArgs(game: game),
           initialChildren: children,
         );
 
-  static const String name = 'JoinGameRoute';
+  static const String name = 'CreateOrJoinGameRoute';
 
-  static const PageInfo<JoinGameRouteArgs> page =
-      PageInfo<JoinGameRouteArgs>(name);
+  static const PageInfo<CreateOrJoinGameRouteArgs> page =
+      PageInfo<CreateOrJoinGameRouteArgs>(name);
 }
 
-class JoinGameRouteArgs {
-  const JoinGameRouteArgs({required this.game});
+class CreateOrJoinGameRouteArgs {
+  const CreateOrJoinGameRouteArgs({this.game});
 
-  final Game game;
+  final Game? game;
 
   @override
   String toString() {
-    return 'JoinGameRouteArgs{game: $game}';
+    return 'CreateOrJoinGameRouteArgs{game: $game}';
   }
 }
 
