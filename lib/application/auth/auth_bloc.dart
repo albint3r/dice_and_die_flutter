@@ -199,6 +199,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         error: null,
       ),
     );
+    final router = getIt<AppRouter>();
+    router.replaceAll([
+      const LoginRoute(),
+    ]);
   }
 
   Future<void> _signInOrLogin(

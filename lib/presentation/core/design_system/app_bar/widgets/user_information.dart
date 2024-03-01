@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../../application/auth/auth_bloc.dart';
+import '../../../../../domain/auth/app_user.dart';
 import '../../../theme/const_values.dart';
 import '../../text/titleh1.dart';
 import '../../text/titleh2.dart';
@@ -39,7 +40,9 @@ class UserInformation extends StatelessWidget {
                 fontSize: 30,
               ),
               TitleH2.isSecondary(
-                user!.name.isNotEmpty ? user.name : 'Player Unknown',
+                user is AppUser && user.name.isNotEmpty
+                    ? user.name
+                    : 'Player Unknown',
               ),
             ],
           ),
