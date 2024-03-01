@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../application/game_play/game_play_bloc.dart';
-import '../../../../domain/game2/entities/player.dart';
-import '../../../../domain/game2/schemas/response.dart';
+
+import '../../../../domain/game_play/entities/player.dart';
+import '../../../../domain/game_play/schemas/response.dart';
 import '../../../core/theme/const_values.dart';
 import '../emote_msg_player.dart';
 import '../game_board.dart';

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/game_play/game_play_bloc.dart';
 import '../../application/sounds_effects/sounds_effects_bloc.dart';
-import '../../domain/game2/entities/player.dart';
+import '../../domain/game_play/entities/player.dart';
 import '../../injectables.dart';
 import 'widgets/body_game_play.dart';
 import 'widgets/bottom_app_game_bar.dart';
@@ -35,9 +35,10 @@ class CreateGamePage extends StatelessWidget {
           return SafeArea(
             child: Scaffold(
               body: const BodyGamePlay(),
-              bottomNavigationBar:
-                  isOpponentPlayer ? const BottomAppGameBar() : null,
-              floatingActionButton: isOpponentPlayer
+              bottomNavigationBar: isOpponentPlayer && !state.existGameError
+                  ? const BottomAppGameBar()
+                  : null,
+              floatingActionButton: isOpponentPlayer && !state.existGameError
                   ? const FloatingActionGamePlayButton()
                   : null,
               floatingActionButtonLocation:

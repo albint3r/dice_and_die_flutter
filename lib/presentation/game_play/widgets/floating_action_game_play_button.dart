@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import '../../../application/game_play/game_play_bloc.dart';
-import '../../../domain/game2/enums/emote.dart';
+import '../../../domain/game_play/enums/emote.dart';
 
 class FloatingActionGamePlayButton extends StatefulWidget {
   const FloatingActionGamePlayButton({super.key});

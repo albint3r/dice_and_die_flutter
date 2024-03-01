@@ -5,8 +5,8 @@ import 'package:l/l.dart';
 
 import '../../../application/auth/auth_bloc.dart';
 import '../../../domain/auth/app_user.dart';
-import '../../../domain/game2/entities/game.dart';
-import '../../../domain/game2/entities/player.dart';
+import '../../../domain/game_play/entities/game.dart';
+import '../../../domain/game_play/entities/player.dart';
 import '../../auth/login/login_page.dart';
 import '../../auth/signup/signup_page.dart';
 import '../../game_play/create_game_page.dart';

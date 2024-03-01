@@ -1,4 +1,4 @@
-import '../game2/entities/game.dart';
+import '../game_play/entities/game.dart';
 
 typedef Json = Map<String, dynamic>;
 

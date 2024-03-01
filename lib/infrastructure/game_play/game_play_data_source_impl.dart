@@ -2,7 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:web_socket_channel/src/channel.dart';
 
 import '../../application/auth/auth_bloc.dart';
-import '../../domain/game2/use_case/i_game_play_data_source.dart';
+import '../../domain/game_play/use_case/i_game_play_data_source.dart';
 
 @Injectable(as: IGamePlayDataSource)
 class GamePlayDataSourceImpl implements IGamePlayDataSource {

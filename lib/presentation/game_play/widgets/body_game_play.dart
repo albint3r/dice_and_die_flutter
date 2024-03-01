@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/game_play/game_play_bloc.dart';
 import '../../../application/sounds_effects/sounds_effects_bloc.dart';
-import '../../../domain/game2/entities/player.dart';
-import '../../../domain/game2/enums/enum_game_state.dart';
-import '../../../domain/game2/schemas/response.dart';
+
+import '../../../domain/game_play/entities/player.dart';
+import '../../../domain/game_play/enums/enum_game_state.dart';
+import '../../../domain/game_play/schemas/response.dart';
 import 'first_person/first_person_area.dart';
 import 'second_person/second_person_area.dart';
 import 'waiting_game_room.dart';
@@ -32,7 +33,7 @@ class BodyGamePlay extends StatelessWidget {
         listener: (context, state) => context.read<SoundsEffectsBloc>().add(
               const SoundsEffectsEvent.playRollDice(),
             ),
-        child: const WaitingGameRoom(text: 'Validating Waiting Room'),
+        child: const WaitingGameRoom(text: 'Validating\nWaiting Room'),
       );
     }
     if (isWaitingOpponent) {

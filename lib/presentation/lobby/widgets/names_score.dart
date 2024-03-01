@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../domain/game2/entities/game.dart';
+import '../../../domain/game_play/entities/game.dart';
 import '../../core/design_system/text/titleh2.dart';
 
 class NamesScore extends StatelessWidget {

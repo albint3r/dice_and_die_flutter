@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/game_play/game_play_bloc.dart';
-import '../../../../domain/game2/entities/player.dart';
-import '../../../../domain/game2/schemas/response.dart';
+
+import '../../../../domain/game_play/entities/player.dart';
+import '../../../../domain/game_play/schemas/response.dart';
 import '../emote_msg_opponent.dart';
 import '../first_person/turn_player_indicator.dart';
 import '../game_board.dart';

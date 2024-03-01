@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:l/l.dart';
 
-import '../../domain/game2/errors/errors.dart';
+import '../../domain/game_play/errors/errors.dart';
 
 part 'sounds_effects_bloc.freezed.dart';
 

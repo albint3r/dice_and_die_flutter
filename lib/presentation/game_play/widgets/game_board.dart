@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../domain/game2/entities/player.dart';
+import '../../../domain/game_play/entities/player.dart';
 import '../../core/theme/const_values.dart';
 
 class GameBoard extends StatelessWidget {
