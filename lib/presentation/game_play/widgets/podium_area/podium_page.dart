@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../domain/game2/entities/game.dart';
-import '../../../../domain/game2/entities/player.dart';
+
+import '../../../../domain/game_play/entities/game.dart';
+import '../../../../domain/game_play/entities/player.dart';
 import '../../../../gen/assets.gen.dart';
 import 'body_podium_area.dart';
 

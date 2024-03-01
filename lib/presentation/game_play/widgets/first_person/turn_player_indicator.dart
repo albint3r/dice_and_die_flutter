@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/game_play/game_play_bloc.dart';
-import '../../../../domain/game2/enums/enum_game_state.dart';
+import '../../../../domain/game_play/enums/enum_game_state.dart';
 import '../../../core/design_system/text/text_body.dart';
 
 class TurnPlayerIndicator extends StatelessWidget {

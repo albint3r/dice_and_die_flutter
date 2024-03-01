@@ -3,12 +3,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:web_socket_channel/status.dart' as status;
 
-import '../../domain/game2/entities/game.dart';
-import '../../domain/game2/entities/player.dart';
-import '../../domain/game2/enums/emote.dart';
-import '../../domain/game2/errors/errors.dart';
-import '../../domain/game2/schemas/response.dart';
-import '../../domain/game2/use_case/i_game_play_facade.dart';
+import '../../domain/game_play/entities/game.dart';
+import '../../domain/game_play/entities/player.dart';
+import '../../domain/game_play/enums/emote.dart';
+import '../../domain/game_play/errors/errors.dart';
+import '../../domain/game_play/schemas/response.dart';
+import '../../domain/game_play/use_case/i_game_play_facade.dart';
 import '../../injectables.dart';
 import '../../presentation/core/router/app_router.dart';
 import '../lobby/lobby_bloc.dart';
@@ -186,7 +186,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
       await facade.channel.sink.close(status.normalClosure);
       await Future.delayed(
         const Duration(
-          milliseconds: 1500,
+          milliseconds: 500,
         ),
       );
       getIt<LobbyBloc>().add(

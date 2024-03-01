@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../core/types.dart';
-import '../../game2/entities/game.dart';
+import '../../game_play/entities/game.dart';
 
 part 'lobby.freezed.dart';
 

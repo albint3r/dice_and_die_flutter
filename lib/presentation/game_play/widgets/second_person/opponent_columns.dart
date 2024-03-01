@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../domain/game2/entities/b_column.dart';
+import '../../../../domain/game_play/entities/b_column.dart';
 import '../../../core/theme/const_values.dart';
 import '../column_values.dart';
 import '../score_field.dart';

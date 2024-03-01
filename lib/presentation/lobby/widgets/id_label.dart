@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../domain/game2/entities/game.dart';
+import '../../../domain/game_play/entities/game.dart';
 import '../../core/design_system/text/text_body_small.dart';
 
 class IdLabel extends StatelessWidget {

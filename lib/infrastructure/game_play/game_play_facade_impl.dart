@@ -5,14 +5,15 @@ import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/src/channel.dart';
 
 import '../../domain/core/types.dart';
-import '../../domain/game2/entities/game.dart';
-import '../../domain/game2/entities/player.dart';
-import '../../domain/game2/enums/emote.dart';
-import '../../domain/game2/enums/enum_game_event.dart';
-import '../../domain/game2/errors/errors.dart';
-import '../../domain/game2/schemas/response.dart';
-import '../../domain/game2/use_case/i_game_play_data_source.dart';
-import '../../domain/game2/use_case/i_game_play_facade.dart';
+
+import '../../domain/game_play/entities/game.dart';
+import '../../domain/game_play/entities/player.dart';
+import '../../domain/game_play/enums/emote.dart';
+import '../../domain/game_play/enums/enum_game_event.dart';
+import '../../domain/game_play/errors/errors.dart';
+import '../../domain/game_play/schemas/response.dart';
+import '../../domain/game_play/use_case/i_game_play_data_source.dart';
+import '../../domain/game_play/use_case/i_game_play_facade.dart';
 
 @Injectable(as: IGamePlayFacade)
 class GamePlayFacadeImpl implements IGamePlayFacade {

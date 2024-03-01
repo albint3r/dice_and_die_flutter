@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/game_play/game_play_bloc.dart';
-import '../../../domain/game2/enums/emote.dart';
-import '../../../domain/game2/schemas/response.dart';
+import '../../../domain/game_play/enums/emote.dart';
+import '../../../domain/game_play/schemas/response.dart';
 import '../../../gen/assets.gen.dart';
 
 // TODO: REFACTORIZAR ESTA EN FUNCIOES MAS SIMPLES y su funcion clon

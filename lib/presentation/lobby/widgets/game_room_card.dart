@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../domain/game2/entities/game.dart';
+import '../../../domain/game_play/entities/game.dart';
 import '../../core/design_system/cards/custom_waiting_room_card.dart';
 import '../../core/design_system/cards/custom_waiting_room_label_card.dart';
 import '../../core/theme/const_values.dart';
