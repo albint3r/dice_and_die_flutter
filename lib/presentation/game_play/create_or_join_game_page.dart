@@ -13,12 +13,12 @@ import 'widgets/bottom_app_game_bar.dart';
 import 'widgets/floating_action_game_play_button.dart';
 
 @RoutePage()
-class JoinGamePage extends StatelessWidget {
-  const JoinGamePage({
-    required this.game,
+class CreateOrJoinGamePage extends StatelessWidget {
+  const CreateOrJoinGamePage({
+    this.game,
   });
 
-  final Game game;
+  final Game? game;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,9 @@ class JoinGamePage extends StatelessWidget {
         BlocProvider(
           create: (context) => getIt<GamePlayBloc>()
             ..add(
-              GamePlayEvent.joinGame(game),
+              game is Game
+                  ? GamePlayEvent.joinGame(game!)
+                  : const GamePlayEvent.createGame(),
             ),
         ),
         BlocProvider(
@@ -38,13 +40,13 @@ class JoinGamePage extends StatelessWidget {
         builder: (context) {
           final state = context.watch<GamePlayBloc>().state;
           final isOpponentPlayer = state.opponentPlayer is Player;
+          final showBottomAppBar = isOpponentPlayer && !state.existGameError;
           return SafeArea(
             child: Scaffold(
               body: const BodyGamePlay(),
-              bottomNavigationBar: isOpponentPlayer && !state.existGameError
-                  ? const BottomAppGameBar()
-                  : null,
-              floatingActionButton: isOpponentPlayer && !state.existGameError
+              bottomNavigationBar:
+                  showBottomAppBar ? const BottomAppGameBar() : null,
+              floatingActionButton: showBottomAppBar
                   ? const FloatingActionGamePlayButton()
                   : null,
               floatingActionButtonLocation:

@@ -9,8 +9,7 @@ import '../../../domain/game_play/entities/game.dart';
 import '../../../domain/game_play/entities/player.dart';
 import '../../auth/login/login_page.dart';
 import '../../auth/signup/signup_page.dart';
-import '../../game_play/create_game_page.dart';
-import '../../game_play/join_game_page.dart';
+import '../../game_play/create_or_join_game_page.dart';
 import '../../game_play/widgets/podium_area/podium_page.dart';
 import '../../lobby/lobby_page.dart';
 import '../../profile/profile_page.dart';
@@ -31,10 +30,7 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
           page: LobbyRoute.page,
         ),
         AutoRoute(
-          page: CreateGameRoute.page,
-        ),
-        AutoRoute(
-          page: JoinGameRoute.page,
+          page: CreateOrJoinGameRoute.page,
         ),
         AutoRoute(
           page: PodiumRoute.page,

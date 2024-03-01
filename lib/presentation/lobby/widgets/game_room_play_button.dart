@@ -20,7 +20,7 @@ class GameRoomPlayButton extends StatelessWidget {
       onPressed: game.isFull
           ? null
           : () => context.router.push(
-                JoinGameRoute(
+                CreateOrJoinGameRoute(
                   game: game,
                 ),
               ),
