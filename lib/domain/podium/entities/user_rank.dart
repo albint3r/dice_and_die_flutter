@@ -1,6 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../core/types.dart';
+import '../../core/types.dart';
+
+
 
 part 'user_rank.freezed.dart';
 

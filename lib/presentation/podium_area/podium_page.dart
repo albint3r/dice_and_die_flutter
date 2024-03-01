@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../domain/game_play/entities/game.dart';
 import '../../../../domain/game_play/entities/player.dart';
 import '../../../../gen/assets.gen.dart';
+import '../../application/auth/auth_bloc.dart';
 import '../../application/podium/podium_bloc.dart';
 import '../../injectables.dart';
 import 'body_podium_area.dart';
@@ -60,10 +61,12 @@ class PodiumPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final auth = context.watch<AuthBloc>().state;
+    final rankId = auth.appUser?.userLevel.rankId ?? 0;
     return BlocProvider(
       create: (context) => getIt<PodiumBloc>()
         ..add(
-          const PodiumEvent.started(),
+          PodiumEvent.started(rankId),
         ),
       child: Scaffold(
         body: SafeArea(

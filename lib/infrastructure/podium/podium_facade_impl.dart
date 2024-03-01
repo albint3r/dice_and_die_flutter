@@ -1,7 +1,8 @@
 import 'package:injectable/injectable.dart';
 
-import '../../domain/podium/i_podium_data_source.dart';
-import '../../domain/podium/i_podium_facade.dart';
+import '../../domain/podium/entities/user_rank.dart';
+import '../../domain/podium/use_cases/i_podium_data_source.dart';
+import '../../domain/podium/use_cases/i_podium_facade.dart';
 
 @Injectable(as: IPodiumFacade)
 class PodiumFacadeImpl implements IPodiumFacade {
@@ -10,23 +11,20 @@ class PodiumFacadeImpl implements IPodiumFacade {
   final IPodiumDataSource _dataSource;
 
   @override
-  Future<void> getUserRanking() => _dataSource.getUserRanking();
+  Future<UserRank> getUserRanking() => _dataSource.getUserRanking();
 
   @override
-  Future<void> getUserRankingByRank() {
-    // TODO: implement getUserRankingByRank
-    throw UnimplementedError();
-  }
+  Future<UserRank> getUserRankingByRank(int rankId) =>
+      _dataSource.getUserRankingByRank(
+        rankId,
+      );
 
   @override
-  Future<void> getUsersRanking() {
-    // TODO: implement getUsersRanking
-    throw UnimplementedError();
-  }
+  Future<UsersRanks> getUsersRanking() => _dataSource.getUsersRanking();
 
   @override
-  Future<void> getUsersRankingByRank() {
-    // TODO: implement getUsersRankingByRank
-    throw UnimplementedError();
-  }
+  Future<UsersRanks> getUsersRankingByRank(int rankId) =>
+      _dataSource.getUsersRankingByRank(
+        rankId,
+      );
 }
