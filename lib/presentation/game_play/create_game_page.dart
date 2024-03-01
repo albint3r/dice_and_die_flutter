@@ -35,9 +35,10 @@ class CreateGamePage extends StatelessWidget {
           return SafeArea(
             child: Scaffold(
               body: const BodyGamePlay(),
-              bottomNavigationBar:
-                  isOpponentPlayer ? const BottomAppGameBar() : null,
-              floatingActionButton: isOpponentPlayer
+              bottomNavigationBar: isOpponentPlayer && !state.existGameError
+                  ? const BottomAppGameBar()
+                  : null,
+              floatingActionButton: isOpponentPlayer && !state.existGameError
                   ? const FloatingActionGamePlayButton()
                   : null,
               floatingActionButtonLocation:

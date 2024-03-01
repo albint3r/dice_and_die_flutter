@@ -32,7 +32,7 @@ class BodyGamePlay extends StatelessWidget {
         listener: (context, state) => context.read<SoundsEffectsBloc>().add(
               const SoundsEffectsEvent.playRollDice(),
             ),
-        child: const WaitingGameRoom(text: 'Validating Waiting Room'),
+        child: const WaitingGameRoom(text: 'Validating\nWaiting Room'),
       );
     }
     if (isWaitingOpponent) {
