@@ -8,11 +8,12 @@ import '../../../../application/lobby/lobby_bloc.dart';
 
 import '../../../../domain/game_play/entities/player.dart';
 import '../../../../domain/game_play/enums/enum_game_state.dart';
-import '../../../core/design_system/app_bar/widgets/user_level_progress_bar_podium.dart';
-import '../../../core/design_system/buttons/custom_long_button.dart';
-import '../../../core/design_system/text/titleh1.dart';
-import '../../../core/router/app_router.dart';
-import '../../../core/theme/const_values.dart';
+import '../../application/podium/podium_bloc.dart';
+import '../core/design_system/app_bar/widgets/user_level_progress_bar_podium.dart';
+import '../core/design_system/buttons/custom_long_button.dart';
+import '../core/design_system/text/titleh1.dart';
+import '../core/router/app_router.dart';
+import '../core/theme/const_values.dart';
 import 'game_stats_info_container.dart';
 
 class BodyPodiumArea extends StatelessWidget {
@@ -51,6 +52,12 @@ class BodyPodiumArea extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final state = context.watch<PodiumBloc>().state;
+    if (state.isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(

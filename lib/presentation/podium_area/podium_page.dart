@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../domain/game_play/entities/game.dart';
 import '../../../../domain/game_play/entities/player.dart';
 import '../../../../gen/assets.gen.dart';
+import '../../application/podium/podium_bloc.dart';
+import '../../injectables.dart';
 import 'body_podium_area.dart';
 
 @RoutePage()
@@ -21,8 +23,7 @@ class PodiumPage extends StatelessWidget {
   final Player opponentPlayer;
   final (Player, Player?) winnerPlayer;
 
-  @override
-  Widget build(BuildContext context) {
+  BodyPodiumArea _getPodiumArea() {
     final isTie = winnerPlayer is (Player, Player);
     final winner = winnerPlayer.$1;
     final isPlayerWinner = winner == player;
@@ -54,6 +55,21 @@ class PodiumPage extends StatelessWidget {
       opponentPlayer: opponentPlayer,
       backGroundImage: Assets.images.backgroundLose.provider(),
       textImage: Assets.images.youLose.image(),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => getIt<PodiumBloc>()
+        ..add(
+          const PodiumEvent.started(),
+        ),
+      child: Scaffold(
+        body: SafeArea(
+          child: _getPodiumArea(),
+        ),
+      ),
     );
   }
 }
