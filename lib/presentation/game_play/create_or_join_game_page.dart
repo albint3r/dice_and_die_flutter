@@ -27,9 +27,7 @@ class CreateOrJoinGamePage extends StatelessWidget {
         BlocProvider(
           create: (context) => getIt<GamePlayBloc>()
             ..add(
-              game is Game
-                  ? GamePlayEvent.joinGame(game!)
-                  : const GamePlayEvent.createGame(),
+              GamePlayEvent.createOrJoinGame(game),
             ),
         ),
         BlocProvider(

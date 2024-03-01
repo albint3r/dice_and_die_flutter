@@ -14,40 +14,40 @@ import 'waiting_game_room.dart';
 class BodyGamePlay extends StatelessWidget {
   const BodyGamePlay({super.key});
 
+  BlocListener<GamePlayBloc, GamePlayState> _rollDiceListener(
+    String text, {
+    bool isButton = true,
+  }) {
+    return BlocListener<GamePlayBloc, GamePlayState>(
+      listenWhen: (pre, curr) {
+        return pre.game?.gameState != curr.game?.gameState &&
+            curr.game?.gameState == EnumGameState.rollDice;
+      },
+      listener: (context, state) => context.read<SoundsEffectsBloc>().add(
+            const SoundsEffectsEvent.playRollDice(),
+          ),
+      child: WaitingGameRoom(
+        text: text,
+        isButton: isButton,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final gamePlay = context.watch<GamePlayBloc>().state;
     final isWaitingOpponent = gamePlay.game?.p2 == null;
     if (gamePlay.existGameError) {
-      return const WaitingGameRoom(
-        text: 'Connection Fail.\nYou will be return to the lobby',
+      return _rollDiceListener(
+        'Connection failed.\nReturning to the lobby...',
         isButton: false,
       );
     }
     if (gamePlay.isLoading) {
-      return BlocListener<GamePlayBloc, GamePlayState>(
-        listenWhen: (pre, curr) {
-          return pre.game?.gameState != curr.game?.gameState &&
-              curr.game?.gameState == EnumGameState.rollDice;
-        },
-        listener: (context, state) => context.read<SoundsEffectsBloc>().add(
-              const SoundsEffectsEvent.playRollDice(),
-            ),
-        child: const WaitingGameRoom(text: 'Validating\nWaiting Room'),
-      );
+      return _rollDiceListener('Validating\nWaiting Room');
     }
     if (isWaitingOpponent) {
-      // todo: REFACTORIZAR LOS LISTENERS EN FUNCIONES QUE SE REPITEN
-      return BlocListener<GamePlayBloc, GamePlayState>(
-        listenWhen: (pre, curr) {
-          return pre.game?.gameState != curr.game?.gameState &&
-              curr.game?.gameState == EnumGameState.rollDice;
-        },
-        listener: (context, state) => context.read<SoundsEffectsBloc>().add(
-              const SoundsEffectsEvent.playRollDice(),
-            ),
-        child: const WaitingGameRoom(text: 'Waiting Player\nJoin Match'),
-      );
+      return _rollDiceListener('Waiting Player\nJoin Match');
     }
     // todo: REFACTORIZAR LOS LISTENERS EN FUNCIONES QUE SE REPITEN
     return MultiBlocListener(

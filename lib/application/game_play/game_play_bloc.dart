@@ -19,73 +19,17 @@ part 'game_play_event.dart';
 
 part 'game_play_state.dart';
 
-// TODO: REFACTORIZAR ESTA EN FUNCIOES MAS SIMPLES
 @injectable
 class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
   GamePlayBloc(IGamePlayFacade facade) : super(GamePlayState.initial()) {
-    on<_CreateGame>((event, emit) async {
-      final channel = facade.getGamePlayChannel('new_game');
-      await channel.ready;
-      // Just notify the lobby it creates a new game
-      final lobby = getIt<LobbyBloc>();
-      lobby.add(const LobbyEvent.updateLobbyGames());
-      await emit.forEach(
-        channel.stream,
-        onData: (data) {
-          final response = facade.loadGamePlay(data);
-          final emoteExtras = facade.listeningChatMessage(response);
-
-          if (emoteExtras is ResponseEmoteExtras &&
-              emoteExtras.playerId == state.player?.id) {
-            return state.copyWith(
-              emoteExtrasPlayer: emoteExtras,
-            );
-          }
-          if (emoteExtras is ResponseEmoteExtras &&
-              emoteExtras.playerId == state.opponentPlayer?.id) {
-            return state.copyWith(
-              emoteExtrasOpponent: emoteExtras,
-            );
-          }
-          return state.copyWith(
-            isLoading: false,
-            game: response.game,
-            player: response.game.p1,
-            opponentPlayer: response.game.p2,
-          );
-        },
-      ).whenComplete(
-        () {
-          final router = getIt<AppRouter>();
-          try {
-            channel.sink.close(status.normalClosure);
-            final player = state.player;
-            final game = state.game;
-            final winnerPlayer = facade.getWinnerPlayer(game!, player!);
-            router.replace(
-              PodiumRoute(
-                game: game,
-                player: player,
-                opponentPlayer: state.opponentPlayer!,
-                winnerPlayer: winnerPlayer,
-              ),
-            );
-          } on NoWinnerExistError catch (_) {
-            emit(
-              state.copyWith(
-                game: null,
-              ),
-            );
-            router.replaceAll([const LobbyRoute()]);
-          }
-        },
-      );
-    });
-    on<_JoinGame>((event, emit) async {
+    on<_CreateOrJoinGame>((event, emit) async {
       try {
-        final channel = facade.getGamePlayChannel(event.game.gameId);
+        final eGame = event.game;
+        final channel = facade.getGamePlayChannel(
+          eGame is Game ? eGame.gameId : 'new_game',
+        );
         await channel.ready;
-        // Just notify the lobby a new user enter to the game.
+        // Just notify the lobby it creates a new game
         final lobby = getIt<LobbyBloc>();
         lobby.add(const LobbyEvent.updateLobbyGames());
         await emit.forEach(
@@ -93,8 +37,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
           onData: (data) {
             final response = facade.loadGamePlay(data);
             final emoteExtras = facade.listeningChatMessage(response);
-            // Send only emote if exist. This helps to avoid the dice
-            // roll again and make the sound affect.
+
             if (emoteExtras is ResponseEmoteExtras &&
                 emoteExtras.playerId == state.player?.id) {
               return state.copyWith(
@@ -110,37 +53,30 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
             return state.copyWith(
               isLoading: false,
               game: response.game,
-              player: response.game.p2,
-              opponentPlayer: response.game.p1,
+              player: eGame is Game ? response.game.p2 : response.game.p1,
+              opponentPlayer:
+                  eGame is Game ? response.game.p1 : response.game.p2,
             );
           },
         ).whenComplete(
           () {
-            final router = getIt<AppRouter>();
             try {
-              channel.sink.close(status.normalClosure);
-              final player = state.player;
-              final game = state.game;
-              final winnerPlayer = facade.getWinnerPlayer(game!, player!);
-              router.replace(
-                PodiumRoute(
-                  game: game,
-                  player: player,
-                  opponentPlayer: state.opponentPlayer!,
-                  winnerPlayer: winnerPlayer,
-                ),
-              );
+              _getWinnerPlayer(facade);
             } on NoWinnerExistError catch (_) {
               emit(
                 state.copyWith(
                   game: null,
                 ),
               );
-              router.pop();
+              getIt<AppRouter>().replaceAll([
+                const LobbyRoute(),
+              ]);
             }
           },
         );
       } catch (e) {
+        // This error is related usually when the user is trying
+        // to connect to a game corps.
         emit(
           state.copyWith(
             existGameError: true,
@@ -159,42 +95,22 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
       facade.selectColumn(event.index);
     });
     on<_GetWinnerPlayer>((event, emit) async {
-      facade.getWinnerPlayer(state.game!, state.player!);
-      try {
-        facade.channel.closeReason;
-        facade.channel.sink.close(status.normalClosure);
-      } catch (e) {
-        print('-*' * 100);
-        print('_GetWinnerPlayer ERROR: $e');
-        print('-*' * 100);
-      }
-      final player = state.player;
-      final game = state.game;
-      final winnerPlayer = facade.getWinnerPlayer(game!, player!);
-      final router = getIt<AppRouter>();
-      router.replace(
-        PodiumRoute(
-          game: game,
-          player: player,
-          opponentPlayer: state.opponentPlayer!,
-          winnerPlayer: winnerPlayer,
-        ),
-      );
+      _getWinnerPlayer(facade);
+    });
+    on<_SendEmote>((event, emit) async {
+      facade.sendEmote(event.chatEmote);
     });
     on<_Disconnect>((event, emit) async {
       facade.channel.closeReason;
       await facade.channel.sink.close(status.normalClosure);
       await Future.delayed(
         const Duration(
-          milliseconds: 500,
+          milliseconds: 300,
         ),
       );
       getIt<LobbyBloc>().add(
         const LobbyEvent.updateLobbyGames(),
       );
-    });
-    on<_SendEmote>((event, emit) async {
-      facade.sendEmote(event.chatEmote);
     });
     on<_ShowEmotePlayer>((event, emit) async {
       emit(
@@ -242,5 +158,22 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         ),
       );
     });
+  }
+
+  void _getWinnerPlayer(IGamePlayFacade facade) {
+    facade.channel.closeReason;
+    facade.channel.sink.close(status.normalClosure);
+    final player = state.player;
+    final game = state.game;
+    final winnerPlayer = facade.getWinnerPlayer(game!, player!);
+    final router = getIt<AppRouter>();
+    router.replace(
+      PodiumRoute(
+        game: game,
+        player: player,
+        opponentPlayer: state.opponentPlayer!,
+        winnerPlayer: winnerPlayer,
+      ),
+    );
   }
 }
