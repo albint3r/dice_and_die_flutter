@@ -1,9 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../../application/auth/auth_bloc.dart';
 import '../../../router/app_router.dart';
 import '../../buttons/custom_long_button.dart';
+import '../../buttons/custom_text_button.dart';
 
 class ButtonsContainer extends StatelessWidget {
   const ButtonsContainer({super.key});
@@ -28,15 +31,27 @@ class ButtonsContainer extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            CustomLongButton(
-              text: 'Profile',
-              width: size.width * .80,
-              onPressed: () => context.router.push(const ProfileRoute()),
+            Expanded(
+              child: Column(
+                children: [
+                  CustomLongButton(
+                    text: 'Profile',
+                    width: size.width * .80,
+                    onPressed: () => context.router.push(const ProfileRoute()),
+                  ),
+                  const Gap(10),
+                  CustomLongButton(
+                    text: 'Ranking',
+                    width: size.width * .80,
+                  ),
+                ],
+              ),
             ),
-            const Gap(10),
-            CustomLongButton(
-              text: 'Ranking',
-              width: size.width * .80,
+            CustomTextButton(
+              text: 'LogOut',
+              onPressed: () => context.read<AuthBloc>().add(
+                    const AuthEvent.logOut(),
+                  ),
             ),
           ],
         ),
