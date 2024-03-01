@@ -29,7 +29,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
           eGame is Game ? eGame.gameId : 'new_game',
         );
         await channel.ready;
-        // Just notify the lobby it creates a new game
+        // Just notify the lobby user creates a new game
         final lobby = getIt<LobbyBloc>();
         lobby.add(const LobbyEvent.updateLobbyGames());
         await emit.forEach(
@@ -102,11 +102,8 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
     });
     on<_Disconnect>((event, emit) async {
       facade.channel.closeReason;
-      await facade.channel.sink.close(status.normalClosure);
-      await Future.delayed(
-        const Duration(
-          milliseconds: 1500,
-        ),
+      await facade.channel.sink.close(
+        status.normalClosure,
       );
       getIt<LobbyBloc>().add(
         const LobbyEvent.updateLobbyGames(),
@@ -167,6 +164,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
     final game = state.game;
     final winnerPlayer = facade.getWinnerPlayer(game!, player!);
     final router = getIt<AppRouter>();
+    // Send user to the podium screen
     router.replace(
       PodiumRoute(
         game: game,

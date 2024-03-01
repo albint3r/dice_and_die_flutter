@@ -49,45 +49,45 @@ class CreateOrJoinGamePage extends StatelessWidget {
           ),
           BlocListener<GamePlayBloc, GamePlayState>(
             listenWhen: (pre, curr) =>
-            pre.game?.winnerPlayer != curr.game?.winnerPlayer &&
+                pre.game?.winnerPlayer != curr.game?.winnerPlayer &&
                 curr.game?.winnerPlayer is List<Player?>,
             listener: (context, state) => context.read<GamePlayBloc>().add(
-              const GamePlayEvent.getWinnerPlayer(),
-            ),
+                  const GamePlayEvent.getWinnerPlayer(),
+                ),
           ),
           BlocListener<GamePlayBloc, GamePlayState>(
             listenWhen: (pre, curr) =>
-            pre.game?.gameState != curr.game?.gameState &&
+                pre.game?.gameState != curr.game?.gameState &&
                 curr.game?.gameState == EnumGameState.selectColumn,
             listener: (context, state) => context.read<SoundsEffectsBloc>().add(
-              const SoundsEffectsEvent.stopRollDice(),
-            ),
+                  const SoundsEffectsEvent.stopRollDice(),
+                ),
           ),
           BlocListener<SoundsEffectsBloc, SoundsEffectsState>(
             listenWhen: (pre, curr) =>
-            pre.isRollDiceSoundComplete != curr.isRollDiceSoundComplete &&
+                pre.isRollDiceSoundComplete != curr.isRollDiceSoundComplete &&
                 curr.isRollDiceSoundComplete,
             listener: (context, state) => context.read<GamePlayBloc>().add(
-              const GamePlayEvent.rollDice(),
-            ),
+                  const GamePlayEvent.rollDice(),
+                ),
           ),
           BlocListener<GamePlayBloc, GamePlayState>(
             listenWhen: (pre, curr) =>
-            pre.emoteExtrasPlayer != curr.emoteExtrasPlayer &&
+                pre.emoteExtrasPlayer != curr.emoteExtrasPlayer &&
                 curr.emoteExtrasPlayer is ResponseEmoteExtras &&
                 !curr.isVisiblePlayerEmote,
             listener: (context, state) => context.read<GamePlayBloc>().add(
-              const GamePlayEvent.showEmotePlayer(),
-            ),
+                  const GamePlayEvent.showEmotePlayer(),
+                ),
           ),
           BlocListener<GamePlayBloc, GamePlayState>(
             listenWhen: (pre, curr) =>
-            pre.emoteExtrasOpponent != curr.emoteExtrasOpponent &&
+                pre.emoteExtrasOpponent != curr.emoteExtrasOpponent &&
                 curr.emoteExtrasOpponent is ResponseEmoteExtras &&
                 !curr.isVisibleOpponentEmote,
             listener: (context, state) => context.read<GamePlayBloc>().add(
-              const GamePlayEvent.showEmoteOpponent(),
-            ),
+                  const GamePlayEvent.showEmoteOpponent(),
+                ),
           ),
         ],
         child: Builder(
@@ -95,17 +95,17 @@ class CreateOrJoinGamePage extends StatelessWidget {
             final state = context.watch<GamePlayBloc>().state;
             final isOpponentPlayer = state.opponentPlayer is Player;
             final showBottomAppBar = isOpponentPlayer && !state.existGameError;
-            return SafeArea(
-              child: Scaffold(
-                body: const BodyGamePlay(),
-                bottomNavigationBar:
-                    showBottomAppBar ? const BottomAppGameBar() : null,
-                floatingActionButton: showBottomAppBar
-                    ? const FloatingActionGamePlayButton()
-                    : null,
-                floatingActionButtonLocation:
-                    FloatingActionButtonLocation.centerDocked,
+            return Scaffold(
+              body: const SafeArea(
+                child: BodyGamePlay(),
               ),
+              bottomNavigationBar:
+                  showBottomAppBar ? const BottomAppGameBar() : null,
+              floatingActionButton: showBottomAppBar
+                  ? const FloatingActionGamePlayButton()
+                  : null,
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.centerDocked,
             );
           },
         ),

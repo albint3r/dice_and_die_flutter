@@ -15,15 +15,19 @@ class BodyGamePlay extends StatelessWidget {
     final isWaitingOpponent = gamePlay.game?.p2 == null;
     if (gamePlay.existGameError) {
       return const WaitingGameRoom(
-        text: 'Connection failed.\nReturning to the lobby...',
+        'Connection failed.\nReturning to the lobby...',
         isButton: false,
       );
     }
     if (gamePlay.isLoading) {
-      return const WaitingGameRoom(text: 'Validating\nWaiting Room');
+      return const WaitingGameRoom(
+        'Validating\nWaiting Room',
+      );
     }
     if (isWaitingOpponent) {
-      return const WaitingGameRoom(text: 'Waiting Player\nJoin Match');
+      return const WaitingGameRoom(
+        'Waiting Player\nJoin Match',
+      );
     }
     return ListView(
       // mainAxisAlignment: MainAxisAlignment.end,

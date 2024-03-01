@@ -7,8 +7,8 @@ import '../../core/design_system/buttons/custom_long_button.dart';
 import '../../core/design_system/text/titleh1.dart';
 
 class WaitingGameRoom extends StatelessWidget {
-  const WaitingGameRoom({
-    required this.text,
+  const WaitingGameRoom(
+    this.text, {
     this.isButton = true,
   });
 
