@@ -9,7 +9,7 @@ class PodiumState with _$PodiumState {
   }) = _PodiumState;
 
   factory PodiumState.initial() => const PodiumState(
-        isLoading: false,
+        isLoading: true,
         userGlobalRanking: 0,
         userRankRanking: 0,
       );

@@ -12,6 +12,7 @@ import '../../application/podium/podium_bloc.dart';
 import '../core/design_system/app_bar/widgets/user_level_progress_bar_podium.dart';
 import '../core/design_system/buttons/custom_long_button.dart';
 import '../core/design_system/text/titleh1.dart';
+import '../core/design_system/text/titleh2.dart';
 import '../core/router/app_router.dart';
 import '../core/theme/const_values.dart';
 import 'game_stats_info_container.dart';
@@ -73,6 +74,26 @@ class BodyPodiumArea extends StatelessWidget {
             SizedBox(
               child: Column(
                 children: [
+                  Card(
+                    color: Colors.white,
+                    elevation: 15,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TitleH1(
+                            text: 'Global Ranking: ${state.userGlobalRanking}',
+                            color: colorScheme.onSecondary,
+                          ),
+                          TitleH2(
+                            'Rank Position: ${state.userRankRanking}',
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Gap(20),
                   TitleH1(
                     text: 'Exp Won: ${_getWinPoints()}',
                     fontSize: 50,
