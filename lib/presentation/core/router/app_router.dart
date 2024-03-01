@@ -10,8 +10,8 @@ import '../../../domain/game_play/entities/player.dart';
 import '../../auth/login/login_page.dart';
 import '../../auth/signup/signup_page.dart';
 import '../../game_play/create_or_join_game_page.dart';
-import '../../game_play/widgets/podium_area/podium_page.dart';
 import '../../lobby/lobby_page.dart';
+import '../../podium_area/podium_page.dart';
 import '../../profile/profile_page.dart';
 
 part 'app_router.gr.dart';
