@@ -83,12 +83,12 @@ class BodyPodiumArea extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TitleH1(
-                            text: 'Your Ranking: ${state.userGlobalRanking}',
+                            text: 'Your Are Ranking: ${state.userGlobalRanking}',
                             color: colorScheme.onSecondary,
                           ),
-                          TitleH2(
-                            'Rank ${player.appUser.userLevel.rank.name}: ${state.userRankRanking}',
-                          ),
+                          // TitleH2(
+                          //   'Rank ${player.appUser.userLevel.rank.name}: ${state.userRankRanking}',
+                          // ),
                         ],
                       ),
                     ),
