@@ -5,6 +5,7 @@ import '../../../application/ranking/ranking_bloc.dart';
 import '../../core/design_system/text/text_body.dart';
 import '../../core/design_system/text/titleh1.dart';
 import '../../profile/widgets/profile_image.dart';
+import 'user_ranking_information.dart';
 
 class BodyRanking extends StatelessWidget {
   const BodyRanking({super.key});
@@ -21,14 +22,7 @@ class BodyRanking extends StatelessWidget {
     }
     return Column(
       children: [
-        Container(
-          child: Column(
-            children: [
-              const ProfileImage(),
-              TitleH1(text: 'Rank: ${state.userRank?.ranking ?? 0}'),
-            ],
-          ),
-        ),
+        UserRankingInformation(),
         Expanded(
           child: ListView.builder(
             itemCount: globalUsersRanks.length,
