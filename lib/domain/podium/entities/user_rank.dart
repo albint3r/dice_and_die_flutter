@@ -2,8 +2,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../core/types.dart';
 
-
-
 part 'user_rank.freezed.dart';
 
 part 'user_rank.g.dart';
@@ -11,6 +9,7 @@ part 'user_rank.g.dart';
 @freezed
 class UserRank with _$UserRank {
   const factory UserRank({
+    @JsonKey(name: "user_id") required String userId,
     required int ranking,
     required String name,
     @JsonKey(name: "last_name") required String lastName,

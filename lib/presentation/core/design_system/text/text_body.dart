@@ -8,12 +8,14 @@ class TextBody extends StatelessWidget {
     this.textAlign,
     this.maxLines = 1,
     this.fontSize = body,
+    this.color,
   });
 
   final String text;
   final TextAlign? textAlign;
   final int maxLines;
   final double fontSize;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class TextBody extends StatelessWidget {
       text,
       style: theme.textTheme.bodyMedium?.copyWith(
         fontSize: fontSize,
+        color: color,
       ),
       maxLines: maxLines,
       overflow: TextOverflow.fade,
