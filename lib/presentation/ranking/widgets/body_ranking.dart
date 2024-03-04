@@ -26,7 +26,10 @@ class BodyRanking extends StatelessWidget {
       children: [
         const UserRankingInformation(),
         Gap(10),
-        UserRankCard(state.globalFirstPlaceUser!),
+        UserRankCard(
+          state.globalFirstPlaceUser!,
+          isFirstPlace: true,
+        ),
         Expanded(
           child: ListView.builder(
             itemCount: globalUsersRanks.length,
