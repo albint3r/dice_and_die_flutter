@@ -8,6 +8,7 @@ class RankingState with _$RankingState {
     required List<UserRank> leagueUsersRanks,
     UserRank? userRank,
     UserRank? leagueUserRank,
+    UserRank? globalFirstPlaceUser,
   }) = _RankingState;
 
   factory RankingState.initial() => RankingState(

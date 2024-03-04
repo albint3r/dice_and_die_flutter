@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
 import '../../../application/ranking/ranking_bloc.dart';
 import '../../core/design_system/text/text_body.dart';
 import '../../core/design_system/text/titleh1.dart';
 import '../../profile/widgets/profile_image.dart';
+import 'user_rank_card.dart';
 import 'user_ranking_information.dart';
 
 class BodyRanking extends StatelessWidget {
@@ -22,24 +24,15 @@ class BodyRanking extends StatelessWidget {
     }
     return Column(
       children: [
-        UserRankingInformation(),
+        const UserRankingInformation(),
+        Gap(10),
+        UserRankCard(state.globalFirstPlaceUser!),
         Expanded(
           child: ListView.builder(
             itemCount: globalUsersRanks.length,
             itemBuilder: (context, index) {
               final userRank = globalUsersRanks[index];
-              return Card(
-                child: Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      TextBody("${userRank.ranking}"),
-                      TextBody(userRank.name),
-                      TextBody("${userRank.level}"),
-                    ],
-                  ),
-                ),
-              );
+              return UserRankCard(userRank);
             },
           ),
         ),

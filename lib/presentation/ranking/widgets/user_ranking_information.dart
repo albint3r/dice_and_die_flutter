@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/ranking/ranking_bloc.dart';
+import '../../core/design_system/text/titleh1.dart';
 import '../../core/design_system/text/titleh2.dart';
 import '../../core/theme/const_values.dart';
 import '../../profile/widgets/profile_image.dart';
@@ -18,20 +19,24 @@ class UserRankingInformation extends StatelessWidget {
     final state = context.watch<RankingBloc>().state;
     final size = MediaQuery.of(context).size;
 
-    return Container(
-      color: colorScheme.onSecondary,
-      width: size.width,
-      height: avatarSize + 50,
-      child: Padding(
-        padding: const EdgeInsets.all(padding),
-        child: Column(
-          children: [
-            const ProfileImage(
-              width: avatarSize,
-              height: avatarSize,
-            ),
-            TitleH2('Rank: ${state.userRank?.ranking ?? 0}'),
-          ],
+    return Card(
+      margin: EdgeInsets.zero,
+      elevation: 12,
+      child: Container(
+        color: colorScheme.onSecondary,
+        width: size.width,
+        height: avatarSize + 50,
+        child: Padding(
+          padding: const EdgeInsets.all(padding),
+          child: Column(
+            children: [
+              const ProfileImage(
+                width: avatarSize,
+                height: avatarSize,
+              ),
+              TitleH1(text:'Rank: ${state.userRank?.ranking ?? 0}'),
+            ],
+          ),
         ),
       ),
     );

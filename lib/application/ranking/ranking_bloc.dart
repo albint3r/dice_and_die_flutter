@@ -17,11 +17,13 @@ class RankingBloc extends Bloc<RankingEvent, RankingState> {
     on<_Started>((event, emit) async {
       final globalRanking = await facade.getGlobalRanking();
       final userRank = await facade.getUserGlobalRanking();
+      final globalFirstPlaceUser = globalRanking.usersRanks.first;
       emit(
         state.copyWith(
           isLoading: false,
-          globalUsersRanks: globalRanking.usersRanks,
+          globalUsersRanks: globalRanking.usersRanks.skip(1).toList(),
           userRank: userRank,
+          globalFirstPlaceUser: globalFirstPlaceUser,
         ),
       );
     });
