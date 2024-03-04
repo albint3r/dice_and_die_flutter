@@ -21,7 +21,7 @@ class UserRankingInformation extends StatelessWidget {
 
     return Card(
       margin: EdgeInsets.zero,
-      elevation: 12,
+      elevation: elevation,
       child: Container(
         color: colorScheme.onSecondary,
         width: size.width,

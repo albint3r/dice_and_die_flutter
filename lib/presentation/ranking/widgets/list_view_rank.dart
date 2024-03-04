@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/ranking/ranking_bloc.dart';
+import '../../core/theme/const_values.dart';
 import 'user_rank_card.dart';
+
+const topN = 20;
+const defaultTilesSpace = 2;
 
 class ListViewRank extends StatefulWidget {
   const ListViewRank({
@@ -30,9 +34,9 @@ class _ListViewRankState extends State<ListViewRank> {
   }
 
   void _scrollToUserRank(int ranking) {
-    if (ranking <= 20) {
+    if (ranking <= topN) {
       _scrollController.jumpTo(
-        (ranking - 2).clamp(0, ranking) * 75,
+        (ranking - defaultTilesSpace).clamp(0, ranking) * rankTileHeight,
       );
     }
   }

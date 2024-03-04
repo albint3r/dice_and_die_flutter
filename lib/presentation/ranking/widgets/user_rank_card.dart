@@ -10,6 +10,8 @@ import '../../core/design_system/text/titleh2.dart';
 import '../../core/theme/const_values.dart';
 import '../../profile/widgets/profile_image.dart';
 
+const boxProfile = 50.0;
+
 class UserRankCard extends StatelessWidget {
   const UserRankCard(
     this.userRank, {
@@ -40,9 +42,9 @@ class UserRankCard extends StatelessWidget {
       ),
       child: Card(
         color: isFirstPlace ? colorScheme.surface : colorScheme.onPrimary,
-        elevation: isUser ? 12 : 0,
+        elevation: isUser ? elevation : 0,
         child: SizedBox(
-          height: 75,
+          height: rankTileHeight,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -54,10 +56,10 @@ class UserRankCard extends StatelessWidget {
                 ),
               ),
               const ProfileImage(
-                width: 50,
-                height: 50,
+                width: boxProfile,
+                height: boxProfile,
               ),
-              const Gap(10),
+              const Gap(padding),
               Expanded(
                 child: TitleH2(
                   userRank.name,

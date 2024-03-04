@@ -10,6 +10,8 @@ const spreadRadius = 3.0;
 const perWithColumn = .80;
 const perMaxHeightColumn = .85;
 const perMaxHeightScoreField = .10;
+// Rank
+const rankTileHeight = 75.0;
 
 
 const bottomAppBarHeight = 35.0;
