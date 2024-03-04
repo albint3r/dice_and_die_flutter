@@ -14,7 +14,7 @@ part 'podium_state.dart';
 class PodiumBloc extends Bloc<PodiumEvent, PodiumState> {
   PodiumBloc(IPodiumFacade facade) : super(PodiumState.initial()) {
     on<_Started>((event, emit) async {
-      final userRanking = await facade.getUserRanking();
+      final userRanking = await facade.getUserGlobalRanking();
       emit(
         state.copyWith(
           isLoading: false,

@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 
-import '../../domain/podium/entities/user_rank.dart';
+import '../../domain/ranking/entities/user_rank.dart';
 import '../../domain/ranking/i_ranking_data_source.dart';
 import '../../domain/ranking/i_ranking_facade.dart';
 
@@ -14,10 +14,7 @@ class RankingFacadeImpl implements IRankingFacade {
   Future<UsersRanks> getGlobalRanking() => _dataSource.getGlobalRanking();
 
   @override
-  Future<UsersRanks> getLeagueRanking(int rankId) =>
-      _dataSource.getLeagueRanking(
-        rankId,
-      );
+  Future<UsersRanks> getLeagueRanking(int rankId) => getLeagueRanking(rankId);
 
   @override
   Future<UserRank> getUserGlobalRanking() => _dataSource.getUserGlobalRanking();

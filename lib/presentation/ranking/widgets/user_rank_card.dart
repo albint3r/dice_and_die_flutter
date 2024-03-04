@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 import '../../../application/auth/auth_bloc.dart';
-import '../../../domain/podium/entities/user_rank.dart';
+import '../../../domain/ranking/entities/user_rank.dart';
 import '../../core/design_system/text/text_body.dart';
 import '../../core/design_system/text/titleh1.dart';
 import '../../core/design_system/text/titleh2.dart';
