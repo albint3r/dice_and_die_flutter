@@ -5,8 +5,11 @@ import 'package:gap/gap.dart';
 
 import '../../../../../application/auth/auth_bloc.dart';
 import '../../../router/app_router.dart';
+import '../../../theme/const_values.dart';
 import '../../buttons/custom_long_button.dart';
 import '../../buttons/custom_text_button.dart';
+
+const widthPer = .80;
 
 class ButtonsContainer extends StatelessWidget {
   const ButtonsContainer({super.key});
@@ -28,7 +31,7 @@ class ButtonsContainer extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(padding),
         child: Column(
           children: [
             Expanded(
@@ -36,13 +39,18 @@ class ButtonsContainer extends StatelessWidget {
                 children: [
                   CustomLongButton(
                     text: 'Profile',
-                    width: size.width * .80,
-                    onPressed: () => context.router.push(const ProfileRoute()),
+                    width: size.width * widthPer,
+                    onPressed: () => context.router.push(
+                      const ProfileRoute(),
+                    ),
                   ),
                   const Gap(10),
                   CustomLongButton(
                     text: 'Ranking',
-                    width: size.width * .80,
+                    width: size.width * widthPer,
+                    onPressed: () => context.router.push(
+                      const RankingRoute(),
+                    ),
                   ),
                 ],
               ),

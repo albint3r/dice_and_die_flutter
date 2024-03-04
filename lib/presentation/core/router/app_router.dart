@@ -13,6 +13,7 @@ import '../../game_play/create_or_join_game_page.dart';
 import '../../lobby/lobby_page.dart';
 import '../../podium_area/podium_page.dart';
 import '../../profile/profile_page.dart';
+import '../../ranking/ranking_page.dart';
 
 part 'app_router.gr.dart';
 
@@ -43,6 +44,9 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
         ),
         AutoRoute(
           page: ProfileRoute.page,
+        ),
+        AutoRoute(
+          page: RankingRoute.page,
         ),
       ];
 
