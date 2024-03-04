@@ -27,8 +27,10 @@ class BodyRanking extends StatelessWidget {
           state.globalFirstPlaceUser!,
           isFirstPlace: true,
         ),
-        const Expanded(
-          child: ListViewRank(),
+        Expanded(
+          child: ListViewRank(
+            userRanking: state.userRank?.ranking ?? 0,
+          ),
         ),
       ],
     );
