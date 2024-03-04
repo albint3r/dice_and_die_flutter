@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/core/types.dart';
-import '../../domain/podium/errors/errors.dart';
 import '../../domain/ranking/entities/user_rank.dart';
+import '../../domain/ranking/errors/errors.dart';
 import '../../domain/ranking/i_ranking_data_source.dart';
 
 @Injectable(as: IRankingDataSource)
