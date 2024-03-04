@@ -1,4 +1,4 @@
-import '../podium/entities/user_rank.dart';
+import 'entities/user_rank.dart';
 
 abstract interface class IRankingFacade {
   Future<UsersRanks> getGlobalRanking();

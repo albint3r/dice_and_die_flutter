@@ -16,6 +16,9 @@ import '../core/design_system/text/titleh2.dart';
 import '../core/router/app_router.dart';
 import '../core/theme/const_values.dart';
 import 'game_stats_info_container.dart';
+import 'go_back_lobby_btn.dart';
+import 'go_to_rank_btn.dart';
+import 'your_rank_info_card.dart';
 
 class BodyPodiumArea extends StatelessWidget {
   const BodyPodiumArea({
@@ -74,26 +77,8 @@ class BodyPodiumArea extends StatelessWidget {
             SizedBox(
               child: Column(
                 children: [
-                  Card(
-                    color: Colors.white,
-                    elevation: 15,
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TitleH1(
-                            text: 'Your Are Ranking: ${state.userGlobalRanking}',
-                            color: colorScheme.onSecondary,
-                          ),
-                          // TitleH2(
-                          //   'Rank ${player.appUser.userLevel.rank.name}: ${state.userRankRanking}',
-                          // ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Gap(20),
+                  const YourRankInfoCard(),
+                  const Gap(20),
                   TitleH1(
                     text: 'Exp Won: ${_getWinPoints()}',
                     fontSize: 50,
@@ -119,22 +104,12 @@ class BodyPodiumArea extends StatelessWidget {
               ],
             ),
             const Gap(10),
-            CustomLongButton(
-              text: 'Go Back Menu',
-              width: waitingRoomCardWidth * .80,
-              onPressed: () {
-                context.router.replaceAll(
-                  [const LobbyRoute()],
-                );
-                context.read<AuthBloc>().add(
-                      AuthEvent.notifyUserUpdatesAfterGameEnds(
-                        player.appUser,
-                      ),
-                    );
-                context.read<LobbyBloc>().add(
-                      const LobbyEvent.updateLobbyGames(),
-                    );
-              },
+            GoBackLobbyBtn(
+              player: player,
+            ),
+            const Gap(padding),
+            GoToRankBtn(
+              player: player,
             ),
           ],
         ),
