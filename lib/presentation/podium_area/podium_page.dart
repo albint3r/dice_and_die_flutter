@@ -59,6 +59,9 @@ class PodiumPage extends StatelessWidget {
     );
   }
 
+  bool get isWinner =>
+      winnerPlayer is (Player, Player) || player == winnerPlayer.$1;
+
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthBloc>().state;
@@ -68,7 +71,11 @@ class PodiumPage extends StatelessWidget {
         ..add(
           PodiumEvent.started(rankId),
         )
-        ..add(const PodiumEvent.playWinSound()),
+        ..add(
+          isWinner
+              ? const PodiumEvent.playWinSound()
+              : const PodiumEvent.playLoseSound(),
+        ),
       child: Scaffold(
         body: SafeArea(
           child: _getPodiumArea(),

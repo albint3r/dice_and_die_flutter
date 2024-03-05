@@ -37,7 +37,11 @@ class PodiumBloc extends Bloc<PodiumEvent, PodiumState> {
     });
 
     on<_PlayLoseSound>((event, emit) async {
-      //todo: add logic here!
+      const path = 'sounds/lose_sound.mp3';
+      await state.loseSound.setSource(
+        AssetSource(path),
+      );
+      await state.loseSound.resume();
     });
   }
 }
