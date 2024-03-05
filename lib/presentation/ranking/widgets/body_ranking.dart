@@ -42,6 +42,7 @@ class BodyRanking extends StatelessWidget {
                   child: ListViewRank(
                     userRanking: state.userRank?.ranking ?? 0,
                     usersRanks: globalUsersRanks,
+                    topN: 20,
                   ),
                 ),
               ],

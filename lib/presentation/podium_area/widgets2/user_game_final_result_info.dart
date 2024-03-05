@@ -11,7 +11,7 @@ import '../../core/theme/const_values.dart';
 import '../../profile/widgets/profile_image.dart';
 import '../widgets/game_stats_info_container.dart';
 
-const avatarSize = 150.0;
+const avatarSize = 80.0;
 
 class UserGameFinalResultInfo extends StatelessWidget {
   const UserGameFinalResultInfo({
@@ -63,7 +63,7 @@ class UserGameFinalResultInfo extends StatelessWidget {
             ),
           ),
           width: size.width,
-          height: 490,
+          height: 400,
           child: Padding(
             padding: const EdgeInsets.all(padding),
             child: Column(
@@ -72,7 +72,11 @@ class UserGameFinalResultInfo extends StatelessWidget {
                   width: avatarSize,
                   height: avatarSize,
                 ),
-                TitleH1(text: 'League Rank: ${state.userLeagueRanking}'),
+                TitleH1(
+                  text: 'League Rank: ${state.userLeagueRanking}',
+                  color: colorScheme.secondary,
+                  fontSize: 10,
+                ),
                 Column(
                   children: [
                     TitleH1(

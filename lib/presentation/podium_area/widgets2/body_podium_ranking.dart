@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import '../../../application/podium/podium_bloc.dart';
 import '../../../domain/game_play/entities/player.dart';
 import '../../../domain/game_play/enums/enum_game_state.dart';
+import '../../core/theme/const_values.dart';
 import '../../ranking/widgets/list_view_rank.dart';
 import '../widgets/go_back_lobby_btn.dart';
 import 'user_game_final_result_info.dart';
@@ -52,13 +53,14 @@ class BodyPodiumRanking extends StatelessWidget {
           child: ListViewRank(
             userRanking: state.userLeagueRanking,
             usersRanks: state.leagueRanking,
+            tilesSpace: 0,
           ),
         ),
-        const Gap(10),
+        const Gap(padding),
         GoBackLobbyBtn(
           player: player,
         ),
-        const Gap(20),
+        const Gap(padding),
       ],
     );
   }
