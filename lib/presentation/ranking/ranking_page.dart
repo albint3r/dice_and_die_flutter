@@ -21,7 +21,7 @@ class RankingPage extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           appBar: CustomAppBar(
-            title: 'Ranking',
+            title: 'Global Top 20',
             icon: Icons.arrow_back,
             onPress: () => context.router.pop(),
           ),

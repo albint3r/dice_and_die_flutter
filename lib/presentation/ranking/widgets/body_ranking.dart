@@ -15,6 +15,7 @@ class BodyRanking extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = context.watch<RankingBloc>().state;
     final size = MediaQuery.of(context).size;
+    final globalUsersRanks = state.globalUsersRanks;
 
     if (state.isLoading) {
       return const Center(
@@ -40,6 +41,8 @@ class BodyRanking extends StatelessWidget {
                 Expanded(
                   child: ListViewRank(
                     userRanking: state.userRank?.ranking ?? 0,
+                    usersRanks: globalUsersRanks,
+                    topN: 20,
                   ),
                 ),
               ],

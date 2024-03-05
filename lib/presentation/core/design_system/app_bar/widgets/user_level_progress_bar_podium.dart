@@ -18,14 +18,14 @@ class UserLevelProgressBarPodium extends StatelessWidget {
     return SizedBox(
       width: 300,
       child: LinearPercentIndicator(
-        animationDuration: 5,
-        animateFromLastPercent: true,
-        restartAnimation: true,
-        curve: Curves.bounceIn,
+        animationDuration: 3500,
+        animation: true,
+        curve: Curves.bounceOut,
         width: 250,
         lineHeight: progressBarHeight,
-        percent:
-            appUser.userLevel.expPoints / appUser.userLevel.nextLevelPoints,
+        // percent:
+        //     appUser.userLevel.expPoints / appUser.userLevel.nextLevelPoints,
+        percent: .10,
         alignment: MainAxisAlignment.center,
         barRadius: const Radius.circular(borderRadius),
         backgroundColor: colorScheme.onSecondary,
