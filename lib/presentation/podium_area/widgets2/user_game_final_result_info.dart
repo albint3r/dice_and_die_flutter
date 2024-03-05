@@ -52,58 +52,72 @@ class UserGameFinalResultInfo extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.all(padding * 2),
-      child: Card(
-        elevation: elevation,
-        child: Container(
-          // color: colorScheme.onSecondary,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: backGroundImage,
-              fit: BoxFit.cover,
-            ),
+      child: Container(
+        // color: colorScheme.onSecondary,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(borderRadius),
           ),
-          width: size.width,
-          height: 400,
-          child: Padding(
-            padding: const EdgeInsets.all(padding),
-            child: Column(
-              children: [
-                const ProfileImage(
-                  width: avatarSize,
-                  height: avatarSize,
-                ),
-                TitleH1(
-                  text: 'League Rank: ${state.userLeagueRanking}',
-                  color: colorScheme.secondary,
-                  fontSize: 10,
-                ),
-                Column(
-                  children: [
-                    TitleH1(
-                      text: 'Exp Won: ${_getWinPoints()}',
-                      fontSize: 50,
-                      color: colorScheme.onSecondary,
-                    ),
-                    UserLevelProgressBarPodium(
-                      player.appUser,
-                    ),
-                  ],
-                ),
-                const Gap(30),
-                Stack(
-                  children: [
-                    GameStatsInfoContainer(
-                      player: player,
-                      opponentPlayer: opponentPlayer,
-                    ),
-                    Positioned(
-                      left: 25,
-                      child: textImage,
-                    ),
-                  ],
-                ),
-              ],
+          boxShadow: [
+            BoxShadow(
+              color: colorScheme.onBackground,
+              offset: const Offset(-5, -5),
+              blurRadius: 8,
+              spreadRadius: 1,
             ),
+            BoxShadow(
+              color: colorScheme.onPrimary,
+              offset: const Offset(5, 5),
+              blurRadius: 8,
+              spreadRadius: 1,
+            ),
+          ],
+          image: DecorationImage(
+            image: backGroundImage,
+            fit: BoxFit.cover,
+          ),
+        ),
+        width: size.width,
+        height: 400,
+        child: Padding(
+          padding: const EdgeInsets.all(padding),
+          child: Column(
+            children: [
+              const ProfileImage(
+                width: avatarSize,
+                height: avatarSize,
+              ),
+              TitleH1(
+                text: 'League Rank: ${state.userLeagueRanking}',
+                color: colorScheme.secondary,
+                fontSize: 10,
+              ),
+              Column(
+                children: [
+                  TitleH1(
+                    text: 'Exp Won: ${_getWinPoints()}',
+                    fontSize: 50,
+                    color: colorScheme.onSecondary,
+                  ),
+                  UserLevelProgressBarPodium(
+                    player.appUser,
+                  ),
+                ],
+              ),
+              const Gap(30),
+              Stack(
+                children: [
+                  GameStatsInfoContainer(
+                    player: player,
+                    opponentPlayer: opponentPlayer,
+                  ),
+                  Positioned(
+                    left: 25,
+                    child: textImage,
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),

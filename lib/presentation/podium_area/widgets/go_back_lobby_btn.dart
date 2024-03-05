@@ -20,7 +20,7 @@ class GoBackLobbyBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomLongButton(
       text: 'Go Back Lobby',
-      width: waitingRoomCardWidth * .80,
+      width: waitingRoomCardWidth,
       onPressed: () {
         context.router.replaceAll(
           [const LobbyRoute()],
