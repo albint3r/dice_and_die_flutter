@@ -8,7 +8,8 @@ import '../../../../gen/assets.gen.dart';
 import '../../application/auth/auth_bloc.dart';
 import '../../application/podium/podium_bloc.dart';
 import '../../injectables.dart';
-import 'body_podium_area.dart';
+import 'widgets/body_podium_area.dart';
+import 'widgets2/body_podium_ranking.dart';
 
 @RoutePage()
 class PodiumPage extends StatelessWidget {
@@ -24,13 +25,13 @@ class PodiumPage extends StatelessWidget {
   final Player opponentPlayer;
   final (Player, Player?) winnerPlayer;
 
-  BodyPodiumArea _getPodiumArea() {
+  BodyPodiumRanking _getPodiumArea() {
     final isTie = winnerPlayer is (Player, Player);
     final winner = winnerPlayer.$1;
     final isPlayerWinner = winner == player;
 
     if (isTie) {
-      return BodyPodiumArea(
+      return BodyPodiumRanking(
         gameState: game.gameState!,
         winnerPlayer: player,
         player: player,
@@ -40,7 +41,7 @@ class PodiumPage extends StatelessWidget {
       );
     }
     if (isPlayerWinner) {
-      return BodyPodiumArea(
+      return BodyPodiumRanking(
         gameState: game.gameState!,
         winnerPlayer: winner,
         player: player,
@@ -49,7 +50,7 @@ class PodiumPage extends StatelessWidget {
         textImage: Assets.images.youWin.image(),
       );
     }
-    return BodyPodiumArea(
+    return BodyPodiumRanking(
       gameState: game.gameState!,
       winnerPlayer: winner,
       player: player,

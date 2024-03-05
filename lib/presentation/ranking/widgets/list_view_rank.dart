@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/ranking/ranking_bloc.dart';
+import '../../../domain/ranking/entities/user_rank.dart';
 import '../../core/theme/const_values.dart';
 import 'user_rank_card.dart';
 
-const topN = 20;
+const topN = 100;
 const defaultTilesSpace = 2;
 
 class ListViewRank extends StatefulWidget {
   const ListViewRank({
     required this.userRanking,
+    required this.usersRanks,
   });
 
   final int userRanking;
+  final List<UserRank> usersRanks;
 
   @override
   State<ListViewRank> createState() => _ListViewRankState();
@@ -39,23 +42,20 @@ class _ListViewRankState extends State<ListViewRank> {
       _scrollController.animateTo(
         scrollPosition * rankTileHeight,
         duration: const Duration(
-          milliseconds: 500,
+          milliseconds: 700,
         ),
-        curve: Curves.easeInOut,
+        curve: Curves.bounceInOut,
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<RankingBloc>().state;
-    final globalUsersRanks = state.globalUsersRanks;
-
     return ListView.builder(
       controller: _scrollController,
-      itemCount: globalUsersRanks.length,
+      itemCount: widget.usersRanks.length,
       itemBuilder: (context, index) {
-        final userRank = globalUsersRanks[index];
+        final userRank = widget.usersRanks[index];
         return UserRankCard(userRank);
       },
     );

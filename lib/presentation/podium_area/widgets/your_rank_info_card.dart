@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../application/podium/podium_bloc.dart';
-import '../core/design_system/text/titleh1.dart';
+import '../../../application/podium/podium_bloc.dart';
+import '../../core/design_system/text/titleh1.dart';
 
 class YourRankInfoCard extends StatelessWidget {
   const YourRankInfoCard({super.key});

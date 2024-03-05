@@ -16,11 +16,13 @@ class PodiumBloc extends Bloc<PodiumEvent, PodiumState> {
   PodiumBloc(IPodiumFacade facade) : super(PodiumState.initial()) {
     on<_Started>((event, emit) async {
       final userRanking = await facade.getUserGlobalRanking();
+      final userLeagueRanking = await facade.getUserLeagueRanking(event.rankId);
       final leagueRanking = await facade.getLeagueRanking(event.rankId);
       emit(
         state.copyWith(
           isLoading: false,
           userGlobalRanking: userRanking.ranking,
+          userLeagueRanking: userLeagueRanking.ranking,
           leagueRanking: leagueRanking.usersRanks,
         ),
       );

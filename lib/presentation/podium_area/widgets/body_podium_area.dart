@@ -1,20 +1,13 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
-import '../../../../application/auth/auth_bloc.dart';
-import '../../../../application/lobby/lobby_bloc.dart';
-
-import '../../../../domain/game_play/entities/player.dart';
-import '../../../../domain/game_play/enums/enum_game_state.dart';
-import '../../application/podium/podium_bloc.dart';
-import '../core/design_system/app_bar/widgets/user_level_progress_bar_podium.dart';
-import '../core/design_system/buttons/custom_long_button.dart';
-import '../core/design_system/text/titleh1.dart';
-import '../core/design_system/text/titleh2.dart';
-import '../core/router/app_router.dart';
-import '../core/theme/const_values.dart';
+import '../../../../../domain/game_play/entities/player.dart';
+import '../../../../../domain/game_play/enums/enum_game_state.dart';
+import '../../../application/podium/podium_bloc.dart';
+import '../../core/design_system/app_bar/widgets/user_level_progress_bar_podium.dart';
+import '../../core/design_system/text/titleh1.dart';
+import '../../core/theme/const_values.dart';
 import 'game_stats_info_container.dart';
 import 'go_back_lobby_btn.dart';
 import 'go_to_rank_btn.dart';

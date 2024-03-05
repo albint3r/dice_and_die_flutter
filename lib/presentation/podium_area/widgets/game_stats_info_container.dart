@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../domain/game_play/entities/player.dart';
+import '../../../../../domain/game_play/entities/player.dart';
 
-import '../core/design_system/text/titleh2.dart';
-import '../core/theme/const_values.dart';
+import '../../core/design_system/text/titleh2.dart';
+import '../../core/theme/const_values.dart';
 
 class GameStatsInfoContainer extends StatelessWidget {
   const GameStatsInfoContainer({
