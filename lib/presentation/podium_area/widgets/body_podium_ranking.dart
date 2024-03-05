@@ -5,10 +5,11 @@ import 'package:gap/gap.dart';
 import '../../../application/podium/podium_bloc.dart';
 import '../../../domain/game_play/entities/player.dart';
 import '../../../domain/game_play/enums/enum_game_state.dart';
+import '../../../gen/assets.gen.dart';
 import '../../core/theme/const_values.dart';
 import '../../ranking/widgets/list_view_rank.dart';
 import '../../core/design_system/animations/custom_animation_container.dart';
-import '../widgets/go_back_lobby_btn.dart';
+import 'go_back_lobby_btn.dart';
 import 'user_game_final_result_info.dart';
 
 class BodyPodiumRanking extends StatelessWidget {

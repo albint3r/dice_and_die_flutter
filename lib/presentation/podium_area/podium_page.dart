@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dice_and_die_flutter/presentation/podium_area/widgets/body_podium_ranking.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,8 +9,6 @@ import '../../../../gen/assets.gen.dart';
 import '../../application/auth/auth_bloc.dart';
 import '../../application/podium/podium_bloc.dart';
 import '../../injectables.dart';
-import 'widgets/body_podium_area.dart';
-import 'widgets2/body_podium_ranking.dart';
 
 @RoutePage()
 class PodiumPage extends StatelessWidget {

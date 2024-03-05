@@ -25,7 +25,12 @@ class _CustomAnimationContainerState extends State<CustomAnimationContainer>
     _tween = Tween<Offset>(
       begin: const Offset(0, -100),
       end: Offset.zero,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.bounceOut));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.bounceOut,
+      ),
+    );
     _controller.forward();
   }
 

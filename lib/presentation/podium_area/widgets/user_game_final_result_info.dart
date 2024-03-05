@@ -9,7 +9,7 @@ import '../../core/design_system/app_bar/widgets/user_level_progress_bar_podium.
 import '../../core/design_system/text/titleh1.dart';
 import '../../core/theme/const_values.dart';
 import '../../profile/widgets/profile_image.dart';
-import '../widgets/game_stats_info_container.dart';
+import 'game_stats_info_container.dart';
 
 const avatarSize = 80.0;
 
