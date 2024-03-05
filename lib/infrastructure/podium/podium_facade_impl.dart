@@ -12,4 +12,16 @@ class PodiumFacadeImpl implements IPodiumFacade {
 
   @override
   Future<UserRank> getUserGlobalRanking() => _dataSource.getUserGlobalRanking();
+
+  @override
+  Future<UsersRanks> getLeagueRanking(int rankId) =>
+      _dataSource.getLeagueRanking(
+        rankId,
+      );
+
+  @override
+  Future<UserRank> getUserLeagueRanking(int rankId) =>
+      _dataSource.getUserLeagueRanking(
+        rankId,
+      );
 }

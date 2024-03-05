@@ -4,13 +4,15 @@ part of 'podium_bloc.dart';
 class PodiumState with _$PodiumState {
   const factory PodiumState({
     required bool isLoading,
+    required List<UserRank> leagueRanking,
+    required int userLeagueRanking,
     required int userGlobalRanking,
-    required int userRankRanking,
   }) = _PodiumState;
 
   factory PodiumState.initial() => const PodiumState(
         isLoading: true,
+        userLeagueRanking: 0,
         userGlobalRanking: 0,
-        userRankRanking: 0,
+        leagueRanking: [],
       );
 }

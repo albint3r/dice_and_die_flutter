@@ -35,8 +35,13 @@ class _ListViewRankState extends State<ListViewRank> {
 
   void _scrollToUserRank(int ranking) {
     if (ranking <= topN) {
-      _scrollController.jumpTo(
-        (ranking - defaultTilesSpace).clamp(0, ranking) * rankTileHeight,
+      final scrollPosition = (ranking - defaultTilesSpace).clamp(0, ranking);
+      _scrollController.animateTo(
+        scrollPosition * rankTileHeight,
+        duration: const Duration(
+          milliseconds: 500,
+        ),
+        curve: Curves.easeInOut,
       );
     }
   }
