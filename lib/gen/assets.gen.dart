@@ -54,9 +54,12 @@ class $AssetsSoundsGen {
   /// File path: assets/sounds/slash1_sound.mp3
   String get slash1Sound => 'assets/sounds/slash1_sound.mp3';
 
+  /// File path: assets/sounds/win_sound.mp3
+  String get winSound => 'assets/sounds/win_sound.mp3';
+
   /// List of all assets
   List<String> get values =>
-      [diceRandomRollingEffect, diceRoll, pianoKey, slash1Sound];
+      [diceRandomRollingEffect, diceRoll, pianoKey, slash1Sound, winSound];
 }
 
 class $AssetsImagesEmotesGen {

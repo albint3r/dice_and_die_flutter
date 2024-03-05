@@ -7,12 +7,16 @@ class PodiumState with _$PodiumState {
     required List<UserRank> leagueRanking,
     required int userLeagueRanking,
     required int userGlobalRanking,
+    required AudioPlayer winSound,
+    required AudioPlayer loseSound,
   }) = _PodiumState;
 
-  factory PodiumState.initial() => const PodiumState(
+  factory PodiumState.initial() => PodiumState(
         isLoading: true,
         userLeagueRanking: 0,
         userGlobalRanking: 0,
         leagueRanking: [],
+        loseSound: AudioPlayer(),
+        winSound: AudioPlayer(),
       );
 }

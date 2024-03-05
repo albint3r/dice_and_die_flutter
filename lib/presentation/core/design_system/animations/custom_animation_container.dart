@@ -20,7 +20,7 @@ class _CustomAnimationContainerState extends State<CustomAnimationContainer>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 700),
+      duration: const Duration(milliseconds: 1000),
     );
     _tween = Tween<Offset>(
       begin: const Offset(0, -100),

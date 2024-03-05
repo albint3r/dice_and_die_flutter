@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -26,6 +27,17 @@ class PodiumBloc extends Bloc<PodiumEvent, PodiumState> {
           leagueRanking: leagueRanking.usersRanks,
         ),
       );
+    });
+    on<_PlayWinSound>((event, emit) async {
+      const path = 'sounds/win_sound.mp3';
+      await state.winSound.setSource(
+        AssetSource(path),
+      );
+      await state.winSound.resume();
+    });
+
+    on<_PlayLoseSound>((event, emit) async {
+      //todo: add logic here!
     });
   }
 }
