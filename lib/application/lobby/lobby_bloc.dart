@@ -19,13 +19,15 @@ part 'lobby_state.dart';
 class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
   LobbyBloc(ILobbyFacade facade) : super(LobbyState.initial()) {
     on<_LoadLobbyGames>((event, emit) async {
+      final channel  = facade.getLobbyChannel();
+      await channel.ready;
       emit(
         state.copyWith(
-          channel: facade.getLobbyChannel(),
+          channel: channel,
         ),
       );
       await emit.forEach(
-        state.channel!.stream,
+        channel.stream,
         onData: (data) {
           final response = facade.loadActiveGames(data);
           return state.copyWith(

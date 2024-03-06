@@ -14,8 +14,8 @@ abstract class RegisterModule {
   Uri getUri() {
     return Uri(
       scheme: 'http',
-      // host: '146.190.134.20',
-      host: '192.168.1.66',
+      host: '146.190.134.20',
+      // host: '192.168.1.66',
       port: 8000,
     );
   }
