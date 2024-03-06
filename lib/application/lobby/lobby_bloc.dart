@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:l/l.dart';
 import 'package:web_socket_channel/status.dart' as status;
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -19,7 +20,7 @@ part 'lobby_state.dart';
 class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
   LobbyBloc(ILobbyFacade facade) : super(LobbyState.initial()) {
     on<_LoadLobbyGames>((event, emit) async {
-      final channel  = facade.getLobbyChannel();
+      final channel = facade.getLobbyChannel();
       await channel.ready;
       emit(
         state.copyWith(
@@ -36,29 +37,36 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
             isLoading: false,
           );
         },
-      ).whenComplete(() {
+      ).whenComplete(() async {
         // Restart All
-        state.channel!.sink.close(status.goingAway);
-        emit(
-          state.copyWith(
-            isLoading: true,
-            totalPlayer: 0,
-            channel: null,
-            lobby: const Lobby(activeGames: {}),
-          ),
-        );
-        final router = getIt<AppRouter>();
-        router.pushAll(
-          [
-            const LoginRoute(),
-          ],
-        );
+        await _disconnect(emit);
       });
     });
     on<_UpdateLobbyGames>(
       (event, emit) {
-        facade.updateLobbyActiveGames();
+        try {
+          facade.updateLobbyActiveGames();
+        } catch (e) {
+          l.i('The users was already disconnected. This was your error: $e');
+        }
       },
+    );
+  }
+
+  Future<void> _disconnect(Emitter<LobbyState> emit) async {
+    try {
+      await state.channel?.sink.close(status.normalClosure,);
+    } catch (e) {
+      l.i('The users was already disconnected. This was your error: $e');
+    }
+
+    emit(
+      state.copyWith(
+        isLoading: true,
+        totalPlayer: 0,
+        channel: null,
+        lobby: const Lobby(activeGames: {}),
+      ),
     );
   }
 }
