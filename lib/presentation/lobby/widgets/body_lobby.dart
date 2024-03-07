@@ -13,7 +13,12 @@ class BodyLobby extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final lobby = context.watch<LobbyBloc>().state;
-    if (lobby.isLoading) const Center(child: CircularProgressIndicator());
+
+    if (lobby.isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     final games = lobby.lobby.activeGames?.values.toList() ?? [];
 
     return Column(

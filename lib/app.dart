@@ -26,7 +26,9 @@ class App extends StatelessWidget {
       listeners: [
         // This Load all the games after the user login to the App.
         BlocListener<AuthBloc, AuthState>(
-          listenWhen: (pre, curr) => pre.sessionToken != curr.sessionToken,
+          listenWhen: (pre, curr) =>
+              curr.sessionToken.isNotEmpty &&
+              pre.sessionToken != curr.sessionToken,
           listener: (context, state) => context.read<LobbyBloc>().add(
                 const LobbyEvent.loadLobbyGames(),
               ),

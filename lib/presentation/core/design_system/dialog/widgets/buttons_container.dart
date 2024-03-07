@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../../application/auth/auth_bloc.dart';
+import '../../../../../application/lobby/lobby_bloc.dart';
 import '../../../router/app_router.dart';
 import '../../../theme/const_values.dart';
 import '../../buttons/custom_long_button.dart';
@@ -57,9 +58,11 @@ class ButtonsContainer extends StatelessWidget {
             ),
             CustomTextButton(
               text: 'LogOut',
-              onPressed: () => context.read<AuthBloc>().add(
-                    const AuthEvent.logOut(),
-                  ),
+              onPressed: () {
+                context.read<AuthBloc>().add(
+                      const AuthEvent.logOut(),
+                    );
+              },
             ),
           ],
         ),
