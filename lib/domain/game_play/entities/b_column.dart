@@ -17,4 +17,12 @@ class BColumn with _$BColumn {
   const BColumn._();
 
   factory BColumn.fromJson(Json json) => _$BColumnFromJson(json);
+
+  TColumCounter get counter {
+    final columnCounter = <int, int>{};
+    for (final val in values) {
+      columnCounter[val] = 1 + (columnCounter[val] ?? 0);
+    }
+    return columnCounter;
+  }
 }

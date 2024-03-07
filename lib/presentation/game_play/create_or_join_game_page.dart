@@ -95,17 +95,17 @@ class CreateOrJoinGamePage extends StatelessWidget {
             final state = context.watch<GamePlayBloc>().state;
             final isOpponentPlayer = state.opponentPlayer is Player;
             final showBottomAppBar = isOpponentPlayer && !state.existGameError;
-            return Scaffold(
-              body: const SafeArea(
-                child: BodyGamePlay(),
+            return SafeArea(
+              child: Scaffold(
+                body: const BodyGamePlay(),
+                bottomNavigationBar:
+                    showBottomAppBar ? const BottomAppGameBar() : null,
+                floatingActionButton: showBottomAppBar
+                    ? const FloatingActionGamePlayButton()
+                    : null,
+                floatingActionButtonLocation:
+                    FloatingActionButtonLocation.centerDocked,
               ),
-              bottomNavigationBar:
-                  showBottomAppBar ? const BottomAppGameBar() : null,
-              floatingActionButton: showBottomAppBar
-                  ? const FloatingActionGamePlayButton()
-                  : null,
-              floatingActionButtonLocation:
-                  FloatingActionButtonLocation.centerDocked,
             );
           },
         ),
