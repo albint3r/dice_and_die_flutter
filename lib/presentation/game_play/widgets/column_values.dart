@@ -1,4 +1,3 @@
-import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
 
 import '../../../domain/game_play/entities/b_column.dart';

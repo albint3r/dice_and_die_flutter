@@ -31,7 +31,7 @@ class BodyLogIn extends StatelessWidget {
             child: LoginForm(),
           ),
         ),
-        TextBodySmall('Version 0.0.0.1'),
+        TextBodySmall('Version 0.0.0.2'),
       ],
     );
   }
