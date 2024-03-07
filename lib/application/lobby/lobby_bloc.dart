@@ -40,13 +40,15 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
       ).whenComplete(() async {
         // Restart All
         await _disconnect(emit);
+        getIt<AppRouter>().replaceAll([const LoginRoute()]);
       });
     });
     on<_UpdateLobbyGames>(
-      (event, emit) {
+      (event, emit) async {
         try {
           facade.updateLobbyActiveGames();
         } catch (e) {
+          await _disconnect(emit);
           l.i('The users was already disconnected. This was your error: $e');
         }
       },
@@ -55,11 +57,12 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
 
   Future<void> _disconnect(Emitter<LobbyState> emit) async {
     try {
-      await state.channel?.sink.close(status.normalClosure,);
+      await state.channel?.sink.close(
+        status.normalClosure,
+      );
     } catch (e) {
       l.i('The users was already disconnected. This was your error: $e');
     }
-
     emit(
       state.copyWith(
         isLoading: true,
