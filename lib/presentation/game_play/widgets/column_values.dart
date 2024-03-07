@@ -2,6 +2,7 @@ import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
 
 import '../../../domain/game_play/entities/b_column.dart';
+import '../../core/design_system/animations/custom_animation_container.dart';
 import '../../core/design_system/text/titleh2.dart';
 import '../../core/theme/const_values.dart';
 
@@ -81,17 +82,19 @@ class ColumnValues extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                   vertical: 10,
                 ),
-                child: Container(
-                  constraints: BoxConstraints(
-                    maxHeight: diceSize,
-                    maxWidth: diceSize,
-                  ),
-                  decoration: _buildColorDiceSelectorDecoration(
-                    colorScheme,
-                    diceValue,
-                  ),
-                  child: Center(
-                    child: TitleH2('$diceValue'),
+                child: CustomAnimationContainer(
+                  child: Container(
+                    constraints: BoxConstraints(
+                      maxHeight: diceSize,
+                      maxWidth: diceSize,
+                    ),
+                    decoration: _buildColorDiceSelectorDecoration(
+                      colorScheme,
+                      diceValue,
+                    ),
+                    child: Center(
+                      child: TitleH2('$diceValue'),
+                    ),
                   ),
                 ),
               ),
