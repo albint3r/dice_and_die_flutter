@@ -64,8 +64,7 @@ class PodiumPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final auth = context.watch<AuthBloc>().state;
-    final rankId = auth.appUser?.userLevel.rankId ?? 0;
+    final rankId = player.appUser.userLevel.rankId;
     return BlocProvider(
       create: (context) => getIt<PodiumBloc>()
         ..add(
