@@ -9,6 +9,7 @@ import '../../../domain/game_play/entities/game.dart';
 import '../../../domain/game_play/entities/player.dart';
 import '../../auth/login/login_page.dart';
 import '../../auth/signup/signup_page.dart';
+import '../../game_play/challenge_friend_page.dart';
 import '../../game_play/create_or_join_game_page.dart';
 import '../../lobby/lobby_page.dart';
 import '../../podium_area/podium_page.dart';
@@ -32,6 +33,10 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
         ),
         AutoRoute(
           page: CreateOrJoinGameRoute.page,
+        ),
+        AutoRoute(
+          page: ChallengeFriendRoute.page,
+          path: '/game-friend/:id',
         ),
         AutoRoute(
           page: PodiumRoute.page,
@@ -58,13 +63,21 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
     if (kDebugMode) {
       l.d('.' * 50);
       l.d('Current Page :" [${router.current.name}]  to Next Page -> [${resolver.route.name}]');
+      l.d('pathParams :" [${resolver.route.pathParams}]');
+      l.d('path :" [${resolver.route.path}]');
+      l.d('routeName :" [${resolver.routeName}]');
+      l.d('route :" [${resolver.route}]');
       l.d('.' * 50);
     }
     final appUser = _auth.state.appUser;
     final sessionToken = _auth.state.sessionToken;
-    if ((appUser is AppUser && sessionToken.isNotEmpty) ||
-        resolver.route.name == LoginRoute.name ||
-        resolver.route.name == SignUpRoute.name) {
+    final resolveRouteName = resolver.route.name;
+    final isUser = appUser is AppUser;
+    final isToken = sessionToken.isNotEmpty;
+    if ((isUser && isToken) ||
+        resolveRouteName == LoginRoute.name ||
+        resolveRouteName == SignUpRoute.name ||
+        resolveRouteName == ChallengeFriendRoute.name) {
       resolver.next();
     } else {
       resolver.redirect(const LoginRoute());

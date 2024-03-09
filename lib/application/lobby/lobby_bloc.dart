@@ -61,9 +61,13 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
       final String challengeGameId = uuid.v4();
       getIt<UserPreference>().setChallengeGameId(challengeGameId);
       Share.share(
-        'I Challenge you a match http://diceanddie.com/game/$challengeGameId',
+        'I Challenge you a match http://diceanddie.com/game-friend/$challengeGameId',
       );
-      getIt<AppRouter>().replaceAll([const RankingRoute()]);
+      getIt<AppRouter>().replaceAll([
+        ChallengeFriendRoute(
+          gameId: challengeGameId,
+        ),
+      ]);
     });
   }
 

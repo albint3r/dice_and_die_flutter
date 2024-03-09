@@ -20,8 +20,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc(IAuthFacade facade) : super(AuthState.initial()) {
     on<_ValidateInitialSessionToken>((event, emit) async {
       // Initialize the Share Preference to obtain the Session Token
+      print('*|' * 100);
+      print('AUTHENTIFICATION' * 100);
       await facade.pref.init();
       final sessionToken = await facade.pref.getSessionToken();
+      print('*|' * 100);
       // If Session token get User data from the server
       if (sessionToken.isEmpty) {
         emit(

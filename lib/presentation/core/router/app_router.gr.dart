@@ -15,6 +15,16 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    ChallengeFriendRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<ChallengeFriendRouteArgs>(
+          orElse: () =>
+              ChallengeFriendRouteArgs(gameId: pathParams.getString('id')));
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ChallengeFriendPage(gameId: args.gameId),
+      );
+    },
     CreateOrJoinGameRoute.name: (routeData) {
       final args = routeData.argsAs<CreateOrJoinGameRouteArgs>(
           orElse: () => const CreateOrJoinGameRouteArgs());
@@ -66,6 +76,36 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [ChallengeFriendPage]
+class ChallengeFriendRoute extends PageRouteInfo<ChallengeFriendRouteArgs> {
+  ChallengeFriendRoute({
+    required String gameId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ChallengeFriendRoute.name,
+          args: ChallengeFriendRouteArgs(gameId: gameId),
+          rawPathParams: {'id': gameId},
+          initialChildren: children,
+        );
+
+  static const String name = 'ChallengeFriendRoute';
+
+  static const PageInfo<ChallengeFriendRouteArgs> page =
+      PageInfo<ChallengeFriendRouteArgs>(name);
+}
+
+class ChallengeFriendRouteArgs {
+  const ChallengeFriendRouteArgs({required this.gameId});
+
+  final String gameId;
+
+  @override
+  String toString() {
+    return 'ChallengeFriendRouteArgs{gameId: $gameId}';
+  }
 }
 
 /// generated route for
