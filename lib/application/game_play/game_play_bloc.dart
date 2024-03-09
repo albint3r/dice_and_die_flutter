@@ -159,9 +159,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         ),
       );
     });
-    on<_ChallengeFriend>((event, emit) async {
-      Share.share('check out my website https://example.com');
-    });
+
   }
 
   void _getWinnerPlayer(IGamePlayFacade facade) {

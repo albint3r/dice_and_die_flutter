@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:l/l.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:web_socket_channel/status.dart' as status;
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -53,6 +54,9 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
         }
       },
     );
+    on<_ChallengeFriend>((event, emit) async {
+      Share.share('I Challenge you a match http://diceanddie.com');
+    });
   }
 
   Future<void> _disconnect(Emitter<LobbyState> emit) async {

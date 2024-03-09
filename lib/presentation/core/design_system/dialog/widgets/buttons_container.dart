@@ -54,11 +54,12 @@ class ButtonsContainer extends StatelessWidget {
                       const RankingRoute(),
                     ),
                   ),
+                  const Gap(10),
                   CustomLongButton(
                     text: 'Challenge Friend',
                     width: size.width * widthPer,
-                    onPressed: () => context.read<GamePlayBloc>().add(
-                          const GamePlayEvent.challengeFriend(),
+                    onPressed: () => context.read<LobbyBloc>().add(
+                          const LobbyEvent.challengeFriend(),
                         ),
                   )
                 ],
