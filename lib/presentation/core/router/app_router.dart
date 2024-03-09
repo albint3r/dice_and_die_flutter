@@ -29,7 +29,6 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
         AutoRoute(
           initial: true,
           page: LobbyRoute.page,
-          path: '/lobby',
         ),
         AutoRoute(
           page: CreateOrJoinGameRoute.page,

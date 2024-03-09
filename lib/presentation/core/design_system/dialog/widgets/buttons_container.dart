@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../../application/auth/auth_bloc.dart';
+import '../../../../../application/game_play/game_play_bloc.dart';
 import '../../../../../application/lobby/lobby_bloc.dart';
 import '../../../router/app_router.dart';
 import '../../../theme/const_values.dart';
@@ -53,6 +54,13 @@ class ButtonsContainer extends StatelessWidget {
                       const RankingRoute(),
                     ),
                   ),
+                  CustomLongButton(
+                    text: 'Challenge Friend',
+                    width: size.width * widthPer,
+                    onPressed: () => context.read<GamePlayBloc>().add(
+                          const GamePlayEvent.challengeFriend(),
+                        ),
+                  )
                 ],
               ),
             ),

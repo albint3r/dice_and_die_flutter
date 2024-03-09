@@ -19,4 +19,6 @@ class GamePlayEvent with _$GamePlayEvent {
   const factory GamePlayEvent.showEmoteOpponent() = _ShowEmoteOpponent;
 
   const factory GamePlayEvent.disconnect() = _Disconnect;
+
+  const factory GamePlayEvent.challengeFriend() = _ChallengeFriend;
 }

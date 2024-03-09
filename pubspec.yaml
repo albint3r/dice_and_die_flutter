@@ -2,7 +2,7 @@ name: dice_and_die_flutter
 description: This is a board game whit dice and strategy.
 publish_to: 'none'
 
-version: 1.1.0+29
+version: 1.1.0+30
 
 environment:
   sdk: '>=3.0.3 <4.0.0'
@@ -35,6 +35,7 @@ dependencies:
   shared_preferences: ^2.2.2
   reactive_forms: ^16.1.1
   flutter_speed_dial: ^7.0.0
+  share_plus: ^7.2.2
 
 
 
