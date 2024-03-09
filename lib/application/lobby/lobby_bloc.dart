@@ -3,11 +3,13 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:l/l.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/status.dart' as status;
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../../domain/lobby/entities/lobby.dart';
 import '../../domain/lobby/use_case/i_lobby_facade.dart';
+import '../../infrastructure/core/user_preference.dart';
 import '../../injectables.dart';
 import '../../presentation/core/router/app_router.dart';
 
@@ -55,7 +57,13 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
       },
     );
     on<_ChallengeFriend>((event, emit) async {
-      Share.share('I Challenge you a match http://diceanddie.com');
+      const uuid = Uuid();
+      final String challengeGameId = uuid.v4();
+      getIt<UserPreference>().setChallengeGameId(challengeGameId);
+      Share.share(
+        'I Challenge you a match http://diceanddie.com/game/$challengeGameId',
+      );
+      getIt<AppRouter>().replaceAll([const RankingRoute()]);
     });
   }
 

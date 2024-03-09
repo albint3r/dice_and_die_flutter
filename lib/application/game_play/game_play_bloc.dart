@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:web_socket_channel/status.dart' as status;
 
 import '../../domain/game_play/entities/game.dart';
@@ -159,7 +158,6 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
         ),
       );
     });
-
   }
 
   void _getWinnerPlayer(IGamePlayFacade facade) {
