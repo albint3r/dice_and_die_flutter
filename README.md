@@ -6,7 +6,9 @@ Dice n Die Multiplayer is an exhilarating multiplayer game based on the mini-gam
 
 Example:
 2 (1) = 2
+
 2 (2) = 2 x 2 = 4
+
 2 (3) = 2 x 2 x 2= 6
 
 Additionally, players can remove numbers from the opponent's board if the resulting number matches one already present on that board.
