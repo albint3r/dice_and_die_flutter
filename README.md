@@ -2,7 +2,14 @@
 
 #### Overview
 
-Dice n Die Multiplayer is an exhilarating multiplayer game based on the mini-game Dice n Die from Cult of Lamb. The objective is to accumulate the highest number of points before one of the two players completes their board. The game proceeds in turns, where each player rolls a die and places the result in a column of their choice. Points are multiplied by the number of repetitions in the same column. Additionally, players can remove numbers from the opponent's board if the resulting number matches one already present on that board.
+Dice n Die Multiplayer is an exhilarating multiplayer game based on the mini-game Dice n Die from Cult of Lamb. The objective is to accumulate the highest number of points before one of the two players completes their board. The game proceeds in turns, where each player rolls a die and places the result in a column of their choice. Points are multiplied by the number of repetitions in the same column.
+
+Example:
+2 (1) = 2
+2 (2) = 2 x 2 = 4
+2 (3) = 2 x 2 x 2= 6
+
+Additionally, players can remove numbers from the opponent's board if the resulting number matches one already present on that board.
 
 #### Features
 
