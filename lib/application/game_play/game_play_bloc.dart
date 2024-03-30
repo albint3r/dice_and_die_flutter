@@ -1,11 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:web_socket_channel/src/channel.dart';
 import 'package:web_socket_channel/status.dart' as status;
 
 import '../../domain/game_play/entities/game.dart';
 import '../../domain/game_play/entities/player.dart';
 import '../../domain/game_play/enums/emote.dart';
+import '../../domain/game_play/enums/match_type.dart';
 import '../../domain/game_play/errors/errors.dart';
 import '../../domain/game_play/schemas/response.dart';
 import '../../domain/game_play/use_case/i_game_play_facade.dart';
@@ -25,9 +27,15 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
     on<_CreateOrJoinGame>((event, emit) async {
       try {
         final eGame = event.game;
-        final channel = facade.getGamePlayChannel(
-          eGame is Game ? eGame.gameId : 'new_game',
-        );
+        final WebSocketChannel channel;
+        if(event.matchType == MatchType.pvpRanked) {
+          channel = facade.getGamePlayChannel(
+            eGame is Game ? eGame.gameId : 'new_game',
+          );
+        } else {
+          channel = facade.getGamePlayAIChannel();
+        }
+
         await channel.ready;
         // Just notify the lobby user creates a new game
         final lobby = getIt<LobbyBloc>();

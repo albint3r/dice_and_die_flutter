@@ -24,4 +24,15 @@ class GamePlayDataSourceImpl implements IGamePlayDataSource {
     );
     return WebSocketChannel.connect(uri);
   }
+
+  @override
+  WebSocketChannel getGamePlayAIChannel() {
+    const path = '/v2/game/ai';
+    final uri = _uri.replace(
+      scheme: 'ws',
+      path: path,
+      queryParameters: {'token': _auth.state.sessionToken},
+    );
+    return WebSocketChannel.connect(uri);
+  }
 }

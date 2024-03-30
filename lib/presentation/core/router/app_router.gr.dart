@@ -20,7 +20,10 @@ abstract class _$AppRouter extends RootStackRouter {
           orElse: () => const CreateOrJoinGameRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: CreateOrJoinGamePage(game: args.game),
+        child: CreateOrJoinGamePage(
+          game: args.game,
+          matchType: args.matchType,
+        ),
       );
     },
     LobbyRoute.name: (routeData) {
@@ -73,10 +76,14 @@ abstract class _$AppRouter extends RootStackRouter {
 class CreateOrJoinGameRoute extends PageRouteInfo<CreateOrJoinGameRouteArgs> {
   CreateOrJoinGameRoute({
     Game? game,
+    MatchType matchType = MatchType.pvpRanked,
     List<PageRouteInfo>? children,
   }) : super(
           CreateOrJoinGameRoute.name,
-          args: CreateOrJoinGameRouteArgs(game: game),
+          args: CreateOrJoinGameRouteArgs(
+            game: game,
+            matchType: matchType,
+          ),
           initialChildren: children,
         );
 
@@ -87,13 +94,18 @@ class CreateOrJoinGameRoute extends PageRouteInfo<CreateOrJoinGameRouteArgs> {
 }
 
 class CreateOrJoinGameRouteArgs {
-  const CreateOrJoinGameRouteArgs({this.game});
+  const CreateOrJoinGameRouteArgs({
+    this.game,
+    this.matchType = MatchType.pvpRanked,
+  });
 
   final Game? game;
 
+  final MatchType matchType;
+
   @override
   String toString() {
-    return 'CreateOrJoinGameRouteArgs{game: $game}';
+    return 'CreateOrJoinGameRouteArgs{game: $game, matchType: $matchType}';
   }
 }
 

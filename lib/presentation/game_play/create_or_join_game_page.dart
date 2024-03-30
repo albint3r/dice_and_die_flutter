@@ -8,6 +8,7 @@ import '../../application/sounds_effects/sounds_effects_bloc.dart';
 import '../../domain/game_play/entities/game.dart';
 import '../../domain/game_play/entities/player.dart';
 import '../../domain/game_play/enums/enum_game_state.dart';
+import '../../domain/game_play/enums/match_type.dart';
 import '../../domain/game_play/schemas/response.dart';
 import '../../injectables.dart';
 import 'widgets/body_game_play.dart';
@@ -18,9 +19,11 @@ import 'widgets/floating_action_game_play_button.dart';
 class CreateOrJoinGamePage extends StatelessWidget {
   const CreateOrJoinGamePage({
     this.game,
+    this.matchType = MatchType.pvpRanked,
   });
 
   final Game? game;
+  final MatchType matchType;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,10 @@ class CreateOrJoinGamePage extends StatelessWidget {
         BlocProvider(
           create: (context) => getIt<GamePlayBloc>()
             ..add(
-              GamePlayEvent.createOrJoinGame(game),
+              GamePlayEvent.createOrJoinGame(
+                game,
+                matchType,
+              ),
             ),
         ),
         BlocProvider(

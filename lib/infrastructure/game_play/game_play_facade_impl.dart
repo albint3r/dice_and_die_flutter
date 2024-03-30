@@ -34,6 +34,11 @@ class GamePlayFacadeImpl implements IGamePlayFacade {
   }
 
   @override
+  WebSocketChannel getGamePlayAIChannel() {
+    return _channel = _dataSource.getGamePlayAIChannel();
+  }
+
+  @override
   void rollDice() => _channel.sink.add('{"event": "roll"}');
 
   @override
