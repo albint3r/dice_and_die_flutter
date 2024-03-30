@@ -5,6 +5,8 @@ import 'package:gap/gap.dart';
 
 import '../../../../../application/auth/auth_bloc.dart';
 import '../../../../../application/lobby/lobby_bloc.dart';
+import '../../../../../domain/game_play/enums/match_type.dart';
+import '../../../../game_play/create_or_join_game_page.dart';
 import '../../../router/app_router.dart';
 import '../../../theme/const_values.dart';
 import '../../buttons/custom_long_button.dart';
@@ -38,6 +40,16 @@ class ButtonsContainer extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
+                  CustomLongButton(
+                    text: 'Play AI',
+                    width: size.width * widthPer,
+                    onPressed: () => context.router.push(
+                      CreateOrJoinGameRoute(
+                        matchType: MatchType.ai,
+                      ),
+                    ),
+                  ),
+                  const Gap(10),
                   CustomLongButton(
                     text: 'Profile',
                     width: size.width * widthPer,

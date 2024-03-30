@@ -4,6 +4,7 @@ part of 'game_play_bloc.dart';
 class GamePlayEvent with _$GamePlayEvent {
   const factory GamePlayEvent.createOrJoinGame(
     Game? game,
+    MatchType matchType,
   ) = _CreateOrJoinGame;
 
   const factory GamePlayEvent.rollDice() = _RollDice;

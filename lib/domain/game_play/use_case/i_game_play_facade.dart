@@ -12,6 +12,8 @@ abstract interface class IGamePlayFacade {
 
   WebSocketChannel getGamePlayChannel(String gameId);
 
+  WebSocketChannel getGamePlayAIChannel();
+
   ResponseGame loadGamePlay(dynamic data);
 
   void rollDice();
