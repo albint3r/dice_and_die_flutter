@@ -18,14 +18,14 @@ class CustomFloatingActionButton extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     return SpeedDial(
       backgroundColor: colorScheme.secondary,
-      // gradientBoxShape: BoxShape.circle,
-      // gradient: LinearGradient(
-      //   begin: Alignment.topLeft,
-      //   colors: [
-      //     colorScheme.primary,
-      //     colorScheme.error,
-      //   ],
-      // ),
+      gradientBoxShape: BoxShape.circle,
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        colors: [
+          colorScheme.primary,
+          colorScheme.error,
+        ],
+      ),
       elevation: 15,
       buttonSize: const Size(shortButtonWidth, shortButtonWidth),
       overlayColor: colorScheme.onBackground,
@@ -34,8 +34,8 @@ class CustomFloatingActionButton extends StatelessWidget {
       icon: Icons.videogame_asset_sharp,
       activeIcon: Icons.close,
       childrenButtonSize: const Size(shortButtonWidth, buttonHeight),
-      animationCurve: Curves.elasticOut,
-      animationDuration: const Duration(milliseconds: 700),
+      // animationCurve: Curves.elasticOut,
+      // animationDuration: const Duration(milliseconds: 700),
       children: [
         SpeedDialChild(
           label: 'Create Game',
