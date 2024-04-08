@@ -73,13 +73,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final form = event.loginRawValues;
         final email = form['email'];
         final password = form['password'];
-        if (email is String && password is String) {
+        final name = form['name'];
+        if (email is String && password is String && name is String) {
+          final response = await facade.signIn(email, name, password);
           await _signInOrLogin(
-            email,
-            password,
+            response,
             emit,
             facade,
-            facade.signIn,
           );
         }
         // Navigate to the Lobby After the user logging
@@ -109,12 +109,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final email = form['email'];
         final password = form['password'];
         if (email is String && password is String) {
+          final response = await facade.logIn(email, password);
           await _signInOrLogin(
-            email,
-            password,
+            response,
             emit,
             facade,
-            facade.logIn,
           );
         }
         // Navigate to the Lobby After the user logging
@@ -206,11 +205,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _signInOrLogin(
-    String email,
-    String password,
+    AuthResponse response,
     Emitter<AuthState> emit,
     IAuthFacade facade,
-    Future<AuthResponse> Function(String, String) callBack,
   ) async {
     emit(
       state.copyWith(
@@ -218,10 +215,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       ),
     );
     // Validate the Form have email and password information.
-    final response = await callBack(
-      email,
-      password,
-    );
     emit(
       state.copyWith(
         sessionToken: response.sessionToken,

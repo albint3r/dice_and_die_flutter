@@ -35,9 +35,14 @@ class AuthFacadeImpl implements IAuthFacade {
       );
 
   @override
-  Future<AuthResponse> signIn(String email, String password) =>
+  Future<AuthResponse> signIn(
+    String email,
+    String name,
+    String password,
+  ) =>
       _dataSource.signIn(
         email,
+        name,
         password,
       );
 

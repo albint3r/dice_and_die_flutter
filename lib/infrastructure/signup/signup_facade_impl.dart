@@ -14,6 +14,12 @@ class SignupFacadeImpl implements ISignUpFacade {
           Validators.email,
         ],
       ),
+      'name': FormControl<String>(
+        validators: [
+          Validators.required,
+          Validators.minLength(4),
+        ],
+      ),
       'password': FormControl<String>(
         validators: [
           Validators.required,
@@ -27,7 +33,7 @@ class SignupFacadeImpl implements ISignUpFacade {
       Validators.mustMatch(
         'password',
         'confirm password',
-      )
+      ),
     ],
   );
 

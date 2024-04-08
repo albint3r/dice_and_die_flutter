@@ -13,43 +13,8 @@ class AuthDataSourceImpl implements IAuthDataSource {
   final Dio _dio;
 
   @override
-  Future<AuthResponse> logIn(String email, String password) => _logInOrSignUp(
-        email,
-        password,
-        // '/auth/v1/login',
-        '/v2/auth/login',
-      );
-
-  @override
-  Future<AuthResponse> signIn(String email, String password) => _logInOrSignUp(
-        email,
-        password,
-        // '/auth/v1/signin',
-        '/v2/auth/signin',
-      );
-
-  @override
-  Future<AuthResponse> logInFromSessionToken(String sessionToken) async {
-    final response = await _dio.post(
-      // '/auth/v1/login/token',
-      '/v2/auth/login/token',
-      options: FastHeader.getOptions(sessionToken),
-    );
-    final data = response.data as Json;
-    if (response.statusCode == 403) {
-      throw Exception('Bad session token credentials');
-    }
-    if (response.statusCode == 401) {
-      throw Exception('Bad session token credentials');
-    }
-    return AuthResponse.fromJson(data);
-  }
-
-  Future<AuthResponse> _logInOrSignUp(
-    String email,
-    String password,
-    String url,
-  ) async {
+  Future<AuthResponse> logIn(String email, String password) async {
+    const url = '/v2/auth/login';
     final response = await _dio.post(
       url,
       data: {
@@ -57,6 +22,37 @@ class AuthDataSourceImpl implements IAuthDataSource {
         'password': password,
       },
     );
+    return _getAuthResponse(response);
+  }
+
+  @override
+  Future<AuthResponse> signIn(
+    String email,
+    String name,
+    String password,
+  ) async {
+    const url = '/v2/auth/signin';
+    final response = await _dio.post(
+      url,
+      data: {
+        'email': email,
+        'name': name,
+        'password': password,
+      },
+    );
+    return _getAuthResponse(response);
+  }
+
+  @override
+  Future<AuthResponse> logInFromSessionToken(String sessionToken) async {
+    final response = await _dio.post(
+      '/v2/auth/login/token',
+      options: FastHeader.getOptions(sessionToken),
+    );
+    return _getAuthResponse(response);
+  }
+
+  Future<AuthResponse> _getAuthResponse(Response<dynamic> response) async {
     final data = response.data as Json;
     if (response.statusCode == 403) {
       throw Exception('Bad session token credentials');

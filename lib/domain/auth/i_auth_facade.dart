@@ -17,6 +17,7 @@ abstract interface class IAuthFacade {
 
   Future<AuthResponse> signIn(
     String email,
+    String name,
     String password,
   );
 
