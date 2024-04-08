@@ -53,7 +53,11 @@ class AuthDataSourceImpl implements IAuthDataSource {
   }
 
   Future<AuthResponse> _getAuthResponse(Response<dynamic> response) async {
+    print('*-'*100);
+    print('response->$response');
     final data = response.data as Json;
+    print('data->$data');
+    print('*-'*100);
     if (response.statusCode == 403) {
       throw Exception('Bad session token credentials');
     }
