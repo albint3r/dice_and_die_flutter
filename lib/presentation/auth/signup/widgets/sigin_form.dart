@@ -8,6 +8,7 @@ import '../../signup/widgets/email_field.dart';
 import '../../signup/widgets/password_field.dart';
 import 'confirm_password_field.dart';
 import 'login_page_button.dart';
+import 'name_field.dart';
 import 'signin_button.dart';
 
 class SignInForm extends StatelessWidget {
@@ -21,6 +22,7 @@ class SignInForm extends StatelessWidget {
       formGroup: form.formGroup!,
       listFields: const [
         EmailField(),
+        NameField(),
         PasswordField(),
         ConfirmPasswordField(),
       ],
