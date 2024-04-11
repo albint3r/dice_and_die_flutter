@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/auth/i_auth_data_source.dart';
@@ -10,10 +11,12 @@ class AuthFacadeImpl implements IAuthFacade {
   AuthFacadeImpl(
     this._dataSource,
     this._userPreference,
+    this._firebaseAuth,
   );
 
   final IAuthDataSource _dataSource;
   final UserPreference _userPreference;
+  final FirebaseAuth _firebaseAuth;
 
   @override
   UserPreference get pref => _userPreference;

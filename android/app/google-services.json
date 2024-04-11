@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1057166474255",
+    "project_id": "dice-n-die",
+    "storage_bucket": "dice-n-die.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057166474255:android:40577e9469e13c9513777a",
+        "android_client_info": {
+          "package_name": "com.albinter.dice_and_die_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057166474255-esqlnbm84236kcvo722jq6ht48pk2tu4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.albinter.dice_and_die_flutter",
+            "certificate_hash": "f78df122ea3e70e859e833c678681d806c43ff92"
+          }
+        },
+        {
+          "client_id": "1057166474255-lsije7ff0plfr19bubmetgmbm9ecgg19.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1DPmuWRzWpZa9AxB7JtYzP2YJkN1Q2Z8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057166474255-lsije7ff0plfr19bubmetgmbm9ecgg19.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1057166474255-cuql44mqi4qk6rrvidoitc49lchlgan5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.diceAndDieFlutter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
