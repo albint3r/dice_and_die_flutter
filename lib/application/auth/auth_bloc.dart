@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../domain/auth/app_user.dart';
 import '../../domain/auth/errors/auth_error.dart';
@@ -155,6 +157,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           ),
         ),
       );
+    });
+    on<_SigInWithGoogle>((event, emit) async {
+      await facade.signInWithGoogle();
     });
   }
 

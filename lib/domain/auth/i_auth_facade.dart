@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../infrastructure/core/user_preference.dart';
@@ -9,6 +10,8 @@ abstract interface class IAuthFacade {
   Future<AuthResponse> loginFromSessionToken(
     String sessionToken,
   );
+
+  Future<void> signInWithGoogle();
 
   Future<AuthResponse> logIn(
     String email,

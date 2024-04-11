@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/auth/i_auth_data_source.dart';
@@ -58,4 +59,25 @@ class AuthFacadeImpl implements IAuthFacade {
   @override
   Future<void> deleteSessionTokenInPref() =>
       _userPreference.deleteSessionToken();
+
+  @override
+  Future<void> signInWithGoogle() async {
+    print('*-'*100);
+    final auth = FirebaseAuth.instance;
+    print(auth);
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+    print('credential->$credential');
+    // Once signed in, return the UserCredential
+    //   return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
 }
