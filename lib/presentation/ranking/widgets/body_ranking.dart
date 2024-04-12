@@ -14,7 +14,6 @@ class BodyRanking extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<RankingBloc>().state;
-    final size = MediaQuery.of(context).size;
     final globalUsersRanks = state.globalUsersRanks;
 
     if (state.isLoading) {
@@ -48,7 +47,7 @@ class BodyRanking extends StatelessWidget {
               ],
             ),
           ),
-        )
+        ),
       ],
     );
   }

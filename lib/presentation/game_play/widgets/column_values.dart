@@ -18,7 +18,9 @@ class ColumnValues extends StatelessWidget {
 
   /// Add color and shadow if the Dice have more than one coincidence
   BoxDecoration _buildColorDiceSelectorDecoration(
-      ColorScheme colorScheme, int diceValue) {
+    ColorScheme colorScheme,
+    int diceValue,
+  ) {
     final count = column.counter[diceValue]!;
     final double spreadRadius;
     final List<Color> colors;
@@ -54,7 +56,7 @@ class ColumnValues extends StatelessWidget {
           color: colorScheme.surface,
           blurRadius: count > 1 ? 15 : 0,
           spreadRadius: spreadRadius,
-        )
+        ),
       ],
     );
   }

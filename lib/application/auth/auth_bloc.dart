@@ -156,6 +156,33 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ),
       );
     });
+    on<_SigInWithGoogle>((event, emit) async {
+      final authCredentials = await facade.signInWithGoogle();
+      emit(
+        state.copyWith(
+          isLoading: true,
+        ),
+      );
+      final response = await facade.logInWithGoogle(authCredentials);
+
+      await _signInOrLogin(
+        response,
+        emit,
+        facade,
+      );
+      if (state.sessionToken.isNotEmpty) {
+        final router = getIt<AppRouter>();
+        router.replaceAll([
+          const LobbyRoute(),
+        ]);
+        await Future.delayed(const Duration(seconds: 1));
+        emit(
+          state.copyWith(
+            isLoading: false,
+          ),
+        );
+      }
+    });
   }
 
   /// Emit the error for every listener trigger their event if apply the condition

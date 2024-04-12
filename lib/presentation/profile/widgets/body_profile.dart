@@ -1,4 +1,3 @@
-import 'package:dice_and_die_flutter/presentation/profile/widgets/rank_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -7,6 +6,7 @@ import '../../../application/auth/auth_bloc.dart';
 import '../../core/design_system/app_bar/widgets/user_level_progress_bar_podium.dart';
 import '../../core/theme/const_values.dart';
 import 'profile_image.dart';
+import 'rank_info.dart';
 import 'user_account_information.dart';
 
 class BodyProfile extends StatelessWidget {

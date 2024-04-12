@@ -1,3 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/auth/i_auth_data_source.dart';
@@ -26,7 +29,11 @@ class AuthFacadeImpl implements IAuthFacade {
       );
 
   @override
-  Future<void> logOut() => _userPreference.deleteSessionToken();
+  Future<void> logOut() async {
+    await _userPreference.deleteSessionToken();
+    await GoogleSignIn().signOut();
+    await FirebaseAuth.instance.signOut();
+  }
 
   @override
   Future<AuthResponse> loginFromSessionToken(String sessionToken) =>
@@ -55,4 +62,39 @@ class AuthFacadeImpl implements IAuthFacade {
   @override
   Future<void> deleteSessionTokenInPref() =>
       _userPreference.deleteSessionToken();
+
+  @override
+  Future<UserCredential> signInWithGoogle() async {
+    final googleUser = await _getGoogleUserByPlatform();
+
+    // Obtain the auth details from the request
+    final googleAuth = await googleUser?.authentication;
+    if (googleAuth is GoogleSignInAuthentication) {
+      final googleToken = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      // Once signed in, return the UserCredential
+      return FirebaseAuth.instance.signInWithCredential(
+        googleToken,
+      );
+    }
+    throw Exception('Google Auth Failed in [signInWithGoogle]');
+  }
+
+  @override
+  Future<AuthResponse> logInWithGoogle(UserCredential authCredentials) =>
+      _dataSource.logInWithGoogle(
+        authCredentials.user!.uid,
+      );
+
+  Future<GoogleSignInAccount?> _getGoogleUserByPlatform() async {
+    final GoogleSignInAccount? googleUser;
+    if (kIsWeb) {
+      googleUser = await GoogleSignIn().signIn();
+    } else {
+      googleUser = await GoogleSignIn().signIn();
+    }
+    return googleUser;
+  }
 }

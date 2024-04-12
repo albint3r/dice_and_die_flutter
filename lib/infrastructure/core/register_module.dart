@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio_intercept_to_curl/dio_intercept_to_curl.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:l/l.dart';
@@ -16,7 +17,7 @@ abstract class RegisterModule {
       scheme: 'http',
       host: '146.190.134.20',
       // host: 'localhost',
-      // host: '192.168.1.74',
+      // host: '192.168.1.68',
       port: 8000,
     );
   }
@@ -60,4 +61,7 @@ abstract class RegisterModule {
       ..add(auth);
     return dio;
   }
+
+  @singleton
+  FirebaseAuth getFirebaseAuth() => FirebaseAuth.instance;
 }

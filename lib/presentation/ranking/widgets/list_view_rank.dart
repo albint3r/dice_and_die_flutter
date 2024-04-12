@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../application/ranking/ranking_bloc.dart';
 import '../../../domain/ranking/entities/user_rank.dart';
 import '../../core/theme/const_values.dart';
 import 'user_rank_card.dart';
