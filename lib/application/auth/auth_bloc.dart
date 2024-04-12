@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:l/l.dart';
 
 import '../../domain/auth/app_user.dart';
 import '../../domain/auth/errors/auth_error.dart';
@@ -157,30 +158,34 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
     });
     on<_SigInWithGoogle>((event, emit) async {
-      final authCredentials = await facade.signInWithGoogle();
-      emit(
-        state.copyWith(
-          isLoading: true,
-        ),
-      );
-      final response = await facade.logInWithGoogle(authCredentials);
-
-      await _signInOrLogin(
-        response,
-        emit,
-        facade,
-      );
-      if (state.sessionToken.isNotEmpty) {
-        final router = getIt<AppRouter>();
-        router.replaceAll([
-          const LobbyRoute(),
-        ]);
-        await Future.delayed(const Duration(seconds: 1));
+      try {
+        final authCredentials = await facade.signInWithGoogle();
         emit(
           state.copyWith(
-            isLoading: false,
+            isLoading: true,
           ),
         );
+        final response = await facade.logInWithGoogle(authCredentials);
+
+        await _signInOrLogin(
+          response,
+          emit,
+          facade,
+        );
+        if (state.sessionToken.isNotEmpty) {
+          final router = getIt<AppRouter>();
+          router.replaceAll([
+            const LobbyRoute(),
+          ]);
+          await Future.delayed(const Duration(seconds: 1));
+          emit(
+            state.copyWith(
+              isLoading: false,
+            ),
+          );
+        }
+      } catch (e) {
+        l.d('[_SigInWithGoogle]: User canceled the google login pop up');
       }
     });
   }
