@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 
@@ -30,7 +33,11 @@ class AuthFacadeImpl implements IAuthFacade {
       );
 
   @override
-  Future<void> logOut() => _userPreference.deleteSessionToken();
+  Future<void> logOut() async {
+    await _userPreference.deleteSessionToken();
+    await GoogleSignIn().signOut();
+    await FirebaseAuth.instance.signOut();
+  }
 
   @override
   Future<AuthResponse> loginFromSessionToken(String sessionToken) =>
@@ -61,23 +68,37 @@ class AuthFacadeImpl implements IAuthFacade {
       _userPreference.deleteSessionToken();
 
   @override
-  Future<void> signInWithGoogle() async {
-    print('*-'*100);
-    final auth = FirebaseAuth.instance;
-    print(auth);
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  Future<UserCredential> signInWithGoogle() async {
+    final googleUser = await _getGoogleUserByPlatform();
 
     // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
+    final googleAuth = await googleUser?.authentication;
+    if (googleAuth is GoogleSignInAuthentication) {
+      final googleToken = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      // Once signed in, return the UserCredential
+      return FirebaseAuth.instance.signInWithCredential(
+        googleToken,
+      );
+    }
+    throw Exception('Google Auth Failed in [signInWithGoogle]');
+  }
 
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
-    print('credential->$credential');
-    // Once signed in, return the UserCredential
-    //   return await FirebaseAuth.instance.signInWithCredential(credential);
+  @override
+  Future<AuthResponse> logInWithGoogle(UserCredential authCredentials) =>
+      _dataSource.logInWithGoogle(
+        authCredentials.user!.uid,
+      );
+
+  Future<GoogleSignInAccount?> _getGoogleUserByPlatform() async {
+    final GoogleSignInAccount? googleUser;
+    if (kIsWeb) {
+      googleUser = await GoogleSignIn().signIn();
+    } else {
+      googleUser = await GoogleSignIn().signIn();
+    }
+    return googleUser;
   }
 }

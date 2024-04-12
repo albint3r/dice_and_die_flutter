@@ -12,6 +12,10 @@ abstract interface class IAuthDataSource {
     String password,
   );
 
+  Future<AuthResponse> logInWithGoogle(
+      String googleUserId,
+  );
+
   Future<AuthResponse> logInFromSessionToken(
     String sessionToken,
   );
