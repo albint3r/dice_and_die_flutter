@@ -5,8 +5,7 @@ class AuthEvent with _$AuthEvent {
   const factory AuthEvent.validateInitialSessionToken() =
       _ValidateInitialSessionToken;
 
-  const factory AuthEvent.sigInWithGoogle() =
-  _SigInWithGoogle;
+  const factory AuthEvent.sigInWithGoogle() = _SigInWithGoogle;
 
   const factory AuthEvent.sigInWithEmailAndPassword(
     Map<String, Object?> loginRawValues,

@@ -70,8 +70,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1057166474255',
     projectId: 'dice-n-die',
     storageBucket: 'dice-n-die.appspot.com',
-    androidClientId: '1057166474255-esqlnbm84236kcvo722jq6ht48pk2tu4.apps.googleusercontent.com',
-    iosClientId: '1057166474255-cuql44mqi4qk6rrvidoitc49lchlgan5.apps.googleusercontent.com',
+    androidClientId:
+        '1057166474255-esqlnbm84236kcvo722jq6ht48pk2tu4.apps.googleusercontent.com',
+    iosClientId:
+        '1057166474255-cuql44mqi4qk6rrvidoitc49lchlgan5.apps.googleusercontent.com',
     iosBundleId: 'com.example.diceAndDieFlutter',
   );
 }

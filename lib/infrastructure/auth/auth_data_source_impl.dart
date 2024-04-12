@@ -26,9 +26,11 @@ class AuthDataSourceImpl implements IAuthDataSource {
   }
 
   @override
-  Future<AuthResponse> signIn(String email,
-      String name,
-      String password,) async {
+  Future<AuthResponse> signIn(
+    String email,
+    String name,
+    String password,
+  ) async {
     const url = '/v2/auth/signin';
     final response = await _dio.post(
       url,
@@ -51,7 +53,9 @@ class AuthDataSourceImpl implements IAuthDataSource {
   }
 
   @override
-  Future<AuthResponse> logInWithGoogle(String googleUserId,) async {
+  Future<AuthResponse> logInWithGoogle(
+    String googleUserId,
+  ) async {
     final response = await _dio.post(
       '/v2/auth/signin/google',
       data: {'google_user_id': googleUserId},

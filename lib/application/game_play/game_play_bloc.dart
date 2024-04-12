@@ -28,7 +28,7 @@ class GamePlayBloc extends Bloc<GamePlayEvent, GamePlayState> {
       try {
         final eGame = event.game;
         final WebSocketChannel channel;
-        if(event.matchType == MatchType.pvpRanked) {
+        if (event.matchType == MatchType.pvpRanked) {
           channel = facade.getGamePlayChannel(
             eGame is Game ? eGame.gameId : 'new_game',
           );

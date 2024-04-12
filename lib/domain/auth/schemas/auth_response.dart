@@ -11,8 +11,8 @@ part 'auth_response.g.dart';
 class AuthResponse with _$AuthResponse {
   const factory AuthResponse({
     @JsonKey(name: 'user') required AppUser appUser,
-    @JsonKey(name: 'session_token')required String sessionToken,
-    @JsonKey(name: 'status_code')required int statusCode,
+    @JsonKey(name: 'session_token') required String sessionToken,
+    @JsonKey(name: 'status_code') required int statusCode,
   }) = _AuthResponse;
 
   const AuthResponse._();

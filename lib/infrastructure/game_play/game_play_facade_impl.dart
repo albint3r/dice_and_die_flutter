@@ -5,7 +5,6 @@ import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/src/channel.dart';
 
 import '../../domain/core/types.dart';
-
 import '../../domain/game_play/entities/game.dart';
 import '../../domain/game_play/entities/player.dart';
 import '../../domain/game_play/enums/emote.dart';
@@ -64,7 +63,7 @@ class GamePlayFacadeImpl implements IGamePlayFacade {
   }
 
   @override
-  (Player, Player?) getWinnerPlayer(Game game, Player player) {
+  TWinner getWinnerPlayer(Game game, Player player) {
     final winnerPlayer = game.winnerPlayer;
     if (winnerPlayer is List<Player?>) {
       return (winnerPlayer[0]!, winnerPlayer[1]);

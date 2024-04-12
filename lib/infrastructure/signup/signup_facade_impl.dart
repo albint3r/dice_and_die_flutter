@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_forms/src/models/models.dart';
 
 import '../../domain/signup/i_signup_facade.dart';
 

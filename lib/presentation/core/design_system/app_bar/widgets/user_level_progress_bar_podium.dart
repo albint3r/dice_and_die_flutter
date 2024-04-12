@@ -25,7 +25,6 @@ class UserLevelProgressBarPodium extends StatelessWidget {
         lineHeight: progressBarHeight,
         percent:
             appUser.userLevel.expPoints / appUser.userLevel.nextLevelPoints,
-
         alignment: MainAxisAlignment.center,
         barRadius: const Radius.circular(borderRadius),
         backgroundColor: colorScheme.onSecondary,

@@ -1,5 +1,6 @@
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+import '../../core/types.dart';
 import '../entities/game.dart';
 import '../entities/player.dart';
 import '../enums/emote.dart';
@@ -22,7 +23,7 @@ abstract interface class IGamePlayFacade {
 
   void sendEmote(Emote emote);
 
-  (Player, Player?) getWinnerPlayer(Game game, Player player);
+  TWinner getWinnerPlayer(Game game, Player player);
 
   ResponseEmoteExtras? listeningChatMessage(ResponseGame response);
 }
