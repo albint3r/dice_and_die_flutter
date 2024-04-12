@@ -22,5 +22,3 @@ class UserPreference {
 
   Future<void> deleteSessionToken() async => _prefs.remove(_sessionToken);
 }
-
-

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../theme/theme_config.dart';
 
-
 class MaterialAppRouterDelegate {
   static MaterialApp router(
     String title, {

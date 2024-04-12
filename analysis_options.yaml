@@ -14,6 +14,7 @@ analyzer:
     - "test/**.mocks.dart"
     - "lib/gen/**"
     - "lib/injection.config.dart"
+    - "lib/firebase_options.dart"
 
 linter:
   rules:

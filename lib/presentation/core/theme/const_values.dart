@@ -1,7 +1,9 @@
 import 'package:reactive_forms/reactive_forms.dart';
+
 //DEFAULT BASE WIN POINTS
 const baseExpPoints = 15;
 const dieSize = 50.0;
+
 ///
 const maxWidthBoard = 800.0;
 const minWidthBoard = 600.0;
@@ -12,7 +14,6 @@ const perMaxHeightColumn = .85;
 const perMaxHeightScoreField = .10;
 // Rank
 const rankTileHeight = 75.0;
-
 
 const bottomAppBarHeight = 35.0;
 const borderRadius = 15.0;

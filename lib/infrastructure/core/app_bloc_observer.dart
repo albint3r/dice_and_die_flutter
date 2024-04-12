@@ -8,9 +8,6 @@ import 'package:l/l.dart';
 
 import '../../domain/core/types.dart';
 
-
-
-
 @injectable
 class AppBlocObserver extends BlocObserver {
   AppBlocObserver(
@@ -18,7 +15,6 @@ class AppBlocObserver extends BlocObserver {
   );
 
   final GlobalKey<ScaffoldMessengerState>? _messenger;
-
 
   @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {

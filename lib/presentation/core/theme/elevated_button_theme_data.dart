@@ -42,8 +42,7 @@ abstract class CustomElevatedButtonThemeData {
               return colorScheme.primaryContainer
                   .withOpacity(0.8); // Cambia el color al presionar
             }
-            return colorScheme.primary
-                .withOpacity(0.8); // Sin cambio de color
+            return colorScheme.primary.withOpacity(0.8); // Sin cambio de color
           },
         ),
       ),

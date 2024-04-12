@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../domain/game_play/entities/game.dart';
 import '../../../../domain/game_play/entities/player.dart';
 import '../../../../gen/assets.gen.dart';
-import '../../application/auth/auth_bloc.dart';
 import '../../application/podium/podium_bloc.dart';
+import '../../domain/core/types.dart';
 import '../../injectables.dart';
 import 'widgets/body_podium_ranking.dart';
 
@@ -22,10 +22,10 @@ class PodiumPage extends StatelessWidget {
   final Game game;
   final Player player;
   final Player opponentPlayer;
-  final (Player, Player?) winnerPlayer;
+  final TWinner winnerPlayer;
 
   BodyPodiumRanking _getPodiumArea() {
-    final isTie = winnerPlayer is (Player, Player);
+    final isTie = winnerPlayer is TIsTie;
     final winner = winnerPlayer.$1;
     final isPlayerWinner = winner == player;
 
@@ -59,8 +59,7 @@ class PodiumPage extends StatelessWidget {
     );
   }
 
-  bool get isWinner =>
-      winnerPlayer is (Player, Player) || player == winnerPlayer.$1;
+  bool get isWinner => winnerPlayer is TIsTie || player == winnerPlayer.$1;
 
   @override
   Widget build(BuildContext context) {
