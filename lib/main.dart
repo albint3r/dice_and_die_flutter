@@ -1,4 +1,3 @@
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,10 +9,6 @@ import 'injectables.dart';
 
 Future<void> main() async {
   await configureDependencies();
-  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  print('analytics->${analytics.app}');
-  await analytics.logLogin();
-  print('analytics-> algo paso');
   // Create A Global Message Key to Display The Bloc observer logs in terminal
   final messengerKey = GlobalKey<ScaffoldMessengerState>();
   Bloc.observer = AppBlocObserver(messengerKey);
