@@ -26,6 +26,12 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    HowToPlayRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const HowToPlayPage(),
+      );
+    },
     LobbyRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -107,6 +113,20 @@ class CreateOrJoinGameRouteArgs {
   String toString() {
     return 'CreateOrJoinGameRouteArgs{game: $game, matchType: $matchType}';
   }
+}
+
+/// generated route for
+/// [HowToPlayPage]
+class HowToPlayRoute extends PageRouteInfo<void> {
+  const HowToPlayRoute({List<PageRouteInfo>? children})
+      : super(
+          HowToPlayRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HowToPlayRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

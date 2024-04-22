@@ -11,6 +11,7 @@ import '../../buttons/custom_long_button.dart';
 import '../../buttons/custom_text_button.dart';
 
 const widthPer = .80;
+const buttonPadding = 15.0;
 
 class ButtonsContainer extends StatelessWidget {
   const ButtonsContainer({super.key});
@@ -47,7 +48,15 @@ class ButtonsContainer extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Gap(10),
+                  const Gap(buttonPadding),
+                  CustomLongButton(
+                    text: 'How to Play',
+                    width: size.width * widthPer,
+                    onPressed: () => context.router.push(
+                      const HowToPlayRoute(),
+                    ),
+                  ),
+                  const Gap(buttonPadding),
                   CustomLongButton(
                     text: 'Profile',
                     width: size.width * widthPer,
@@ -55,7 +64,7 @@ class ButtonsContainer extends StatelessWidget {
                       const ProfileRoute(),
                     ),
                   ),
-                  const Gap(10),
+                  const Gap(buttonPadding),
                   CustomLongButton(
                     text: 'Ranking',
                     width: size.width * widthPer,
