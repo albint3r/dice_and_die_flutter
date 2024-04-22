@@ -11,6 +11,7 @@ import '../../../domain/game_play/enums/match_type.dart';
 import '../../auth/login/login_page.dart';
 import '../../auth/signup/signup_page.dart';
 import '../../game_play/create_or_join_game_page.dart';
+import '../../how_to_play/how_to_play_page.dart';
 import '../../lobby/lobby_page.dart';
 import '../../podium_area/podium_page.dart';
 import '../../profile/profile_page.dart';
@@ -48,6 +49,9 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
         ),
         AutoRoute(
           page: RankingRoute.page,
+        ),
+        AutoRoute(
+          page: HowToPlayRoute.page,
         ),
       ];
 

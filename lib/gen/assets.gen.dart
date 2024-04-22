@@ -21,6 +21,7 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/background_win.png');
 
   $AssetsImagesEmotesGen get emotes => const $AssetsImagesEmotesGen();
+  $AssetsImagesHowToPlayGen get howToPlay => const $AssetsImagesHowToPlayGen();
 
   /// File path: assets/images/monetface.png
   AssetGenImage get monetface =>
@@ -105,6 +106,34 @@ class $AssetsImagesEmotesGen {
   /// List of all assets
   List<AssetGenImage> get values =>
       [haha, hello, nice, omg, sorry, wow, wtf, yes];
+}
+
+class $AssetsImagesHowToPlayGen {
+  const $AssetsImagesHowToPlayGen();
+
+  /// File path: assets/images/how_to_play/how_to_play1.png
+  AssetGenImage get howToPlay1 =>
+      const AssetGenImage('assets/images/how_to_play/how_to_play1.png');
+
+  /// File path: assets/images/how_to_play/how_to_play2.png
+  AssetGenImage get howToPlay2 =>
+      const AssetGenImage('assets/images/how_to_play/how_to_play2.png');
+
+  /// File path: assets/images/how_to_play/how_to_play3.png
+  AssetGenImage get howToPlay3 =>
+      const AssetGenImage('assets/images/how_to_play/how_to_play3.png');
+
+  /// File path: assets/images/how_to_play/how_to_play4.png
+  AssetGenImage get howToPlay4 =>
+      const AssetGenImage('assets/images/how_to_play/how_to_play4.png');
+
+  /// File path: assets/images/how_to_play/how_to_play5.png
+  AssetGenImage get howToPlay5 =>
+      const AssetGenImage('assets/images/how_to_play/how_to_play5.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values =>
+      [howToPlay1, howToPlay2, howToPlay3, howToPlay4, howToPlay5];
 }
 
 class Assets {
