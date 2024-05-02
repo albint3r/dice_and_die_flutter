@@ -6,6 +6,7 @@ class ProfileState with _$ProfileState {
     required bool isLoading,
     required bool isEditing,
     required String newUserName,
+    required List<ReferralProgram> referrals,
     FormGroup? formGroup,
   }) = _ProfileState;
 
@@ -13,5 +14,6 @@ class ProfileState with _$ProfileState {
         isLoading: true,
         isEditing: false,
         newUserName: '',
+        referrals: [],
       );
 }

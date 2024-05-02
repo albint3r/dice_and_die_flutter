@@ -1,3 +1,4 @@
+import 'package:dice_and_die_flutter/presentation/profile/widgets/referrals_table.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -26,8 +27,9 @@ class BodyProfile extends StatelessWidget {
               const Gap(padding * 3),
               UserLevelProgressBarPodium(appUser!),
               RankInfo(appUser),
-              const Gap(padding),
+              const Gap(padding * 3),
               const UserAccountInformation(),
+              const ReferralsTable(),
             ],
           ),
         ],

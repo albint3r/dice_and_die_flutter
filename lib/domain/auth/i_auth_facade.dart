@@ -23,6 +23,7 @@ abstract interface class IAuthFacade {
     String email,
     String name,
     String password,
+    String referralCode,
   );
 
   Future<void> logOut();

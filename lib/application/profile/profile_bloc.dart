@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+import '../../domain/profile/entities/referral_program.dart';
 import '../../domain/profile/i_profile_facade.dart';
 
 part 'profile_bloc.freezed.dart';
@@ -14,11 +15,13 @@ part 'profile_state.dart';
 @injectable
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc(IProfileFacade facade) : super(ProfileState.initial()) {
-    on<_Started>((event, emit) {
+    on<_Started>((event, emit) async {
+      final referrals = await facade.getUserReferralProgram();
       emit(
         state.copyWith(
           isLoading: false,
           formGroup: facade.formGroup,
+          referrals: referrals,
         ),
       );
     });

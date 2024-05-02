@@ -30,6 +30,7 @@ class AuthDataSourceImpl implements IAuthDataSource {
     String email,
     String name,
     String password,
+    String referralCode,
   ) async {
     const url = '/v2/auth/signin';
     final response = await _dio.post(
@@ -38,6 +39,7 @@ class AuthDataSourceImpl implements IAuthDataSource {
         'email': email,
         'name': name,
         'password': password,
+        'promoter_code': referralCode,
       },
     );
     return _getAuthResponse(response);
