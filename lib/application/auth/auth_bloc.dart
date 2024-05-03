@@ -75,8 +75,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final email = form['email'];
         final password = form['password'];
         final name = form['name'];
-        if (email is String && password is String && name is String) {
-          final response = await facade.signIn(email, name, password);
+        final referralCode = form['referral code'] ?? '';
+        if (email is String &&
+            password is String &&
+            name is String &&
+            referralCode is String) {
+          final response = await facade.signIn(
+            email,
+            name,
+            password,
+            referralCode,
+          );
           await _signInOrLogin(
             response,
             emit,

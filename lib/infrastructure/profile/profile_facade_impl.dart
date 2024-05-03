@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_forms/src/models/models.dart';
 
+import '../../domain/profile/entities/referral_program.dart';
 import '../../domain/profile/i_profile_data_source.dart';
 import '../../domain/profile/i_profile_facade.dart';
 
@@ -31,4 +31,14 @@ class ProfileFacadeImpl implements IProfileFacade {
   Future<String> updateName(String name) => _dataSource.updateName(
         name.toLowerCase(),
       );
+
+  @override
+  Future<List<ReferralProgram>> getUserReferralProgram() async {
+    try {
+      final response = await _dataSource.getUserReferralProgram();
+      return response.referrals;
+    } catch (e) {
+      return [];
+    }
+  }
 }

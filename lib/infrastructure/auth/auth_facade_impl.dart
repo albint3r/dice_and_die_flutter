@@ -46,11 +46,13 @@ class AuthFacadeImpl implements IAuthFacade {
     String email,
     String name,
     String password,
+    String referralCode,
   ) =>
       _dataSource.signIn(
         email,
         name,
         password,
+        referralCode,
       );
 
   @override

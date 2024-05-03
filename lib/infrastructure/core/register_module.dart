@@ -18,7 +18,7 @@ abstract class RegisterModule {
       scheme: 'http',
       host: '146.190.134.20',
       // host: 'localhost',
-      // host: '192.168.1.68',
+      // host: '192.168.1.78',
       port: 8000,
     );
   }

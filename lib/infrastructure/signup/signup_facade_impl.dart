@@ -27,6 +27,7 @@ class SignupFacadeImpl implements ISignUpFacade {
         ],
       ),
       'confirm password': FormControl<String>(),
+      'referral code': FormControl<String>(),
     },
     validators: [
       Validators.mustMatch(

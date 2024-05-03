@@ -1,3 +1,4 @@
+import 'package:dice_and_die_flutter/presentation/auth/signup/widgets/referral_code_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,6 +26,7 @@ class SignInForm extends StatelessWidget {
         NameField(),
         PasswordField(),
         ConfirmPasswordField(),
+        ReferralCodeField(),
       ],
       listButtons: const [
         SignInButton(),

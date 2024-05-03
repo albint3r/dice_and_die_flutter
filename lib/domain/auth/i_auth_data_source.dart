@@ -5,6 +5,7 @@ abstract interface class IAuthDataSource {
     String email,
     String name,
     String password,
+    String referralCode,
   );
 
   Future<AuthResponse> logIn(
@@ -13,7 +14,7 @@ abstract interface class IAuthDataSource {
   );
 
   Future<AuthResponse> logInWithGoogle(
-      String googleUserId,
+    String googleUserId,
   );
 
   Future<AuthResponse> logInFromSessionToken(
