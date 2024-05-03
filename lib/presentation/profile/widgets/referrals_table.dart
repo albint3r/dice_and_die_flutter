@@ -1,11 +1,11 @@
 import 'package:clipboard/clipboard.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 import '../../../application/auth/auth_bloc.dart';
 import '../../../application/profile/profile_bloc.dart';
+import '../../../domain/core/extensions.dart';
 import '../../core/design_system/text/titleh1.dart';
 import '../../core/design_system/text/titleh2.dart';
 import '../../core/theme/const_values.dart';
@@ -44,68 +44,69 @@ class ReferralsTable extends StatelessWidget {
             ],
           ),
           const Gap(padding),
-          DataTable(
-            border: TableBorder.all(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(borderRadius),
+          if (referrals.isNotEmpty)
+            DataTable(
+              border: TableBorder.all(
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(borderRadius),
+                ),
               ),
+              columns: const <DataColumn>[
+                DataColumn(
+                  label: Expanded(
+                    child: Text(
+                      'User',
+                    ),
+                  ),
+                ),
+                DataColumn(
+                  label: Expanded(
+                    child: Text(
+                      'Amount',
+                    ),
+                  ),
+                ),
+                DataColumn(
+                  label: Expanded(
+                    child: Text(
+                      'Deposits',
+                    ),
+                  ),
+                ),
+              ],
+              rows: referrals
+                  .map(
+                    (referral) => DataRow(
+                      cells: [
+                        DataCell(
+                          Center(
+                            child: TitleH2(
+                              referral.referralCode.substring(0, 4),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        DataCell(
+                          Center(
+                            child: TitleH2(
+                              '\$ ${referral.totalRewards}',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        DataCell(
+                          Center(
+                            child: TitleH2(
+                              referral.totalDeposits.toString().formatToFinancial(),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                  .toList(),
             ),
-            columns: const <DataColumn>[
-              DataColumn(
-                label: Expanded(
-                  child: Text(
-                    'User',
-                  ),
-                ),
-              ),
-              DataColumn(
-                label: Expanded(
-                  child: Text(
-                    'Amount',
-                  ),
-                ),
-              ),
-              DataColumn(
-                label: Expanded(
-                  child: Text(
-                    'Deposits',
-                  ),
-                ),
-              ),
-            ],
-            rows: referrals
-                .map(
-                  (referral) => DataRow(
-                    cells: [
-                      DataCell(
-                        Center(
-                          child: TitleH2(
-                            referral.referralCode.substring(0, 4),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                      DataCell(
-                        Center(
-                          child: TitleH2(
-                            '\$ ${referral.totalRewards}',
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                      DataCell(
-                        Center(
-                          child: TitleH2(
-                            referral.totalDeposits.toString(),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-                .toList(),
-          ),
         ],
       ),
     );

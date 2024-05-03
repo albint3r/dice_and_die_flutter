@@ -1,4 +1,3 @@
-import 'package:dice_and_die_flutter/presentation/profile/widgets/referrals_table.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -6,8 +5,10 @@ import 'package:gap/gap.dart';
 import '../../../application/auth/auth_bloc.dart';
 import '../../core/design_system/app_bar/widgets/user_level_progress_bar_podium.dart';
 import '../../core/theme/const_values.dart';
+import 'gold_info.dart';
 import 'profile_image.dart';
 import 'rank_info.dart';
+import 'referrals_table.dart';
 import 'user_account_information.dart';
 
 class BodyProfile extends StatelessWidget {
@@ -27,6 +28,7 @@ class BodyProfile extends StatelessWidget {
               const Gap(padding * 3),
               UserLevelProgressBarPodium(appUser!),
               RankInfo(appUser),
+              const GoldInfo(),
               const Gap(padding * 3),
               const UserAccountInformation(),
               const ReferralsTable(),

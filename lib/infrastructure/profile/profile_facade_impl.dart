@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_forms/src/models/models.dart';
 
 import '../../domain/profile/entities/referral_program.dart';
 import '../../domain/profile/i_profile_data_source.dart';
