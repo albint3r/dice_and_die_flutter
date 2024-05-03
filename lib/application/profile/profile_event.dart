@@ -7,6 +7,4 @@ class ProfileEvent with _$ProfileEvent {
   const factory ProfileEvent.isEditing() = _IsEditing;
 
   const factory ProfileEvent.sendChange() = _SendChange;
-
-  const factory ProfileEvent.copyPromoteCode() = _SendChange;
 }
