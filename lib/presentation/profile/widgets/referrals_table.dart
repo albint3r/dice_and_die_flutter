@@ -1,7 +1,10 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
+import '../../../application/auth/auth_bloc.dart';
 import '../../../application/profile/profile_bloc.dart';
 import '../../core/design_system/text/titleh1.dart';
 import '../../core/design_system/text/titleh2.dart';
@@ -13,9 +16,11 @@ class ReferralsTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final profile = context.watch<ProfileBloc>().state;
+    final auth = context.watch<AuthBloc>().state;
     final referrals = profile.referrals;
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final userId = auth.appUser?.userId ?? '';
     return SizedBox(
       width: waitingRoomCardWidth,
       child: Column(
@@ -25,6 +30,20 @@ class ReferralsTable extends StatelessWidget {
             child: TitleH1(text: 'Referrals information'),
           ),
           Divider(color: colorScheme.onBackground),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('Your Code:'),
+              Text(
+                userId.substring(0, 12),
+              ),
+              IconButton(
+                onPressed: () => FlutterClipboard.copy(userId),
+                icon: const Icon(Icons.copy),
+              ),
+            ],
+          ),
+          const Gap(padding),
           DataTable(
             border: TableBorder.all(
               borderRadius: const BorderRadius.all(

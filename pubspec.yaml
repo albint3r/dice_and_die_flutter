@@ -42,6 +42,7 @@ dependencies:
   google_sign_in_web: ^0.12.3+2
   firebase_analytics: ^10.8.9
   flutter_onboarding_slider: ^1.0.11
+  clipboard: ^0.1.3
 
 
 
